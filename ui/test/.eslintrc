@@ -1,0 +1,8 @@
+extends:
+  - plugin:wdio/recommended
+
+plugins:
+  - wdio
+
+env:
+  mocha: true

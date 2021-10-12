@@ -9,7 +9,6 @@ defaults:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,3 +26,27 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+
+  test:
+    env:
+      PORT: 3000
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Chromium
+      run: sudo apt-get install chromium-browser
+    - name: node@${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: ui/package-lock.json
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm start &
+    - run: npm run test:integration
