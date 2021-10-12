@@ -6,7 +6,7 @@ app.use((req, res) => {
   res.send('Hello World!');
 });
 
-const server = app.listen(process.env.PORT, (err, result) => {
+const server = app.listen(process.env.PORT, (err) => {
   if (err) {
     return console.error(err);
   }
