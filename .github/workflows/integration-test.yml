@@ -2,7 +2,7 @@ name: Integration Test
 
 on:
   push:
-    master
+    - master
 
 defaults:
   run:
