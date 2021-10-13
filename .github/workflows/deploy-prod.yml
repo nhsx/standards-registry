@@ -1,4 +1,4 @@
-name: deploy-test
+name: deploy-prod
 
 on:
   release:
@@ -7,7 +7,7 @@ on:
 
 jobs:
 
-  dockerbuild:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
