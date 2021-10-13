@@ -37,6 +37,7 @@ jobs:
       - name: build and push
         id: build-image
         env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
