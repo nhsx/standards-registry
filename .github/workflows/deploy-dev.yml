@@ -42,7 +42,7 @@ jobs:
       - name: build and push
         id: build-image
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ${{ github.sha }}
         run: |
