@@ -2,7 +2,8 @@ name: Integration Test
 
 on:
   push:
-    - master
+    branches:
+      - master
 
 defaults:
   run:
