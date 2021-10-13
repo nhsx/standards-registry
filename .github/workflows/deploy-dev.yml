@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
-          AWS_REGION: <region>
+          AWS_REGION: ${{ env.AWS_REGION }}
       - name: build and push
         id: build-image
         env:
