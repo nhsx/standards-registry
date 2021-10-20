@@ -1,0 +1,10 @@
+@import 'vars';
+
+.optionSelect {
+  margin-top: $nhsuk-gutter * 2;
+  max-height: 200px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-left: 10px;
+}

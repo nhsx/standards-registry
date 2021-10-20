@@ -1,0 +1,12 @@
+@import 'vars';
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  border-top: 1px solid $border-colour;
+  padding: 10px 20px 10px 0;
+}

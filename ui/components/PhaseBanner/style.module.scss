@@ -1,0 +1,31 @@
+@import 'vars';
+
+.phaseBanner {
+  &.homepage {
+    background-color: $blue;
+  }
+}
+
+.inner {
+  padding-top: $nhsuk-gutter-smaller;
+  padding-bottom: $nhsuk-gutter-smaller;
+
+  @include borderBottom;
+
+  &.homepage {
+    @include borderTop(rgba(255, 255, 255, 0.2));
+    border-bottom: 0;
+    color: $white;
+  }
+}
+
+.tag {
+  font-size: 14px;
+  background-color: $pink;
+  border: none;
+  margin-right: $nhsuk-gutter-smaller;
+
+  &.homepage {
+    border: 1px solid white;
+  }
+}

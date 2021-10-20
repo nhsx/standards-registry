@@ -1,0 +1,21 @@
+@import 'vars';
+
+.title {
+  margin-bottom: $nhsuk-gutter * 2;
+}
+
+.card {
+  a {
+    text-decoration: none !important;
+    display: inline-block;
+  }
+  h5 {
+    margin-bottom: 0;
+  }
+
+  p {
+    text-decoration: none;
+    display: inline-block;
+    color: $text-colour;
+  }
+}
