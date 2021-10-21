@@ -1,0 +1,298 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: keitaro/ckan
+  tag: 2.9.2
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "ckan"
+
+pvc:
+  enabled: true
+  size: "1Gi"
+
+# RedisName -- Variable for name override for redis deployment
+RedisName: &RedisName redis
+
+# SolrName -- Variable for name override for solr deployment
+SolrName: &SolrName solr
+
+# DatapusherName -- Variable for name override for datapusher deployment
+DatapusherName: &DatapusherName datapusher
+
+# DBHost -- Variable for name of headless svc from postgres deployment
+DBHost: &DBHost dev.cdbsqtf2n9lj.eu-west-2.rds.amazonaws.com
+# MasterDBName -- Variable for name of the master user database in PostgreSQL
+MasterDBName: &MasterDBName postgres
+# MasterDBUser -- Variable for master user name for PostgreSQL
+MasterDBUser: &MasterDBUser postgres
+# MasterDBPass -- Variable for password for the master user in PostgreSQL
+MasterDBPass: &MasterDBPass pass
+
+# CkanDBName -- Variable for name of the database used by CKAN
+CkanDBName: &CkanDBName ckan_default
+# CkanDBUser -- Variable for username for the owner of the CKAN database
+CkanDBUser: &CkanDBUser ckan_default
+# CkanDBPass -- Variable for password for the CKAN database owner
+CkanDBPass: &CkanDBPass pass
+# DatastoreDBName -- Variable for name of the database used by Datastore
+DatastoreDBName: &DatastoreDBName datastore_default
+# DatastoreRWDBUser -- Variable for username for the user with write access to the datastore database
+DatastoreRWDBUser: &DatastoreRWDBUser datastorerw
+# DatastoreRWDBPass -- Variable for password for the datastore database user with write access
+DatastoreRWDBPass: &DatastoreRWDBPass pass
+# DatastoreRODBUser -- Variable for username for the user with read access to the datastore database
+DatastoreRODBUser: &DatastoreRODBUser datastorero
+# DatastoreRODBPass -- Variable for password for the datastore database user with read access
+DatastoreRODBPass: &DatastoreRODBPass pass
+
+ckan:
+  # ckan.sysadminName -- CKAN system admin username
+  sysadminName: "ckan_admin"
+  # ckan.sysadminPassword -- CKAN system admin password
+  sysadminPassword: "PasswordHere"
+  # ckan.sysadminApiToken -- CKAN system admin API token
+  # Needs to be generated via the CKAN UI and replaced after initial deployment
+  sysadminApiToken: "replace_this_with_generated_api_token_for_sysadmin"
+  # ckan.sysadminEmail -- CKAN system admin email
+  sysadminEmail: "admin@domain.com"
+  # ckan.siteTitle -- Site title for the instance
+  siteTitle: "NHSX Standards Directory"
+  # ckan.siteId -- Site id
+  siteId: "site-id-here"
+  # ckan.siteUrl -- Url for the CKAN instance
+  siteUrl: "http://localhost:5000"
+  # ckan.ckanPlugins -- List of plugins to be used by the instance
+  ckanPlugins: "envvars image_view text_view recline_view datastore datapusher"
+  # ckan.storagePath -- Storage path to be used by the instance
+  storagePath: "/var/lib/ckan/default"
+  activityStreamsEmailNotifications: "true"
+  debug: "false"
+  # ckan.maintenanceMode -- Set to true to disable CKAN from starting and serve a maintenance page
+  maintenanceMode: "false"
+  psql:
+    # ckan.psql.initialize -- Flag whether to initialize the PostgreSQL instance with the provided users and databases
+    initialize: true
+    # ckan.psql.masterUser -- PostgreSQL master username
+    masterUser: *MasterDBUser
+    # ckan.psql.masterPassword -- PostgreSQL master user password
+    masterPassword: *MasterDBPass
+    # ckan.psql.masterDatabase -- PostgreSQL database for the master user
+    masterDatabase: *MasterDBName
+  db:
+    # ckan.db.ckanDbUrl -- Url of the PostgreSQL server where the CKAN database is hosted
+    ckanDbUrl: *DBHost
+    # ckan.db.ckanDbName -- Name of the database to be used by CKAN
+    ckanDbName: *CkanDBName
+    # ckan.db.ckanDbUser -- Username of the database to be used by CKAN
+    ckanDbUser: *CkanDBUser
+    # ckan.db.ckanDbPassword -- Password of the user for the database to be used by CKAN
+    ckanDbPassword: *CkanDBPass
+  datastore:
+    # ckan.datastore.RwDbUrl -- Url of the PostgreSQL server where the datastore database is hosted
+    RwDbUrl: *DBHost
+    # ckan.datastore.RwDbName -- Name of the database to be used for Datastore
+    RwDbName: *DatastoreDBName
+    # ckan.datastore.RwDbUser -- Username for the datastore database with write permissions
+    RwDbUser: *DatastoreRWDBUser
+    # ckan.datastore.RwDbPassword -- Password for the datastore write permissions user
+    RwDbPassword: *DatastoreRWDBPass
+    # ckan.datastore.RoDbUrl -- Url of the PostgreSQL server where the datastore database is hosted
+    RoDbUrl: *DBHost
+    # ckan.datastore.RoDbName -- Name of the database to be used for Datastore
+    RoDbName: *DatastoreDBName
+    # ckan.datastore.RoDbUser -- Username for the datastore database with read permissions
+    RoDbUser: *DatastoreRODBUser
+    # ckan.datastore.RoDbPassword -- Password for the datastore read permissions user
+    RoDbPassword: *DatastoreRODBPass
+  # ckan.solr -- Location of SOLR collection used by the instance
+  solr: "http://solr-headless:8983/solr/ckancollection"
+  # ckan.redis -- Location of the Redis service to be used by the CKAN instance
+  redis: "redis://redis-headless:6379/0"
+  spatialBackend: "solr"
+  locale:
+    offered: "en"
+    default: "en"
+  # ckan.datapusherUrl -- Location of the datapusher service to be used by the CKAN instance
+  datapusherUrl: "http://datapusher-headless:8000"
+  # ckan.datapusherCallbackUrlBase -- Location of the CKAN k8s service to be used by the Datapusher, overriding the default site url route.
+  datapusherCallbackUrlBase: http://ckan
+  smtp:
+    server: "smtpServerURLorIP:port"
+    user: "smtpUser" 
+    password: "smtpPassword"
+    mailFrom: "postmaster@domain.com"
+    tls: "enabled"
+    starttls: "true"
+  issues:
+    sendEmailNotifications: "true"
+
+  # ckan.extraEnv -- An array to add extra environment variables
+  # For example:
+  # extraEnv:
+  #   - name: FOO
+  #     value: "bar"
+  #
+  extraEnv: []
+
+  readiness:
+    # ckan.readiness.initialDelaySeconds -- Inital delay seconds for the readiness probe
+    initialDelaySeconds: 10
+    #  ckan.readiness.periodSeconds -- Check interval for the readiness probe
+    periodSeconds: 10
+    # ckan.readiness.failureThreshold -- Failure threshold for the readiness probe
+    failureThreshold: 6
+    # ckan.readiness.timeoutSeconds -- Timeout interval for the readiness probe
+    timeoutSeconds: 10
+  liveness:
+    # ckan.liveness.initialDelaySeconds -- Initial delay for the liveness probe
+    initialDelaySeconds: 10
+    # ckan.liveness.periodSeconds -- Check interval for the liveness probe
+    periodSeconds: 10
+    # ckan.liveness.failureThreshold -- Failure threshold for the liveness probe
+    failureThreshold: 6
+    # ckan.liveness.timeoutSeconds -- Timeout interval for the liveness probe
+    timeoutSeconds: 10
+
+serviceAccount:
+  # serviceAccount.create -- Specifies whether a service account should be created
+  create: false
+  # serviceAccount.annotations -- Annotations to add to the service account
+  annotations: {}
+  # serviceAccount.name -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  # service.type -- Type of the service created for the CKAN pod
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# ingressRoute -- Used in conjunction with a Traefik v2 deployment
+ingressRoute:
+  enabled: false
+  host: chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+datapusher:
+  # datapusher.enabled -- Flag to control whether to deploy the datapusher
+  enabled: true
+  # datapusher.fullnameOverride -- Name override for the datapusher deployment
+  fullnameOverride: *DatapusherName
+  datapusher:
+    # datapusher.datapusher.maxContentSize -- Maximum size of content to be uploaded in bytes.
+    maxContentLength: "102400000"
+    # datapusher.datapusher.chunkSize -- Size of chunks of the data that is being downloaded in bytes
+    chunkSize: "10240000"
+    # datapusher.datapusher.insertRows -- Number of rows to take from the data and upload them as chunks to datastore
+    insertRows: "50000"
+    # datapusher.datapusher.downloadTimeout -- Timeout limit of the download request
+    downloadTimeout: "300"
+    # datapusher.datapusher.datapusherSslVerify -- Enable or disable (boolean) verification of SSL when trying to get resources. Default: True
+    datapusherSslVerify: "False"
+    # datapusher.datapusher.datapusherRewriteResources -- Enable or disable (boolean) whether datapusher should rewrite resources uploaded to CKAN's filestore, since datapusher takes the CKAN Site URL value for generating the resource URL. Default: False
+    datapusherRewriteResources: "True"
+    # datapusher.datapusher.datapusherRewriteUrl -- Sets the rewrite URL that datapushed will rewrite resources that are uploaded to CKAN's filestore. Default: http://ckan:5000
+    datapusherRewriteUrl: http://ckan
+
+redis:
+  # Please see all available overrides at https://github.com/helm/charts/tree/master/stable/redis
+  # redis.enabled -- Flag to control whether to deploy Redis
+  enabled: true
+  # redis.fullnameOverride -- Name override for the redis deployment
+  fullnameOverride: *RedisName
+  cluster:
+    # redis.cluster.enabled -- Cluster mode for Redis
+    enabled: false
+  master:
+    persistence:
+      # redis.master.persistence.enabled -- Enable redis volume claim
+      enabled: false
+      # redis.master.persistence.size -- Size of the volume claim
+      size: 1Gi
+  # redis.usePassword -- Use password for accessing redis
+  usePassword: false
+
+solr:  
+  # Please see all available overrides at https://github.com/helm/charts/tree/master/incubator/solr
+  # solr.enabled -- Flag to control whether to deploy SOLR
+  enabled: true
+  initialize:
+    # solr.initialize.enabled -- Flag whether to initialize the SOLR instance with the provided collection name
+    enabled: true
+    # solr.initialize.numShards -- Number of shards for the SOLR collection
+    numShards: 2
+    # solr.initialize.replicationFactor -- Number of replicas for each SOLR shard
+    replicationFactor: 1
+    # solr.initialize.maxShardsPerNode -- Maximum shards per node
+    maxShardsPerNode: 10
+    # solr.initialize.configsetName -- Name of the config set used for initializing
+    configsetName: ckanConfigSet
+  # solr.fullnameOverride -- Name override for the SOLR deployment
+  fullnameOverride: *SolrName
+  # solr.replicaCount -- Number of SOLR instances in the cluster
+  replicaCount: 1
+  volumeClaimTemplates:
+    # solr.volumeClaimTemplates.storageSize -- Size of Solr PVC
+    storageSize: 5Gi
+  image:
+    # solr.image.repository -- Repository for the SOLR image
+    repository: solr
+    # solr.image.tag -- Tag for the SOLR image
+    tag: 6.6.6
+  zookeeper:
+    # solr.zookeeper.replicaCount -- Numer of Zookeeper replicas in the ZK cluster
+    replicaCount: 1
+    persistence:
+      # solr.zookeeper.persistence.size -- Size of ZK PVC
+      size: 1Gi
+
+postgresql:
+  # postgresql.enabled -- Flag to control whether to deploy PostgreSQL
+  enabled: false
