@@ -1,0 +1,15 @@
+@import 'vars';
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  padding-top: $nhsuk-gutter * 2;
+  @include borderTop($light-grey);
+
+  &:last-child {
+    @include borderBottom($light-grey);
+  }
+}

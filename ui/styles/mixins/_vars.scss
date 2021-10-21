@@ -1,0 +1,10 @@
+@import 'colours';
+@import 'measurements';
+
+@mixin borderBottom($colour: $border-colour) {
+  border-bottom: 1px solid $colour;
+}
+
+@mixin borderTop($colour: $border-colour) {
+  border-top: 1px solid $colour;
+}
