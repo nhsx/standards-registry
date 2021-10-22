@@ -50,25 +50,19 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: Helm Deploy
-        uses: 'deliverybot/helm@v1'
-        with:
-          release: 'ckan'
-          namespace: 'default'
-          chart: 'keitaro-charts/ckan'
-          token: '${{ github.token }}'
-          repo: https://keitaro-charts.storage.googleapis.com
-          repo-alias: keitaro-charts
-          value-files: './charts/ckan/values.yaml'
-          values: |
-            ckan.sysadminApiToken: ${{ secrets.CKAN_SYSADMIN_API_TOKEN }}
-            ckan.sysadminName: ${{ secrets.CKAN_SYSADMIN_API_TOKEN }}
-            ckan.sysadminPassword: ${{ secrets.CKAN_SYSADMIN_PASS }}
-            ckan.CkanDBPass: ${{ secrets.CKAN_DB_PASS }}
-            ckan.DatastoreRWDBPass: ${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}
-            ckan.DatastoreRODBPass: ${{ secrets.CKAN_DATASTORE_RO_DB_PASS }}
-            ckan.siteUrl: ${{ secrets.CKAN_SITE_URL }}
-            MasterDBPass: ${{ secrets.MASTER_DB_PASS }}
+      - name: helm deploy
+        uses: koslib/helm-eks-action@master
         env:
-          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG_FILE }}'
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+        with:
+          command: >-
+            helm upgrade ckan --repo https://keitaro-charts.storage.googleapis.com --install --wait keitaro-charts/ckan -f ./charts/ckan/values.yaml
+            --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
+            --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
+            --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
+            --set ckan.CkanDBPass='${{ secrets.CKAN_DB_PASS }}'
+            --set ckan.DatastoreRWDBPass='${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}'
+            --set ckan.DatastoreRODBPass='${{ secrets.CKAN_SITE_URL }}'
+            --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
+            --set MasterDBPass='${{ secrets.MASTER_DB_PASS }}'
       - run: echo deploydev
