@@ -17,7 +17,7 @@ defaults:
 
 jobs:
 
-  dockerbuild:
+  docker-build:
     runs-on: ubuntu-latest
     environment: dev
     env:
@@ -50,6 +50,12 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  ckan-deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      AWS_REGION: eu-west-2
+    steps:
       - name: configure credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
