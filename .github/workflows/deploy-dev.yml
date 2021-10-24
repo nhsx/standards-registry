@@ -68,7 +68,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
         with:
           command: >-
-            helm upgrade ckan -n dev --repo https://keitaro-charts.storage.googleapis.com --install --wait keitaro-charts/ckan -f ./charts/ckan/values.yaml
+            helm upgrade ckan -n dev --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
             --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
             --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
             --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
