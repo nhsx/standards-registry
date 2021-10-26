@@ -79,4 +79,5 @@ jobs:
             --set ckan.DatastoreRODBPass='${{ secrets.CKAN_SITE_URL }}'
             --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
             --set MasterDBPass='${{ secrets.MASTER_DB_PASS }}'
+            --set DBHost='${{ secrets.DBHOST }}'
       - run: echo deploydev
