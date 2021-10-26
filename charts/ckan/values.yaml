@@ -26,7 +26,7 @@ SolrName: &SolrName solr
 DatapusherName: &DatapusherName datapusher
 
 # DBHost -- Variable for name of headless svc from postgres deployment
-DBHost: &DBHost dev.cdbsqtf2n9lj.eu-west-2.rds.amazonaws.com
+DBHost: &DBHost postgreshost
 # MasterDBName -- Variable for name of the master user database in PostgreSQL
 MasterDBName: &MasterDBName postgres
 # MasterDBUser -- Variable for master user name for PostgreSQL
