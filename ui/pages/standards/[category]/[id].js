@@ -10,13 +10,15 @@ function getExtra(data, key) {
 const Category = ({ data }) => {
   const category = getExtra(data, 'category');
   const categoryText = `${upperFirst(category)} format`;
-  console.log(data)
-  const status = getExtra(data, 'status');
+
   return (
     <Page title={data.title}>
       <Reading>
         <h2 className="nhsuk-caption-l">
-          <Tag>{upperFirst(status)}</Tag>
+          {
+            // TODO: this will be a tag or extra prop
+          }
+          <Tag>{upperFirst(data.state)}</Tag>
           &nbsp;
           { categoryText }
         </h2>
