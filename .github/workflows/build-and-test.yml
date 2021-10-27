@@ -35,7 +35,7 @@ jobs:
           - 16.x
     env:
       PORT: 3000
-      CKAN_URL: CKAN_URL=http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action
+      CKAN_URL: http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
