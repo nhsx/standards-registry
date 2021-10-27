@@ -1,4 +1,5 @@
 import { Reading, Snippet, Page, Row, Col, Filters, Dataset } from '../../../components';
+import { list } from '../../../helpers/api';
 
 const CONTENT = {
   content: {
@@ -44,17 +45,14 @@ export default function Category({ data }) {
 }
 
 export async function getServerSideProps(context) {
+  const { page } = context.query;
   const { category } = context.params;
-
-  const content = CONTENT[category];
-
-  const res = await fetch(`http://localhost:3000/api/standards/${category}`);
-  const data = await res.json();
+  const data = await list({ page });
 
   return {
     props: {
       data,
-      content
+      content: CONTENT[category]
     }
   }
 

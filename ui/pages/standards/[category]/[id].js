@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown'
 import { Page, Reading, Tag, Row, Col, PanelList, Details, EmailSignup, Feedback, Model } from '../../../components';
 import upperFirst from 'lodash/upperFirst';
+import { read } from '../../../helpers/api';
 import schema from '../../../schema';
 
 function getExtra(data, key) {
@@ -8,9 +9,6 @@ function getExtra(data, key) {
 }
 
 const Category = ({ data }) => {
-  const category = getExtra(data, 'category');
-  const categoryText = `${upperFirst(category)} format`;
-
   return (
     <Page title={data.title}>
       <Reading>
@@ -19,8 +17,6 @@ const Category = ({ data }) => {
             // TODO: this will be a tag or extra prop
           }
           <Tag>{upperFirst(data.state)}</Tag>
-          &nbsp;
-          { categoryText }
         </h2>
         <h1>{ data.title }</h1>
       </Reading>
@@ -45,9 +41,7 @@ const Category = ({ data }) => {
 
 export async function getServerSideProps(context) {
   const { category, id } = context.params;
-
-  const res = await fetch(`http://localhost:3000/api/standards/${category}/${id}`);
-  const data = await res.json();
+  const data = await read({ id });
 
   return {
     props: {

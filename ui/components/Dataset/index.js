@@ -1,3 +1,4 @@
+import url from 'url';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Snippet, Tag, Flex, Pagination } from '../';
@@ -9,8 +10,7 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model, includeType }) {
-  const router = useRouter();
-  const target = `${router.asPath}/${model.name}`;
+  const target = `/standards/model/${model.name}`;
   const status = (model.extras.find(e => e.key === 'status') || {}).value;
   const type = (model.extras.find(e => e.key === 'category') || {}).value || 'Uncategorised';
   return (
@@ -18,16 +18,10 @@ function Model({ model, includeType }) {
       <Link href={target}>
         <a>{ model.title }</a>
       </Link>
-      {
-        includeType && <p className="nhsuk-hint">{ type }</p>
-      }
       <p>{ model.notes }</p>
       <Flex className="nhsuk-body-s">
         <div>
-          Status: <Tag>{upperFirst(status)}</Tag>
-        </div>
-        <div>
-          Compliance: required
+          Status: <Tag>{upperFirst(model.state)}</Tag>
         </div>
         <div>
           Last updated: {format(parseISO(model.metadata_modified), DATE_FORMAT)}
@@ -52,6 +46,7 @@ export default function Dataset({ data = {}, searchTerm, includeType, pagination
           ))
         }
       </ul>
+      <Pagination count={count} />
     </>
   )
 }

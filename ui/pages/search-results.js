@@ -1,4 +1,5 @@
 import { Page, Col, Row, Reading, Filters, Dataset, Snippet } from '../components'
+import { list } from '../helpers/api';
 
 const content = {
   title: 'Search results',
@@ -28,14 +29,13 @@ export default function SearchResults({ filters, data, searchTerm }) {
 }
 
 export async function getServerSideProps(context) {
-  const { q } = context.query || '';
-  const response = await fetch(`http://localhost:3000/api/standards/search/${q}`)
-  const result = await response.json();
+  const { q, page } = context.query;
+  const result = await list({ q, page });
 
   return {
     props: {
       data: result,
-      searchTerm: q,
+      searchTerm: q || '',
       content
     }
   }

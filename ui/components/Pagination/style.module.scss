@@ -1,16 +1,31 @@
 @import "vars";
 
 .pagination {
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
   .summary {
     float: right;
+    padding-bottom: $nhsuk-gutter / 2;
+    padding-top: $nhsuk-gutter / 2;
   }
 
   .item {
     display: inline-block;
+
+    &:first-of-type .link {
+      padding-left: 0;
+    }
+    &:last-of-type .link {
+      padding-right: 0;
+    }
   }
 
   .link {
     text-decoration: none;
+    padding: $nhsuk-gutter / 2 $nhsuk-gutter $nhsuk-gutter / 2 $nhsuk-gutter;
 
     &:hover, &:focus {
       outline: 3px solid $yellow;
