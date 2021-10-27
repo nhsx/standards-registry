@@ -5,6 +5,7 @@ const stringify = require('csv-stringify');
 
 const PRSB = 'https://theprsb.org/standards/';
 const NHSD = 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections';
+const API_CATALOGUE = 'https://digital.nhs.uk/developer/api-catalogue';
 
 const columns = [
   'owner',
@@ -85,6 +86,29 @@ describe('WebScraper', () => {
       });
     };
 
+  });
+
+  it('API Catalogue', async () => {
+    await browser.url(API_CATALOGUE);
+    await browser.$('[data-uipath="website.glossary.list"]').waitForDisplayed();
+    const standards = await browser.$$('[data-uipath="website.glossary.list"] h2');
+    for await (row of standards)  {
+      const link = await row.$('a');
+      let url = await link.getAttribute('href');
+      const title = await link.getText();
+      const p = await row.nextElement();
+      const description = await p.getText();
+      if (Url.parse(url).hostname === null) {
+        url = 'https://digital.nhs.uk' + url;
+      }
+      this.output.write({
+        owner: 'apic',
+        url,
+        title,
+        description,
+        approval: ''
+      });
+    };
   });
 
 });
