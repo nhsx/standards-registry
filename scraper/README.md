@@ -16,7 +16,7 @@ When this is complete the records will be saved in `./standards.csv`
 
 Create a `.env` file in this directory and define the following environment variables:
 
-*`CKAN` - the base url of the CKAN instance
+*`CKAN_URL` - the base url of the CKAN instance
 *`API_KEY` - an API key with write access to the CKAN instance
 
 Then run:

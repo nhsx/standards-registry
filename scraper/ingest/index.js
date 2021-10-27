@@ -17,7 +17,7 @@ const rows = parse(csv, { columns: true });
   for await (row of rows) {
     const name = row.title.toLowerCase().replace(/[^a-z ]/g, '').replace(/ /g, '-');
     try {
-      const response = await fetch(`${process.env.CKAN}/api/3/action/package_show?id=${name}`);
+      const response = await fetch(`${process.env.CKAN_URL}/api/3/action/package_show?id=${name}`);
       const data = await response.json();
 
       const params = {
@@ -36,7 +36,7 @@ const rows = parse(csv, { columns: true });
 
       const endpoint = data.success ? `/api/3/action/package_update?id=${name}` : '/api/3/action/package_create';
       const action = data.success ? 'Updated' : 'Created';
-      const ingest = await fetch(`${process.env.CKAN}${endpoint}`, {
+      const ingest = await fetch(`${process.env.CKAN_URL}${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(params),
         headers: {
