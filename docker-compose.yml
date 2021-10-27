@@ -4,5 +4,6 @@ services:
     build: ./ui
     environment:
       PORT: 3000
+      CKAN_URL: $CKAN_URL
     ports:
       - "3000:3000"

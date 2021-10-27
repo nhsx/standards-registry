@@ -10,6 +10,7 @@ export { default as Hero } from './Hero';
 export { default as Model } from './Model';
 export { default as OptionSelect } from './OptionSelect';
 export { default as Page } from './Page';
+export { default as Pagination } from './Pagination';
 export { default as PanelList } from './PanelList';
 export { default as PhaseBanner } from './PhaseBanner';
 export { default as Reading } from './Reading';
