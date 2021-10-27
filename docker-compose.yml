@@ -4,5 +4,6 @@ services:
     build: ./ui
     environment:
       PORT: 3000
+      CKAN_URL: http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action
     ports:
       - "3000:3000"
