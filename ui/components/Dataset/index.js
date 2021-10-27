@@ -1,46 +1,54 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Snippet, Tag, Flex } from '../';
+import { Snippet, Tag, Flex, Pagination } from '../';
+import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import styles from './style.module.scss';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
-function Item({ id, title, content, updatedAt }) {
+function Model({ model, includeType }) {
   const router = useRouter();
-  const target = `${router.asPath}/${id}`;
+  const target = `${router.asPath}/${model.name}`;
+  const status = (model.extras.find(e => e.key === 'status') || {}).value;
+  const type = (model.extras.find(e => e.key === 'category') || {}).value || 'Uncategorised';
   return (
     <>
       <Link href={target}>
-        <a>{ title }</a>
+        <a>{ model.title }</a>
       </Link>
-      <p>{ content }</p>
+      {
+        includeType && <p className="nhsuk-hint">{ type }</p>
+      }
+      <p>{ model.notes }</p>
       <Flex className="nhsuk-body-s">
         <div>
-          Status: <Tag>Active</Tag>
+          Status: <Tag>{upperFirst(status)}</Tag>
         </div>
         <div>
           Compliance: required
         </div>
         <div>
-          Last updated: {format(parseISO(updatedAt), DATE_FORMAT)}
+          Last updated: {format(parseISO(model.metadata_modified), DATE_FORMAT)}
         </div>
       </Flex>
     </>
   )
 }
 
-export default function Dataset({ data }) {
-  const count = data.length;
+export default function Dataset({ data = {}, searchTerm, includeType, pagination }) {
+  const { count = 0, results = [] } = data;
 
   return (
     <>
-      <h4><Snippet num={count} plural={count > 1}>filters.summary</Snippet></h4>
+      <h3>
+        <Snippet num={count} plural={count > 1 || count === 0} searchTerm={searchTerm} inline>{searchTerm ? 'filters.summary' : 'filters.all'}</Snippet>
+      </h3>
       <ul className={styles.list}>
         {
-          data.map(datum => (
-            <li key={datum.id}><Item {...datum} /></li>
+          results.map(model => (
+            <li key={model.id} className={styles.listItem}><Model model={model} includeType={includeType} /></li>
           ))
         }
       </ul>

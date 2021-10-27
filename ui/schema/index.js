@@ -1,6 +1,7 @@
 import ReactMarkdown from 'react-markdown';
 import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
+import upperFirst from 'lodash/upperFirst'
 import { Details } from '../components';
 
 const DATE_FORMAT = 'do MMMM yyyy';
@@ -13,18 +14,20 @@ export default {
     show: false
   },
   owner: {
-    label: 'Owner'
+    label: 'Owner',
+    accessor: 'organization.title'
   },
   reference: {
     label: 'Reference'
   },
   category:	{
-    label: 'Category'
+    label: 'Category',
+    format: (val, data) => upperFirst((data.extras.find(e => e.key === 'category') || {}).value)
   },
   version: {
     label: 'Version'
   },
-  lastUpdated: {
+  metadata_modified: {
     label: 'Standard last updated',
     format: (val, data) => (
       <>

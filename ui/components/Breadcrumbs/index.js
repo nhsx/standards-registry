@@ -18,7 +18,8 @@ export default function Breadcrumbs({ labels, ...props }) {
 
   useEffect(() => {
     if (router) {
-      const linkPath = router.asPath.trim().split('/');
+      const path = router.asPath.trim().split('?').shift();
+      const linkPath = path.trim().split('/');
       linkPath.shift();
 
       const pathArray = compact(linkPath).map((path, i) => {
@@ -42,7 +43,7 @@ export default function Breadcrumbs({ labels, ...props }) {
 
   // lookup model label
   function getLabel(page) {
-    if (context && context.id === parseInt(page, 10)) {
+    if (context && context.id === page) {
       return context.data.title;
     }
     return convertBreadcrumb(page);

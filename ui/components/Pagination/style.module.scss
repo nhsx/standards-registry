@@ -1,0 +1,30 @@
+@import "vars";
+
+.pagination {
+  .summary {
+    float: right;
+  }
+
+  .item {
+    display: inline-block;
+  }
+
+  .link {
+    text-decoration: none;
+
+    &:hover, &:focus {
+      outline: 3px solid $yellow;
+    }
+
+    &.current {
+      font-weight: bold;
+      border: none;
+      pointer-events: none;
+      cursor: default;
+
+      &:link, &:visited {
+        color: black
+      }
+    }
+  }
+}

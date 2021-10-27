@@ -2,7 +2,13 @@ import { createContext, useContext } from 'react';
 import merge from 'lodash/merge';
 
 const CONTENT = {
-  title: 'Join up IT systems in health and social care'
+  title: 'Join up IT systems in health and social care',
+  filters: {
+    summary: 'Showing {{num}} result{{#plural}}s{{/plural}}'
+  },
+  pagination: {
+    summary: 'Showing {{from}} - {{to}} of {{total}} results'
+  }
 }
 
 const ContentContext = createContext();

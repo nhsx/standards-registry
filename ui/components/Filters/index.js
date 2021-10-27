@@ -1,5 +1,71 @@
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
 
+const FILTERS = [
+  {
+    title: 'Topic',
+    options: [
+      {
+        label: 'Appointment / Scheduling',
+        value: 'Scheduling'
+      },
+      {
+        label: 'Referrals',
+        value: 'Referrals'
+      },
+      {
+        label: 'Access to records',
+        value: 'access'
+      },
+      {
+        label: 'Clinical decision support',
+        value: 'clinical'
+      }
+    ]
+  },
+  {
+    title: 'Programme',
+    options: [
+      {
+        label: 'Appointment / Scheduling',
+        value: 'Scheduling'
+      },
+      {
+        label: 'Referrals',
+        value: 'Referrals'
+      },
+      {
+        label: 'Access to records',
+        value: 'access'
+      },
+      {
+        label: 'Clinical decision support',
+        value: 'clinical'
+      }
+    ]
+  },
+  {
+    title: 'Care settings',
+    options: [
+      {
+        label: 'Appointment / Scheduling',
+        value: 'Scheduling'
+      },
+      {
+        label: 'Referrals',
+        value: 'Referrals'
+      },
+      {
+        label: 'Access to records',
+        value: 'access'
+      },
+      {
+        label: 'Clinical decision support',
+        value: 'clinical'
+      }
+    ]
+  }
+]
+
 function Filter({ title, options }) {
   return (
     <Details summary={title} className="nhsuk-filter">
@@ -10,7 +76,7 @@ function Filter({ title, options }) {
   )
 }
 
-export default function Filters({ filters = [] }) {
+export default function Filters({ filters = FILTERS }) {
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
