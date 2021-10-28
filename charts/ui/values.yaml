@@ -1,0 +1,16 @@
+# Default values for standards-ui.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+ui:
+  name: standards-ui
+  group: frontend
+  container:
+    image: imageurl
+    port: 3000
+  service:
+    type: ClusterIP
+    port: 3000
+  config:
+    ckanurl: ckanurl

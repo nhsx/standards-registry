@@ -50,7 +50,7 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-  ckan-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment: dev
     env:
@@ -64,7 +64,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: helm deploy
+      - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
@@ -82,4 +82,17 @@ jobs:
             --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
+      - name: ui deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade --install --wait -n dev ui .
+            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - run: echo deploydev
+      
