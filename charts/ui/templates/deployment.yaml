@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ui.name }}
+  labels:
+    app: {{ .Values.ui.name }}
+    group: {{ .Values.ui.group }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.ui.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ui.name }}
+        group: {{ .Values.ui.group }}
+    spec:
+      containers:
+        - name: {{ .Values.ui.name }}
+          image: {{ .Values.ui.container.image }}
+          ports:
+            - containerPort: {{ .Values.ui.container.port }}
+          env:
+          - name: CKAN_URL
+            value: {{ .Values.ui.config.ckanurl }}
