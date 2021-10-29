@@ -44,10 +44,15 @@ export default function Category({ data }) {
   )
 }
 
+const DEFAULT_SORT = {
+  column: 'name',
+  order: 'asc'
+};
+
 export async function getServerSideProps(context) {
-  const { page } = context.query;
+  const { page, sort = DEFAULT_SORT } = context.query;
   const { category } = context.params;
-  const data = await list({ page });
+  const data = await list({ page, sort });
 
   return {
     props: {

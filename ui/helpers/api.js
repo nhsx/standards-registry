@@ -7,12 +7,17 @@ export async function read({ id }) {
   return data.result;
 }
 
-export async function list({ page = 1, q }) {
+export async function list({ page = 1, q, sort }) {
+  let sortstring;
   const rows = 10;
 
   const start = (page - 1) * rows
 
-  const query = stringify({ q, rows, start });
+  if (sort) {
+    sortstring = `${sort.column} ${sort.order}`;
+  }
+
+  const query = stringify({ q, rows, start, sort: sortstring });
 
   const response = await fetch(`${CKAN_URL}/package_search?${query}`)
   const data = await response.json();
