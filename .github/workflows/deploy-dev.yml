@@ -118,5 +118,5 @@ jobs:
             --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
-            --set ckan.image.repository=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       
