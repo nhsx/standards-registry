@@ -13,7 +13,7 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
 
 # Fetch and build the custom CKAN extensions
 RUN pip wheel --wheel-dir=/wheels git+https://github.com/ckan/ckanext-scheming@master#egg=ckanext-scheming
-RUN pip wheel --wheel-dir=/wheels git+https://github.com/Marvell-Consulting/ckanext-extrafields@main#egg=ckanext-extrafields
+RUN pip wheel --wheel-dir=/wheels git+https://github.com/Marvell-Consulting/ckanext-extrafields@scheming-only#egg=ckanext-extrafields
 
 ############
 ### MAIN ###
