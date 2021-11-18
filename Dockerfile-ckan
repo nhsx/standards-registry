@@ -12,8 +12,8 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
     python3-dev=3.8.10-r0
 
 # Fetch and build the custom CKAN extensions
-RUN install git+https://github.com/ckan/ckanext-scheming@master#egg=ckanext-scheming
-RUN install git+https://github.com/Marvell-Consulting/ckanext-extrafields@scheming-only#egg=ckanext-extrafields
+RUN pip install git+https://github.com/ckan/ckanext-scheming@master#egg=ckanext-scheming
+RUN pip install git+https://github.com/Marvell-Consulting/ckanext-extrafields@scheming-only#egg=ckanext-extrafields
 
 # Add the custom extensions to the plugins list
 ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher extrafields scheming_datasets 
