@@ -30,6 +30,7 @@ COPY --from=extbuild /wheels /srv/app/ext_wheels
 
 # Install and enable the custom extensions
 RUN pip install --no-index --find-links=/srv/app/ext_wheels ckanext-extrafields && \
+    pip install --no-index --find-links=/srv/app/ext_wheels ckanext-scheming && \
     ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}" && \
     ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.extrafields:ckan_dataset.yaml" && \
     chown -R ckan:ckan /srv/app
