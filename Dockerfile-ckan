@@ -20,6 +20,7 @@ ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
+RUN ckan -c  ${APP_DIR}/production.ini search-index rebuild
 RUN chown -R ckan:ckan /srv/app
 
 # Switch to the ckan user
