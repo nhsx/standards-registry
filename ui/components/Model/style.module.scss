@@ -1,0 +1,8 @@
+@import "vars";
+
+.td {
+  padding: 0;
+  &:last-child {
+    border-bottom: 0;
+  }
+}

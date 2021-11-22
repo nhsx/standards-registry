@@ -1,34 +1,31 @@
-import { isArray } from "lodash";
 import get from "lodash/get";
-import { Component, Table, Tbody, Tr, Td } from "../";
+import { Table, Tbody, Tr, Td } from "../";
 import styles from "./style.module.scss";
+
+const format = ({ options, vals, data }) =>
+  options.format ? options.format(vals, data) : vals;
 
 const Rows = (props) => {
   const { options, vals, data } = props;
-  let values;
-  values = !isArray(vals) ? [vals] : vals;
   return (
     <Td className="nhsuk-table__cell">
-      {isArray(vals)
-        ? values.map((val, index) => (
-            <Table key={index}>
-              <Tbody>
-                <Tr>
-                  <Td classes={styles.td}>
-                    {options.format ? options.format(val, data) : val}
-                  </Td>
-                </Tr>
-              </Tbody>
-            </Table>
-          ))
-        : options.format
-        ? options.format(vals, data)
-        : vals}
+      {Array.isArray(vals) ? (
+        <ul className="nhsuk-list-bullet">
+          {vals.map((val, index) => (
+            <li key={index}>
+              {options.format ? options.format(val, data) : val}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        format(props)
+      )}
     </Td>
   );
 };
 
 export default function Model({ schema, data }) {
+  console.log(data);
   return (
     <div className="nhsuk-model">
       <p>{data.notes}</p>

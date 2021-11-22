@@ -16,6 +16,16 @@ export default {
     label: "Owner",
     accessor: "organization.title",
   },
+  approval_code: {
+    label: "Approval Code",
+  },
+  status: {
+    label: "Status",
+    format: (val) => <Tag classes={val}>{upperFirst(val)}</Tag>,
+  },
+  standard_category: {
+    label: "Category",
+  },
   url: {
     label: "Link to standard",
     format: (val) => (
@@ -28,6 +38,9 @@ export default {
     label: "Standard last updated",
     format: (val) => format(parseISO(val), DATE_FORMAT),
   },
+  care_setting: {
+    label: "Care Settings",
+  },
   procedure: {
     label: "Procedures",
   },
@@ -37,8 +50,4 @@ export default {
   related_standards: {
     label: "Related Standards",
   },
-  status: {
-    label: "Status",
-    format: (val) => <Tag classes={val}>{upperFirst(val)}</Tag>,
-  }
 };
