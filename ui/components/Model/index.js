@@ -1,6 +1,5 @@
 import get from "lodash/get";
 import { Table, Tbody, Tr, Td } from "../";
-import styles from "./style.module.scss";
 
 const format = ({ options, vals, data }) =>
   options.format ? options.format(vals, data) : vals;
