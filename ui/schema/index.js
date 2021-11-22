@@ -1,9 +1,9 @@
-import parseISO from "date-fns/parseISO";
-import format from "date-fns/format";
-import upperFirst from "lodash/upperFirst";
-import { Details, Tag } from "../components";
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
+import upperFirst from 'lodash/upperFirst';
+import { Tag } from '../components';
 
-const DATE_FORMAT = "do MMMM yyyy";
+const DATE_FORMAT = 'do MMMM yyyy';
 
 export default {
   title: {
@@ -13,41 +13,41 @@ export default {
     show: false,
   },
   owner: {
-    label: "Owner",
-    accessor: "organization.title",
+    label: 'Owner',
+    accessor: 'organization.title',
   },
   approval_code: {
-    label: "Approval Code",
+    label: 'Approval Code',
   },
   status: {
-    label: "Status",
+    label: 'Status',
     format: (val) => <Tag classes={val}>{upperFirst(val)}</Tag>,
   },
   standard_category: {
-    label: "Category",
+    label: 'Category',
   },
   url: {
-    label: "Link to standard",
+    label: 'Link to standard',
     format: (val) => (
-      <a href={val} target="_blank">
+      <a href={val} target='_blank' rel='noreferrer'>
         View standard
       </a>
     ),
   },
   metadata_modified: {
-    label: "Standard last updated",
+    label: 'Standard last updated',
     format: (val) => format(parseISO(val), DATE_FORMAT),
   },
   care_setting: {
-    label: "Care Settings",
+    label: 'Care Settings',
   },
   procedure: {
-    label: "Procedures",
+    label: 'Procedures',
   },
   dependencies: {
-    label: "Dependencies",
+    label: 'Dependencies',
   },
   related_standards: {
-    label: "Related Standards",
+    label: 'Related Standards',
   },
 };

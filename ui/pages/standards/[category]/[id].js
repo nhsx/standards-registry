@@ -1,7 +1,7 @@
 import {
+  Tag,
   Page,
   Reading,
-  Tag,
   Row,
   Col,
   PanelList,
@@ -13,10 +13,6 @@ import {
 import upperFirst from 'lodash/upperFirst';
 import { read } from '../../../helpers/api';
 import schema from '../../../schema';
-
-function getExtra(data, key) {
-  return (data.extras.find((e) => e.key === key) || {}).value;
-}
 
 const Category = ({ data }) => {
   return (

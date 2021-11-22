@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Snippet, Tag, Flex, Pagination } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
@@ -8,16 +7,12 @@ import styles from './style.module.scss';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
-function Model({ model, includeType }) {
+function Model({ model }) {
   const target = `/standards/model/${model.name}`;
   const status =
     model && model.extras
       ? model.extras.find((e) => e.key === 'status').value
       : model.state;
-  const type =
-    model && model.extras
-      ? (model.extras.find((e) => e.key === 'category') || {}).value
-      : 'Uncategorised';
   return (
     <>
       <Link href={target}>
@@ -40,7 +35,7 @@ export default function Dataset({
   data = {},
   searchTerm,
   includeType,
-  pagination,
+  // pagination,
 }) {
   const { count = 0, results = [] } = data;
 
