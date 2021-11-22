@@ -20,7 +20,6 @@ function getExtra(data, key) {
 }
 
 const Category = ({ data }) => {
-  console.log(data);
   return (
     <Page title={data.title}>
       <Reading>
