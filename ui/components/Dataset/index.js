@@ -1,31 +1,30 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Snippet, Tag, Flex, Pagination } from "../";
-import upperFirst from "lodash/upperFirst";
-import format from "date-fns/format";
-import parseISO from "date-fns/parseISO";
-import styles from "./style.module.scss";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Snippet, Tag, Flex, Pagination } from '../';
+import upperFirst from 'lodash/upperFirst';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
+import styles from './style.module.scss';
 
-const DATE_FORMAT = "do MMM yyyy";
+const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model, includeType }) {
-  console.log(model.name, model);
   const target = `/standards/model/${model.name}`;
   const status =
     model && model.extras
-      ? model.extras.find((e) => e.key === "status").value
+      ? model.extras.find((e) => e.key === 'status').value
       : model.state;
   const type =
     model && model.extras
-      ? (model.extras.find((e) => e.key === "category") || {}).value
-      : "Uncategorised";
+      ? (model.extras.find((e) => e.key === 'category') || {}).value
+      : 'Uncategorised';
   return (
     <>
       <Link href={target}>
         <a>{model.title}</a>
       </Link>
       <p>{model.notes}</p>
-      <Flex className="nhsuk-body-s">
+      <Flex className='nhsuk-body-s'>
         <div>
           Status: <Tag>{upperFirst(status)}</Tag>
         </div>
@@ -54,7 +53,7 @@ export default function Dataset({
           searchTerm={searchTerm}
           inline
         >
-          {searchTerm ? "filters.summary" : "filters.all"}
+          {searchTerm ? 'filters.summary' : 'filters.all'}
         </Snippet>
       </h3>
       <ul className={styles.list}>
