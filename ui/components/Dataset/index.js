@@ -10,9 +10,10 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model, includeType }) {
+  console.log(model.name, model)
   const target = `/standards/model/${model.name}`;
-  const status = (model.extras.find(e => e.key === 'status') || {}).value;
-  const type = (model.extras.find(e => e.key === 'category') || {}).value || 'Uncategorised';
+  const status = model && model.extras ? (model.extras.find(e => e.key === 'status')).value : model.state;
+  const type = model && model.extras ? (model.extras.find(e => e.key === 'category') || {}).value : 'Uncategorised';
   return (
     <>
       <Link href={target}>
@@ -21,7 +22,7 @@ function Model({ model, includeType }) {
       <p>{ model.notes }</p>
       <Flex className="nhsuk-body-s">
         <div>
-          Status: <Tag>{upperFirst(model.state)}</Tag>
+          Status: <Tag>{upperFirst(status)}</Tag>
         </div>
         <div>
           Last updated: {format(parseISO(model.metadata_modified), DATE_FORMAT)}
