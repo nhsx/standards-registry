@@ -19,8 +19,8 @@ const Category = ({ data }) => {
     <Page title={data.title}>
       <Reading>
         <h2 className="nhsuk-caption-l">
-          <Tag status={data.status}>{upperFirst(data.status)}</Tag>{' '}
-          {data.standard_category}
+          <Tag status={data.status}>{upperFirst(data.status)}</Tag> Information
+          standard listing
         </h2>
         <h1>{data.title}</h1>
       </Reading>
