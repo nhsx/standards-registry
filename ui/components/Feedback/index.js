@@ -1,3 +1,3 @@
 export default function Feedback() {
-  return null
+  return null;
 }

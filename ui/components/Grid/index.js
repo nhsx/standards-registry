@@ -24,32 +24,29 @@ function getClassName(total, cols) {
       type = 'third';
       break;
     case 2:
-      type = 'half'
+      type = 'half';
   }
 
   return `nhsuk-grid-column-${numword}-${type}${cols > 1 ? 's' : ''}`;
 }
 
 export function Row({ children, className }) {
-
   const total = Children.toArray(children).reduce((t, child) => {
     return t + (parseInt(child.props.colspan, 10) || 1);
   }, 0);
 
   if (total === 0 || total > 4) {
-    throw new Error('Number of cols should be between 1 and 4')
+    throw new Error('Number of cols should be between 1 and 4');
   }
 
   return (
     <div className={classnames('nhsuk-grid-row', className)}>
-      {
-        Children.map(children, child => cloneElement(child, { total }))
-      }
+      {Children.map(children, (child) => cloneElement(child, { total }))}
     </div>
   );
 }
 
 export function Col({ children, total, colspan }) {
   const className = getClassName(total, colspan);
-  return <div className={className}>{ children }</div>
+  return <div className={className}>{children}</div>;
 }

@@ -1,24 +1,28 @@
-import ReactMarkdown from 'react-markdown'
-import { Page, Reading, Tag, Row, Col, PanelList, Details, EmailSignup, Feedback, Model } from '../../../components';
+import {
+  Tag,
+  Page,
+  Reading,
+  Row,
+  Col,
+  PanelList,
+  Details,
+  EmailSignup,
+  Feedback,
+  Model,
+} from '../../../components';
 import upperFirst from 'lodash/upperFirst';
 import { read } from '../../../helpers/api';
 import schema from '../../../schema';
-
-function getExtra(data, key) {
-  return (data.extras.find(e => e.key === key) || {}).value;
-}
 
 const Category = ({ data }) => {
   return (
     <Page title={data.title}>
       <Reading>
-        <h2 className="nhsuk-caption-l">
-          {
-            // TODO: this will be a tag or extra prop
-          }
-          <Tag>{upperFirst(data.state)}</Tag>
+        <h2 className='nhsuk-caption-l'>
+          <Tag classes={data.status}>{upperFirst(data.status)}</Tag>{' '}
+          {data.standard_category}
         </h2>
-        <h1>{ data.title }</h1>
+        <h1>{data.title}</h1>
       </Reading>
       <Row>
         <Col colspan={2}>
@@ -26,10 +30,10 @@ const Category = ({ data }) => {
         </Col>
         <Col>
           <PanelList>
-            <Details summary="Get updates for this standard">
+            <Details summary='Get updates for this standard'>
               <EmailSignup />
             </Details>
-            <Details summary="Give feedback about this standard">
+            <Details summary='Give feedback about this standard'>
               <Feedback />
             </Details>
           </PanelList>
@@ -37,7 +41,7 @@ const Category = ({ data }) => {
       </Row>
     </Page>
   );
-}
+};
 
 export async function getServerSideProps(context) {
   const { category, id } = context.params;
@@ -46,9 +50,9 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data,
-      category
-    }
-  }
+      category,
+    },
+  };
 }
 
-export default Category
+export default Category;
