@@ -8,7 +8,6 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  console.log(model);
   const { name, status, title, metadata_modified, notes } = model;
   const target = `/standards/model/${name}`;
   return (
@@ -33,7 +32,7 @@ export default function Dataset({
   data = {},
   searchTerm,
   includeType,
-  // pagination,
+  //   pagination,
 }) {
   const { count = 0, results = [] } = data;
 
