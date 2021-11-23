@@ -8,23 +8,21 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const target = `/standards/model/${model.name}`;
-  const status =
-    model && model.extras
-      ? model.extras.find((e) => e.key === 'status').value
-      : model.state;
+  console.log(model);
+  const { name, status, title, metadata_modified, notes } = model;
+  const target = `/standards/model/${name}`;
   return (
     <>
       <Link href={target}>
-        <a>{model.title}</a>
+        <a>{title}</a>
       </Link>
-      <p>{model.notes}</p>
+      <p>{notes}</p>
       <Flex className="nhsuk-body-s">
         <div>
-          Status: <Tag>{upperFirst(status)}</Tag>
+          Status: <Tag status={status}>{upperFirst(status)}</Tag>
         </div>
         <div>
-          Last updated: {format(parseISO(model.metadata_modified), DATE_FORMAT)}
+          Last updated: {format(parseISO(metadata_modified), DATE_FORMAT)}
         </div>
       </Flex>
     </>
