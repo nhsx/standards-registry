@@ -1,45 +1,17 @@
-import Link from 'next/link';
-import { Reading, Page, Snippet, Row, Col } from '../../components';
+import {
+  Reading,
+  Snippet,
+  Page,
+  Row,
+  Col,
+  Filters,
+  Dataset,
+} from '../../components';
+import { list } from '../../helpers/api';
 
-const CONTENT = {
-  title: 'Browse directory',
-  intro:
-    'Find standards, services and rules for building interoperable technology in health and social care in England.',
-  content: {
-    link: 'Content standards',
-    content:
-      'Find clinical codes, content and data formats to collect, process and share information consistently across care settings.',
-  },
-  technical: {
-    link: 'Technical standards',
-    content:
-      'Find technical specifications and APIs to exchange information with other technology products and services.',
-  },
-  services: {
-    link: 'Services',
-    content:
-      'Find central datasets and feeds to connect to and make use of national resources like NHS Email and Wifi.',
-  },
-};
-
-function Panel({ path }) {
+export default function Standards({ data }) {
   return (
-    <>
-      <h4>
-        <Link href={`standards/${path}`}>
-          <a>
-            <Snippet inline>{`${path}.link`}</Snippet>
-          </a>
-        </Link>
-      </h4>
-      <Snippet small>{`${path}.content`}</Snippet>
-    </>
-  );
-}
-
-export default function Standards() {
-  return (
-    <Page content={CONTENT}>
+    <Page>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>
@@ -48,23 +20,28 @@ export default function Standards() {
       </Reading>
       <Row>
         <Col>
-          <Panel path='content' />
+          <Filters />
         </Col>
-        <Col>
-          <Panel path='technical' />
-        </Col>
-        <Col>
-          <Panel path='services' />
+        <Col colspan={3}>
+          <Dataset data={data} pagination={true} />
         </Col>
       </Row>
     </Page>
   );
 }
 
-export async function getStaticProps() {
+const DEFAULT_SORT = {
+  column: 'name',
+  order: 'asc',
+};
+
+export async function getServerSideProps(context) {
+  const { page, sort = DEFAULT_SORT } = context.query;
+  const data = await list({ page, sort });
+
   return {
     props: {
-      content: CONTENT,
+      data,
     },
   };
 }

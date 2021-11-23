@@ -11,7 +11,7 @@ export async function list({ page = 1, q, sort }) {
   let sortstring;
   const rows = 10;
 
-  const start = (page - 1) * rows
+  const start = (page - 1) * rows;
 
   if (sort) {
     sortstring = `${sort.column} ${sort.order}`;
@@ -19,7 +19,7 @@ export async function list({ page = 1, q, sort }) {
 
   const query = stringify({ q, rows, start, sort: sortstring });
 
-  const response = await fetch(`${CKAN_URL}/package_search?${query}`)
+  const response = await fetch(`${CKAN_URL}/package_search?${query}`);
   const data = await response.json();
 
   return data.result;

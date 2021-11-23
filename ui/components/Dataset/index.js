@@ -9,7 +9,7 @@ const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
   const { name, status, title, metadata_modified, notes } = model;
-  const target = `/standards/model/${name}`;
+  const target = `/standards/${name}`;
   return (
     <>
       <Link href={target}>
