@@ -19,7 +19,7 @@ function Model({ model }) {
         <a>{model.title}</a>
       </Link>
       <p>{model.notes}</p>
-      <Flex className='nhsuk-body-s'>
+      <Flex className="nhsuk-body-s">
         <div>
           Status: <Tag>{upperFirst(status)}</Tag>
         </div>

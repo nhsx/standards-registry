@@ -1,4 +1,4 @@
-import classnames from "classnames";
+import classnames from 'classnames';
 
 export function Tbody({ children }) {
   return <tbody className="nhsuk-table__body">{children}</tbody>;
@@ -26,7 +26,7 @@ export function Th({ children }) {
 
 export function Td({ children, classes }) {
   return (
-    <td role="cell" className={classnames("nhsuk-table__cell", classes)}>
+    <td role="cell" className={classnames('nhsuk-table__cell', classes)}>
       {children}
     </td>
   );

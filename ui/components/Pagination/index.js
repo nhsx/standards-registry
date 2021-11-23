@@ -34,7 +34,7 @@ export default function Pagination({ limit = 10, count }) {
         </Snippet>
       </div>
       <ul>
-        <li className={styles.item} id='prevButton'>
+        <li className={styles.item} id="prevButton">
           <Link href={href(page - 1)}>
             <a
               className={classnames(styles.link, {
@@ -58,7 +58,7 @@ export default function Pagination({ limit = 10, count }) {
             </Link>
           </li>
         ))}
-        <li className={styles.item} id='nextButton'>
+        <li className={styles.item} id="nextButton">
           <a
             className={classnames(styles.link, {
               [styles.current]: page >= totalPages,

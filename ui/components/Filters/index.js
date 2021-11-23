@@ -6,65 +6,65 @@ const FILTERS = [
     options: [
       {
         label: 'Appointment / Scheduling',
-        value: 'Scheduling'
+        value: 'Scheduling',
       },
       {
         label: 'Referrals',
-        value: 'Referrals'
+        value: 'Referrals',
       },
       {
         label: 'Access to records',
-        value: 'access'
+        value: 'access',
       },
       {
         label: 'Clinical decision support',
-        value: 'clinical'
-      }
-    ]
+        value: 'clinical',
+      },
+    ],
   },
   {
     title: 'Programme',
     options: [
       {
         label: 'Appointment / Scheduling',
-        value: 'Scheduling'
+        value: 'Scheduling',
       },
       {
         label: 'Referrals',
-        value: 'Referrals'
+        value: 'Referrals',
       },
       {
         label: 'Access to records',
-        value: 'access'
+        value: 'access',
       },
       {
         label: 'Clinical decision support',
-        value: 'clinical'
-      }
-    ]
+        value: 'clinical',
+      },
+    ],
   },
   {
     title: 'Care settings',
     options: [
       {
         label: 'Appointment / Scheduling',
-        value: 'Scheduling'
+        value: 'Scheduling',
       },
       {
         label: 'Referrals',
-        value: 'Referrals'
+        value: 'Referrals',
       },
       {
         label: 'Access to records',
-        value: 'access'
+        value: 'access',
       },
       {
         label: 'Clinical decision support',
-        value: 'clinical'
-      }
-    ]
-  }
-]
+        value: 'clinical',
+      },
+    ],
+  },
+];
 
 function Filter({ title, options }) {
   return (
@@ -73,7 +73,7 @@ function Filter({ title, options }) {
         <CheckboxGroup options={options} small />
       </OptionSelect>
     </Details>
-  )
+  );
 }
 
 export default function Filters({ filters = FILTERS }) {
@@ -81,10 +81,10 @@ export default function Filters({ filters = FILTERS }) {
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <PanelList>
-        {
-          filters.map((filter, index) => <Filter key={index} {...filter} />)
-        }
+        {filters.map((filter, index) => (
+          <Filter key={index} {...filter} />
+        ))}
       </PanelList>
     </div>
-  )
+  );
 }

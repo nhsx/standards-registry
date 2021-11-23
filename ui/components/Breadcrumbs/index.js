@@ -51,17 +51,17 @@ export default function Breadcrumbs({ labels }) {
 
   return (
     <nav className={classnames('nhsuk-breadcrumbs', styles.breadcrumbs)}>
-      <div className='nhsuk-width-container'>
-        <ol className='nhsuk-breadcrumb__list'>
-          <li className='nhsuk-breadcrumb__item'>
-            <Link className='nhsuk-breadcrumb__link' href='/'>
+      <div className="nhsuk-width-container">
+        <ol className="nhsuk-breadcrumb__list">
+          <li className="nhsuk-breadcrumb__item">
+            <Link className="nhsuk-breadcrumb__link" href="/">
               <a>Home</a>
             </Link>
           </li>
           {breadcrumbs.map((breadcrumb, i) => (
-            <li key={breadcrumb.href} className='nhsuk-breadcrumb__item'>
+            <li key={breadcrumb.href} className="nhsuk-breadcrumb__item">
               {i < breadcrumbs.length - 1 ? (
-                <Link href={breadcrumb.href} className='nhsuk-breadcrumb__link'>
+                <Link href={breadcrumb.href} className="nhsuk-breadcrumb__link">
                   <a>{getLabel(breadcrumb.value)}</a>
                 </Link>
               ) : (

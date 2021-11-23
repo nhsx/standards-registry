@@ -7,9 +7,9 @@ const format = ({ options, vals, data }) =>
 const Rows = (props) => {
   const { options, vals, data } = props;
   return (
-    <Td className='nhsuk-table__cell'>
+    <Td className="nhsuk-table__cell">
       {Array.isArray(vals) ? (
-        <ul className='nhsuk-list-bullet'>
+        <ul className="nhsuk-list-bullet">
           {vals.map((val, index) => (
             <li key={index}>
               {options.format ? options.format(val, data) : val}
@@ -25,7 +25,7 @@ const Rows = (props) => {
 
 export default function Model({ schema, data }) {
   return (
-    <div className='nhsuk-model'>
+    <div className="nhsuk-model">
       <p>{data.notes}</p>
       <Table>
         <Tbody>
@@ -39,7 +39,7 @@ export default function Model({ schema, data }) {
               return (
                 <Tr key={index}>
                   <Td>
-                    <span className='nhsuk-u-font-weight-bold'>
+                    <span className="nhsuk-u-font-weight-bold">
                       {options.label}
                     </span>
                   </Td>
