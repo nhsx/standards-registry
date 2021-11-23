@@ -24,7 +24,6 @@ const Rows = (props) => {
 };
 
 export default function Model({ schema, data }) {
-  console.log(data);
   return (
     <div className='nhsuk-model'>
       <p>{data.notes}</p>
