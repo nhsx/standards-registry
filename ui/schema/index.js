@@ -21,7 +21,7 @@ export default {
   },
   status: {
     label: 'Status',
-    format: (val) => <Tag classes={val}>{upperFirst(val)}</Tag>,
+    format: (val) => <Tag status={val}>{upperFirst(val)}</Tag>,
   },
   standard_category: {
     label: 'Category',
@@ -29,7 +29,7 @@ export default {
   url: {
     label: 'Link to standard',
     format: (val) => (
-      <a href={val} target='_blank' rel='noreferrer'>
+      <a href={val} target="_blank" rel="noreferrer">
         View standard
       </a>
     ),

@@ -18,8 +18,8 @@ const Category = ({ data }) => {
   return (
     <Page title={data.title}>
       <Reading>
-        <h2 className='nhsuk-caption-l'>
-          <Tag classes={data.status}>{upperFirst(data.status)}</Tag>{' '}
+        <h2 className="nhsuk-caption-l">
+          <Tag status={data.status}>{upperFirst(data.status)}</Tag>{' '}
           {data.standard_category}
         </h2>
         <h1>{data.title}</h1>
@@ -30,10 +30,10 @@ const Category = ({ data }) => {
         </Col>
         <Col>
           <PanelList>
-            <Details summary='Get updates for this standard'>
+            <Details summary="Get updates for this standard">
               <EmailSignup />
             </Details>
-            <Details summary='Give feedback about this standard'>
+            <Details summary="Give feedback about this standard">
               <Feedback />
             </Details>
           </PanelList>
