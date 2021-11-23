@@ -9,12 +9,12 @@ import {
   EmailSignup,
   Feedback,
   Model,
-} from '../../../components';
+} from '../../components';
 import upperFirst from 'lodash/upperFirst';
-import { read } from '../../../helpers/api';
-import schema from '../../../schema';
+import { read } from '../../helpers/api';
+import schema from '../../schema';
 
-const Category = ({ data }) => {
+const Id = ({ data }) => {
   return (
     <Page title={data.title}>
       <Reading>
@@ -44,15 +44,14 @@ const Category = ({ data }) => {
 };
 
 export async function getServerSideProps(context) {
-  const { category, id } = context.params;
+  const { id } = context.params;
   const data = await read({ id });
 
   return {
     props: {
       data,
-      category,
     },
   };
 }
 
-export default Category;
+export default Id;
