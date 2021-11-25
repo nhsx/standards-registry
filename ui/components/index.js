@@ -7,6 +7,7 @@ export { default as Feedback } from './Feedback';
 export { default as Flex } from './Flex';
 export { default as Filters } from './Filters';
 export { default as Hero } from './Hero';
+export { default as Link } from './Link';
 export { default as Model } from './Model';
 export { default as OptionSelect } from './OptionSelect';
 export { default as Page } from './Page';
