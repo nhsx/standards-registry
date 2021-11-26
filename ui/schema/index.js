@@ -38,7 +38,7 @@ export default [
     section_title: 'Relationships to other standards',
     dependencies: {
       label: 'Dependencies',
-      format: (val) => <MarkdownBlock md={val} />,
+      format: (val) => val && <MarkdownBlock md={val} />,
     },
     related_standards: {
       label: 'Related Standards',
@@ -48,7 +48,7 @@ export default [
     section_title: 'Assurance and endorsements',
     assurance: {
       label: 'Assurance',
-      format: (val) => <MarkdownBlock md={val} />,
+      format: (val) => val && <MarkdownBlock md={val} />,
     },
     endorsements: {
       label: 'Endorsements',
