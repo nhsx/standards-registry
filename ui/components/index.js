@@ -19,6 +19,7 @@ export { default as Snippet } from './Snippet';
 export { default as Search } from './Search';
 export { default as Tag } from './Tag';
 export { default as Layout } from './Layout';
+export { default as ReviewDates } from './ReviewDates';
 
 export { Table, Thead, Tbody, Tr, Th, Td } from './Table';
 export { Row, Col } from './Grid';

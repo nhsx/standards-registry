@@ -24,7 +24,6 @@ const Rows = (props) => {
 };
 
 const Section = ({ entry, data }) => {
-  console.log('entry', entry);
   return (
     <>
       <h2 className="nhsuk-heading-m">{entry.section_title}</h2>
@@ -33,7 +32,6 @@ const Section = ({ entry, data }) => {
           {Object.keys(entry)
             .filter((key) => entry[key].label)
             .map((key, index) => {
-              console.log(key);
               const options = entry[key];
               const val = options.accessor
                 ? get(data, options.accessor, data[key])
@@ -55,14 +53,12 @@ const Section = ({ entry, data }) => {
   );
 };
 
-export default function Model({ schema, data }) {
-  console.log(data, schema);
+export default function list({ schema, data }) {
   return (
-    <div className="nhsuk-model">
+    <>
       {schema.map((entry, index) => {
-        console.log('here', entry);
         return <Section key={index} entry={entry} data={data}></Section>;
       })}
-    </div>
+    </>
   );
 }

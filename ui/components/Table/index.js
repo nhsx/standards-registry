@@ -1,12 +1,7 @@
 import classnames from 'classnames';
-import styles from './style.module.scss';
 
 export function Tbody({ children }) {
-  return (
-    <tbody className={classnames('nhsuk-table__body', styles.tbody)}>
-      {children}
-    </tbody>
-  );
+  return <tbody className="nhsuk-table__body">{children}</tbody>;
 }
 
 export function Thead({ children }) {
@@ -19,7 +14,7 @@ export function Thead({ children }) {
 
 export function Tr({ children }) {
   return (
-    <tr role="row" className={classnames('nhsuk-table__row', styles.table)}>
+    <tr role="row" className="nhsuk-table__row">
       {children}
     </tr>
   );
@@ -50,7 +45,7 @@ export function Td({ children, classes }) {
 
 export function Table({ children }) {
   return (
-    <table className="nhsuk-table-responsive" role="table">
+    <table className="nhsuk-table" role="table">
       {children}
     </table>
   );

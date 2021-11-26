@@ -1,9 +1,5 @@
-// import parseISO from 'date-fns/parseISO';
-// import format from 'date-fns/format';
 import upperFirst from 'lodash/upperFirst';
 import { Tag, Link } from '../components';
-
-// const DATE_FORMAT = 'do MMMM yyyy';
 
 export default [
   {
@@ -57,16 +53,3 @@ export default [
     },
   },
 ];
-
-// url: {
-//   label: 'Link to standard',
-//   format: (val) => (
-//     <a href={val} target="_blank" rel="noreferrer">
-//       View standard
-//     </a>
-//   ),
-// },
-// metadata_modified: {
-//   label: 'Standard last updated',
-//   format: (val) => format(parseISO(val), DATE_FORMAT),
-// },
