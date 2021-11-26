@@ -1,7 +1,17 @@
 import classnames from 'classnames';
+import styles from './style.module.scss';
 
 export function Tbody({ children }) {
-  return <tbody className="nhsuk-table__body">{children}</tbody>;
+  return (
+    <tbody
+      className={classnames(
+        'nhsuk-table__body nhsuk-u-font-size-16',
+        styles.tbody
+      )}
+    >
+      {children}
+    </tbody>
+  );
 }
 
 export function Thead({ children }) {
