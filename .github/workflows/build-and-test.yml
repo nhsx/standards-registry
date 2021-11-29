@@ -3,6 +3,7 @@ name: build-and-test
 on:
   - push
   - pull_request
+  - release
 
 defaults:
   run:

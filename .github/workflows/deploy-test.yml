@@ -1,13 +1,79 @@
 name: deploy-test
 
 on:
-  workflow_dispatch
+  release:
+    workflows:
+      - build-and-test
+    types:
+      - completed
+    conclusion:
+      - success
 
 jobs:
 
-  deploy:
+  ui:
     runs-on: ubuntu-latest
+    environment: test
+    defaults:
+      run:
+        working-directory: ui
+    env:
+      AWS_REGION: eu-west-2
     steps:
-      - name: Checkout
+      - name: checkout
         uses: actions/checkout@v2
-      - run: echo deploytest
+      - name: configure credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade --install --wait -n test ui ./charts/ui
+            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  ckan:
+    runs-on: ubuntu-latest
+    environment: test
+    env:
+      AWS_REGION: eu-west-2
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: configure credentials (using us-east-1)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: ckan deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: ckan-${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade ckan -n test --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
+            --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
+            --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
+            --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
+            --set ckan.datastore.RwDbPassword='${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}'
+            --set ckan.datastore.RoDbPassword='${{ secrets.CKAN_DATASTORE_RO_DB_PASS }}'
+            --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
+            --set ckan.psql.masterPassword='${{ secrets.MASTER_DB_PASS }}'
+            --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
+            --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
+            --set image.tag=$IMAGE_TAG
+      
