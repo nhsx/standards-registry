@@ -9,7 +9,7 @@ const Rows = (props) => {
   return (
     <Td className="nhsuk-table__cell">
       {Array.isArray(vals) ? (
-        <ul className="nhsuk-list-bullet">
+        <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
             <li key={index}>
               {options.format ? options.format(val, data) : val}
@@ -23,16 +23,16 @@ const Rows = (props) => {
   );
 };
 
-export default function Model({ schema, data }) {
+const Section = ({ entry, data }) => {
   return (
-    <div className="nhsuk-model">
-      <p>{data.notes}</p>
+    <>
+      <h2 className="nhsuk-heading-m">{entry.section_title}</h2>
       <Table>
         <Tbody>
-          {Object.keys(schema)
-            .filter((key) => schema[key].show !== false)
+          {Object.keys(entry)
+            .filter((key) => entry[key].label)
             .map((key, index) => {
-              const options = schema[key];
+              const options = entry[key];
               const val = options.accessor
                 ? get(data, options.accessor, data[key])
                 : data[key];
@@ -49,6 +49,16 @@ export default function Model({ schema, data }) {
             })}
         </Tbody>
       </Table>
-    </div>
+    </>
+  );
+};
+
+export default function list({ schema, data }) {
+  return (
+    <>
+      {schema.map((entry, index) => {
+        return <Section key={index} entry={entry} data={data}></Section>;
+      })}
+    </>
   );
 }

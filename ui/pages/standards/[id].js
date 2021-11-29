@@ -9,6 +9,7 @@ import {
   EmailSignup,
   Feedback,
   Model,
+  ReviewDates,
 } from '../../components';
 import upperFirst from 'lodash/upperFirst';
 import { read } from '../../helpers/api';
@@ -23,10 +24,14 @@ const Id = ({ data }) => {
           standard listing
         </h2>
         <h1>{data.title}</h1>
+        <div className="nhsuk-grid-row nhsuk-grid-column-two-thirds">
+          <p>{data.notes}</p>
+        </div>
       </Reading>
       <Row>
         <Col colspan={2}>
           <Model schema={schema} data={data} />
+          <ReviewDates data={data} />
         </Col>
         <Col>
           <PanelList>

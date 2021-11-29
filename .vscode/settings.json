@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "prettier.configPath": "ui/.prettierrc"
+  "prettier.configPath": "ui/.prettierrc",
+  "workbench.colorTheme": "One Monokai",
+  "workbench.preferredDarkColorTheme": "One Monokai"
 }

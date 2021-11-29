@@ -7,6 +7,7 @@ export { default as Feedback } from './Feedback';
 export { default as Flex } from './Flex';
 export { default as Filters } from './Filters';
 export { default as Hero } from './Hero';
+export { default as Link } from './Link';
 export { default as Model } from './Model';
 export { default as OptionSelect } from './OptionSelect';
 export { default as Page } from './Page';
@@ -18,6 +19,8 @@ export { default as Snippet } from './Snippet';
 export { default as Search } from './Search';
 export { default as Tag } from './Tag';
 export { default as Layout } from './Layout';
+export { default as ReviewDates } from './ReviewDates';
+export { default as MarkdownBlock } from './MarkdownBlock';
 
 export { Table, Thead, Tbody, Tr, Th, Td } from './Table';
 export { Row, Col } from './Grid';
