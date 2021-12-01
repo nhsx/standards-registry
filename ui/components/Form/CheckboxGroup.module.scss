@@ -1,19 +1,20 @@
 .checkboxGroup {
   .checkboxes {
+    margin-left: -8px;
     &.small {
       .item {
         min-height: 0;
-        margin-bottom: 0;
-        padding-left: 34px;
-        float: left;
+        margin-left: 8px;
 
         .input {
-          left: -10px;
           padding: 6px 15px 5px 1px;
         }
 
         .label {
+          padding-left: 0;
           &:before {
+            padding: 0;
+            left: 4px;
             top: 8px;
             width: 24px;
             height: 24px;
@@ -21,7 +22,7 @@
 
           &:after {
             top: 15px;
-            left: 6px;
+            left: 10px;
             width: 9px;
             height: 3.5px;
             border-width: 0 0 3px 3px;

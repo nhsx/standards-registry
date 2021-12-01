@@ -54,11 +54,16 @@ export default function CheckboxGroup({
             return (
               <div
                 key={option.value}
-                className={classnames('nhsuk-checkboxes__item', styles.item)}
+                className={classnames(
+                  'nhsuk-checkboxes__item',
+                  'nhsuk-u-font-size-16',
+                  styles.item
+                )}
               >
                 <input
                   className={classnames(
                     'nhsuk-checkboxes__input',
+                    'nhsuk-u-font-size-16',
                     styles.input
                   )}
                   id={optionId}
@@ -70,6 +75,7 @@ export default function CheckboxGroup({
                   className={classnames(
                     'nhsuk-label',
                     'nhsuk-checkboxes__label',
+                    'nhsuk-u-font-size-16',
                     styles.label
                   )}
                   htmlFor={optionId}
