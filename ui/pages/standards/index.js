@@ -37,17 +37,11 @@ const DEFAULT_SORT = {
 
 export async function getServerSideProps(context) {
   const { page, sort = DEFAULT_SORT } = context.query;
-  // Sad times,
-  // const [schemaData, data] = [await schema(), await list({ page, sort })];
-  const [schemaData, data] = await Promise.all([
-    schema(),
-    list({ page, sort }),
-  ]);
 
   return {
     props: {
-      data,
-      schemaData,
+      data: await list({ page, sort }),
+      schemaData: await schema(),
     },
   };
 }

@@ -5,7 +5,6 @@ import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
 // [ ] Figure out filter/facet search calls
 
 function Filter({ label, choices }) {
-  console.log(label, choices);
   return (
     <Details summary={label} className="nhsuk-filter">
       <OptionSelect>

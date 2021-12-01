@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 import { stringify } from 'qs';
 const CKAN_URL = process.env.CKAN_URL;
 
