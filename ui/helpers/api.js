@@ -24,3 +24,11 @@ export async function list({ page = 1, q, sort }) {
 
   return data.result;
 }
+
+export async function schema(dataset = 'dataset') {
+  const response = await fetch(
+    `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
+  );
+  const data = await response.json();
+  return data.result;
+}

@@ -7,9 +7,11 @@ const statusMap = {
   retired: 'nhsuk-tag--red',
 };
 
-export default function Tag({ children, status }) {
+export default function Tag({ children, classes, status }) {
   return (
-    <span className={classnames('nhsuk-tag', statusMap[status] || null)}>
+    <span
+      className={classnames('nhsuk-tag', classes, statusMap[status] || null)}
+    >
       {children}
     </span>
   );

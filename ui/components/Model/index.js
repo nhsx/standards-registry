@@ -7,7 +7,7 @@ const format = ({ options, vals, data }) =>
 const Rows = (props) => {
   const { options, vals, data } = props;
   return (
-    <Td className="nhsuk-table__cell">
+    <Td>
       {Array.isArray(vals) ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
