@@ -19,6 +19,7 @@ export default function CheckboxGroup({
   hint,
   options,
   small,
+  onChange,
 }) {
   options = options.map((option) => {
     if (typeof option === 'string') {
@@ -70,9 +71,7 @@ export default function CheckboxGroup({
                   name={name}
                   type="checkbox"
                   value={option.value}
-                  onChange={(e) =>
-                    console.log(option, 'checked:', e.target.checked)
-                  }
+                  onChange={onChange}
                 />
                 <label
                   className={classnames(

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
 
 // TODO:
@@ -8,27 +8,55 @@ import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
 // [ ] Figure out filter/facet search calls
 // [ ] State management
 
-function Filter({ label, choices }) {
+function Filter({ label, choices, onChange }) {
   return (
     <Details summary={label} className="nhsuk-filter">
       <OptionSelect>
-        <CheckboxGroup options={choices} small />
+        <CheckboxGroup onChange={onChange} options={choices} small />
       </OptionSelect>
     </Details>
   );
 }
 
 export default function Filters({ schema }) {
+  const [selections, setSelections] = useState([]);
   const { dataset_fields: fields } = schema;
   const pick = (names) =>
     names.map((name) => fields.find((val) => val.field_name === name));
   const filters = pick(['business_use', 'care_setting']);
+
+  const setItem = (event) => {
+    const { checked, value } = event.target;
+    const item = {
+      value,
+    };
+    if (checked) {
+      setSelections([...selections, item]);
+    } else {
+      setSelections(
+        selections.filter((selection) => selection.value !== value)
+      );
+    }
+  };
+
+  // Similar to componentDidMount and componentDidUpdate:
+  useEffect(() => {
+    console.log(selections);
+    // Update the document title using the browser API
+    document.title = `${selections.length} selected`;
+  });
+
+  const onCheckboxChange = (e) => {
+    console.log('checked:', e, e.target.checked);
+    setItem(e);
+  };
+
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <PanelList>
         {filters.map((filter, index) => (
-          <Filter key={index} {...filter} />
+          <Filter key={index} {...filter} onChange={onCheckboxChange} />
         ))}
       </PanelList>
     </div>
