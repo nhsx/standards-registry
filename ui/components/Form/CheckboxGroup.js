@@ -20,6 +20,7 @@ export default function CheckboxGroup({
   options,
   small,
   onChange,
+  parent,
 }) {
   options = options.map((option) => {
     if (typeof option === 'string') {
@@ -68,6 +69,7 @@ export default function CheckboxGroup({
                     styles.input
                   )}
                   id={optionId}
+                  parent={parent}
                   name={name}
                   type="checkbox"
                   value={option.value}

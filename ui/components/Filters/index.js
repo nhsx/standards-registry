@@ -12,14 +12,19 @@ function Filter({ label, choices, onChange }) {
   return (
     <Details summary={label} className="nhsuk-filter">
       <OptionSelect>
-        <CheckboxGroup onChange={onChange} options={choices} small />
+        <CheckboxGroup
+          onChange={onChange}
+          options={choices}
+          parent={label}
+          small
+        />
       </OptionSelect>
     </Details>
   );
 }
 
 export default function Filters({ schema }) {
-  const [selections, setSelections] = useState([]);
+  const [selections, setSelections] = useState({});
   const { dataset_fields: fields } = schema;
   const pick = (names) =>
     names.map((name) => fields.find((val) => val.field_name === name));
@@ -27,14 +32,22 @@ export default function Filters({ schema }) {
 
   const setItem = (event) => {
     const { checked, value } = event.target;
+    const parent = event.target.getAttribute('parent');
     const item = {
       value,
     };
     if (checked) {
-      setSelections([...selections, item]);
+      setSelections({
+        ...selections,
+        ...{
+          [parent]: selections[parent] ? [...selections[parent], item] : [item],
+        },
+      });
     } else {
       setSelections(
-        selections.filter((selection) => selection.value !== value)
+        selections.map((selection) =>
+          selection.filter((selection) => selection.value !== value)
+        )
       );
     }
   };
@@ -50,7 +63,7 @@ export default function Filters({ schema }) {
     console.log('checked:', e, e.target.checked);
     setItem(e);
   };
-
+  console.log('filters', filters);
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
