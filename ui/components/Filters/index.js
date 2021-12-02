@@ -44,11 +44,14 @@ export default function Filters({ schema }) {
         },
       });
     } else {
-      setSelections(
-        selections.map((selection) =>
-          selection.filter((selection) => selection.value !== value)
-        )
-      );
+      setSelections({
+        ...selections,
+        ...{
+          [parent]: selections[parent].filter(
+            (selection) => selection.value !== value
+          ),
+        },
+      });
     }
   };
 
