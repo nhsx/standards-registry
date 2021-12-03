@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
-import { filterSearch } from '../../helpers/api';
-
+import { filter } from '../../pages/api/filter';
 // TODO:
 // [x] call http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action/scheming_dataset_schema_show?type=dataset
 // [x] filter by dataset_fields > field_name: status etc
@@ -9,6 +8,7 @@ import { filterSearch } from '../../helpers/api';
 // [x] State management
 // [ ] Figure out filter/facet search calls
 // [ ] Push/pull history query
+// [ ] CORS issue
 
 function Filter({ label, choices, onChange, field_name: fieldName }) {
   return (
@@ -70,7 +70,7 @@ export default function Filters({ schema }) {
     // Time to call the api!
     // [ ] Figure out filter/facet search calls
     console.log('query', query);
-    console.log(await filterSearch(query));
+    console.log(await filter(query));
   });
 
   const onCheckboxChange = (e) => setItem(e);
