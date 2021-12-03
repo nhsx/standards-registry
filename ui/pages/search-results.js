@@ -39,8 +39,8 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
 }
 
 export async function getServerSideProps(context) {
-  const { q, page } = context.query;
-  const result = await list({ q, page });
+  const { q, selections, page } = context.query;
+  const result = await list({ q, selections, page });
 
   return {
     props: {

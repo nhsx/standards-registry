@@ -8,6 +8,8 @@ import {
   Dataset,
 } from '../../components';
 import { list, schema } from '../../helpers/api';
+import { parse } from 'url';
+import { parse as qsParse } from 'qs';
 
 export default function Standards({ data, schemaData }) {
   return (
@@ -36,11 +38,14 @@ const DEFAULT_SORT = {
 };
 
 export async function getServerSideProps(context) {
+  const { resolvedUrl } = context;
+  const parsed = parse(resolvedUrl);
+  const { selections } = qsParse(parsed.query);
   const { page, sort = DEFAULT_SORT } = context.query;
 
   return {
     props: {
-      data: await list({ page, sort }),
+      data: await list({ page, sort, selections }),
       schemaData: await schema(),
     },
   };
