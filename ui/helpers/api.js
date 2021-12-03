@@ -1,6 +1,19 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 import { stringify } from 'qs';
-const CKAN_URL = process.env.CKAN_URL;
+const CKAN_URL = process.env.NEXT_PUBLIC_CKAN_URL;
+
+// helper function for building SOLR Filter Queries into package_search
+// e.g. // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
+function serialise(obj = {}) {
+  let str = Object.keys(obj)
+    .reduce((acc, key) => {
+      // acc.push(key + ':' + encodeURIComponent(obj[key]));
+      acc.push(key + ':' + obj[key]);
+      return acc;
+    }, [])
+    .join(' AND ');
+  return `?fq=(${str})`;
+}
 
 export async function read({ id }) {
   const response = await fetch(`${CKAN_URL}/package_show?id=${id}`);
@@ -30,6 +43,16 @@ export async function schema(dataset = 'dataset') {
   const response = await fetch(
     `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
   );
+  const data = await response.json();
+  return data.result;
+}
+
+export async function filterSearch(queryset = {}) {
+  // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
+  const response = await fetch(
+    `${CKAN_URL}/package_search${serialise(queryset)}`
+  );
+
   const data = await response.json();
   return data.result;
 }

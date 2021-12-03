@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react';
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
+import { filterSearch } from '../../helpers/api';
 
 // TODO:
 // [x] call http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action/scheming_dataset_schema_show?type=dataset
 // [x] filter by dataset_fields > field_name: status etc
 // [x] 16px font, more space
+// [x] State management
 // [ ] Figure out filter/facet search calls
-// [ ] State management
+// [ ] Push/pull history query
 
-function Filter({ label, choices, onChange }) {
+function Filter({ label, choices, onChange, field_name: fieldName }) {
   return (
     <Details summary={label} className="nhsuk-filter">
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
           options={choices}
-          parent={label}
+          parent={fieldName}
           small
         />
       </OptionSelect>
@@ -29,44 +31,50 @@ export default function Filters({ schema }) {
   const pick = (names) =>
     names.map((name) => fields.find((val) => val.field_name === name));
   const filters = pick(['business_use', 'care_setting']);
-
+  // console.log(filters);
   const setItem = (event) => {
     const { checked, value } = event.target;
     const parent = event.target.getAttribute('parent');
-    const item = {
-      value,
-    };
+
     if (checked) {
       setSelections({
         ...selections,
         ...{
-          [parent]: selections[parent] ? [...selections[parent], item] : [item],
+          [parent]: selections[parent]
+            ? [...selections[parent], value]
+            : [value],
         },
       });
     } else {
       setSelections({
         ...selections,
         ...{
-          [parent]: selections[parent].filter(
-            (selection) => selection.value !== value
-          ),
+          [parent]: selections[parent].filter((i) => i !== value),
         },
       });
     }
   };
 
   // Similar to componentDidMount and componentDidUpdate:
-  useEffect(() => {
-    console.log(selections);
-    // Update the document title using the browser API
-    document.title = `${selections.length} selected`;
+  useEffect(async () => {
+    if (Object.entries(selections).length === 0) {
+      return;
+    }
+    console.log('selections', selections);
+    const query = {};
+    for (const prop in selections) {
+      // sanitise "Apointment / thinf"=> "apointment"
+      selections[prop] = selections[prop].map((i) => i.split(' ').shift());
+      query[prop] = `(*${selections[prop].join('* OR *')}*)`;
+    }
+    // Time to call the api!
+    // [ ] Figure out filter/facet search calls
+    console.log('query', query);
+    console.log(await filterSearch(query));
   });
 
-  const onCheckboxChange = (e) => {
-    console.log('checked:', e, e.target.checked);
-    setItem(e);
-  };
-  console.log('filters', filters);
+  const onCheckboxChange = (e) => setItem(e);
+
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>

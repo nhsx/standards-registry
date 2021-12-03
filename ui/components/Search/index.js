@@ -5,7 +5,6 @@ import styles from './style.module.scss';
 
 export default function Search({ placeholder, label = true }) {
   const { query } = useQueryContext();
-  console.log(query);
   const [value, setValue] = useState(query.q);
   return (
     <form className="nhsuk-search" method="GET" action="/search-results">
