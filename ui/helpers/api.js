@@ -4,7 +4,7 @@ const CKAN_URL = process.env.CKAN_URL;
 
 // helper function for building SOLR Filter Queries into package_search
 // e.g. // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
-function serialise(obj = {}) {
+export function serialise(obj = {}) {
   let str = Object.keys(obj)
     .reduce((acc, key) => {
       // acc.push(key + ':' + encodeURIComponent(obj[key]));
@@ -47,11 +47,9 @@ export async function schema(dataset = 'dataset') {
   return data.result;
 }
 
-export async function filterSearch(queryset = {}) {
+export async function filterSearch(query = '') {
   // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
-  const response = await fetch(
-    `${CKAN_URL}/package_search${serialise(queryset)}`
-  );
+  const response = await fetch(`${CKAN_URL}/package_search${query}`);
 
   const data = await response.json();
   return data.result;

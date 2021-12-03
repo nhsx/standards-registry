@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
-import { filter } from '../../pages/api/filter';
+import { serialise } from '../../helpers/api';
+import fetch from 'node-fetch';
 // TODO:
 // [x] call http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action/scheming_dataset_schema_show?type=dataset
 // [x] filter by dataset_fields > field_name: status etc
@@ -60,7 +61,6 @@ export default function Filters({ schema }) {
     if (Object.entries(selections).length === 0) {
       return;
     }
-    console.log('selections', selections);
     const query = {};
     for (const prop in selections) {
       // sanitise "Apointment / thinf"=> "apointment"
@@ -69,8 +69,8 @@ export default function Filters({ schema }) {
     }
     // Time to call the api!
     // [ ] Figure out filter/facet search calls
-    console.log('query', query);
-    console.log(await filter(query));
+    const res = await fetch('/api/filter?q=' + serialise(query));
+    console.log('results!', await res.json());
   });
 
   const onCheckboxChange = (e) => setItem(e);
