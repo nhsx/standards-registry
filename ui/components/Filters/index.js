@@ -29,7 +29,10 @@ function Filter({ label, choices, onChange, field_name: fieldName }) {
 export default function Filters({ schema }) {
   const [selections, setSelections] = useState({});
   const { dataset_fields: fields } = schema;
-  const { query, updateQuery } = useQueryContext();
+  const {
+    // query, TODO: retrive filters from query
+    updateQuery,
+  } = useQueryContext();
 
   const pick = (names) =>
     names.map((name) => fields.find((val) => val.field_name === name));
