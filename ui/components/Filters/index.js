@@ -11,9 +11,16 @@ import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
 // [ ] Push/pull history query
 // [ ] CORS issue
 
-function Filter({ label, choices, onChange, field_name: fieldName }) {
+function Filter({
+  label,
+  choices,
+  onChange,
+  field_name: fieldName,
+  hasChecked,
+}) {
+  console.log('hasChecked', hasChecked);
   return (
-    <Details summary={label} className="nhsuk-filter">
+    <Details summary={label} className="nhsuk-filter" open={hasChecked}>
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
@@ -64,6 +71,24 @@ export default function Filters({ schema }) {
   useEffect(() => {
     updateQuery({ selections });
   }, [selections]);
+
+  const selected = getSelections();
+  if (selected) {
+    for (const filter of filters) {
+      const key = filter.field_name;
+      const list = selected[key];
+      filter.hasChecked = false;
+      if (list) {
+        filter.choices.map((choice) => {
+          if (list.includes(choice.value)) {
+            filter.hasChecked = true;
+            choice.checked = true;
+          }
+          return choice;
+        });
+      }
+    }
+  }
 
   const onCheckboxChange = (e) => setItem(e);
 

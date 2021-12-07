@@ -1,6 +1,8 @@
 import { stringify } from 'qs';
 import { useRouter } from 'next/router';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { parse } from 'url';
+import { parse as qsParse } from 'qs';
 
 const QueryContext = createContext();
 
@@ -10,6 +12,13 @@ export function QueryContextWrapper({ children }) {
 
   function getQuery() {
     return stringify(query);
+  }
+
+  function getSelections() {
+    const { asPath } = router;
+    const parsed = parse(asPath);
+    const { selections } = qsParse(parsed.query);
+    return selections;
   }
 
   function updateQuery(props) {
@@ -24,6 +33,7 @@ export function QueryContextWrapper({ children }) {
     query,
     getQuery,
     updateQuery,
+    getSelections,
   };
 
   return (
