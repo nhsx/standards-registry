@@ -25,8 +25,7 @@ export function QueryContextWrapper({ children }) {
 
   function updateQuery(props) {
     const { query } = router;
-    console.log(merge(query, props));
-    return router.push({ query: merge(query, props) });
+    return router.push({ query: { ...query, ...props } });
   }
 
   const value = {

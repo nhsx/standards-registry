@@ -60,9 +60,11 @@ export default function Filters({ schema }) {
   const removeFilter = (filter) => {
     const selections = getSelections();
     for (const key of categories) {
-      selections[key] = selections[key]
-        .filter((i) => i !== filter[key])
-        .flatMap((f) => f);
+      selections[key] = [
+        ...new Set(
+          [selections[key]].flatMap((f) => f).filter((i) => i !== filter[key])
+        ),
+      ];
     }
     updateQuery(selections);
   };
@@ -75,25 +77,23 @@ export default function Filters({ schema }) {
     return checked ? addFilter(filter) : removeFilter(filter);
   };
 
-  // const onCheckboxChange = (e) => setItem(e);
-
-  // if (selections) {
-  //   for (const filter of filters) {
-  //     const key = filter.field_name;
-  //     const list = selections[key];
-  //     filter.hasChecked = false;
-  //     if (list) {
-  //       filter.choices.map((choice) => {
-  //         if (list.includes(choice.value)) {
-  //           filter.hasChecked = true;
-  //           choice.checked = true;
-  //         }
-  //         return choice;
-  //       });
-  //     }
-  //   }
-  //   // updateQuery({ selections });
-  // }
+  const setSelections = () => {
+    const selections = getSelections();
+    for (const filter of filters) {
+      const key = filter.field_name;
+      const list = selections[key];
+      filter.hasChecked = false;
+      filter.choices.map((choice) => {
+        choice.checked = false;
+        if (list && list.includes(choice.value)) {
+          filter.hasChecked = true;
+          choice.checked = true;
+        }
+        return choice;
+      });
+    }
+  };
+  setSelections();
 
   return (
     <div className="nhsuk-filters">
