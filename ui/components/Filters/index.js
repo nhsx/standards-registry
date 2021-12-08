@@ -33,39 +33,34 @@ function Filter({
   );
 }
 
+const pick = (names, fields) =>
+  names.map((name) => fields.find((val) => val.field_name === name));
+
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
-
-  const pick = (names) =>
-    names.map((name) => fields.find((val) => val.field_name === name));
   const categories = ['business_use', 'care_setting'];
-  const filters = pick(categories);
-  // const selectionStructure = categories.reduce((cats, cat) => {
-  //   cats[cat] = [];
-  //   return cats;
-  // }, {});
-
-  // const selections = merge(selectionStructure, getSelections());
-  // debugger;
+  const filters = pick(categories, fields);
 
   const addFilter = (filter) => {
     const selections = getSelections();
-    for (const key in selections) {
+    for (const key of categories) {
       selections[key] = [selections[key]]
-        .concat([filter[key]])
+        .filter((f) => f)
+        .concat([filter[key]].filter((f) => f))
         .flatMap((f) => f);
     }
-
     updateQuery(selections);
   };
 
   const removeFilter = (filter) => {
     const selections = getSelections();
-    Object.keys(selections).map((key) => {
-      selections[key].filter((t) => t !== filter[key]);
-    });
-    console.log(selections, 'noe');
+    for (const key of categories) {
+      selections[key] = selections[key]
+        .filter((i) => i !== filter[key])
+        .flatMap((f) => f);
+    }
+    updateQuery(selections);
   };
 
   const setItem = (event) => {
@@ -74,25 +69,9 @@ export default function Filters({ schema }) {
     const filter = { [parent]: value };
 
     return checked ? addFilter(filter) : removeFilter(filter);
-
-    //   setSelections({
-    //     ...selections,
-    //     ...{
-    //       [parent]: selections[parent]
-    //         ? [...selections[parent], value]
-    //         : [value],
-    //     },
-    //   });
-    // } else {
-    //   setSelections({
-    //     ...selections,
-    //     ...{
-    //       [parent]: selections[parent].filter((i) => i !== value),
-    //     },
-    //   });
   };
 
-  const onCheckboxChange = (e) => setItem(e);
+  // const onCheckboxChange = (e) => setItem(e);
 
   // if (selections) {
   //   for (const filter of filters) {
@@ -117,7 +96,7 @@ export default function Filters({ schema }) {
       <h3>Filters</h3>
       <PanelList>
         {filters.map((filter, index) => (
-          <Filter key={index} {...filter} onChange={onCheckboxChange} />
+          <Filter key={index} {...filter} onChange={setItem} />
         ))}
       </PanelList>
     </div>
