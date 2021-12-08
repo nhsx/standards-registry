@@ -2,12 +2,16 @@ import fetch from 'node-fetch';
 import { stringify } from 'qs';
 const CKAN_URL = process.env.CKAN_URL;
 
+// TODO: neaten
 export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
-
   const query = {};
   if (!selections) return;
+
   for (const prop in selections) {
+    if (typeof selections[prop] === 'string') {
+      selectionsRef[prop] = [selectionsRef[prop]];
+    }
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
@@ -27,7 +31,6 @@ export function serialise(obj = {}) {
   }
   let str = Object.keys(obj)
     .reduce((acc, key) => {
-      // acc.push(key + ':' + encodeURIComponent(obj[key]));
       acc.push(key + ':' + obj[key]);
       return acc;
     }, [])
@@ -41,7 +44,7 @@ export async function read({ id }) {
   return data.result;
 }
 
-export async function list({ page = 1, q, selections, sort }) {
+export async function list({ page = 1, q, sort, query }) {
   let sortstring, fq;
   const rows = 10;
 
@@ -50,14 +53,12 @@ export async function list({ page = 1, q, selections, sort }) {
   if (sort) {
     sortstring = `${sort.column} ${sort.order}`;
   }
+  // TODO: figure out how to get q/rows etc from this
+  fq = serialise(queriseSelections(query));
 
-  if (selections) {
-    fq = serialise(queriseSelections(selections));
-  }
+  const ckanQuery = stringify({ q, fq, rows, start, sort: sortstring });
 
-  const query = stringify({ q, fq, rows, start, sort: sortstring });
-
-  const response = await fetch(`${CKAN_URL}/package_search?${query}`);
+  const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
 
   return data.result;

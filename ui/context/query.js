@@ -1,9 +1,6 @@
 import { stringify } from 'qs';
 import { useRouter } from 'next/router';
 import { createContext, useContext } from 'react';
-import { parse } from 'url';
-import { parse as qsParse } from 'qs';
-import { merge } from 'lodash';
 
 const QueryContext = createContext();
 
@@ -16,10 +13,6 @@ export function QueryContextWrapper({ children }) {
   }
 
   function getSelections() {
-    // debugger;
-    // const { asPath } = router;
-    // const parsed = parse(asPath);
-    // const { selections } = qsParse(parsed.query);
     return router.query;
   }
 
