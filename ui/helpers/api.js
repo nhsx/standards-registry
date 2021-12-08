@@ -6,6 +6,7 @@ export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
 
   const query = {};
+  if (!selections) return;
   for (const prop in selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());

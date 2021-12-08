@@ -1,36 +1,36 @@
 import { stringify } from 'qs';
 import { useRouter } from 'next/router';
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import { parse } from 'url';
 import { parse as qsParse } from 'qs';
+import { merge } from 'lodash';
 
 const QueryContext = createContext();
 
 export function QueryContextWrapper({ children }) {
   const router = useRouter();
-  const [query, setQuery] = useState(router.query);
 
   function getQuery() {
+    const { query } = router;
     return stringify(query);
   }
 
   function getSelections() {
-    const { asPath } = router;
-    const parsed = parse(asPath);
-    const { selections } = qsParse(parsed.query);
-    return selections;
+    // debugger;
+    // const { asPath } = router;
+    // const parsed = parse(asPath);
+    // const { selections } = qsParse(parsed.query);
+    return router.query;
   }
 
   function updateQuery(props) {
-    return setQuery({ ...query, ...props });
+    const { query } = router;
+    console.log(merge(query, props));
+    return router.push({ query: merge(query, props) });
   }
 
-  useEffect(() => {
-    router.push({ query: stringify(query) });
-  }, [query]);
-
   const value = {
-    query,
+    query: router.query,
     getQuery,
     updateQuery,
     getSelections,

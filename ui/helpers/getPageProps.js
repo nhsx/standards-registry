@@ -16,6 +16,7 @@ export async function getPageProps(context, options = {}) {
     props: {
       ...{
         data: await list({ q, page, sort, selections }),
+        selections: selections || null,
         schemaData: await schema(),
         searchTerm: q || '',
       },
