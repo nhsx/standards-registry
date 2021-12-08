@@ -45,10 +45,14 @@ export default function Filters({ schema }) {
   const addFilter = (filter) => {
     const selections = getSelections();
     for (const key of categories) {
-      selections[key] = [selections[key]]
-        .filter((f) => f)
-        .concat([filter[key]].filter((f) => f))
-        .flatMap((f) => f);
+      selections[key] = [
+        ...new Set(
+          [selections[key]]
+            .filter((f) => f)
+            .concat([filter[key]].filter((f) => f))
+            .flatMap((f) => f)
+        ),
+      ];
     }
     updateQuery(selections);
   };
