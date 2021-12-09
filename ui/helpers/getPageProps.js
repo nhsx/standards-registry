@@ -7,12 +7,12 @@ export async function getPageProps(context, options = {}) {
     order: 'asc',
   };
 
-  const { q, page, sort = DEFAULT_SORT } = context.query;
+  const { q, page, sort = DEFAULT_SORT, ...filters } = query;
 
   return {
     props: {
       ...{
-        data: await list({ q, page, sort, query }),
+        data: await list({ q, page, sort, filters }),
         schemaData: await schema(),
         searchTerm: q || '',
       },

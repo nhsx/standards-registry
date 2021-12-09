@@ -29,7 +29,7 @@ export function serialise(obj = {}) {
   if (Object.keys(obj).length === 0) {
     return;
   }
-  let str = Object.keys(obj)
+  const str = Object.keys(obj)
     .reduce((acc, key) => {
       acc.push(key + ':' + obj[key]);
       return acc;
@@ -44,7 +44,7 @@ export async function read({ id }) {
   return data.result;
 }
 
-export async function list({ page = 1, q, sort, query }) {
+export async function list({ page = 1, q, sort, filters }) {
   let sortstring, fq;
   const rows = 10;
 
@@ -53,8 +53,8 @@ export async function list({ page = 1, q, sort, query }) {
   if (sort) {
     sortstring = `${sort.column} ${sort.order}`;
   }
-  // TODO: figure out how to get q/rows etc from this
-  fq = serialise(queriseSelections(query));
+
+  fq = serialise(queriseSelections(filters));
 
   const ckanQuery = stringify({ q, fq, rows, start, sort: sortstring });
 
