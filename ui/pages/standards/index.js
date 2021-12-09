@@ -9,7 +9,7 @@ import {
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
 
-export default function Standards({ data, schemaData, selections }) {
+export default function Standards({ data, schemaData }) {
   return (
     <Page>
       <h1>
