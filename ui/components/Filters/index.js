@@ -1,16 +1,5 @@
 import { useQueryContext } from '../../context/query';
 import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
-// import { queriseSelections, serialise } from '../../helpers/api';
-// import { merge, remove } from 'lodash';
-
-// TODO:
-// [x] call http://a864b7b77f8e140858ab710899b7ed73-1561736528.eu-west-2.elb.amazonaws.com:5000/api/3/action/scheming_dataset_schema_show?type=dataset
-// [x] filter by dataset_fields > field_name: status etc
-// [x] 16px font, more space
-// [x] State management
-// [ ] Figure out filter/facet search calls
-// [ ] Push/pull history query
-// [ ] CORS issue
 
 function Filter({
   label,
