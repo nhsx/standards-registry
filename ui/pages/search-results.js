@@ -7,7 +7,7 @@ import {
   Dataset,
   Snippet,
 } from '../components';
-import { list } from '../helpers/api';
+import { getPageProps } from '../helpers/getPageProps';
 
 const content = {
   title: 'Search results',
@@ -17,7 +17,7 @@ const content = {
   },
 };
 
-export default function SearchResults({ data, searchTerm }) {
+export default function SearchResults({ data, searchTerm, schemaData }) {
   return (
     <Page>
       <h1>
@@ -28,7 +28,7 @@ export default function SearchResults({ data, searchTerm }) {
       </Reading>
       <Row>
         <Col>
-          <Filters />
+          <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
           <Dataset data={data} searchTerm={searchTerm} includeType={true} />
@@ -39,14 +39,5 @@ export default function SearchResults({ data, searchTerm }) {
 }
 
 export async function getServerSideProps(context) {
-  const { q, page } = context.query;
-  const result = await list({ q, page });
-
-  return {
-    props: {
-      data: result,
-      searchTerm: q || '',
-      content,
-    },
-  };
+  return await getPageProps(context, { content });
 }

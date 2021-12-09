@@ -6,20 +6,33 @@ const QueryContext = createContext();
 
 export function QueryContextWrapper({ children }) {
   const router = useRouter();
-  const query = router.query;
 
-  function getQuery(props) {
-    return stringify({ ...query, ...props });
+  function getQuery() {
+    const { query } = router;
+    return stringify(query);
+  }
+
+  function getSelections() {
+    return router.query;
+  }
+
+  function updateQuery(props) {
+    const { query } = router;
+    return router.push({ query: { ...query, ...props } });
   }
 
   const value = {
-    query,
-    getQuery
+    query: router.query,
+    getQuery,
+    updateQuery,
+    getSelections,
   };
-  
-  return <QueryContext.Provider value={value}>{ children }</QueryContext.Provider>;
+
+  return (
+    <QueryContext.Provider value={value}>{children}</QueryContext.Provider>
+  );
 }
 
 export function useQueryContext() {
-  return useContext(QueryContext)
+  return useContext(QueryContext);
 }

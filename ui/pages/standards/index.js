@@ -7,9 +7,9 @@ import {
   Filters,
   Dataset,
 } from '../../components';
-import { list } from '../../helpers/api';
+import { getPageProps } from '../../helpers/getPageProps';
 
-export default function Standards({ data }) {
+export default function Standards({ data, schemaData }) {
   return (
     <Page>
       <h1>
@@ -20,7 +20,7 @@ export default function Standards({ data }) {
       </Reading>
       <Row>
         <Col>
-          <Filters />
+          <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
           <Dataset data={data} pagination={true} />
@@ -30,18 +30,6 @@ export default function Standards({ data }) {
   );
 }
 
-const DEFAULT_SORT = {
-  column: 'name',
-  order: 'asc',
-};
-
 export async function getServerSideProps(context) {
-  const { page, sort = DEFAULT_SORT } = context.query;
-  const data = await list({ page, sort });
-
-  return {
-    props: {
-      data,
-    },
-  };
+  return await getPageProps(context);
 }

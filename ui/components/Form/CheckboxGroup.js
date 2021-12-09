@@ -19,6 +19,8 @@ export default function CheckboxGroup({
   hint,
   options,
   small,
+  onChange,
+  parent,
 }) {
   options = options.map((option) => {
     if (typeof option === 'string') {
@@ -54,22 +56,31 @@ export default function CheckboxGroup({
             return (
               <div
                 key={option.value}
-                className={classnames('nhsuk-checkboxes__item', styles.item)}
+                className={classnames(
+                  'nhsuk-checkboxes__item',
+                  'nhsuk-u-font-size-16',
+                  styles.item
+                )}
               >
                 <input
                   className={classnames(
                     'nhsuk-checkboxes__input',
+                    'nhsuk-u-font-size-16',
                     styles.input
                   )}
                   id={optionId}
+                  parent={parent}
                   name={name}
                   type="checkbox"
                   value={option.value}
+                  onChange={onChange}
+                  checked={option.checked}
                 />
                 <label
                   className={classnames(
                     'nhsuk-label',
                     'nhsuk-checkboxes__label',
+                    'nhsuk-u-font-size-16',
                     styles.label
                   )}
                   htmlFor={optionId}
