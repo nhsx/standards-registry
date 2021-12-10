@@ -42,6 +42,7 @@ export default [
     },
     related_standards: {
       label: 'Related Standards',
+      format: (val) => val && <MarkdownBlock md={val} />,
     },
   },
   {
