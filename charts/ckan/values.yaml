@@ -9,12 +9,12 @@ image:
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: "ckan"
+# nameOverride: ''
+fullnameOverride: 'ckan'
 
 pvc:
   enabled: true
-  size: "1Gi"
+  size: '1Gi'
 
 # RedisName -- Variable for name override for redis deployment
 RedisName: &RedisName redis
@@ -53,28 +53,28 @@ DatastoreRODBPass: &DatastoreRODBPass pass
 
 ckan:
   # ckan.sysadminName -- CKAN system admin username
-  sysadminName: "ckan_admin"
+  sysadminName: 'ckan_admin'
   # ckan.sysadminPassword -- CKAN system admin password
-  sysadminPassword: "PasswordHere"
+  sysadminPassword: 'PasswordHere'
   # ckan.sysadminApiToken -- CKAN system admin API token
   # Needs to be generated via the CKAN UI and replaced after initial deployment
-  sysadminApiToken: "replace_this_with_generated_api_token_for_sysadmin"
+  sysadminApiToken: 'replace_this_with_generated_api_token_for_sysadmin'
   # ckan.sysadminEmail -- CKAN system admin email
-  sysadminEmail: "admin@domain.com"
+  sysadminEmail: 'admin@domain.com'
   # ckan.siteTitle -- Site title for the instance
-  siteTitle: "NHSX Standards Directory"
+  siteTitle: 'NHSX Standards Directory'
   # ckan.siteId -- Site id
-  siteId: "site-id-here"
+  siteId: 'site-id-here'
   # ckan.siteUrl -- Url for the CKAN instance
-  siteUrl: "http://localhost:5000"
+  siteUrl: 'http://localhost:5000'
   # ckan.ckanPlugins -- List of plugins to be used by the instance
-  ckanPlugins: "envvars image_view text_view recline_view datastore datapusher extrafields"
+  ckanPlugins: 'envvars image_view text_view recline_view datastore datapusher extrafields'
   # ckan.storagePath -- Storage path to be used by the instance
-  storagePath: "/var/lib/ckan/default"
-  activityStreamsEmailNotifications: "true"
-  debug: "false"
+  storagePath: '/var/lib/ckan/default'
+  activityStreamsEmailNotifications: 'true'
+  debug: 'false'
   # ckan.maintenanceMode -- Set to true to disable CKAN from starting and serve a maintenance page
-  maintenanceMode: "false"
+  maintenanceMode: 'false'
   psql:
     # ckan.psql.initialize -- Flag whether to initialize the PostgreSQL instance with the provided users and databases
     initialize: true
@@ -111,26 +111,26 @@ ckan:
     # ckan.datastore.RoDbPassword -- Password for the datastore read permissions user
     RoDbPassword: *DatastoreRODBPass
   # ckan.solr -- Location of SOLR collection used by the instance
-  solr: "http://solr-headless:8983/solr/ckancollection"
+  solr: 'http://solr-headless:8983/solr/ckancollection'
   # ckan.redis -- Location of the Redis service to be used by the CKAN instance
-  redis: "redis://redis-headless:6379/0"
-  spatialBackend: "solr"
+  redis: 'redis://redis-headless:6379/0'
+  spatialBackend: 'solr'
   locale:
-    offered: "en"
-    default: "en"
+    offered: 'en'
+    default: 'en'
   # ckan.datapusherUrl -- Location of the datapusher service to be used by the CKAN instance
-  datapusherUrl: "http://datapusher-headless:8000"
+  datapusherUrl: 'http://datapusher-headless:8000'
   # ckan.datapusherCallbackUrlBase -- Location of the CKAN k8s service to be used by the Datapusher, overriding the default site url route.
   datapusherCallbackUrlBase: http://ckan
   smtp:
-    server: "smtpServerURLorIP:port"
-    user: "smtpUser" 
-    password: "smtpPassword"
-    mailFrom: "postmaster@domain.com"
-    tls: "enabled"
-    starttls: "true"
+    server: 'smtpServerURLorIP:port'
+    user: 'smtpUser'
+    password: 'smtpPassword'
+    mailFrom: 'postmaster@domain.com'
+    tls: 'enabled'
+    starttls: 'true'
   issues:
-    sendEmailNotifications: "true"
+    sendEmailNotifications: 'true'
 
   # ckan.extraEnv -- An array to add extra environment variables
   # For example:
@@ -168,16 +168,18 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
-podSecurityContext: {}
-  # fsGroup: 2000
+# podSecurityContext:
+#   {}
+# fsGroup: 2000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# securityContext:
+#   {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
 
 service:
   # service.type -- Type of the service created for the CKAN pod
@@ -186,7 +188,8 @@ service:
 
 ingress:
   enabled: false
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -202,23 +205,23 @@ ingressRoute:
   enabled: false
   host: chart-example.local
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# resources: {}
+#   # We usually recommend not to specify default resources and to leave this as a conscious
+#   # choice for the user. This also increases chances charts run on environments with little
+#   # resources, such as Minikube. If you do want to specify resources, uncomment the following
+#   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+#   # limits:
+#   #   cpu: 100m
+#   #   memory: 128Mi
+#   # requests:
+#   #   cpu: 100m
+#   #   memory: 128Mi
 
-nodeSelector: {}
+# nodeSelector: {}
 
-tolerations: []
+# tolerations: []
 
-affinity: {}
+# affinity: {}
 
 datapusher:
   # datapusher.enabled -- Flag to control whether to deploy the datapusher
@@ -227,17 +230,17 @@ datapusher:
   fullnameOverride: *DatapusherName
   datapusher:
     # datapusher.datapusher.maxContentSize -- Maximum size of content to be uploaded in bytes.
-    maxContentLength: "102400000"
+    maxContentLength: '102400000'
     # datapusher.datapusher.chunkSize -- Size of chunks of the data that is being downloaded in bytes
-    chunkSize: "10240000"
+    chunkSize: '10240000'
     # datapusher.datapusher.insertRows -- Number of rows to take from the data and upload them as chunks to datastore
-    insertRows: "50000"
+    insertRows: '50000'
     # datapusher.datapusher.downloadTimeout -- Timeout limit of the download request
-    downloadTimeout: "300"
+    downloadTimeout: '300'
     # datapusher.datapusher.datapusherSslVerify -- Enable or disable (boolean) verification of SSL when trying to get resources. Default: True
-    datapusherSslVerify: "False"
+    datapusherSslVerify: 'False'
     # datapusher.datapusher.datapusherRewriteResources -- Enable or disable (boolean) whether datapusher should rewrite resources uploaded to CKAN's filestore, since datapusher takes the CKAN Site URL value for generating the resource URL. Default: False
-    datapusherRewriteResources: "True"
+    datapusherRewriteResources: 'True'
     # datapusher.datapusher.datapusherRewriteUrl -- Sets the rewrite URL that datapushed will rewrite resources that are uploaded to CKAN's filestore. Default: http://ckan:5000
     datapusherRewriteUrl: http://ckan
 
@@ -259,7 +262,7 @@ redis:
   # redis.usePassword -- Use password for accessing redis
   usePassword: false
 
-solr:  
+solr:
   # Please see all available overrides at https://github.com/helm/charts/tree/master/incubator/solr
   # solr.enabled -- Flag to control whether to deploy SOLR
   enabled: true
