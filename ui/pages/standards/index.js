@@ -30,6 +30,6 @@ export default function Standards({ data, schemaData }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   return await getPageProps(context);
 }
