@@ -4,12 +4,9 @@ import {
   Reading,
   Row,
   Col,
-  PanelList,
-  Details,
-  EmailSignup,
-  Feedback,
   Model,
   ReviewDates,
+  FeedbackFooter,
 } from '../../components';
 import upperFirst from 'lodash/upperFirst';
 import { read } from '../../helpers/api';
@@ -31,17 +28,8 @@ const Id = ({ data }) => {
       <Row>
         <Col colspan={2}>
           <Model schema={schema} data={data} />
+          <FeedbackFooter />
           <ReviewDates data={data} />
-        </Col>
-        <Col>
-          <PanelList>
-            <Details summary="Get updates for this standard">
-              <EmailSignup />
-            </Details>
-            <Details summary="Give feedback about this standard">
-              <Feedback />
-            </Details>
-          </PanelList>
         </Col>
       </Row>
     </Page>
