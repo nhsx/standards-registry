@@ -10,6 +10,7 @@ import {
   Feedback,
   Model,
   ReviewDates,
+  FeedbackFooter,
 } from '../../components';
 import upperFirst from 'lodash/upperFirst';
 import { read } from '../../helpers/api';
@@ -31,9 +32,10 @@ const Id = ({ data }) => {
       <Row>
         <Col colspan={2}>
           <Model schema={schema} data={data} />
+          <FeedbackFooter />
           <ReviewDates data={data} />
         </Col>
-        <Col>
+        {/* <Col>
           <PanelList>
             <Details summary="Get updates for this standard">
               <EmailSignup />
@@ -42,7 +44,7 @@ const Id = ({ data }) => {
               <Feedback />
             </Details>
           </PanelList>
-        </Col>
+        </Col> */}
       </Row>
     </Page>
   );
