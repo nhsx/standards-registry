@@ -21,10 +21,15 @@ export default [
     },
     documentation_help_text: {
       label: 'Documentation',
-    },
-    documentation_link: {
-      label: 'Documentation link',
-      format: (val) => <Link href={val}></Link>,
+      format: (val, data) => (
+        <>
+          <MarkdownBlock md={val} />
+          <Link
+            href={data.documentation_link}
+            text="View documentation for this standard (opens in new window)"
+          />
+        </>
+      ),
     },
   },
   {
