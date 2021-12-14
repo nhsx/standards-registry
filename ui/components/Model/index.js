@@ -8,7 +8,7 @@ const Rows = (props) => {
   const { options, vals, data } = props;
   return (
     <Td>
-      {Array.isArray(vals) ? (
+      {Array.isArray(vals) && vals.length > 0 ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
             <li key={index}>
