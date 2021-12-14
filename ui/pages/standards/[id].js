@@ -4,10 +4,6 @@ import {
   Reading,
   Row,
   Col,
-  PanelList,
-  Details,
-  EmailSignup,
-  Feedback,
   Model,
   ReviewDates,
   FeedbackFooter,
@@ -35,16 +31,6 @@ const Id = ({ data }) => {
           <FeedbackFooter />
           <ReviewDates data={data} />
         </Col>
-        {/* <Col>
-          <PanelList>
-            <Details summary="Get updates for this standard">
-              <EmailSignup />
-            </Details>
-            <Details summary="Give feedback about this standard">
-              <Feedback />
-            </Details>
-          </PanelList>
-        </Col> */}
       </Row>
     </Page>
   );
