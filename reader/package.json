@@ -1,0 +1,18 @@
+{
+  "name": "standards-directory-spreadsheet-reader",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "type": "module",
+  "author": "ralph",
+  "license": "WTFPL",
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.5",
+    "dotenv": "^10.0.0",
+    "googleapis": "^92.0.0",
+    "jest": "^27.4.5"
+  }
+}
