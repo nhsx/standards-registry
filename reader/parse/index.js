@@ -120,7 +120,7 @@ export const joinTitlesToValues = (colTitles, vals) => {
       const key = colTitles[index];
       if (!!field) {
         if (key === 'standard_category') {
-          field = sentenceCase(field);
+          field = sentenceCase(field.replace('&', 'and'));
         }
 
         if (key === 'status') {
