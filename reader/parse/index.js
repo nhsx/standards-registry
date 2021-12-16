@@ -20,7 +20,7 @@ export const businessUse = [
   'Continuity of Care (ToC)',
   'Demographics',
   'Key Care Information',
-  'Prescribing ',
+  'Prescribing',
   'Dispensing',
   'Vaccination',
   'Messaging',
@@ -131,11 +131,13 @@ export const joinTitlesToValues = (colTitles, vals) => {
         if (businessUse.includes(colTitles[index])) {
           result['business_use'] = [colTitles[index]]
             .concat(result['business_use'])
-            .filter((i) => i);
+            .filter((i) => i)
+            .sort();
         } else if (careSettings.includes(colTitles[index])) {
           result['care_setting'] = [colTitles[index]]
             .concat(result['care_setting'])
-            .filter((i) => i);
+            .filter((i) => i)
+            .sort();
         } else {
           result[colTitles[index]] = field;
         }
