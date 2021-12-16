@@ -1,4 +1,6 @@
-import { joinHeadingsValues, headings, values, prepHeadings } from '../index';
+import { joinHeadingsValues, sample, prepHeadings } from '../index';
+
+const { headings, values } = sample;
 
 describe('parse', () => {
   describe('prepHeadings', () => {
