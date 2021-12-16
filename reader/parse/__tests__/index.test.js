@@ -1,4 +1,4 @@
-import { joinHeadingsValues, sample, prepHeadings } from '../index';
+import { joinTitlesToValues, sample, prepHeadings } from '../index';
 
 const { headings, values } = sample;
 
@@ -9,8 +9,8 @@ describe('parse', () => {
     });
   });
 
-  describe('joinHeadingsValues', () => {
-    const result = joinHeadingsValues(prepHeadings(headings), values);
+  describe('joinTitlesToValues', () => {
+    const result = joinTitlesToValues(prepHeadings(headings), values);
     test('sets business use and care setting', () => {
       expect(result.business_use).toEqual([
         'Patient Communication',

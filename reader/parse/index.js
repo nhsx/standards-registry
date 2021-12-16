@@ -113,11 +113,11 @@ const sentenceCase = (str) =>
 
 export const prepHeadings = (headings) => headings.map((i) => i.trim());
 
-export const joinHeadingsValues = (headings, vals) => {
+export const joinTitlesToValues = (colTitles, vals) => {
   return vals
     .map((v) => (v.toLowerCase() === 'x' ? true : v))
     .reduce((result, field, index) => {
-      const key = headings[index];
+      const key = colTitles[index];
       if (!!field) {
         if (key === 'standard_category') {
           field = sentenceCase(field);
@@ -128,16 +128,16 @@ export const joinHeadingsValues = (headings, vals) => {
         }
 
         // dumb way of segmenting to business and care setting
-        if (businessUse.includes(headings[index])) {
-          result['business_use'] = [headings[index]]
+        if (businessUse.includes(colTitles[index])) {
+          result['business_use'] = [colTitles[index]]
             .concat(result['business_use'])
             .filter((i) => i);
-        } else if (careSettings.includes(headings[index])) {
-          result['care_setting'] = [headings[index]]
+        } else if (careSettings.includes(colTitles[index])) {
+          result['care_setting'] = [colTitles[index]]
             .concat(result['care_setting'])
             .filter((i) => i);
         } else {
-          result[headings[index]] = field;
+          result[colTitles[index]] = field;
         }
       }
       return result;
