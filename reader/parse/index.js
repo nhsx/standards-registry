@@ -117,8 +117,6 @@ export const joinHeadingsValues = (headings, vals) => {
     .reduce((result, field, index) => {
       const key = headings[index];
       if (!!field) {
-        console.log('tracking', key);
-
         if (key === 'standard_category') {
           field = sentenceCase(field);
         }
@@ -127,8 +125,8 @@ export const joinHeadingsValues = (headings, vals) => {
           field = field.toLowerCase();
         }
 
+        // dumb way of segmenting to business and care setting
         if (businessUse.includes(headings[index])) {
-          // dumb way of segmenting to business and care setting
           result['business_use'] = [headings[index]]
             .concat(result['business_use'])
             .filter((i) => i);
