@@ -32,6 +32,8 @@ try {
 
   const { values } = res.data;
 
+  console.log(values[0]);
+
   await writeFile('sheet.json', JSON.stringify(res.data));
 } catch (err) {
   console.error(err);
