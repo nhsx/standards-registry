@@ -5,12 +5,6 @@ import dotenv from 'dotenv';
 import slugify from 'slugify';
 
 const config = dotenv.config('./.env').parsed;
-const { CKAN_URL, CKAN_API_KEY } = config;
-const sheet = JSON.parse(
-  await readFile(new URL('./parsed.json', import.meta.url))
-);
-
-const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const startTime = new Date();
 const logTitle = `log-${startTime.toISOString()}.txt`;
@@ -20,7 +14,16 @@ const report = {
   successes: 0,
   failures: 0,
 };
-(async () => {
+const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export const writeToCKAN = async ({
+  fileLocation = './parsed.json',
+  ckanUrl = config.CKAN_URL,
+  ckanApiKey = config.CKAN_API_KEY,
+}) => {
+  const sheet = JSON.parse(
+    await readFile(new URL(fileLocation, import.meta.url))
+  );
   for (const record of sheet) {
     await sleep(150); //sleep .15s between hits to the api
 
@@ -39,7 +42,7 @@ const report = {
 
     try {
       const lookup =
-        `${CKAN_URL}/package_show?` +
+        `${ckanUrl}/package_show?` +
         new URLSearchParams({
           id: name,
         });
@@ -55,13 +58,13 @@ const report = {
         : '/package_create';
       const action = check.success ? 'Update' : 'Create';
 
-      console.log(`about to write to  ${process.env.CKAN_URL}${endpoint}`);
+      console.log(`about to write to  ${ckanUrl}${endpoint}`);
 
-      const write = await fetch(`${process.env.CKAN_URL}${endpoint}`, {
+      const write = await fetch(`${ckanUrl}${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(params),
         headers: {
-          Authorization: CKAN_API_KEY,
+          Authorization: ckanApiKey,
           'Content-Type': 'application/json',
         },
       });
@@ -99,4 +102,4 @@ const report = {
       -----------------------------
       `);
   logStream.end();
-})();
+};

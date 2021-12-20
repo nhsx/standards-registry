@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { google } from 'googleapis';
 import { writeFile } from 'fs/promises';
+import { parseSheet } from './parse/read.js';
+import { writeToCKAN } from './write.js';
 
 // If modifying these scopes, delete token.json.
 const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
@@ -21,20 +23,22 @@ const authenticate = async () => {
 };
 
 try {
-  const { sheets } = await authenticate();
-  const res = await sheets.spreadsheets.values.get({
+  const options = {
     spreadsheetId,
-    // range: 'A1:AQ186',
-    // NB: this the name of the spreadsheet
-    range: 'standards',
-  });
-  console.log(res);
-
+    range: 'standards', // NB: this the name of the spreadsheet, but can be modified to a range like range: 'A1:AQ186',
+  };
+  const { sheets } = await authenticate();
+  const res = await sheets.spreadsheets.values.get(options);
   const { values } = res.data;
 
+  console.log('Pulled down sheet', options);
   console.log(values[0]);
 
+  const ckanApiKey = process.env.CKAN_API_KEY;
+  const ckanUrl = process.env.CKAN_URL;
   await writeFile('sheet.json', JSON.stringify(res.data));
+  await parseSheet();
+  await writeToCKAN({ ckanApiKey, ckanUrl });
 } catch (err) {
   console.error(err);
 }
