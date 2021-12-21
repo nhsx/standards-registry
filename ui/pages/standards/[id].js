@@ -21,8 +21,8 @@ const Id = ({ data }) => {
           standard listing
         </h2>
         <h1>{data.title}</h1>
-        <div className="nhsuk-grid-row nhsuk-grid-column-two-thirds">
-          <p>{data.notes}</p>
+        <div className="nhsuk-u-reading-width">
+          <p>{data.description}</p>
         </div>
       </Reading>
       <Row>

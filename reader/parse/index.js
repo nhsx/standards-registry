@@ -33,14 +33,14 @@ export const businessUse = [
 
 const headings = [
   'title',
-  'name',
-  'notes',
+  'documentation_link',
+  'description',
   'owner_org',
   'reference_code',
   'status',
   'standard_category',
   'dependencies',
-  'related standards',
+  'related_standards',
   'Community health',
   'Dentistry',
   'Hospital',

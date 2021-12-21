@@ -8,14 +8,14 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const { name, status, title, metadata_modified, notes } = model;
+  const { name, status, title, metadata_modified, description } = model;
   const target = `/standards/${name}`;
   return (
     <>
       <Link href={target}>
         <a>{title}</a>
       </Link>
-      <p>{notes}</p>
+      <p>{description}</p>
       <Flex className="nhsuk-body-s">
         <div>
           Status: <Tag status={status}>{upperFirst(status)}</Tag>
