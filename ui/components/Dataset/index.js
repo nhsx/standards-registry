@@ -28,16 +28,14 @@ function Model({ model }) {
   );
 }
 
-export default function Dataset({
-  data = {},
-  searchTerm,
-  includeType,
-  //   pagination,
-}) {
+export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { count = 0, results = [] } = data;
 
   return (
     <>
+      <h3 className="nhsuk-heading-xs">
+        Showing {results.length} of {count} standards
+      </h3>
       <h3>
         <Snippet
           num={count}
