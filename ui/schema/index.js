@@ -49,14 +49,14 @@ export default [
   },
   {
     section_title: 'Relationships to other standards',
-    dependencies: {
-      label: 'Dependencies',
+    related_standards: {
+      label: 'Related Standards',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
     },
-    related_standards: {
-      label: 'Related Standards',
+    dependencies: {
+      label: 'Dependencies',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
