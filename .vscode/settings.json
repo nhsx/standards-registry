@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "prettier.configPath": "ui/.prettierrc",
   "workbench.colorTheme": "One Monokai",
-  "workbench.preferredDarkColorTheme": "One Monokai"
+  "workbench.preferredDarkColorTheme": "One Monokai",
+  "editor.tabSize": 2
 }
