@@ -3,12 +3,19 @@ import { createWriteStream } from 'fs';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import slugify from 'slugify';
+import path from 'path';
 
 const config = dotenv.config('./.env').parsed;
 
 const startTime = new Date();
 const logTitle = `log-${startTime.toISOString()}.txt`;
-const logStream = createWriteStream(logTitle, { flags: 'a' });
+const logStream = createWriteStream(path.resolve(logTitle), { flags: 'a' });
+
+const orgs = {
+  prsb: 'professional-record-standards-body',
+  nhsd: 'nhs-digital',
+};
+
 const report = {
   total: 1,
   successes: 0,
@@ -27,7 +34,7 @@ export const writeToCKAN = async ({
   for (const record of sheet) {
     await sleep(150); //sleep .15s between hits to the api
 
-    const { title } = record;
+    const { title, owner_org } = record;
     // Slugify titles in a similar fashion to CKAN auto-slug
     const name = slugify(title, { lower: true, strict: true });
     console.log('Proecessing record:', title);
@@ -36,7 +43,7 @@ export const writeToCKAN = async ({
       ...record,
       ...{
         name,
-        owner_org: 'nhs-digital',
+        owner_org: orgs[owner_org] || 'nhs-digital',
       },
     };
 

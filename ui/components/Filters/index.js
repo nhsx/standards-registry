@@ -29,10 +29,10 @@ export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
   const categories = [
-    'status',
-    'standard_category',
     'business_use',
     'care_setting',
+    'standard_category',
+    'status',
   ];
   const filters = pick(categories, fields);
 

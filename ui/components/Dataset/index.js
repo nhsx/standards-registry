@@ -8,14 +8,14 @@ import styles from './style.module.scss';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const { name, status, title, metadata_modified, notes } = model;
+  const { name, status, title, metadata_modified, description } = model;
   const target = `/standards/${name}`;
   return (
     <>
       <Link href={target}>
         <a>{title}</a>
       </Link>
-      <p>{notes}</p>
+      <p>{description}</p>
       <Flex className="nhsuk-body-s">
         <div>
           Status: <Tag status={status}>{upperFirst(status)}</Tag>
@@ -28,16 +28,14 @@ function Model({ model }) {
   );
 }
 
-export default function Dataset({
-  data = {},
-  searchTerm,
-  includeType,
-  //   pagination,
-}) {
+export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { count = 0, results = [] } = data;
 
   return (
     <>
+      <h3 className="nhsuk-heading-xs">
+        Showing {results.length} of {count} standards
+      </h3>
       <h3>
         <Snippet
           num={count}

@@ -18,7 +18,7 @@ export default [
       format: (val) => <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>,
     },
     standard_category: {
-      label: 'Type of Standard',
+      label: 'Type of standard',
     },
     documentation_help_text: {
       label: 'Documentation',
@@ -49,14 +49,14 @@ export default [
   },
   {
     section_title: 'Relationships to other standards',
-    dependencies: {
-      label: 'Dependencies',
+    related_standards: {
+      label: 'Related Standards',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
     },
-    related_standards: {
-      label: 'Related Standards',
+    dependencies: {
+      label: 'Dependencies',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
