@@ -13,9 +13,7 @@ import { getPageProps } from '../../helpers/getPageProps';
 export default function Standards({ data, schemaData }) {
   return (
     <Page>
-      <h1>
-        <Snippet inline>browse</Snippet>
-      </h1>
+      <h1>Browse the standards directory</h1>
       <Reading>
         <Snippet>intro</Snippet>
         <p>
