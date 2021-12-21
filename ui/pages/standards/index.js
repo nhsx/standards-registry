@@ -14,10 +14,15 @@ export default function Standards({ data, schemaData }) {
   return (
     <Page>
       <h1>
-        <Snippet inline>title</Snippet>
+        <Snippet inline>browse</Snippet>
       </h1>
       <Reading>
         <Snippet>intro</Snippet>
+        <p>
+          Explore listings for information standards, services and APIs used in
+          health and social care technology. All of the standards listed in the
+          directory are nationally recognised.
+        </p>
       </Reading>
       <Row>
         <Col>
