@@ -18,7 +18,7 @@ export default [
       format: (val) => <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>,
     },
     standard_category: {
-      label: 'Type of Standard',
+      label: 'Type of standard',
     },
     documentation_help_text: {
       label: 'Documentation',
