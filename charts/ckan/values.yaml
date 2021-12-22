@@ -13,7 +13,7 @@ nameOverride: ""
 fullnameOverride: "ckan"
 
 pvc:
-  enabled: true
+  enabled: false
   size: "1Gi"
 
 # RedisName -- Variable for name override for redis deployment
