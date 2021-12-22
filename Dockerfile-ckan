@@ -15,11 +15,12 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
 
 # Add the custom extensions to the plugins list
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations
 
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
+RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:org_with_email.json"
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN chown -R ckan:ckan /srv/app
 
