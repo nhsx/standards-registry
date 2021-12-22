@@ -33,9 +33,6 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
 
   return (
     <>
-      <h3 className="nhsuk-heading-xs">
-        Showing {results.length} of {count} standards
-      </h3>
       <h3>
         <Snippet
           num={count}
