@@ -3,7 +3,6 @@ import merge from 'lodash/merge';
 
 const CONTENT = {
   title: 'Join up IT systems in health and social care',
-  browse: 'Browse the standards directory',
   filters: {
     summary: 'Showing {{num}} result{{#plural}}s{{/plural}}',
   },
