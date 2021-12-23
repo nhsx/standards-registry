@@ -19,7 +19,8 @@ ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher
 
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
-RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml scheming.organization_schemas = ckanext.scheming:org_with_email.json"
+RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
+RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:org_with_email.json"
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN chown -R ckan:ckan /srv/app
 
