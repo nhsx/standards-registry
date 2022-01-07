@@ -27,9 +27,9 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.allow_html = True"
 # RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.editor = medium"
 
 # https://github.com/ckan/ckanext-pages#database-initialization
+RUN ckan --config "$CONFIG" pages initdb
 # RUN ckan --config=${APP_DIR}/production.ini pages initdb
-# RUN ckan --config "$CONFIG" pages initdb
-RUN "$CKAN_HOME"/bin/paster --plugin=ckanext-pages pages initdb -c "${CKAN_CONFIG}/production.ini"
+# RUN "$CKAN_HOME"/bin/paster --plugin=ckanext-pages pages initdb -c "${CKAN_CONFIG}/production.ini"
 
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN chown -R ckan:ckan /srv/app
