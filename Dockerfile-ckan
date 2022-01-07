@@ -23,15 +23,13 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:org_with_email.json"
 RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.allow_html = True"
-# Uncomment if we want to use the 'medium' editor
-# RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.editor = medium"
-
-# https://github.com/ckan/ckanext-pages#database-initialization
-RUN ckan --config "$CONFIG" pages initdb
-# RUN ckan --config=${APP_DIR}/production.ini pages initdb
-# RUN "$CKAN_HOME"/bin/paster --plugin=ckanext-pages pages initdb -c "${CKAN_CONFIG}/production.ini"
 
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
+RUN cd /srv/app/src/ckanext-pages && python setup.py install
+
+# https://github.com/ckan/ckanext-pages#database-initialization
+RUN ckan -c ${APP_DIR}/production.ini pages initdb
+
 RUN chown -R ckan:ckan /srv/app
 
 # Switch to the ckan user
