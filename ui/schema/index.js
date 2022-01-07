@@ -9,8 +9,8 @@ export default [
       label: 'Owner',
       accessor: 'organization.title',
     },
-    approval_code: {
-      label: 'Approval Code',
+    reference_code: {
+      label: 'Reference Code',
       format: (val) => val || 'Not Applicable',
     },
     status: {
