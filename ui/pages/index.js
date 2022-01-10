@@ -89,7 +89,7 @@ function HomeLayout({ children }) {
 
 Home.Layout = HomeLayout;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
       pages: await getPages(),
