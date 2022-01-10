@@ -44,6 +44,12 @@ export async function read({ id }) {
   return data.result;
 }
 
+export async function getPages() {
+  const response = await fetch(`${CKAN_URL}/ckanext_pages_list`);
+  const data = await response.json();
+  return data.result;
+}
+
 export async function list({ page = 1, q, sort, filters }) {
   let sortstring, fq;
   const rows = 10;
