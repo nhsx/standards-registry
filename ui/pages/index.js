@@ -58,11 +58,11 @@ export default function Home({ pages }) {
   const sections = [
     ...new Set(pages.map((i) => i.homepage_section).filter((i) => i)),
   ];
-  return (
+  return pages ? (
     <Page content={CONTENT}>
       {sections.map((section) => Section(section, pages))}
     </Page>
-  );
+  ) : null;
 }
 
 export function HomepageHero() {
