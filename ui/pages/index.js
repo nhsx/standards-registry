@@ -11,34 +11,58 @@ import {
   Card,
 } from '../components';
 import styles from '../styles/Home.module.scss';
+import { getPages } from '../helpers/api';
+import React from 'react';
 
 const CONTENT = {
   title: 'Join up IT systems in health and social care',
   intro:
-    'Find standards, services and APIs to build interoperable technology in health and social care.',
+    'Explore listings for information standards, services and APIs used in health and social care technology.',
 };
 
-export default function Home() {
+const Section = (section, pages) => {
+  const items = pages.filter((i) => i.homepage_section === section);
   return (
-    <Page content={CONTENT}>
-      <h3>Directory</h3>
+    <React.Fragment key={section}>
+      <h3>{section}</h3>
       <Row>
-        <Col>
-          <Link href="/standards">
-            <a>
-              <Card clickable className={styles.card}>
-                <h5>Browse directory</h5>
-                <p className="nhsuk-body-s">
-                  Explore all standards, APIs and services
-                </p>
-              </Card>
-            </a>
-          </Link>
-        </Col>
-        <Col colspan="2"></Col>
+        {items.map((pageItem, index) => {
+          const {
+            name,
+            title,
+            homepage_snippet: snippet,
+            add_to_home_page: addToHomepage,
+          } = pageItem;
+          if (!addToHomepage) {
+            return null;
+          }
+          return (
+            <Col key={index}>
+              <Link href={`/${name}`}>
+                <a>
+                  <Card clickable className={styles.card}>
+                    <h5>{title}</h5>
+                    <p className="nhsuk-body-s">{snippet}</p>
+                  </Card>
+                </a>
+              </Link>
+            </Col>
+          );
+        })}
       </Row>
-    </Page>
+    </React.Fragment>
   );
+};
+
+export default function Home({ pages }) {
+  const sections = [
+    ...new Set(pages.map((i) => i.homepage_section).filter((i) => i)),
+  ];
+  return pages ? (
+    <Page content={CONTENT}>
+      {sections.map((section) => Section(section, pages))}
+    </Page>
+  ) : null;
 }
 
 export function HomepageHero() {
@@ -65,9 +89,10 @@ function HomeLayout({ children }) {
 
 Home.Layout = HomeLayout;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   return {
     props: {
+      pages: await getPages(),
       content: CONTENT,
     },
   };

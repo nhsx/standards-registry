@@ -14,3 +14,7 @@ export default function MarkdownBlock({ md }) {
     />
   );
 }
+
+export const MarkdownRender = ({ md }) => (
+  <div dangerouslySetInnerHTML={createMarkup(parse(md))} />
+);
