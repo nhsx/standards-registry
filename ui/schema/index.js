@@ -35,6 +35,21 @@ export default [
         </>
       ),
     },
+    contact_details: {
+      label: 'Contact details',
+      format: (val, data) => {
+        return (
+          (data.contact_details && (
+            <Link
+              href={`mailto:${data.contact_details}`}
+              text={data.contact_details}
+              newWindow={true}
+            />
+          )) ||
+          'Contact information not yet provided'
+        );
+      },
+    },
   },
   {
     section_title: 'Business and care setting usage',
