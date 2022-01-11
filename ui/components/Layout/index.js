@@ -54,7 +54,9 @@ export default function Home({ children, ...props }) {
               </div>
             </Col>
             <Col>
-              <Search label={false} placeholder="Search" />
+              {!props.hideSearch && (
+                <Search label={false} placeholder="Search" />
+              )}
             </Col>
           </Row>
         </div>

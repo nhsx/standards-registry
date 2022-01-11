@@ -81,7 +81,7 @@ export function HomepageHero() {
 
 function HomeLayout({ children }) {
   return (
-    <Layout Hero={HomepageHero} homepage>
+    <Layout Hero={HomepageHero} homepage hideSearch>
       {children}
     </Layout>
   );
