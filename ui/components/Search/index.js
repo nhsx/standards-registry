@@ -7,7 +7,11 @@ export default function Search({ placeholder, label = true }) {
   const { query } = useQueryContext();
   const [value, setValue] = useState(query.q);
   return (
-    <form className="nhsuk-search" method="GET" action="/search-results">
+    <form
+      className={classnames('nhsuk-search', styles.search)}
+      method="GET"
+      action="/search-results"
+    >
       {label && <label className="nhsuk-label">Search</label>}
       <input
         type="text"
@@ -19,7 +23,10 @@ export default function Search({ placeholder, label = true }) {
       />
       <button className={classnames('nhsuk-search__submit', styles.button)}>
         <svg
-          className="nhsuk-icon nhsuk-icon__search nhsuk-u-font-size-16"
+          className={classnames(
+            'nhsuk-icon nhsuk-icon__search nhsuk-u-font-size-16',
+            styles.icon
+          )}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           aria-hidden="true"
