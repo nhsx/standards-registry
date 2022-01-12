@@ -1,5 +1,10 @@
 @import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
+
+.search {
+  position: relative;
+}
+
 .input {
   display: inline-block;
   padding-left: 0.5em;
@@ -13,7 +18,7 @@
   display: inline-block;
   position: absolute;
   line-height: 50%;
-  right: 1%;
+  right: -3px;
 }
 
 @include mq($until: tablet) {
@@ -36,7 +41,7 @@
 
 // Placeholder for tablet+ specific styling
 // @include mq($from: tablet) {
-//   .button {
-//     background-color: red;
-//   }
+// .button {
+// background-color: red;
+// }
 // }

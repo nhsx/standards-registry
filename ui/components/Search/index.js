@@ -7,7 +7,11 @@ export default function Search({ placeholder, label = true }) {
   const { query } = useQueryContext();
   const [value, setValue] = useState(query.q);
   return (
-    <form className="nhsuk-search" method="GET" action="/search-results">
+    <form
+      className={classnames('nhsuk-search', styles.search)}
+      method="GET"
+      action="/search-results"
+    >
       {label && <label className="nhsuk-label">Search</label>}
       <input
         type="text"
