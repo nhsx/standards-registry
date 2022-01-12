@@ -3,8 +3,8 @@ import { list, schema } from './api';
 export async function getPageProps(context, options = {}) {
   const { query } = context;
   const DEFAULT_SORT = {
-    column: 'name',
-    order: 'asc',
+    score: 'desc',
+    metadata_modified: 'desc',
   };
 
   const { q, page, sort = DEFAULT_SORT, ...filters } = query;
