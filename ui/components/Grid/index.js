@@ -3,7 +3,7 @@ import { Children, cloneElement } from 'react';
 
 function getClassName(total, cols) {
   if (total === 1 || total === cols) {
-    return 'nhsuk-grid-column-full';
+    return 'nhsuk-grid-column-one-half';
   }
 
   let type;
@@ -24,6 +24,7 @@ function getClassName(total, cols) {
       type = 'third';
       break;
     case 2:
+    case 1:
       type = 'half';
   }
 
