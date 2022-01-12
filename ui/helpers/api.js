@@ -55,9 +55,12 @@ export async function list({ page = 1, q, sort, filters }) {
   const rows = 10;
 
   const start = (page - 1) * rows;
-
+  // e.g.
+  // sort=score desc, metadata_modified desc
   if (sort) {
-    sortstring = `${sort.column} ${sort.order}`;
+    sortstring = Object.entries(sort)
+      .map((i) => i.join(' '))
+      .join(', ');
   }
 
   fq = serialise(queriseSelections(filters));
