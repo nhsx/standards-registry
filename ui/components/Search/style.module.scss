@@ -1,9 +1,12 @@
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 .input {
   display: inline-block;
   padding-left: 0.5em;
   border: none;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+  background-color: $color_nhsuk-grey-5;
 }
 
 .button {
@@ -12,3 +15,28 @@
   line-height: 50%;
   right: 1%;
 }
+
+@include mq($until: tablet) {
+  .button {
+    width: 40px;
+    height: 40px;
+    padding: 1px;
+
+    // Fix escaping yellow border on search click
+    &:focus {
+      box-shadow: 0 0px #ffeb3b, 0 0px #212b32;
+    }
+  }
+  // set icon to remain at default size throughout viewport changes
+  .icon {
+    width: 27px !important;
+    height: 27px !important;
+  }
+}
+
+// Placeholder for tablet+ specific styling
+// @include mq($from: tablet) {
+//   .button {
+//     background-color: red;
+//   }
+// }
