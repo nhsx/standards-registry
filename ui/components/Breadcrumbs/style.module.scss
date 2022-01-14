@@ -1,7 +1,16 @@
 @import 'vars';
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
 
 .breadcrumbs {
   background-color: $white;
   padding-top: $nhsuk-gutter;
   padding-bottom: $nhsuk-gutter;
+}
+
+// override the setting to remove breadcrumbs in node_modules/nhsuk-frontend/packages/components/breadcrumb/_breadcrumb.scss
+// .nhsuk-breadcrumb__back,
+.breadcrumbList {
+  @include mq($until: tablet) {
+    display: block;
+  }
 }
