@@ -6,8 +6,12 @@ const StaticPage = ({ pageData }) => {
   const { content, title } = pageData;
   return (
     <Page title={title}>
-      <h1>{title}</h1>
-      <MarkdownRender md={content} />
+      <div className="nhsuk-grid-row">
+        <div className="nhsuk-grid-column-three-quarters">
+          <h1>{title}</h1>
+          <MarkdownRender md={content} />
+        </div>
+      </div>
     </Page>
   );
 };
