@@ -3,6 +3,7 @@ import { Snippet, Tag, Flex, Pagination } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
+import classnames from 'classnames';
 import styles from './style.module.scss';
 
 const DATE_FORMAT = 'do MMM yyyy';
@@ -17,12 +18,17 @@ function Model({ model }) {
       </Link>
       <p>{description}</p>
       <Flex className="nhsuk-body-s">
-        <div>
-          Status: <Tag status={status}>{upperFirst(status)}</Tag>
-        </div>
-        <div>
+        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
+          Status:{' '}
+          <Tag status={status} classes="nhsuk-body-s">
+            {upperFirst(status)}
+          </Tag>
+        </p>
+        <p
+          className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
+        >
           Last updated: {format(parseISO(metadata_modified), DATE_FORMAT)}
-        </div>
+        </p>
       </Flex>
     </>
   );

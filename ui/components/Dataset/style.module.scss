@@ -14,3 +14,10 @@
     @include borderBottom;
   }
 }
+
+.noBottom {
+  margin-bottom: 0;
+}
+.right {
+  text-align: right;
+}
