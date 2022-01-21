@@ -5,6 +5,7 @@ const CONTENT = {
   title: 'Join up IT systems in health and social care',
   filters: {
     summary: 'Showing {{num}} result{{#plural}}s{{/plural}}',
+    all: 'Showing all {{num}} result{{#plural}}s{{/plural}}',
   },
   pagination: {
     summary: 'Showing {{from}} - {{to}} of {{total}} results',
