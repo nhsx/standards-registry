@@ -32,7 +32,7 @@ function Model({ model }) {
 export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { getSelections } = useQueryContext();
   const { count = 0, results = [] } = data;
-  const filtersEmpty = Object.keys(getSelections).length === 0;
+  const filtersSelected = Object.keys(getSelections).length > 0;
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           searchTerm={searchTerm}
           inline
         >
-          {searchTerm || !filtersEmpty ? 'filters.summary' : 'filters.all'}
+          {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
         </Snippet>
       </h3>
       <ul className={styles.list}>
