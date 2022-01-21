@@ -30,6 +30,7 @@ const Section = (section, pages) => {
           const {
             name,
             title,
+            short_title: shortTitle,
             homepage_snippet: snippet,
             add_to_home_page: addToHomepage,
           } = pageItem;
@@ -41,7 +42,7 @@ const Section = (section, pages) => {
               <Link href={`/${name}`}>
                 <a>
                   <Card clickable className={styles.card}>
-                    <h5>{title}</h5>
+                    <h5>{shortTitle || title}</h5>
                     <p className="nhsuk-body-s">{snippet}</p>
                   </Card>
                 </a>
