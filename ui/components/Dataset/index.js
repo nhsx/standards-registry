@@ -4,6 +4,7 @@ import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import styles from './style.module.scss';
+import { useQueryContext } from '../../context/query';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
@@ -29,7 +30,9 @@ function Model({ model }) {
 }
 
 export default function Dataset({ data = {}, searchTerm, includeType }) {
+  const { getSelections } = useQueryContext();
   const { count = 0, results = [] } = data;
+  const filtersEmpty = Object.keys(getSelections).length === 0;
 
   return (
     <>
@@ -40,7 +43,7 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           searchTerm={searchTerm}
           inline
         >
-          {searchTerm ? 'filters.summary' : 'filters.all'}
+          {searchTerm || !filtersEmpty ? 'filters.summary' : 'filters.all'}
         </Snippet>
       </h3>
       <ul className={styles.list}>
