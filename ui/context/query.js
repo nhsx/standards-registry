@@ -18,7 +18,9 @@ export function QueryContextWrapper({ children }) {
 
   function updateQuery(props) {
     const { query } = router;
-    return router.push({ query: { ...query, ...props } });
+    return router.push({ query: { ...query, ...props } }, null, {
+      scroll: false,
+    });
   }
 
   const value = {
