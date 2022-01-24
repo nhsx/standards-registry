@@ -17,7 +17,7 @@ import React from 'react';
 const CONTENT = {
   title: 'Join up IT systems in health and social care',
   intro:
-    'Explore listings for information standards, services and APIs used in health and social care technology.',
+    'Find standards, services and APIs to build interoperable technology in health and social care.',
 };
 
 const Section = (section, pages) => {
