@@ -65,7 +65,7 @@ export default [
   {
     section_title: 'Relationships to other standards',
     related_standards: {
-      label: 'Related Standards',
+      label: 'Related standards',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
