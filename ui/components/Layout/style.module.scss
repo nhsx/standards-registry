@@ -1,6 +1,25 @@
 @import 'vars';
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_spacing.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_spacing.scss';
 
 .main {
   padding-top: $nhsuk-gutter * 4;
   padding-bottom: $nhsuk-gutter * 4;
+}
+
+.logo {
+  @include mq($from: mobile) {
+    align-items: center;
+    display: flex;
+    -ms-flex-align: center;
+    margin-bottom: 0;
+    width: auto;
+  }
+}
+
+.serviceName {
+  @include mq($from: mobile) {
+    padding-left: nhsuk-spacing(3);
+  }
 }

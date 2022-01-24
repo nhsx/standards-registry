@@ -19,7 +19,7 @@
   right: 0;
 }
 
-@include mq($until: desktop) {
+@include mq($until: tablet) {
   .input {
     margin: 10px 0 0;
   }
