@@ -15,7 +15,7 @@ export function queriseSelections(selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
-      query[prop] = `(*${selectionsRef[prop].join('* AND *')}*)`;
+      query[prop] = `(*${selectionsRef[prop].join('* OR *')}*)`;
     } else {
       delete query[prop];
     }
@@ -24,7 +24,7 @@ export function queriseSelections(selections) {
 }
 
 // helper function for building SOLR Filter Queries into package_search
-// e.g. // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
+// e.g. // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20OR%20business_use:(*Continuity*))
 export function serialise(obj = {}) {
   if (Object.keys(obj).length === 0) {
     return;
@@ -34,7 +34,7 @@ export function serialise(obj = {}) {
       acc.push(key + ':' + obj[key]);
       return acc;
     }, [])
-    .join(' AND ');
+    .join(' OR ');
   return `(${str})`;
 }
 
