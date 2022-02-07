@@ -14,7 +14,7 @@ import styles from '../styles/Home.module.scss';
 import { getPages } from '../helpers/api';
 import React from 'react';
 
-const CONTENT = {
+const content = {
   title: 'Join up IT systems in health and social care',
   intro:
     'Find standards, services and APIs to build interoperable technology in health and social care.',
@@ -60,7 +60,7 @@ export default function Home({ pages }) {
     ...new Set(pages.map((i) => i.homepage_section).filter((i) => i)),
   ];
   return pages ? (
-    <Page content={CONTENT}>
+    <Page content={content}>
       {sections.map((section) => Section(section, pages))}
     </Page>
   ) : null;
@@ -94,7 +94,7 @@ export async function getServerSideProps() {
   return {
     props: {
       pages: await getPages(),
-      content: CONTENT,
+      content,
     },
   };
 }
