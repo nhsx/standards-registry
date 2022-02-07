@@ -5,12 +5,11 @@ on:
     workflows:
       - build-and-test
     types:
-      - completed
+      - released
     conclusion:
       - success
 
 jobs:
-
   ui:
     runs-on: ubuntu-latest
     environment: test
@@ -76,4 +75,5 @@ jobs:
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
-      
+            --set ckan.psql.initialize=false
+            --set solr.initialize.enabled=false
