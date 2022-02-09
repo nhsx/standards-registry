@@ -42,7 +42,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: dev-${{ github.sha }}
+          IMAGE_TAG: dev-ui-${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
@@ -54,7 +54,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: dev-ui-${{ github.sha }}
         with:
           command: >-
             helm upgrade --install --wait -n dev ui ./charts/ui
@@ -87,7 +87,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ckan-${{ github.sha }}
+          IMAGE_TAG: dev-ckan-${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
@@ -99,7 +99,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ckan-${{ github.sha }}
+          IMAGE_TAG: dev-ckan-${{ github.sha }}
         with:
           command: >-
             helm upgrade ckan -n dev --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
