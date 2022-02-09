@@ -48,10 +48,11 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: deploy
+      - name: UI deploy
         uses: koslib/helm-eks-action@master
         env:
-          AWS_REGION: ${{ env.AWS_REGION }}
+          # AWS_REGION: ${{ env.AWS_REGION }}
+          AWS_REGION: eu-west-2
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
@@ -97,13 +98,15 @@ jobs:
       - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
+          # AWS_REGION: ${{ env.AWS_REGION }}
+          AWS_REGION: eu-west-2
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: test-ckan-${{ github.sha }}
         with:
           command: >-
-            helm upgrade ckan -n test --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            helm upgrade ckan --debug -n test --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
             --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
             --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
             --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
