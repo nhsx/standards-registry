@@ -51,13 +51,14 @@ jobs:
       - name: deploy
         uses: koslib/helm-eks-action@master
         env:
+          AWS_REGION: ${{ env.AWS_REGION }}
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: test-ui-${{ github.sha }}
         with:
           command: >-
-            helm upgrade --install --wait -n test ui ./charts/ui
+            helm upgrade --debug --install --wait -n test ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   ckan:
