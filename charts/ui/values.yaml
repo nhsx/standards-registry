@@ -14,4 +14,3 @@ ui:
     port: 3000
   config:
     ckanurl: ckanurl
-    kubeconfig: kubeconfig

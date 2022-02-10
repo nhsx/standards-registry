@@ -24,5 +24,3 @@ spec:
           env:
             - name: CKAN_URL
               value: {{ .Values.ui.config.ckanurl }}
-            - name: TEMPORARY_KUBE_CONFIG
-              value: {{ .Values.ui.config.kubeconfig }}
