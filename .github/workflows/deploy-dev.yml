@@ -59,6 +59,7 @@ jobs:
           command: >-
             helm upgrade --install --wait -n dev ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.config.kubeconfig='${{ secrets.KUBECONFIG_FILE }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   ckan:
     runs-on: ubuntu-latest
