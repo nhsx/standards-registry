@@ -113,4 +113,3 @@ jobs:
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
-            --set solr.initialize.enabled=false
