@@ -107,9 +107,6 @@ jobs:
         with:
           command: >-
             helm upgrade ckan --debug -n test --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
-            --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
-            --set ckan.datastore.RwDbPassword='${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}'
-            --set ckan.datastore.RoDbPassword='${{ secrets.CKAN_DATASTORE_RO_DB_PASS }}'
             --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
             --set ckan.psql.masterPassword='${{ secrets.MASTER_DB_PASS }}'
             --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
@@ -117,3 +114,8 @@ jobs:
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
+            --set ckan.psql.initialize=false
+            --set solr.initialize.enabled=false
+            # --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
+            # --set ckan.datastore.RwDbPassword='${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}'
+            #  --set ckan.datastore.RoDbPassword='${{ secrets.CKAN_DATASTORE_RO_DB_PASS }}'
