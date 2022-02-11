@@ -98,8 +98,6 @@ jobs:
       - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
-          # AWS_REGION: ${{ env.AWS_REGION }}
-          AWS_REGION: eu-west-2
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
@@ -110,6 +108,8 @@ jobs:
             --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
             --set ckan.psql.masterPassword='${{ secrets.MASTER_DB_PASS }}'
             --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
