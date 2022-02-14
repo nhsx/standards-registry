@@ -71,13 +71,23 @@ export default function Home({ pages }) {
 export function HomepageHero() {
   return (
     <Hero>
-      <Reading>
-        <h1 className={styles.title}>
-          <Snippet inline>title</Snippet>
-        </h1>
-        <Snippet large>intro</Snippet>
-        <Search placeholder="For example, FHIR, allergies, GP" />
-      </Reading>
+      <div className="nhsuk-grid-row">
+        <div className="nhsuk-grid-column-two-thirds">
+          <h1 className={styles.title}>
+            <Snippet inline>header</Snippet>
+          </h1>
+          <Snippet large>intro</Snippet>
+        </div>
+        <div className="nhsuk-grid-column-one-third">
+          <img
+            className="nhsuk-image__img nhsuk-u-margin-top-6"
+            src="/interop.jpeg"
+            alt="laptop image with health and social care images"
+          ></img>
+        </div>
+      </div>
+
+      <Search placeholder="For example, FHIR, allergies, GP" />
     </Hero>
   );
 }
