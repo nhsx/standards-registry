@@ -2,7 +2,6 @@ import Link from 'next/link';
 import {
   Hero,
   Layout,
-  Reading,
   Page,
   Snippet,
   Search,
