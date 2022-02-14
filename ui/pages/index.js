@@ -14,10 +14,12 @@ import styles from '../styles/Home.module.scss';
 import { getPages } from '../helpers/api';
 import React from 'react';
 
-const CONTENT = {
-  title: 'Join up IT systems in health and social care',
+const content = {
+  title: 'Home - Standards Directory',
+  header:
+    'Find standards and APIs to support data sharing in health and social care',
   intro:
-    'Find standards, services and APIs to build interoperable technology in health and social care.',
+    'Use this directory to find nationally recognised information standards, APIs and services needed to build interoperable technology.',
 };
 
 const Section = (section, pages) => {
@@ -60,7 +62,7 @@ export default function Home({ pages }) {
     ...new Set(pages.map((i) => i.homepage_section).filter((i) => i)),
   ];
   return pages ? (
-    <Page content={CONTENT}>
+    <Page content={content} title={content.title}>
       {sections.map((section) => Section(section, pages))}
     </Page>
   ) : null;
@@ -94,7 +96,7 @@ export async function getServerSideProps() {
   return {
     props: {
       pages: await getPages(),
-      content: CONTENT,
+      content,
     },
   };
 }
