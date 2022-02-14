@@ -12,7 +12,7 @@ export default function Search({ placeholder, label = true }) {
       method="GET"
       action="/search-results"
     >
-      {label && <label className="nhsuk-label">Search</label>}
+      {label && <label className="nhsuk-label">Search directory</label>}
       <input
         type="text"
         className={classnames('nhsuk-input', styles.input)}

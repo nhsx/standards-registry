@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import merge from 'lodash/merge';
 
 const CONTENT = {
-  title: 'Join up IT systems in health and social care',
+  title: 'Standards Directory',
   filters: {
     summary: 'Showing {{num}} result{{#plural}}s{{/plural}}',
     all: 'Showing all {{num}} result{{#plural}}s{{/plural}}',

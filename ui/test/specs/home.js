@@ -3,7 +3,9 @@ describe('Homepage', () => {
     await browser.url(`/`);
 
     await expect(
-      $('h1=Join up IT systems in health and social care')
+      $(
+        'h1=Find standards and APIs to support data sharing in health and social care'
+      )
     ).toBeExisting();
 
     await expect(
