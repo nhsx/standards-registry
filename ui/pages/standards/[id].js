@@ -1,5 +1,4 @@
 import {
-  Tag,
   Page,
   Reading,
   Row,
@@ -8,7 +7,7 @@ import {
   ReviewDates,
   FeedbackFooter,
 } from '../../components';
-import upperFirst from 'lodash/upperFirst';
+
 import { read } from '../../helpers/api';
 import schema from '../../schema';
 
@@ -16,17 +15,14 @@ const Id = ({ data }) => {
   return (
     <Page title={data.title}>
       <Reading>
-        <h2 className="nhsuk-caption-l">
-          <Tag status={data.status}>{upperFirst(data.status)}</Tag> Information
-          standard listing
-        </h2>
+        <h2 className="nhsuk-caption-l">{data.standard_category}</h2>
         <h1>{data.title}</h1>
         <div className="nhsuk-u-reading-width">
           <p>{data.description}</p>
         </div>
       </Reading>
       <Row>
-        <Col colspan={2}>
+        <Col className="nhsuk-grid-column-two-thirds">
           <Model schema={schema} data={data} />
           <FeedbackFooter />
           <ReviewDates data={data} />

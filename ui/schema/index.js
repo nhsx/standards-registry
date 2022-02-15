@@ -1,5 +1,5 @@
 import upperFirst from 'lodash/upperFirst';
-import { Tag, Link, MarkdownBlock } from '../components';
+import { Details, Tag, Link, MarkdownBlock, Paragraph } from '../components';
 
 // `!!val?.length` => check whether empty array or unset val
 export default [
@@ -9,13 +9,38 @@ export default [
       label: 'Owner',
       accessor: 'organization.title',
     },
-    reference_code: {
-      label: 'Reference Code',
-      format: (val) => val || 'Not Applicable',
-    },
     status: {
       label: 'Status',
-      format: (val) => <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>,
+      format: (val) => (
+        <>
+          <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>
+          {
+            <Details
+              className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
+              summary="What this status means"
+            >
+              <div className="nhsuk-details__text">
+                <Paragraph>
+                  <strong>Active standards</strong> are stable, maintained and
+                  have been assured or endorsed for use by qualified bodies.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Draft standards</strong> are still being developed or
+                  are waiting for assurance or endorsement by qualified bodies.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Deprecated standards</strong> are older versions of a
+                  standard which are being phased out.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Retired standards</strong> are not being maintained
+                  and should not be used.
+                </Paragraph>
+              </div>
+            </Details>
+          }
+        </>
+      ),
     },
     standard_category: {
       label: 'Type of standard',
@@ -26,11 +51,15 @@ export default [
         <>
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
-            <Link
-              href={data.documentation_link}
-              text="View documentation for this standard (opens in new window)"
-              newWindow={true}
-            />
+            <>
+              <Link
+                href={data.documentation_link}
+                text="View documentation for this standard"
+                newWindow={true}
+              />
+              <br />
+              (opens in new window)
+            </>
           )}
         </>
       ),
@@ -79,6 +108,10 @@ export default [
   },
   {
     section_title: 'Assurance and endorsements',
+    reference_code: {
+      label: 'Reference Code',
+      format: (val) => val || 'Not Applicable',
+    },
     assurance: {
       label: 'Assurance',
       format: (val) =>
