@@ -5,6 +5,7 @@ import {
   Row,
   Col,
   Filters,
+  Link,
   Dataset,
   FeedbackFooter,
 } from '../../components';
@@ -17,9 +18,18 @@ export default function Standards({ data, schemaData }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Explore listings for information standards, services and APIs used in
-          health and social care technology. All of the standards listed in the
-          directory are nationally recognised.
+          Find standards, services and APIs to build interoperable technology in
+          health and social care.
+        </p>
+        <p>
+          To view, share and discuss standards use cases and local
+          specifications, go to the{' '}
+          <Link
+            href="https://github.com/nhsx/standards-community-platform-for-health-and-social-care"
+            text="standards community platform on GitHub"
+            newWindow={true}
+          />
+          .
         </p>
       </Reading>
       <Row>
