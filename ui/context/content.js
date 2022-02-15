@@ -5,7 +5,7 @@ const CONTENT = {
   title: 'Standards Directory',
   filters: {
     summary: 'Showing {{num}} result{{#plural}}s{{/plural}}',
-    all: 'Showing all {{num}} result{{#plural}}s{{/plural}}',
+    all: 'Showing {{num}} result{{#plural}}s{{/plural}}',
   },
   pagination: {
     summary: 'Showing {{from}} - {{to}} of {{total}} results',
