@@ -51,11 +51,15 @@ export default [
         <>
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
-            <Link
-              href={data.documentation_link}
-              text="View documentation for this standard (opens in new window)"
-              newWindow={true}
-            />
+            <>
+              <Link
+                href={data.documentation_link}
+                text="View documentation for this standard"
+                newWindow={true}
+              />
+              <br />
+              (opens in new window)
+            </>
           )}
         </>
       ),
