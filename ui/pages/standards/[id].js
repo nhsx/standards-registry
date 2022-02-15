@@ -26,7 +26,7 @@ const Id = ({ data }) => {
         </div>
       </Reading>
       <Row>
-        <Col colspan={2}>
+        <Col className="nhsuk-grid-column-two-thirds">
           <Model schema={schema} data={data} />
           <FeedbackFooter />
           <ReviewDates data={data} />

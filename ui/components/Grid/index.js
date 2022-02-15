@@ -47,7 +47,8 @@ export function Row({ children, className }) {
   );
 }
 
-export function Col({ children, total, colspan }) {
-  const className = getClassName(total, colspan);
-  return <div className={className}>{children}</div>;
+export function Col({ children, total, colspan, className }) {
+  return (
+    <div className={className || getClassName(total, colspan)}>{children}</div>
+  );
 }
