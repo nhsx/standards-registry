@@ -16,11 +16,7 @@ export const TableOfContents = ({ content }) => {
               <Link
                 text={heading}
                 href={
-                  '#' +
-                  heading
-                    .toLowerCase()
-                    .replaceAll(' ', '-')
-                    .replaceAll(/%20/g, '-')
+                  '#' + heading.toLowerCase().trim().replaceAll(/%20| /gm, '-')
                 }
               />
             </li>
