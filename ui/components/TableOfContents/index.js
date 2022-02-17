@@ -11,6 +11,12 @@ const TocItem = ({ text }) => (
 );
 
 const TocList = ({ depth, text }) => {
+  // # = depth:1
+  // ## = depth:2
+  // ### = depth:3 etc
+  // starting at depth-2 means h1s and h2s at top level
+  // this is because we don't expect to get h1 content in this component
+  // but we'll still render it into the TOC if we do
   return (
     <>
       {(depth - 2 >= 0 && (
