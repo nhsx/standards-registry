@@ -1,13 +1,13 @@
-import { Page, MarkdownRender } from '../components';
-
+import { Page, MarkdownRender, TableOfContents } from '../components';
 import { getPages } from '../helpers/api';
 
 const StaticPage = ({ pageData }) => {
-  const { content, title } = pageData;
+  const { content, title, show_table_of_contents: showContents } = pageData;
   return (
     <Page title={title}>
       <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-three-quarters">
+        {showContents && <TableOfContents content={content} />}
+        <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
           <MarkdownRender md={content} />
         </div>
