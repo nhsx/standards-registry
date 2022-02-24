@@ -1,10 +1,15 @@
 name: deploy-prod
 
 on:
-  push:
+  workflow_run:
     branches:
       - master
-      - main
+    workflows:
+      - build-and-test
+    types:
+      - completed
+    conclusion:
+      - success
 
 jobs:
   deploy:
