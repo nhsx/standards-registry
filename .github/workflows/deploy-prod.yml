@@ -12,7 +12,55 @@ on:
       - success
 
 jobs:
-  deploy:
+  ui:
+    runs-on: ubuntu-latest
+    environment: prod
+    defaults:
+      run:
+        working-directory: ui
+    env:
+      AWS_REGION: eu-west-2
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: configure credentials (using us-east-1)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      - name: Login to Public ECR
+        uses: docker/login-action@v1
+        with:
+          registry: public.ecr.aws
+          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        env:
+          AWS_REGION: ${{ env.AWS_REGION }}
+      - name: build and push
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: prod-ui-${{ github.sha }}
+        run: |
+          # Build a docker container and push it to ECR
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: prod-ui-${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade --install --wait -n prod ui ./charts/ui
+            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+  ckan:
     runs-on: ubuntu-latest
     environment: prod
     env:
@@ -34,3 +82,39 @@ jobs:
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
+      - name: build and push
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: prod-ckan-${{ github.sha }}
+        run: |
+          # Build a docker container and push it to ECR
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: ckan deploy
+        uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory
+          IMAGE_TAG: prod-ckan-${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade ckan -n prod --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
+            --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
+            --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
+            --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
+            --set ckan.datastore.RwDbPassword='${{ secrets.CKAN_DATASTORE_RW_DB_PASS }}'
+            --set ckan.datastore.RoDbPassword='${{ secrets.CKAN_DATASTORE_RO_DB_PASS }}'
+            --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
+            --set ckan.psql.masterPassword='${{ secrets.MASTER_DB_PASS }}'
+            --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
+            --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
+            --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
+            --set image.tag=$IMAGE_TAG
+            --set ckan.psql.initialize=false
+            --set solr.initialize.enabled=false
