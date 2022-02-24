@@ -1,11 +1,10 @@
 name: deploy-prod
 
 on:
-  release:
-    types:
-      - published
-    conclusion:
-      - success
+  push:
+    branches:
+      - master
+      - main
 
 jobs:
   deploy:
