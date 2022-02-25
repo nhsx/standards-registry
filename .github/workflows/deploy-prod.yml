@@ -57,7 +57,7 @@ jobs:
           IMAGE_TAG: prod-ui-${{ github.sha }}
         with:
           command: >-
-            helm upgrade --install --wait -n prod ui ./charts/ui
+            helm upgrade --debug --install --wait -n prod ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   ckan:
@@ -102,7 +102,7 @@ jobs:
           IMAGE_TAG: prod-ckan-${{ github.sha }}
         with:
           command: >-
-            helm upgrade ckan -n prod --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            helm upgrade --debug ckan -n prod --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
             --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
             --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
             --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
