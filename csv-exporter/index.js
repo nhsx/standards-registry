@@ -22,7 +22,7 @@ const getAllDataSets = async () => {
     const { results, count } = data.result;
 
     if (!success) {
-      console.log(data);
+      console.info('response from ckan', data);
       return console.error(`failed read from ckan using ${listEndpoint}`);
     }
 
@@ -30,11 +30,10 @@ const getAllDataSets = async () => {
     const fileToSave = `test.csv`;
 
     // Save to file:
-    const writing = await csv.toDisk(`./${fileToSave}`);
-    console.log(`saved result with ${count} records to ${fileToSave}`);
-    //   console.log(await csv.toString());
+    await csv.toDisk(`./${fileToSave}`);
+    console.info(`saved result with ${count} records to ${fileToSave}`);
   } catch (e) {
-    console.log(`failed to write out records to csv`);
+    console.info(`failed to write out records to csv`);
     console.error(e);
   }
 };

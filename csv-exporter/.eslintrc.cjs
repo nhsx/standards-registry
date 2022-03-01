@@ -10,8 +10,8 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['node'],
+  plugins: [],
   rules: {
-    'no-console': [2, { allow: ['warn', 'error'] }],
+    'no-console': [2, { allow: ['info', 'warn', 'error'] }],
   },
 };
