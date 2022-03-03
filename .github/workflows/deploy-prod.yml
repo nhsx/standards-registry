@@ -103,7 +103,6 @@ jobs:
         with:
           command: >-
             helm upgrade --debug ckan -n prod --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
-            --set ckan.sysadminApiToken='${{ secrets.CKAN_SYSADMIN_API_TOKEN }}'
             --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
             --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
             --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
