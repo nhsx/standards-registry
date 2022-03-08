@@ -36,7 +36,8 @@ RUN chown -R ckan:ckan /srv/app
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 # run at midnight every night
-RUN crontab -l | { ckan ; echo "0 0 * * * ckan --config=${APP_DIR}/production.ini search-index rebuild entry" >> /var/log/cron.log } | crontab -
+RUN crontab -l > rebuild-index-cron
+RUN echo "0 0 * * * ckan --config=${APP_DIR}/production.ini search-index rebuild entry" >> rebuild-index-cron && crontab rebuild-index-cron
 
 # Run the command on container startup
 CMD cron && tail -f /var/log/cron.log
