@@ -117,3 +117,4 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set postgresql.enabled=false
             --set ckan.psql.initialize=false
+            --set solr.initialize.enabled=false
