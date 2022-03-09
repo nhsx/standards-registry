@@ -23,6 +23,8 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
 RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:org_with_email.json"
 RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.allow_html = True"
+# https://docs.ckan.org/en/2.9/maintaining/tracking.html
+RUN ckan config-tool ${APP_DIR}/production.ini "ckan.tracking_enabled = True"
 
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN cd /srv/app/src/ckanext-pages && python setup.py install
@@ -31,6 +33,16 @@ RUN cd /srv/app/src/ckanext-pages && python setup.py install
 # RUN CKAN_SOLR_URL=http://solr-headless:8983/solr ckan -c ${APP_DIR}/production.ini pages initdb
 
 RUN chown -R ckan:ckan /srv/app
+
+# Setup cron jobs
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
+# run at midnight every night
+RUN crontab -l > rebuild-index-cron
+RUN echo "@hourly ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r" >> rebuild-index-cron
+
+# Run the command on container startup
+CMD cron && tail -f /var/log/cron.log
 
 # Switch to the ckan user
 USER ckan
