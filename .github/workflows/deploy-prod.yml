@@ -116,4 +116,4 @@ jobs:
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
             --set postgresql.enabled=false
-            --set ckan.psql.initialize=true
+            --set ckan.psql.initialize=false
