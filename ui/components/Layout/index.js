@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Breadcrumbs, PhaseBanner, Snippet, Search, Col, Row } from '../';
+import { Analytics, Breadcrumbs, PhaseBanner, Snippet, Search, Col, Row } from '../';
 import styles from './style.module.scss';
 import classnames from 'classnames';
 
@@ -97,6 +97,7 @@ export default function Home({ children, ...props }) {
           </div>
         </div>
       </footer>
+      <Analytics />
     </div>
   );
 }

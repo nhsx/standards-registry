@@ -1,3 +1,4 @@
+export { default as Analytics } from './Analytics';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Card } from './Card';
 export { default as Dataset } from './Dataset';
