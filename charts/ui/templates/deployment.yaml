@@ -24,3 +24,5 @@ spec:
           env:
             - name: CKAN_URL
               value: {{ .Values.ui.config.ckanurl }}
+            - name: TRACKING_ID
+              value: {{ .Values.ui.config.tracking_id }}
