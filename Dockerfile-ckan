@@ -37,7 +37,11 @@ RUN chown -R ckan:ckan /srv/app
 # Setup cron jobs
 RUN crontab -l > rebuild-index-cron
 RUN echo "@hourly ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r" >> rebuild-index-cron
-RUN crontab rebuild-index-cron && rm rebuild-index-cron
+RUN crontab rebuild-index-cron
+RUN touch /srv/app/crondone.log && crontab -l >> /srv/app/crondone.log
+
+# Run the crontab
+CMD ["crond","-f", "-L", "/dev/stdout"]
 
 # Switch to the ckan user
 USER ckan
