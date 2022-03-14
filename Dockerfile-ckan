@@ -45,4 +45,4 @@ RUN touch crontab.tmp \
 CMD ["/usr/sbin/crond", "-f", "-L", "/dev/stdout"]
 
 # Switch to the ckan user
-USER ckan
+# USER ckan
