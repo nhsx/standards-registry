@@ -38,7 +38,8 @@ RUN chown -R ckan:ckan /srv/app
 RUN touch crontab.tmp \
     && echo '0 * * * * ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r' > crontab.tmp \
     && crontab -u ckan crontab.tmp \
-    && rm -rf crontab.tmp
+    && rm -rf crontab.tmp \
+    && echo "ckan" >> /etc/cron.allow
 
 # Run the crontab
 CMD ["/usr/sbin/crond", "-f", "-L", "/dev/stdout"]
