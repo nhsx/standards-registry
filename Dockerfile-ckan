@@ -44,10 +44,10 @@ RUN apk add --no-cache dcron libcap && \
 RUN touch crontab.tmp \
     && echo '0 * * * * ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r' > crontab.tmp \
     && crontab -u ckan crontab.tmp \
-    && rm -rf crontab.tmp 
+    && rm -rf crontab.tmp
 
 # Run the crontab
-CMD ["/usr/sbin/crond"]
+CMD ["/usr/sbin/crond" "-l", "/dev/stdout"]
 
 # Switch to the ckan user
 USER ckan
