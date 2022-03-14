@@ -37,7 +37,7 @@ RUN chown -R ckan:ckan /srv/app
 # Setup cron jobs
 RUN touch crontab.tmp \
     && echo '0 * * * * ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r' > crontab.tmp \
-    && crontab crontab.tmp \
+    && crontab -u ckan crontab.tmp \
     && rm -rf crontab.tmp
 
 # Run the crontab
