@@ -35,13 +35,13 @@ RUN cd /srv/app/src/ckanext-pages && python setup.py install
 RUN chown -R ckan:ckan /srv/app
 
 # Setup cron jobs
-RUN crontab -l > rebuild-index-cron
-RUN chmod +x rebuild-index-cron
-RUN echo "@hourly ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r" >> rebuild-index-cron
-RUN crontab rebuild-index-cron
+RUN touch crontab.tmp \
+    && echo '0 * * * * ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r' > crontab.tmp \
+    && crontab crontab.tmp \
+    && rm -rf crontab.tmp
 
 # Run the crontab
-CMD ["crond","-f", "-L", "/dev/stdout"]
+CMD ["/usr/sbin/crond", "-f", "-L", "/dev/stdout"]
 
 # Switch to the ckan user
 USER ckan
