@@ -42,7 +42,7 @@ RUN touch crontab.tmp \
     && echo "ckan" >> /etc/cron.allow
 
 # Run the crontab
-CMD ["/usr/sbin/crond", "-f", "-L", "/dev/stdout"]
+CMD ["/usr/sbin/crond"]
 
 # Switch to the ckan user
 # USER ckan
