@@ -296,3 +296,28 @@ solr:
 postgresql:
   # postgresql.enabled -- Flag to control whether to deploy PostgreSQL
   enabled: false
+
+# See https://github.com/datopian/ckan-cloud-helm/blob/master/ckan/templates/cronjobs.yaml for details
+cronjobs:
+  - name: ckan-tracking
+    # image: viderum/ckan-cloud-docker:ckan-v0.0.9
+    image: keitaro/ckan:2.9.2
+    # hourly
+    schedule: '0 * * * *'
+    args:
+      - ckan
+      - -c
+      - production.ini
+      - tracking
+      - update
+  - name: ckan-search-rebuilder
+    image: keitaro/ckan:2.9.2
+    # nightly at midnight
+    schedule: '0 0 * * *' 
+    args:
+      - ckan
+      - -c
+      - production.ini
+      - search-index
+      - rebuild
+      - -r
