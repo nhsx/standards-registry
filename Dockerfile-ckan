@@ -29,25 +29,7 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckan.tracking_enabled = True"
 RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN cd /srv/app/src/ckanext-pages && python setup.py install
 
-# https://github.com/ckan/ckanext-pages#database-initialization
-# RUN CKAN_SOLR_URL=http://solr-headless:8983/solr ckan -c ${APP_DIR}/production.ini pages initdb
-
 RUN chown -R ckan:ckan /srv/app
-
-# Setup cron jobs
-# crond needs root, so install dcron and cap package and set the capabilities
-# on dcron binary https://github.com/inter169/systs/blob/master/alpine/crond/README.md
-RUN apk add --no-cache dcron libcap && \
-    chown ckan:ckan /usr/sbin/crond && \
-    setcap cap_setgid=ep /usr/sbin/crond
-
-RUN touch crontab.tmp \
-    && echo '0 * * * * ckan -c ${APP_DIR}/production.ini tracking update && ckan -c ${APP_DIR}/production.ini search-index rebuild -r' > crontab.tmp \
-    && crontab -u ckan crontab.tmp \
-    && rm -rf crontab.tmp 
-
-# Run the crontab
-CMD ["/usr/sbin/crond"]
 
 # Switch to the ckan user
 USER ckan
