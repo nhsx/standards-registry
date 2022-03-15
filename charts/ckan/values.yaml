@@ -304,8 +304,8 @@ cronjobs:
     image: keitaro/ckan:2.9.2
     # hourly
     schedule: '0 * * * *'
+    command: ckan
     args:
-      - ckan
       - -c
       - production.ini
       - tracking
@@ -314,8 +314,8 @@ cronjobs:
     image: keitaro/ckan:2.9.2
     # nightly at midnight
     schedule: '0 0 * * *' 
+    command: ckan
     args:
-      - ckan
       - -c
       - production.ini
       - search-index

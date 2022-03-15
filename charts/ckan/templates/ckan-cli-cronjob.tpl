@@ -17,6 +17,7 @@ spec:
           containers:
           - name: {{ .name }}
             image: {{ .image }}
+            command: {{ .command }}
             args:
             {{- range .args }}
             - {{ . }}
