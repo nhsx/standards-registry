@@ -1,4 +1,5 @@
 @import 'vars';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
 .phaseBanner {
   &.homepage {
@@ -27,5 +28,12 @@
 
   &.homepage {
     border: 1px solid white;
+  }
+}
+.bannerLink {
+  color: white;
+  &:hover {
+    background-color: $color_shade_nhsuk-blue-20;
+    color: white;
   }
 }
