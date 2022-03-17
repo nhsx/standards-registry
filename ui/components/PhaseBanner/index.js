@@ -26,7 +26,9 @@ export default function PhaseBanner({ homepage }) {
           <span className="nhsuk-phase-banner__text">
             This is a new service — your{' '}
             <Link
-              className={classnames(styles.bannerLink)}
+              className={classnames('nhsuk-phase-banner', styles.bannerLink, {
+                [styles.homepage]: homepage,
+              })}
               href="mailto:standards.directory@nhsx.nhs.uk"
               text="feedback"
             />{' '}
