@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import styles from './style.module.scss';
+import Link from '../Link';
 
 export default function PhaseBanner({ homepage }) {
   return (
@@ -20,11 +21,16 @@ export default function PhaseBanner({ homepage }) {
             })}
           >
             {' '}
-            ALPHA{' '}
+            BETA{' '}
           </strong>
           <span className="nhsuk-phase-banner__text">
-            This is a new service. It is a work in progress and some parts do
-            not work yet.
+            This is a new service — your{' '}
+            <Link
+              className={classnames(styles.bannerLink)}
+              href="mailto:standards.directory@nhsx.nhs.uk"
+              text="feedback"
+            />{' '}
+            will help us to improve it.
           </span>
         </span>
       </div>
