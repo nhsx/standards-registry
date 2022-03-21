@@ -31,9 +31,11 @@
   }
 }
 .bannerLink {
-  color: white;
-  &:hover {
-    background-color: $color_shade_nhsuk-blue-20;
+  &.homepage {
     color: white;
+    &:hover {
+      background-color: $color_transparent_nhsuk-blue-50;
+      color: white;
+    }
   }
 }
