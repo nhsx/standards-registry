@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - prototype
+      - demo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: dev
+    defaults:
+      run:
+        working-directory: ui
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+          heroku_email: 'YOUR EMAIL'
+          usedocker: true
+          docker_build_args: |
+            CKAN_URL
+            TRACKING_ID
+        env:
+          CKAN_URL: '${{ secrets.CKAN_URL }}'
+          TRACKING_ID: '${{ secrets.TRACKING_ID }}'
