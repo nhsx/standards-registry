@@ -105,7 +105,7 @@ jobs:
           IMAGE_TAG: test-ckan-${{ github.sha }}
         with:
           command: >-
-            helm upgrade ckan --debug -n test --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            helm upgrade ckan --debug -n test --repo https://marvell-consulting.github.io/ckan-helm-chart --install --wait ckan -f ./charts/ckan/values.yaml
             --set ckan.siteUrl='${{ secrets.CKAN_SITE_URL }}'
             --set ckan.psql.masterPassword='${{ secrets.MASTER_DB_PASS }}'
             --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
