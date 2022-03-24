@@ -15,7 +15,6 @@ const Id = ({ data }) => {
   return (
     <Page title={data.title}>
       <Reading>
-        <h2 className="nhsuk-caption-l">{data.standard_category}</h2>
         <h1>{data.title}</h1>
         <div className="nhsuk-u-reading-width">
           <p>{data.description}</p>
