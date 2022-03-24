@@ -14,7 +14,7 @@ import { getPages } from '../helpers/api';
 import React from 'react';
 
 const content = {
-  title: 'Home - Standards Directory',
+  title: 'Home - NHS Standards Directory',
   header:
     'Find standards and APIs to support data sharing in health and social care',
   intro:
