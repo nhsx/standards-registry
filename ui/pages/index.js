@@ -14,11 +14,11 @@ import { getPages } from '../helpers/api';
 import React from 'react';
 
 const content = {
-  title: 'Home - NHS Standards Directory',
+  title: 'Home - Standards Directory',
   header:
-    'Find standards and APIs to support digital data sharing in health and social care',
+    'Find standards and APIs to support data sharing in health and social care',
   intro:
-    'Use this directory to find nationally recognised information standards, APIs and services needed to build interoperable technology.',
+    'Use this directory to find nationally recognised information standards and APIs needed to build interoperable technology.',
 };
 
 const Section = (section, pages) => {
@@ -78,11 +78,6 @@ export function HomepageHero() {
           <Snippet large>intro</Snippet>
         </div>
         <div className="nhsuk-grid-column-one-third">
-          <img
-            className="nhsuk-image__img nhsuk-u-margin-top-6"
-            src="/interop.jpeg"
-            alt="laptop image with health and social care images"
-          ></img>
         </div>
       </div>
 
