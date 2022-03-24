@@ -103,7 +103,7 @@ jobs:
           IMAGE_TAG: prod-ckan-${{ github.sha }}
         with:
           command: >-
-            helm upgrade --debug ckan -n prod --repo https://keitaro-charts.storage.googleapis.com --install --wait ckan -f ./charts/ckan/values.yaml
+            helm upgrade --debug ckan -n prod --repo https://marvell-consulting.github.io/ckan-helm-chart --install --wait ckan -f ./charts/ckan/values.yaml
             --set ckan.sysadminName='${{ secrets.CKAN_SYSADMIN_NAME }}'
             --set ckan.sysadminPassword='${{ secrets.CKAN_SYSADMIN_PASS }}'
             --set ckan.db.ckanDbPassword='${{ secrets.CKAN_DB_PASS }}'
