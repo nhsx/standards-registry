@@ -39,7 +39,7 @@ echo "CKAN_URL=https://manage.test.nhs.marvell-consulting.com/api/action" >> .en
 Then run the following commands in the `./ui` directory:
 
 ```
-npm install
+npm ci
 npm run dev
 ```
 
