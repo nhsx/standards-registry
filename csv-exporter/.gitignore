@@ -1,5 +1,6 @@
-credentials.json
-parsed.json
-sheet.json
-log-*
-*.csv
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
