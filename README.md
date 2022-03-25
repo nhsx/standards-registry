@@ -30,7 +30,8 @@ cd ./standards-registry/ui
 Create a `.env` file containing the following content:
 
 ```
-CKAN_URL=https://manage.test.nhs.marvell-consulting.com/api/3/action
+touch .env.local
+echo "CKAN_URL=https://manage.test.nhs.marvell-consulting.com/api/action" >> .env.local
 ```
 
 ### Running the server
