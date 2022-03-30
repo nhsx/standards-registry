@@ -7,7 +7,7 @@ export default function Navigation() {
   const links = [
     {
       label: 'Directory',
-      url: '#'
+      url: '/standards'
     },
     {
       label: 'Roadmap',
