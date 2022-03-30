@@ -1,7 +1,7 @@
 @import 'vars';
-@import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
-@import 'node_modules/nhsuk-frontend/packages/core/settings/_spacing.scss';
-@import 'node_modules/nhsuk-frontend/packages/core/tools/_spacing.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_all.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_all.scss';
+@import 'node_modules/nhsuk-frontend/packages/components/header/_header.scss';
 
 .main {
   padding-top: $nhsuk-gutter * 4;
