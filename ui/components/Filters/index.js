@@ -1,5 +1,5 @@
 import { useQueryContext } from '../../context/query';
-import { CheckboxGroup, OptionSelect, Details, PanelList } from '../';
+import { CheckboxGroup, OptionSelect, Expander, PanelList } from '../';
 
 function Filter({
   label,
@@ -9,7 +9,7 @@ function Filter({
   hasChecked,
 }) {
   return (
-    <Details summary={label} className="nhsuk-filter" open={hasChecked}>
+    <Expander summary={label} className="nhsuk-filter" open={hasChecked}>
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
@@ -18,7 +18,7 @@ function Filter({
           small
         />
       </OptionSelect>
-    </Details>
+    </Expander>
   );
 }
 
@@ -93,9 +93,11 @@ export default function Filters({ schema }) {
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <PanelList>
+        <div className="nhsuk-expander-group">
         {filters.map((filter, index) => (
           <Filter key={index} {...filter} onChange={setItem} />
         ))}
+        </div>
       </PanelList>
     </div>
   );

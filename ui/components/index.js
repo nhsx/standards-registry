@@ -4,6 +4,7 @@ export { default as Card } from './Card';
 export { default as Dataset } from './Dataset';
 export { default as Details } from './Details';
 export { default as EmailSignup } from './EmailSignup';
+export { default as Expander } from './Expander';
 export { default as Feedback } from './Feedback';
 export { default as Flex } from './Flex';
 export { default as Filters } from './Filters';
