@@ -113,7 +113,7 @@ export function HomepageHero({ recent }) {
             <h2>New standards and APIs</h2>
             <ul>
               {
-                recent.results.slice(0,3).map(standard => (
+                recent.map(standard => (
                   <li key={standard.id}><Link href={`/standards/${standard.name}`}>{ standard.title }</Link></li>
                 ))
               }
@@ -139,9 +139,10 @@ function HomeLayout({ children, ...props }) {
 Home.Layout = HomeLayout;
 
 export async function getServerSideProps() {
+  const recent = await list({ sort: { metadata_modified: 'desc' } });
   return {
     props: {
-      recent: await list({ sort: { metadata_modified: 'desc' } }),
+      recent: recent.results.slice(0, 3),
       content,
     },
   };
