@@ -5,7 +5,6 @@ import {
   Col,
   Model,
   ReviewDates,
-  FeedbackFooter,
 } from '../../components';
 
 import { read } from '../../helpers/api';
@@ -23,7 +22,6 @@ const Id = ({ data }) => {
       <Row>
         <Col className="nhsuk-grid-column-two-thirds">
           <Model schema={schema} data={data} />
-          <FeedbackFooter />
           <ReviewDates data={data} />
         </Col>
       </Row>
