@@ -78,6 +78,15 @@ export function HomepageHero() {
           <Snippet large>intro</Snippet>
         </div>
         <div className="nhsuk-grid-column-one-third">
+          <div className={styles.sidebar}>
+            <h2>New standards and APIs</h2>
+            <ul>
+              <li><Link href="#">Mental health inpatient discharge</Link></li>
+              <li><Link href="#">Transfer of care mental health discharge - FIHR</Link></li>
+              <li><Link href="#">SNOMED CT</Link></li>
+            </ul>
+            <p><Link href="/standards">Browse the latest standards and APIs</Link></p>
+          </div>
         </div>
       </div>
 

@@ -4,6 +4,14 @@
   margin-bottom: $nhsuk-gutter * 2;
 }
 
+.sidebar {
+  border: 1px solid white;
+  padding: 2em 2em 1em;
+  a {
+    color: white;
+  }
+}
+
 .card {
   a {
     text-decoration: none !important;
