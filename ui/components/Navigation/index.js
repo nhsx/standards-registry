@@ -1,6 +1,4 @@
-import classnames from 'classnames';
 import Link from 'next/link';
-import styles from './style.module.scss';
 
 export default function Navigation() {
 
@@ -34,7 +32,7 @@ export default function Navigation() {
         <ul className="nhsuk-header__navigation-list">
           {
             links.map(link => (
-              <li className="nhsuk-header__navigation-item">
+              <li className="nhsuk-header__navigation-item" key={link.label}>
                 <Link href={link.url}>
                   <a className="nhsuk-header__navigation-link">{ link.label }</a>
                 </Link>
