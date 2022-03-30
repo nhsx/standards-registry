@@ -6,7 +6,7 @@ import {
   Search,
 } from '../components';
 import styles from '../styles/Home.module.scss';
-import { getPages } from '../helpers/api';
+import { list } from '../helpers/api';
 import React from 'react';
 
 const content = {
@@ -98,7 +98,7 @@ export default function Home() {
   </>
 }
 
-export function HomepageHero() {
+export function HomepageHero({ recent }) {
   return (
     <Hero>
       <div className="nhsuk-grid-row">
@@ -112,9 +112,11 @@ export function HomepageHero() {
           <div className={styles.sidebar}>
             <h2>New standards and APIs</h2>
             <ul>
-              <li><Link href="#">Mental health inpatient discharge</Link></li>
-              <li><Link href="#">Transfer of care mental health discharge - FIHR</Link></li>
-              <li><Link href="#">SNOMED CT</Link></li>
+              {
+                recent.results.slice(0,3).map(standard => (
+                  <li key={standard.id}><Link href={`/standards/${standard.name}`}>{ standard.title }</Link></li>
+                ))
+              }
             </ul>
             <p><Link href="/standards">Browse the latest standards and APIs</Link></p>
           </div>
@@ -126,9 +128,9 @@ export function HomepageHero() {
   );
 }
 
-function HomeLayout({ children }) {
+function HomeLayout({ children, ...props }) {
   return (
-    <Layout Hero={HomepageHero} homepage hideSearch>
+    <Layout Hero={HomepageHero} {...props} homepage hideSearch>
       {children}
     </Layout>
   );
@@ -139,7 +141,7 @@ Home.Layout = HomeLayout;
 export async function getServerSideProps() {
   return {
     props: {
-      pages: await getPages(),
+      recent: await list({ sort: { metadata_modified: 'desc' } }),
       content,
     },
   };
