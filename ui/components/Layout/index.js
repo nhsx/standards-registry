@@ -93,7 +93,7 @@ export default function Home({ children, ...props }) {
 
       <PhaseBanner homepage={props.homepage} />
 
-      {props.Hero && <props.Hero />}
+      {props.Hero && <props.Hero {...props} />}
 
       <div className="nhsuk-width-container">
         <main className={styles.main} id="maincontent" role="main">
