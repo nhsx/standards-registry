@@ -57,14 +57,84 @@ const Section = (section, pages) => {
 };
 
 export default function Home({ pages }) {
-  const sections = [
-    ...new Set(pages.map((i) => i.homepage_section).filter((i) => i)),
-  ];
-  return pages ? (
-    <Page content={content} title={content.title}>
-      {sections.map((section) => Section(section, pages))}
-    </Page>
-  ) : null;
+  return <>
+    <div className="nhsuk-grid-row">
+      <div className="nhsuk-grid-column-full">
+        <h2>Browse by care setting</h2>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="/standards?care_setting=Hospital">Hospital</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="/standards?care_setting=GP+%2F+Primary+care">GP/Primary Care</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="/standards?care_setting=Social+care">Social care</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-full">
+        <p><Link href="/standards">Browse all care settings</Link></p>
+      </div>
+    </div>
+    <div className="nhsuk-grid-row">
+      <div className="nhsuk-grid-column-full">
+        <h2>Browse by topic</h2>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-full">
+        <p><Link href="/standards">Browse all topics</Link></p>
+      </div>
+    </div>
+    <div className="nhsuk-grid-row">
+      <div className="nhsuk-grid-column-full">
+        <h2>Browse by type</h2>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h3><Link href="#">Something</Link></h3>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-full">
+        <p><Link href="/standards">Browse all standard types</Link></p>
+      </div>
+    </div>
+
+    <div className="nhsuk-grid-row">
+      <div className="nhsuk-grid-column-one-third">
+        <h2><Link href="#">Roadmap</Link></h2>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h2><Link href="/what-information-standards-are">Guidance</Link></h2>
+        <p>Lorem ipsum dolor</p>
+      </div>
+      <div className="nhsuk-grid-column-one-third">
+        <h2><Link href="#">Community</Link></h2>
+        <p>Lorem ipsum dolor</p>
+      </div>
+    </div>
+
+  </>
 }
 
 export function HomepageHero() {
