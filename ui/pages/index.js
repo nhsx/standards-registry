@@ -49,7 +49,7 @@ export default function Home() {
       </div>
       <div className="nhsuk-grid-column-one-third">
         <h3><Link href="/standards?business_use=Access+to+records">Access to records</Link></h3>
-        <p>Retrieve structured information from a patient's GP and shared care records.</p>
+        <p>Retrieve structured information from a patient and shared care records.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
         <h3><Link href="/standards?business_use=Vaccination">Vaccination</Link></h3>
