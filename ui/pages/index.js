@@ -16,9 +16,9 @@ import React from 'react';
 const content = {
   title: 'Home - Standards Directory',
   header:
-    'Find standards and APIs to support data sharing in health and social care',
+    'Find standards for data and interoperability in health and social care',
   intro:
-    'Use this directory to find nationally recognised information standards and APIs needed to build interoperable technology.',
+    'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.',
 };
 
 const Section = (section, pages) => {

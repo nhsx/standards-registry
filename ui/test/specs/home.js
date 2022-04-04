@@ -4,13 +4,13 @@ describe('Homepage', () => {
 
     await expect(
       $(
-        'h1=Find standards and APIs to support data sharing in health and social care'
+        'h1=Find standards for data and interoperability in health and social care'
       )
     ).toBeExisting();
 
     await expect(
       $('p.nhsuk_body-l').toHaveText(
-        'Find standards, services and APIs to build interoperable technology in health and social care.'
+        'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.'
       )
     );
   });
