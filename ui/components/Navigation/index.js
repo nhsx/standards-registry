@@ -9,15 +9,15 @@ export default function Navigation() {
     },
     {
       label: 'Upcoming standards',
-      url: '#'
+      url: '/roadmap'
     },
     {
       label: 'Standards guidance',
-      url: '#'
+      url: '/what-information-standards-are'
     },
     {
       label: 'Community',
-      url: '#'
+      url: '/community'
     }
   ]
 

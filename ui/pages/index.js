@@ -82,7 +82,7 @@ export default function Home() {
 
     <div className="nhsuk-grid-row">
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="#">Upcoming standards</Link></h2>
+        <h2><Link href="/roadmap">Upcoming standards</Link></h2>
         <p>Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
@@ -90,7 +90,7 @@ export default function Home() {
         <p>Find out what information standards are and what interoperability means in health and social care.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="#">Community</Link></h2>
+        <h2><Link href="/community">Community</Link></h2>
         <p>Connect with other health and social care professionals and share knowledge and best practice.</p>
       </div>
     </div>
