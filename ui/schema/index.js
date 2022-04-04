@@ -81,26 +81,26 @@ export default [
     },
   },
   {
-    section_title: 'Business and care setting usage',
+    section_title: 'Topic and care setting usage',
     business_use: {
-      label: 'Business use',
+      label: 'Topic',
       format: (val) => val || 'As yet unspecified',
     },
     care_setting: {
-      label: 'Care Setting',
+      label: 'Care setting',
       format: (val) => val || 'As yet unspecified',
     },
   },
   {
     section_title: 'Relationships to other standards',
-    related_standards: {
-      label: 'Related standards',
+    dependencies: {
+      label: 'Dependencies',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
     },
-    dependencies: {
-      label: 'Dependencies',
+    related_standards: {
+      label: 'Related standards',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) ||
         'Information unavailable',
@@ -109,11 +109,11 @@ export default [
   {
     section_title: 'Assurance and endorsements',
     reference_code: {
-      label: 'Reference Code',
-      format: (val) => val || 'Not Applicable',
+      label: 'Reference code for legally mandated standards',
+      format: (val) => val || 'None - not legally mandated',
     },
     assurance: {
-      label: 'Assurance',
+      label: 'Quality assured',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
     },

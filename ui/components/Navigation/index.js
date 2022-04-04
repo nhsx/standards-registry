@@ -8,7 +8,7 @@ export default function Navigation() {
       url: '/standards'
     },
     {
-      label: 'Roadmap',
+      label: 'Upcoming standards',
       url: '#'
     },
     {

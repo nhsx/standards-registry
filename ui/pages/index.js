@@ -82,7 +82,7 @@ export default function Home() {
 
     <div className="nhsuk-grid-row">
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="#">Roadmap</Link></h2>
+        <h2><Link href="#">Upcoming standards</Link></h2>
         <p>Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
