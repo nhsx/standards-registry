@@ -223,6 +223,12 @@ exports.config = {
    */
   // afterTest: function(test, context, { error, result, duration, passed, retries }) {
   // },
+  afterTest: function (test, context, { error }) {
+    // take a screenshot anytime a test fails and throws an error
+    if (error) {
+      browser.takeScreenshot();
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
