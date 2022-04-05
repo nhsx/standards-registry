@@ -44,6 +44,44 @@ export default [
     },
     standard_category: {
       label: 'Type of standard',
+      format: (val) => (
+        <>
+          <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>
+          {
+            <Details
+              className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
+              summary="What this type means"
+            >
+              <div className="nhsuk-details__text">
+                <Paragraph>
+                  <strong>Technical specifications and APIs</strong> specify how
+                  information is to be made available technically. This includes
+                  how the data is structured and transported, its architecture
+                  and associated protocols.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Clinical and care record standards</strong> define what
+                  information to collect, the purpose of the information and how
+                  to format it for consistency of meaning - for example creating
+                  a standardised way to register a new patient.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Medical and data dictionaries</strong> define the format
+                  of specific data items in ways that allow them to be consistently
+                  represented. Labelling of medicines or formatting of dates of
+                  birth are examples. This category also includes reference sets
+                  and controlled lists.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Data protection and governance</strong> define rules
+                  for what information can be legally processed and how that
+                  information should be securely handled.
+                </Paragraph>
+              </div>
+            </Details>
+          }
+        </>
+      ),
     },
     documentation_help_text: {
       label: 'Documentation',
