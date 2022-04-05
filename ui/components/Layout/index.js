@@ -1,9 +1,20 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Analytics, Breadcrumbs, PhaseBanner, Snippet, Search, Col, Row } from '../';
+import {
+  Analytics,
+  Breadcrumbs,
+  PhaseBanner,
+  Snippet,
+  Search,
+  Col,
+  Row,
+} from '../';
 import styles from './style.module.scss';
 import classnames from 'classnames';
+
+const nofollow = (env) =>
+  env !== 'production' ? <meta name="robots" content="none" /> : null;
 
 export default function Home({ children, ...props }) {
   useRouter();
@@ -14,6 +25,7 @@ export default function Home({ children, ...props }) {
           <Snippet>title</Snippet>
         </title>
         <link rel="icon" href="/favicon.png" />
+        {nofollow(process.env.NODE_ENV)}
       </Head>
       <a className="nhsuk-skip-link" href="#maincontent">
         Skip to main content
