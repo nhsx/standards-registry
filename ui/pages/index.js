@@ -1,6 +1,5 @@
 import classnames from 'classnames';
-import Link from 'next/link';
-import { Hero, Layout, Snippet, Search } from '../components';
+import { Hero, Layout, Snippet, Search, Link } from '../components';
 import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
 import React from 'react';
@@ -210,8 +209,8 @@ export function HomepageHero({ recent }) {
               ))}
             </ul>
             <p>
-              <Link href="/standards">
-                Browse the latest standards and APIs
+              <Link href="/standards" className="nhsuk-u-font-size-16">
+                Browse the latest standards
               </Link>
             </p>
           </div>
