@@ -227,6 +227,7 @@ exports.config = {
     // take a screenshot anytime a test fails and throws an error
     if (error) {
       browser.takeScreenshot();
+      console.log(test, context);
     }
   },
 
