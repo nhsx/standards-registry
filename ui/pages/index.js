@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import Link from 'next/link';
 import { Hero, Layout, Snippet, Search } from '../components';
 import styles from '../styles/Home.module.scss';
@@ -12,13 +13,44 @@ const content = {
     'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.',
 };
 
+const SoloSection = ({ heading, description, link, linkText }) => (
+  <div
+    className={classnames('nhsuk-grid-column-one-third', styles.lowerSection)}
+  >
+    <hr />
+    <h2>{heading}</h2>
+    <p>{description}</p>
+    <p>
+      <Link href={link}>{linkText}</Link>
+    </p>
+  </div>
+);
+
+const HomeSection = ({ children, title, link, linkText, lineBreak = true }) => (
+  <div className={classnames('nhsuk-grid-row', styles.homeSection)}>
+    <div className="nhsuk-grid-column-full">
+      <h2>{title}</h2>
+    </div>
+    {children}
+    <div className="nhsuk-grid-column-full">
+      <p>
+        <Link href={link}>{linkText}</Link>
+      </p>
+      {lineBreak ? (
+        <hr className="nhsuk-section-break nhsuk-section-break--l nhsuk-section-break--visible" />
+      ) : null}
+    </div>
+  </div>
+);
+
 export default function Home() {
   return (
     <>
-      <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-full">
-          <h2>Browse by care setting</h2>
-        </div>
+      <HomeSection
+        title="Browse by care setting"
+        link="/standards"
+        linkText="Browse all care settings"
+      >
         <div className="nhsuk-grid-column-one-third">
           <h5>
             <Link href="/standards?care_setting=Hospital">Hospital</Link>
@@ -48,16 +80,13 @@ export default function Home() {
             care and support.
           </p>
         </div>
-        <div className="nhsuk-grid-column-full">
-          <p>
-            <Link href="/standards">Browse all care settings</Link>
-          </p>
-        </div>
-      </div>
-      <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-full">
-          <h2>Browse by topic</h2>
-        </div>
+      </HomeSection>
+
+      <HomeSection
+        title="Browse by topic"
+        link="/standards"
+        linkText="Browse all topics"
+      >
         <div className="nhsuk-grid-column-one-third">
           <h5>
             <Link href="/standards?business_use=Appointment+%2F+scheduling">
@@ -89,16 +118,13 @@ export default function Home() {
             prevention protocols.
           </p>
         </div>
-        <div className="nhsuk-grid-column-full">
-          <p>
-            <Link href="/standards">Browse all topics</Link>
-          </p>
-        </div>
-      </div>
-      <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-full">
-          <h2>Browse by type</h2>
-        </div>
+      </HomeSection>
+      <HomeSection
+        title="Browse by type"
+        link="/standards"
+        linkText="Browse all standard types"
+        lineBreak={false}
+      >
         <div className="nhsuk-grid-column-one-third">
           <h5>
             <Link href="/standards?standard_category=Technical+standards+and+specifications">
@@ -132,44 +158,29 @@ export default function Home() {
             information systems.
           </p>
         </div>
-        <div className="nhsuk-grid-column-full">
-          <p>
-            <Link href="/standards">Browse all standard types</Link>
-          </p>
-        </div>
-      </div>
+      </HomeSection>
 
       <div className="nhsuk-grid-row">
-        <div className="nhsuk-grid-column-one-third">
-          <h2>Upcoming standards</h2>
-          <p>
-            Stay up to date with standards and APIs that are being proposed or
-            drafted by standard development bodies.
-          </p>
-          <p>
-            <Link href="/roadmap">Search the roadmap</Link>
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h2>Guidance</h2>
-          <p>
-            Find out what information standards are and what interoperability
-            means in health and social care.
-          </p>
-          <p>
-            <Link href="/what-information-standards-are">Learn more</Link>
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h2>Community</h2>
-          <p>
-            Connect with other health and social care professionals and share
-            knowledge and best practice.
-          </p>
-          <p>
-            <Link href="/community">View the community resources</Link>
-          </p>
-        </div>
+        <SoloSection
+          heading="Upcoming standards"
+          description="Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies."
+          link="/roadmap"
+          linkText="Search the roadmap"
+        />
+        <SoloSection
+          heading="Guidance"
+          description="Find out what information standards are and what interoperability
+        means in health and social care."
+          link="/what-information-standards-are"
+          linkText="Learn more"
+        />
+        <SoloSection
+          heading="Community"
+          description="Connect with other health and social care professionals and share
+        knowledge and best practice."
+          link="/community"
+          linkText="View the community resources"
+        />
       </div>
     </>
   );

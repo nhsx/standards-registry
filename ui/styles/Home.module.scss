@@ -1,4 +1,5 @@
 @import 'vars';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
 .title {
   margin-bottom: $nhsuk-gutter * 2;
@@ -25,5 +26,17 @@
     text-decoration: none;
     display: inline-block;
     color: $text-colour;
+  }
+}
+
+.homeSection {
+  hr {
+    border: 2px solid $nhsuk-border-color;
+  }
+}
+
+.lowerSection {
+  hr {
+    border: 4px solid $nhsuk-secondary-text-color;
   }
 }
