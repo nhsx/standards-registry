@@ -12,7 +12,7 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
     python3-dev=3.8.10-r0
 
 # Fetch and build the custom CKAN extensions
-RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
+RUN pip install --upgrade --force-reinstall -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-pages.git#egg=ckanext-pages"
 
 # Add the custom extensions to the plugins list
