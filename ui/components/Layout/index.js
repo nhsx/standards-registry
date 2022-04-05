@@ -9,7 +9,7 @@ import {
   Snippet,
   Search,
   Col,
-  Row
+  Row,
 } from '../';
 import styles from './style.module.scss';
 import classnames from 'classnames';
@@ -65,7 +65,7 @@ export default function Home({ children, ...props }) {
                         styles.serviceName
                       )}
                     >
-                      Standards directory
+                      Standards Directory
                     </span>
                   </a>
                 </Link>
@@ -80,7 +80,6 @@ export default function Home({ children, ...props }) {
         </div>
         <Navigation />
       </header>
-
 
       <Breadcrumbs
         labels={{
