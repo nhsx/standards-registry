@@ -4,8 +4,8 @@
 @import 'node_modules/nhsuk-frontend/packages/components/header/_header.scss';
 
 .main {
-  padding-top: $nhsuk-gutter * 4;
-  padding-bottom: $nhsuk-gutter * 4;
+  padding-top: $nhsuk-gutter;
+  padding-bottom: $nhsuk-gutter * 2;
 }
 
 .logo {
