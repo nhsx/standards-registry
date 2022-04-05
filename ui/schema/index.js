@@ -13,7 +13,7 @@ export default [
       label: 'Status',
       format: (val) => (
         <>
-          <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>
+          {upperFirst(val)}
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
@@ -46,7 +46,7 @@ export default [
       label: 'Type of standard',
       format: (val) => (
         <>
-          <Tag status={val.toLowerCase()}>{upperFirst(val)}</Tag>
+          <Tag type={val.toLowerCase()}>{upperFirst(val)}</Tag>
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
@@ -151,7 +151,7 @@ export default [
       format: (val) => val || 'None - not legally mandated',
     },
     assurance: {
-      label: 'Quality assured',
+      label: 'Quality assurance',
       format: (val) =>
         (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
     },
