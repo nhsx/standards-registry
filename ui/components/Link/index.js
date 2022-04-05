@@ -1,4 +1,10 @@
-export default function Link({ href, text, newWindow = false, className }) {
+export default function Link({
+  href,
+  text,
+  newWindow = false,
+  className,
+  children,
+}) {
   return (
     <a
       target={newWindow ? '_blank' : '_self'}
@@ -6,7 +12,7 @@ export default function Link({ href, text, newWindow = false, className }) {
       rel="noreferrer"
       className={className}
     >
-      {text || href}
+      {text || children || href}
     </a>
   );
 }

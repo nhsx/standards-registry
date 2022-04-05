@@ -1,7 +1,16 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Analytics, Breadcrumbs, PhaseBanner, Snippet, Search, Col, Row } from '../';
+import {
+  Analytics,
+  Breadcrumbs,
+  Navigation,
+  PhaseBanner,
+  Snippet,
+  Search,
+  Col,
+  Row,
+} from '../';
 import styles from './style.module.scss';
 import classnames from 'classnames';
 
@@ -56,7 +65,7 @@ export default function Home({ children, ...props }) {
                         styles.serviceName
                       )}
                     >
-                      Standards directory
+                      Standards Directory
                     </span>
                   </a>
                 </Link>
@@ -69,6 +78,7 @@ export default function Home({ children, ...props }) {
             </Col>
           </Row>
         </div>
+        <Navigation />
       </header>
 
       <Breadcrumbs
@@ -82,7 +92,7 @@ export default function Home({ children, ...props }) {
 
       <PhaseBanner homepage={props.homepage} />
 
-      {props.Hero && <props.Hero />}
+      {props.Hero && <props.Hero {...props} />}
 
       <div className="nhsuk-width-container">
         <main className={styles.main} id="maincontent" role="main">

@@ -1,7 +1,16 @@
 @import 'vars';
+@import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
 .title {
   margin-bottom: $nhsuk-gutter * 2;
+}
+
+.sidebar {
+  border: 1px solid white;
+  padding: 2em 2em 1em;
+  a {
+    color: white;
+  }
 }
 
 .card {
@@ -17,5 +26,17 @@
     text-decoration: none;
     display: inline-block;
     color: $text-colour;
+  }
+}
+
+.homeSection {
+  hr {
+    border: 2px solid $nhsuk-border-color;
+  }
+}
+
+.lowerSection {
+  hr {
+    border: 4px solid $nhsuk-secondary-text-color;
   }
 }
