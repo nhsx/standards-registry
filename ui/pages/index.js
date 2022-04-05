@@ -24,15 +24,15 @@ export default function Home() {
         <h2>Browse by care setting</h2>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?care_setting=Hospital">Hospital</Link></h3>
+        <h5><Link href="/standards?care_setting=Hospital">Hospital</Link></h5>
         <p>Patient services, maternity, assessments, discharge, accident and emergency care.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?care_setting=GP+%2F+Primary+care">GP / Primary Care</Link></h3>
+        <h5><Link href="/standards?care_setting=GP+%2F+Primary+care">GP / Primary Care</Link></h5>
         <p>Physical and mental health, GP care records, diagnostics, clinical referrals, treatments.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?care_setting=Social+care">Social care</Link></h3>
+        <h5><Link href="/standards?care_setting=Social+care">Social care</Link></h5>
         <p>Adult social care, social services, shared care records, community care and support.</p>
       </div>
       <div className="nhsuk-grid-column-full">
@@ -44,15 +44,15 @@ export default function Home() {
         <h2>Browse by topic</h2>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?business_use=Appointment+%2F+scheduling">Appointments</Link></h3>
+        <h5><Link href="/standards?business_use=Appointment+%2F+scheduling">Appointments</Link></h5>
         <p>Appointment booking and management, clinical referrals, key care information.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?business_use=Access+to+records">Access to records</Link></h3>
+        <h5><Link href="/standards?business_use=Access+to+records">Access to records</Link></h5>
         <p>Retrieve structured information from a patient and shared care records.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?business_use=Vaccination">Vaccination</Link></h3>
+        <h5><Link href="/standards?business_use=Vaccination">Vaccination</Link></h5>
         <p>Coronavirus (COVID-19), seasonal flu, immunisation, treatment and prevention protocols.</p>
       </div>
       <div className="nhsuk-grid-column-full">
@@ -64,15 +64,15 @@ export default function Home() {
         <h2>Browse by type</h2>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?standard_category=Technical+standards+and+specifications">Technical specifications and APIs</Link></h3>
+        <h5><Link href="/standards?standard_category=Technical+standards+and+specifications">Technical specifications and APIs</Link></h5>
         <p>Find technical standards to exchange information with other technology products and services.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?standard_category=Record+standard">Clinical and care record standards</Link></h3>
+        <h5><Link href="/standards?standard_category=Record+standard">Clinical and care record standards</Link></h5>
         <p>Explore clinical codes and data formats to collect, process and share information consistently.</p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h3><Link href="/standards?standard_category=Data+definitions+and+terminologies">Medical and data dictionaries</Link></h3>
+        <h5><Link href="/standards?standard_category=Data+definitions+and+terminologies">Medical and data dictionaries</Link></h5>
         <p>Use approved medical terminologies and definitions to support information systems.</p>
       </div>
       <div className="nhsuk-grid-column-full">
@@ -82,16 +82,19 @@ export default function Home() {
 
     <div className="nhsuk-grid-row">
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="/roadmap">Upcoming standards</Link></h2>
+        <h2>Upcoming standards</h2>
         <p>Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies.</p>
+        <p><Link href="/roadmap">Search the roadmap</Link></p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="/what-information-standards-are">Guidance</Link></h2>
+        <h2>Guidance</h2>
         <p>Find out what information standards are and what interoperability means in health and social care.</p>
+        <p><Link href="/what-information-standards-are">Learn more</Link></p>
       </div>
       <div className="nhsuk-grid-column-one-third">
-        <h2><Link href="/community">Community</Link></h2>
+        <h2>Community</h2>
         <p>Connect with other health and social care professionals and share knowledge and best practice.</p>
+        <p><Link href="/community">View the community resources</Link></p>
       </div>
     </div>
 
