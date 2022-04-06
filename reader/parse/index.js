@@ -12,7 +12,7 @@ export const careSettings = [
   'Urgent and Emergency Care',
 ];
 
-export const businessUse = [
+export const topic = [
   'Appointment / scheduling',
   'Referrals',
   'Access to Records',
@@ -128,9 +128,9 @@ export const joinTitlesToValues = (colTitles, vals) => {
         }
 
         // dumb way of segmenting to business and care setting
-        if (businessUse.includes(colTitles[index])) {
-          result['business_use'] = [colTitles[index]]
-            .concat(result['business_use'])
+        if (topic.includes(colTitles[index])) {
+          result['topic'] = [colTitles[index]]
+            .concat(result['topic'])
             .filter((i) => i)
             .sort();
         } else if (careSettings.includes(colTitles[index])) {
