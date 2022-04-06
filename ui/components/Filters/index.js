@@ -28,12 +28,7 @@ const pick = (names, fields) =>
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
-  const categories = [
-    'business_use',
-    'care_setting',
-    'standard_category',
-    'status',
-  ];
+  const categories = ['topic', 'care_setting', 'standard_category', 'status'];
   const filters = pick(categories, fields);
 
   const addFilter = (filter) => {
@@ -94,9 +89,9 @@ export default function Filters({ schema }) {
       <h3>Filters</h3>
       <PanelList>
         <div className="nhsuk-expander-group">
-        {filters.map((filter, index) => (
-          <Filter key={index} {...filter} onChange={setItem} />
-        ))}
+          {filters.map((filter, index) => (
+            <Filter key={index} {...filter} onChange={setItem} />
+          ))}
         </div>
       </PanelList>
     </div>

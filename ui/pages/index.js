@@ -88,7 +88,7 @@ export default function Home() {
       >
         <div className="nhsuk-grid-column-one-third">
           <h5>
-            <Link href="/standards?business_use=Appointment+%2F+scheduling">
+            <Link href="/standards?topic=Appointment+%2F+scheduling">
               Appointments
             </Link>
           </h5>
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
         <div className="nhsuk-grid-column-one-third">
           <h5>
-            <Link href="/standards?business_use=Access+to+records">
+            <Link href="/standards?topic=Access+to+records">
               Access to records
             </Link>
           </h5>
@@ -110,7 +110,7 @@ export default function Home() {
         </div>
         <div className="nhsuk-grid-column-one-third">
           <h5>
-            <Link href="/standards?business_use=Vaccination">Vaccination</Link>
+            <Link href="/standards?topic=Vaccination">Vaccination</Link>
           </h5>
           <p>
             Coronavirus (COVID-19), seasonal flu, immunisation, treatment and

@@ -82,7 +82,7 @@ export default [
   },
   {
     section_title: 'Topic and care setting usage',
-    business_use: {
+    topic: {
       label: 'Topic',
       format: (val) => val || 'As yet unspecified',
     },
