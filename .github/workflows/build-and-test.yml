@@ -50,7 +50,7 @@ jobs:
 
   notify:
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ failure() }}
     needs:
       - test
       - integrationtest
@@ -62,4 +62,4 @@ jobs:
           SLACK_CHANNEL: developers
           SLACK_COLOR: ${{ job.status }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "build: ${{job.status}}"
+          SLACK_TITLE: Build failed
