@@ -118,3 +118,20 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
+
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs:
+      - ui
+      - ckan
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: github-bot
+          SLACK_CHANNEL: developers
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: "test deployment: ${{job.status}}"
+          MSG_MINIMAL: "true"
