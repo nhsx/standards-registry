@@ -222,7 +222,7 @@ export function HomepageHero({ recent }) {
 
 function HomeLayout({ children, ...props }) {
   return (
-    <Layout Hero={HomepageHero} {...props} homepage hideSearch>
+    <Layout Hero={HomepageHero} {...props} homepage hideBannerSearch>
       {children}
     </Layout>
   );

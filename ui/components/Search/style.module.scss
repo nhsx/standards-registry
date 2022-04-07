@@ -8,8 +8,28 @@
 .input {
   padding-left: 0.5em;
   border: none;
-  border-radius: 4px;
   background-color: $color_nhsuk-grey-5;
+}
+
+.buttonText {
+  position: absolute;
+  color: white;
+  background-color: black;
+  right: 0;
+  bottom: 0;
+  border-radius: 0;
+  height: auto;
+  width: auto;
+  padding: 8px;
+  &:hover {
+    border: none;
+    background-color: $color_nhsuk-grey-1;
+  }
+  &:active,
+  &:focus {
+    outline: 0px;
+    color: white;
+  }
 }
 
 .button {
