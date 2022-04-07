@@ -68,7 +68,6 @@ function SortMenu({ searchTerm }) {
   ];
 
   const { sort: value } = getSelections();
-  console.log(value);
 
   return (
     <div className="nhsuk-form-group">

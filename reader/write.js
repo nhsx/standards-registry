@@ -32,7 +32,7 @@ const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export const writeToCKAN = async ({
   ckanUrl = config.CKAN_URL,
   ckanApiKey = config.CKAN_API_KEY,
-  fileLocation = './sheet.json',
+  fileLocation = './test.json',
 } = {}) => {
   const headers = {
     Authorization: ckanApiKey,
@@ -72,7 +72,7 @@ export const writeToCKAN = async ({
       });
       const check = await response.json();
       const endpoint = check.success
-        ? `/package_update?id=${title}`
+        ? `/package_update?id=${name}`
         : '/package_create';
       const action = check.success ? 'Update' : 'Create';
 
