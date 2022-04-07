@@ -47,3 +47,19 @@ jobs:
       - run: npm run build --if-present
       - run: npm start &
       - run: npm run test:integration
+
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ failure() }}
+    needs:
+      - test
+      - integrationtest
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: github-bot
+          SLACK_CHANNEL: developers
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: Build failed
