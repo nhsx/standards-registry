@@ -1,15 +1,23 @@
+import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
-import { CheckboxGroup, OptionSelect, Expander, PanelList } from '../';
+import { CheckboxGroup, OptionSelect, Expander } from '../';
+
+import styles from './Filters.module.scss';
 
 function Filter({
   label,
   choices,
   onChange,
   field_name: fieldName,
-  hasChecked,
+  open,
+  onToggle
 }) {
+  const toggle = e => {
+    e.preventDefault();
+    onToggle(fieldName, e.target.open);
+  };
   return (
-    <Expander summary={label} className="nhsuk-filter" open={hasChecked}>
+    <Expander summary={label} className="nhsuk-filter" open={open} onToggle={toggle}>
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
@@ -28,12 +36,15 @@ const pick = (names, fields) =>
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
+  const [ openItems, setOpenItems ] = useState([]);
+  const selections = getSelections();
   const categories = [
     'care_setting',
     'topic',
     'standard_category'
   ];
   const filters = pick(categories, fields);
+  const allOpen = openItems.length === filters.length;
 
   const addFilter = (filter) => {
     const selections = getSelections();
@@ -71,33 +82,52 @@ export default function Filters({ schema }) {
   };
 
   const setSelections = () => {
-    const selections = getSelections();
+    const open = new Set(openItems);
     for (const filter of filters) {
       const key = filter.field_name;
       const list = selections[key];
-      filter.hasChecked = false;
       filter.choices.map((choice) => {
         choice.checked = false;
         if (list && list.includes(choice.value)) {
-          filter.hasChecked = true;
+          open.add(key);
           choice.checked = true;
         }
         return choice;
       });
     }
+    setOpenItems([...open]);
   };
-  setSelections();
+  useEffect(setSelections, [selections]);
+
+  const openAll = event => {
+    event.preventDefault();
+    setOpenItems(filters.map(f => f.field_name));
+  };
+
+  const closeAll = event => {
+    event.preventDefault();
+    setOpenItems([]);
+  }
+
+  const toggle = (name, isOpen) => {
+    const open = new Set(openItems);
+    isOpen ? open.add(name) : open.delete(name);
+    setOpenItems([...open]);
+  };
 
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
-      <PanelList>
-        <div className="nhsuk-expander-group">
-          {filters.map((filter, index) => (
-            <Filter key={index} {...filter} onChange={setItem} />
-          ))}
-        </div>
-      </PanelList>
+      <p className={styles.toggleAll}>
+        {
+          allOpen ? <a href="#" onClick={closeAll}>Close all</a> : <a href="#" onClick={openAll}>Open all</a>
+        }
+      </p>
+      <div className="nhsuk-expander-group">
+        {filters.map((filter, index) => (
+          <Filter key={index} {...filter} open={openItems.includes(filter.field_name)} onChange={setItem} onToggle={toggle} />
+        ))}
+      </div>
     </div>
   );
 }
