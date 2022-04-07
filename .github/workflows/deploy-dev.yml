@@ -120,9 +120,9 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
-  notify:
+  notifyfail:
     runs-on: ubuntu-latest
-    if: ${{ always() }}
+    if: ${{ failure() }}
     needs:
       - ui
       - ckan
@@ -132,7 +132,25 @@ jobs:
         env:
           SLACK_USERNAME: github-bot
           SLACK_CHANNEL: developers
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "dev deployment: ${{job.status}}"
+          SLACK_TITLE: "dev deployment: failed"
+          SLACK_MESSAGE: "UI: ${{jobs.ui.result}}\nCKAN: ${{jobs.ckan.result}}"
+          MSG_MINIMAL: "true"
+  notifypass:
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    needs:
+      - ui
+      - ckan
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: github-bot
+          SLACK_CHANNEL: developers
+          SLACK_COLOR: good
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: "dev deployment: succeeded"
+          SLACK_MESSAGE: ":+1::rocket:"
           MSG_MINIMAL: "true"
