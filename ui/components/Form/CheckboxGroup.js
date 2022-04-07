@@ -74,7 +74,7 @@ export default function CheckboxGroup({
                   type="checkbox"
                   value={option.value}
                   onChange={onChange}
-                  checked={option.checked}
+                  checked={option.checked || false}
                 />
                 <label
                   className={classnames(

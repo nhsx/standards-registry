@@ -1,10 +1,18 @@
+import { useState, useEffect } from 'react';
 import classnames from 'classnames';
 
-export default function Expander({ summary, children, className, small, open }) {
+export default function Expander({ summary, children, className, small, open = false, onToggle = () => {} }) {
+
+  const [isOpen, setOpen] = useState(open);
+  useEffect(() => {
+    setOpen(open);
+  }, [open])
+
   return (
     <details
       className={classnames('nhsuk-details nhsuk-expander', className)}
-      open={open || false}
+      open={isOpen}
+      onToggle={onToggle}
     >
       <summary className="nhsuk-details__summary">
         <span
