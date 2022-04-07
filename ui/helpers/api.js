@@ -102,7 +102,6 @@ export async function list({ page = 1, q, sort, filters }) {
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
-
   return data.result;
 }
 
