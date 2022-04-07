@@ -1,16 +1,16 @@
 import classnames from 'classnames';
 
-const statusMap = {
-  active: 'nhsuk-tag--blue',
-  draft: 'nhsuk-tag--grey',
-  deprecated: 'nhsuk-tag--orange',
-  retired: 'nhsuk-tag--red',
+const typeMap = {
+  'Technical specifications and APIs': 'nhsuk-tag--blue',
+  'Data governance and information': 'nhsuk-tag--grey',
+  'Clinical and care record standards': 'nhsuk-tag--orange',
+  'Medical data and dictionaries': 'nhsuk-tag--green',
 };
 
-export default function Tag({ children, classes, status }) {
+export default function TypeTag({ children, classes, type }) {
   return (
     <span
-      className={classnames('nhsuk-tag', classes, statusMap[status] || null)}
+      className={classnames('nhsuk-tag', classes, typeMap[type] || null)}
     >
       {children}
     </span>
