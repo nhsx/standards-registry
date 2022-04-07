@@ -32,7 +32,7 @@ const getAllDataSets = async () => {
     const fileToSave = `test.csv`;
 
     // Save to file:
-    await writeFile(`./${jsonFile}`, JSON.stringify(results));
+    await writeFile(`./${jsonFile}`, JSON.stringify(results, null, '  '));
     await csv.toDisk(`./${fileToSave}`);
     console.info(`saved result with ${count} records to ${fileToSave}`);
   } catch (e) {
