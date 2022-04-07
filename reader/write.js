@@ -9,7 +9,9 @@ const config = dotenv.config('./.env').parsed;
 
 const startTime = new Date();
 const logTitle = `log-${startTime.toISOString()}.txt`;
-const logStream = createWriteStream(path.resolve(logTitle), { flags: 'a' });
+const logStream = createWriteStream(path.resolve(`./logs/${logTitle}`), {
+  flags: 'a',
+});
 
 const orgs = {
   prsb: 'professional-record-standards-body',
@@ -28,6 +30,10 @@ export const writeToCKAN = async ({
   ckanUrl = config.CKAN_URL,
   ckanApiKey = config.CKAN_API_KEY,
 }) => {
+  const headers = {
+    Authorization: ckanApiKey,
+    'Content-Type': 'application/json',
+  };
   const sheet = JSON.parse(
     await readFile(new URL(fileLocation, import.meta.url))
   );
@@ -37,7 +43,7 @@ export const writeToCKAN = async ({
     const { title, owner_org } = record;
     // Slugify titles in a similar fashion to CKAN auto-slug
     const name = slugify(title, { lower: true, strict: true });
-    console.log('Proecessing record:', title);
+    console.log('\n * Processing record:\n  ', title);
 
     const params = {
       ...record,
@@ -54,32 +60,27 @@ export const writeToCKAN = async ({
           id: name,
         });
 
-      console.log(`searching for ${lookup}`);
-      const response = await fetch(lookup);
+      console.log(` * Searching for ${lookup}`);
+      const response = await fetch(lookup, {
+        headers,
+      });
       const check = await response.json();
-
-      console.log('check response:', check);
-
       const endpoint = check.success
         ? `/package_update?id=${title}`
         : '/package_create';
       const action = check.success ? 'Update' : 'Create';
 
-      console.log(`about to write to  ${ckanUrl}${endpoint}`);
-
+      console.log(` * About to ${action} ${ckanUrl}${endpoint}`);
       const write = await fetch(`${ckanUrl}${endpoint}`, {
         method: 'POST',
         body: JSON.stringify(params),
-        headers: {
-          Authorization: ckanApiKey,
-          'Content-Type': 'application/json',
-        },
+        headers,
       });
 
       const writeData = await write.json();
       const { success } = writeData;
       const statusStr = success ? 'successful' : 'unsuccessful';
-      const message = `${action} for "${title}" ${statusStr}`;
+      const message = ` * ${action} for "${title}" ${statusStr}\n`;
       const time = new Date();
 
       (success && report.successes++) || report.failures++;

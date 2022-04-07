@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import 'dotenv/config';
 import ObjectsToCsv from 'objects-to-csv';
+import { writeFile } from 'fs/promises';
 
 const { CKAN_URL: ckanUrl, CKAN_API_KEY: ckanApiKey } = process.env;
 
@@ -27,9 +28,11 @@ const getAllDataSets = async () => {
     }
 
     const csv = new ObjectsToCsv(results);
+    const jsonFile = `test.json`;
     const fileToSave = `test.csv`;
 
     // Save to file:
+    await writeFile(`./${jsonFile}`, JSON.stringify(results, null, '  '));
     await csv.toDisk(`./${fileToSave}`);
     console.info(`saved result with ${count} records to ${fileToSave}`);
   } catch (e) {
