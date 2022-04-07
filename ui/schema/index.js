@@ -46,7 +46,7 @@ export default [
       label: 'Type of standard',
       format: (val) => (
         <>
-          <Tag type={val.toLowerCase()}>{upperFirst(val)}</Tag>
+          <Tag type={val}>{val}</Tag>
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"

@@ -1,13 +1,13 @@
 import classnames from 'classnames';
 
 const typeMap = {
-  technical: 'nhsuk-tag--blue',
-  governance: 'nhsuk-tag--grey',
-  clinical: 'nhsuk-tag--orange',
-  dictioary: 'nhsuk-tag--green',
+  'Technical specifications and APIs': 'nhsuk-tag--blue',
+  'Data governance and information': 'nhsuk-tag--grey',
+  'Clinical and care record standards': 'nhsuk-tag--orange',
+  'Medical data and dictionaries': 'nhsuk-tag--green',
 };
 
-export default function Tag({ children, classes, type }) {
+export default function TypeTag({ children, classes, type }) {
   return (
     <span
       className={classnames('nhsuk-tag', classes, typeMap[type] || null)}
