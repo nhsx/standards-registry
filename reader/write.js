@@ -4,6 +4,10 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import slugify from 'slugify';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const config = dotenv.config('./.env').parsed;
 
@@ -26,21 +30,22 @@ const report = {
 const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const writeToCKAN = async ({
-  fileLocation = './parsed.json',
   ckanUrl = config.CKAN_URL,
   ckanApiKey = config.CKAN_API_KEY,
-}) => {
+  fileLocation = './sheet.json',
+} = {}) => {
   const headers = {
     Authorization: ckanApiKey,
     'Content-Type': 'application/json',
   };
+
   const sheet = JSON.parse(
     await readFile(new URL(fileLocation, import.meta.url))
   );
   for (const record of sheet) {
     await sleep(150); //sleep .15s between hits to the api
 
-    const { title, owner_org } = record;
+    const { title, owner_org, reference_code } = record;
     // Slugify titles in a similar fashion to CKAN auto-slug
     const name = slugify(title, { lower: true, strict: true });
     console.log('\n * Processing record:\n  ', title);
@@ -50,6 +55,7 @@ export const writeToCKAN = async ({
       ...{
         name,
         owner_org: orgs[owner_org] || 'nhs-digital',
+        mandated: !!reference_code,
       },
     };
 
