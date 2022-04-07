@@ -60,6 +60,6 @@ jobs:
         env:
           SLACK_USERNAME: github-bot
           SLACK_CHANNEL: developers
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_TITLE: Build failed
