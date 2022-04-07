@@ -72,8 +72,8 @@ export default function Home({ children, ...props }) {
               </div>
             </Col>
             <Col>
-              {!props.hideSearch && (
-                <Search label={false} placeholder="Search" />
+              {!props.hideBannerSearch && (
+                <Search label={false} placeholder="Search" location="nav" />
               )}
             </Col>
           </Row>

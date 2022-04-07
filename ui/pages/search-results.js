@@ -1,4 +1,6 @@
 import {
+  Search,
+  Layout,
   Page,
   Col,
   Row,
@@ -26,6 +28,15 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
       <Reading>
         <Snippet>intro</Snippet>
       </Reading>
+      <div className="nhsuk-grid-row">
+        <div className="nhsuk-grid-column-three-quarters">
+          <Search
+            labelText="Find a standard"
+            placeholder="For example, FHIR, allergies, GP"
+            location="browse"
+          />
+        </div>
+      </div>
       <Row>
         <Col>
           <Filters schema={schemaData} />
@@ -37,6 +48,10 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
     </Page>
   );
 }
+
+SearchResults.Layout = function SearchResults({ children }) {
+  return <Layout hideBannerSearch>{children}</Layout>;
+};
 
 export async function getServerSideProps(context) {
   return await getPageProps(context, { content });

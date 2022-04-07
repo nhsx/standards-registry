@@ -1,6 +1,8 @@
 import {
+  Layout,
   Reading,
   Snippet,
+  Search,
   Page,
   Row,
   Col,
@@ -20,6 +22,15 @@ export default function Standards({ data, schemaData }) {
           health and social care.
         </p>
       </Reading>
+      <div className="nhsuk-grid-row">
+        <div className="nhsuk-grid-column-three-quarters">
+          <Search
+            labelText="Find a standard"
+            placeholder="For example, FHIR, allergies, GP"
+            location="browse"
+          />
+        </div>
+      </div>
       <Row>
         <Col>
           <Filters schema={schemaData} />
@@ -31,6 +42,10 @@ export default function Standards({ data, schemaData }) {
     </Page>
   );
 }
+
+Standards.Layout = function StandardsLayout({ children }) {
+  return <Layout hideBannerSearch>{children}</Layout>;
+};
 
 export async function getServerSideProps(context) {
   return await getPageProps(context);
