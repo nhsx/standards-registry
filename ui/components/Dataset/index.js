@@ -35,10 +35,55 @@ function Model({ model }) {
   );
 }
 
+function SortMenu({ searchTerm }) {
+  const { getSelections, updateQuery } = useQueryContext();
+
+  const sort = event => {
+    const selections = getSelections();
+    selections.sort = event.target.value;
+    updateQuery(selections, { replace: true });
+  };
+
+  const options = [
+    searchTerm && {
+      label: 'Relevance',
+      value: 'score desc'
+    },
+    {
+      label: 'Updated (newest)',
+      value: 'metadata_modified desc'
+    },
+    {
+      label: 'Updated (oldest)',
+      value: 'metadata_modified asc'
+    },
+    {
+      label: 'A-Z',
+      value: 'name asc'
+    },
+    {
+      label: 'Z-A',
+      value: 'name desc'
+    }
+  ];
+
+  const { sort: value } = getSelections();
+
+  return <div className="nhsuk-form-group">
+    <label className="nhsuk-label" htmlFor="sort">Sort by</label>
+    <select  className="nhsuk-select" name="sort" id="sort" onChange={sort}>
+      {
+        options.filter(Boolean).map(option => <option value={option.value} key={option.value} selected={option.value === value}>{ option.label }</option>)
+      }
+    </select>
+  </div>;
+}
+
 export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { getSelections } = useQueryContext();
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
+
 
   return (
     <>
@@ -52,6 +97,7 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
         </Snippet>
       </h3>
+      <SortMenu searchTerm={searchTerm} />
       <ul className={styles.list}>
         {results.map((model) => (
           <li key={model.id} className={styles.listItem}>

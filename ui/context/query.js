@@ -16,8 +16,13 @@ export function QueryContextWrapper({ children }) {
     return router.query;
   }
 
-  function updateQuery(props) {
+  function updateQuery(props, { replace } = {}) {
     const { query } = router;
+    if (replace) {
+      return router.replace({ query: { ...query, ...props } }, null, {
+        scroll: false,
+      });
+    }
     return router.push({ query: { ...query, ...props } }, null, {
       scroll: false,
     });

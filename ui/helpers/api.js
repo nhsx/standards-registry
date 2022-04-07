@@ -58,9 +58,13 @@ export async function list({ page = 1, q, sort, filters }) {
   // e.g.
   // sort=score desc, metadata_modified desc
   if (sort) {
-    sortstring = Object.entries(sort)
-      .map((i) => i.join(' '))
-      .join(', ');
+    if (typeof sort === 'string') {
+      sortstring = sort;
+    } else {
+      sortstring = Object.entries(sort)
+        .map((i) => i.join(' '))
+        .join(', ');
+    }
   }
 
   fq = serialise(queriseSelections(filters));
