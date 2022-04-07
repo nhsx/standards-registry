@@ -96,7 +96,10 @@ const CheckBox = () => {
   const toggleMandated = (event) => {
     const selections = getSelections();
     const { name, checked } = event.target;
-    selections[name] = checked;
+    delete selections[name];
+    if (checked) {
+      selections[name] = checked;
+    }
     updateQuery(selections, { replace: true });
   };
 
