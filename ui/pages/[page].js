@@ -21,6 +21,12 @@ export async function getServerSideProps(context) {
   const pages = await getPages();
   const pageData = pages.filter((i) => i.name === page).pop();
 
+  if (!pageData) {
+    return {
+      notFound: true
+    };
+  }
+
   return {
     props: {
       pageData,
