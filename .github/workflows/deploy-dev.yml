@@ -135,7 +135,7 @@ jobs:
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_TITLE: "dev deployment: failed"
-          SLACK_MESSAGE: "UI: ${{jobs.ui.result}}\nCKAN: ${{jobs.ckan.result}}"
+          SLACK_MESSAGE: "UI: ${{needs.ui.result}}\nCKAN: ${{needs.ckan.result}}"
           MSG_MINIMAL: "true"
   notifypass:
     runs-on: ubuntu-latest
