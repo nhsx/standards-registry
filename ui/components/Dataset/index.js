@@ -38,7 +38,7 @@ function Model({ model }) {
 function SortMenu({ searchTerm }) {
   const { getSelections, updateQuery } = useQueryContext();
 
-  const sort = event => {
+  const sort = (event) => {
     const selections = getSelections();
     selections.sort = event.target.value;
     updateQuery(selections, { replace: true });
@@ -47,43 +47,83 @@ function SortMenu({ searchTerm }) {
   const options = [
     searchTerm && {
       label: 'Relevance',
-      value: 'score desc'
+      value: 'score desc',
     },
     {
       label: 'Updated (newest)',
-      value: 'metadata_modified desc'
+      value: 'metadata_modified desc',
     },
     {
       label: 'Updated (oldest)',
-      value: 'metadata_modified asc'
+      value: 'metadata_modified asc',
     },
     {
       label: 'A-Z',
-      value: 'name asc'
+      value: 'name asc',
     },
     {
       label: 'Z-A',
-      value: 'name desc'
-    }
+      value: 'name desc',
+    },
   ];
 
   const { sort: value } = getSelections();
 
-  return <div className="nhsuk-form-group">
-    <label className="nhsuk-label" htmlFor="sort">Sort by</label>
-    <select  className="nhsuk-select" name="sort" id="sort" onChange={sort}>
-      {
-        options.filter(Boolean).map(option => <option value={option.value} key={option.value} selected={option.value === value}>{ option.label }</option>)
-      }
-    </select>
-  </div>;
+  return (
+    <div className="nhsuk-form-group">
+      <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor="sort">
+        Sort by
+      </label>
+      <select
+        className="nhsuk-select nhsuk-u-font-size-16"
+        name="sort"
+        id="sort"
+        onChange={sort}
+        value={value}
+      >
+        {options.filter(Boolean).map((option) => (
+          <option value={option.value} key={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
 }
+
+const CheckBox = () => {
+  const { getSelections, updateQuery } = useQueryContext();
+  const toggleMandated = (event) => {
+    const selections = getSelections();
+    const { name, checked } = event.target;
+    selections[name] = checked;
+    updateQuery(selections, { replace: true });
+  };
+
+  return (
+    <div className={classnames('nhsuk-checkboxes__item', styles.checkboxItem)}>
+      <input
+        className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+        id="mandated"
+        name="mandated"
+        type="checkbox"
+        value="nationally mandated"
+        onChange={toggleMandated}
+      />
+      <label
+        className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
+        htmlFor="mandated"
+      >
+        Nationally mandated
+      </label>
+    </div>
+  );
+};
 
 export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { getSelections } = useQueryContext();
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
-
 
   return (
     <>
@@ -97,7 +137,14 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
         </Snippet>
       </h3>
-      <SortMenu searchTerm={searchTerm} />
+      <div className="nhsuk-grid-row">
+        <div className="nhsuk-grid-column-one-half">
+          <SortMenu searchTerm={searchTerm} />
+        </div>
+        <div className="nhsuk-grid-column-one-half">
+          <CheckBox />
+        </div>
+      </div>
       <ul className={styles.list}>
         {results.map((model) => (
           <li key={model.id} className={styles.listItem}>
