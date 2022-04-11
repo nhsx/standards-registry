@@ -83,7 +83,11 @@ export async function list({ page = 1, q, sort, filters }) {
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
-
+  data.result.results.forEach(record => {
+    if (typeMap[record.standard_category]) {
+      record.standard_category = typeMap[record.standard_category];
+    }
+  });
   return data.result;
 }
 

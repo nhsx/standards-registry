@@ -10,7 +10,7 @@ import { useQueryContext } from '../../context/query';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const { name, status, title, metadata_modified, description } = model;
+  const { name, status, title, metadata_modified, standard_category, description } = model;
   const target = `/standards/${name}`;
   return (
     <>
@@ -19,11 +19,12 @@ function Model({ model }) {
       </Link>
       <p>{description}</p>
       <Flex className="nhsuk-body-s">
+
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Status:{' '}
-          <Tag status={status} classes="nhsuk-body-s">
-            {upperFirst(status)}
-          </Tag>
+          Type: <Tag type={standard_category} classes="nhsuk-body-s">{standard_category}</Tag>
+        </p>
+        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
+          Status: {upperFirst(status)}
         </p>
         <p
           className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
