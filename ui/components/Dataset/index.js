@@ -124,6 +124,34 @@ const CheckBox = () => {
   );
 };
 
+const NoResultsSummary = ({ searchTerm }) => (
+  <>
+    <h3>
+      There are no matching results{searchTerm ? ` for ${searchTerm}` : null}.
+    </h3>
+    <p>Improve your search results by:</p>
+    <ul>
+      <li>removing filters</li>
+      <li>double checking your spelling</li>
+      <li>using fewer keywords</li>
+      <li>searching for something less specific</li>
+    </ul>
+  </>
+);
+
+const ResultSummary = ({ count, searchTerm, filtersSelected }) => (
+  <h3>
+    <Snippet
+      num={count}
+      plural={count > 1 || count === 0}
+      searchTerm={searchTerm}
+      inline
+    >
+      {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
+    </Snippet>
+  </h3>
+);
+
 export default function Dataset({ data = {}, searchTerm, includeType }) {
   const { getSelections } = useQueryContext();
   const { count = 0, results = [] } = data;
@@ -131,16 +159,15 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
 
   return (
     <>
-      <h3>
-        <Snippet
-          num={count}
-          plural={count > 1 || count === 0}
+      {count > 0 ? (
+        <ResultSummary
+          filtersSelected={filtersSelected}
+          count={count}
           searchTerm={searchTerm}
-          inline
-        >
-          {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
-        </Snippet>
-      </h3>
+        />
+      ) : (
+        <NoResultsSummary searchTerm={searchTerm} />
+      )}
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
           <SortMenu searchTerm={searchTerm} />
