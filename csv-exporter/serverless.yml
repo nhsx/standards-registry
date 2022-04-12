@@ -12,6 +12,8 @@
 # Happy Coding!
 
 service: csv-exporter
+
+configValidationMode: error
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -65,9 +67,11 @@ functions:
     events:
       - httpApi:
           method: GET
-          path: /get
+          path: /get/{params}
+
     #  Define function environment variables here
-    # environment:
+    environment:
+      useDotEnv: true
     #   ckanUrl: https://manage.test.nhs.marvell-consulting.com/api/action"
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events

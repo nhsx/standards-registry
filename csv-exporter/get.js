@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
-import ObjectsToCsv from 'objects-to-csv';
+const ObjectsToCsv = require('objects-to-csv');
+const fetch = require('node-fetch');
 
-export const getAllDataSets = async (ckanUrl, ckanApiKey) => {
+module.exports = async function getAllDataSets(ckanUrl, ckanApiKey) {
   // Authentication allows unpublished and draft sets in results
   const headers = {
     Authorization: ckanApiKey,
@@ -23,12 +23,14 @@ export const getAllDataSets = async (ckanUrl, ckanApiKey) => {
       return console.error(`failed read from ckan using ${listEndpoint}`);
     }
 
-    const csv = new ObjectsToCsv(results);
+    const csv = await new ObjectsToCsv(results).toString();
     const fileToSave = `test.csv`;
 
     // Save to file:
-    await csv.toDisk(`./${fileToSave}`);
+    // await csv.toDisk(`./${fileToSave}`);
+    const info = { count };
     console.info(`saved result with ${count} records to ${fileToSave}`);
+    return { json: results, csv: csv.toString(), info };
   } catch (e) {
     console.info(`failed to write out records to csv`);
     console.error(e);
