@@ -30,6 +30,8 @@ RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN cd /srv/app/src/ckanext-pages && python setup.py install
 
 RUN chown -R ckan:ckan /srv/app
+RUN mkdir /var/lib/ckan
+RUN chown -R ckan:ckan /var/lib/ckan
 
 # Switch to the ckan user
 USER ckan
