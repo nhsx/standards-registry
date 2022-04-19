@@ -1,3 +1,6 @@
+test.json
+log-*
+*.csv
 # package directories
 node_modules
 jspm_packages
