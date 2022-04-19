@@ -14,17 +14,19 @@ module.exports = async function getAllDataSets(ckanUrl, ckanApiKey) {
     });
     const data = await response.json();
 
-    const { success } = data;
+    const { success, error } = data;
     const { results, count } = data.result;
 
     if (!success) {
       console.info('response from ckan', data);
-      return console.error(`failed read from ckan using ${listEndpoint}`);
+      throw new Error(
+        `failed read from ckan using ${listEndpoint}, Error: ${error}`
+      );
     }
 
     return { results, count };
   } catch (e) {
     console.info(`failed to write out records to csv`);
-    console.error(e);
+    throw new Error(e);
   }
 };
