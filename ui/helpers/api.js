@@ -79,7 +79,7 @@ export async function list({ page = 1, q, sort, filters }) {
 
   fq = serialise(queriseSelections(filters));
 
-  const query = `title:${q}~ || ${q}`;
+  const query = `title:${q}~ OR ${q}`;
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
