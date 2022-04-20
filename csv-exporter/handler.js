@@ -13,7 +13,7 @@ const urls = {
 const urlMap = (env) => urls[env] || urls['dev'];
 
 module.exports.datasets = async (event, context) => {
-  let help = null;
+  const help = [];
   const { queryStringParameters } = event;
 
   // * api key passed as key={key}
@@ -21,10 +21,17 @@ module.exports.datasets = async (event, context) => {
   const ckanUrl = urlMap(env);
 
   if (!key) {
-    help = `CKAN API Key not provided. 
+    help.push(`CKAN API Key not provided. 
 Will proceed with non-authorised call to the api, but private datasets will be hidden.
-The key can be provided in the format ?key={apiKey}`;
+The key can be provided in the format ?key={apiKey}`);
   }
+  if (!env) {
+    help.push(`CKAN environment not specified, defaulting to ${ckanUrl}.`);
+  }
+  if (!download) {
+    help.push(`Set download=true to return a downloadable csv.`);
+  }
+
   try {
     const { results, count } = await getAllDataSets(ckanUrl, key);
     const csvResult = await new ObjectsToCsv(results).toString();
@@ -32,7 +39,7 @@ The key can be provided in the format ?key={apiKey}`;
       statusCode: 200,
       body: JSON.stringify(
         {
-          help,
+          help: help.join('\n\n'),
           success: true,
           result: {
             count,
