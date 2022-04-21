@@ -10,7 +10,14 @@ import { useQueryContext } from '../../context/query';
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const { name, status, title, metadata_modified, standard_category, description } = model;
+  const {
+    name,
+    status,
+    title,
+    metadata_modified,
+    standard_category,
+    description,
+  } = model;
   const target = `/standards/${name}`;
   return (
     <>
@@ -19,9 +26,11 @@ function Model({ model }) {
       </Link>
       <p>{description}</p>
       <Flex className="nhsuk-body-s">
-
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Type: <Tag type={standard_category} classes="nhsuk-body-s">{standard_category}</Tag>
+          Type:{' '}
+          <Tag type={standard_category} classes="nhsuk-body-s">
+            {standard_category}
+          </Tag>
         </p>
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Status: {upperFirst(status)}
@@ -176,7 +185,7 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           <CheckBox />
         </div>
       </div>
-      <ul className={styles.list}>
+      <ul className={styles.list} id="browse-results">
         {results.map((model) => (
           <li key={model.id} className={styles.listItem}>
             <Model model={model} includeType={includeType} />

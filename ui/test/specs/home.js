@@ -14,4 +14,10 @@ describe('Homepage', () => {
       )
     );
   });
+
+  it('should show recent standards on the right hand side', async () => {
+    await browser.url(`/`);
+    const $recents = await $$('ul.nhsuk-u-font-size-16 li');
+    expect($recents.length).toBe(3);
+  });
 });
