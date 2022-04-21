@@ -6,7 +6,8 @@ const typeMap = {
   'Technical standards and specifications': 'Technical specifications and APIs',
   'Record standard': 'Clinical and care record standards',
   'Data definitions and terminologies': 'Medical data and dictionaries',
-  'Information code of practice and governance standard': 'Data governance and information'
+  'Information code of practice and governance standard':
+    'Data governance and information',
 };
 
 // TODO: neaten
@@ -79,12 +80,12 @@ export async function list({ page = 1, q, sort, filters }) {
 
   fq = serialise(queriseSelections(filters));
 
-  const query = `title:${q}~ OR ${q}`;
+  const query = q && `title:${q}~ OR ${q}`;
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
-  data.result.results.forEach(record => {
+  data.result.results.forEach((record) => {
     if (typeMap[record.standard_category]) {
       record.standard_category = typeMap[record.standard_category];
     }
@@ -98,11 +99,11 @@ export async function schema(dataset = 'dataset') {
   );
   const data = await response.json();
 
-
-
-  const category = data.result.dataset_fields.find(field => field.field_name === 'standard_category');
+  const category = data.result.dataset_fields.find(
+    (field) => field.field_name === 'standard_category'
+  );
   if (category) {
-    category.choices.forEach(choice => {
+    category.choices.forEach((choice) => {
       if (typeMap[choice.value]) {
         choice.label = typeMap[choice.value];
       }
