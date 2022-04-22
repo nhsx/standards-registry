@@ -199,7 +199,7 @@ export function HomepageHero({ recent }) {
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>
             <h2>Latest standards</h2>
-            <ul className="nhsuk-u-font-size-16">
+            <ul className="nhsuk-u-font-size-16" id="recent-standards">
               {recent.map((standard) => (
                 <li key={standard.id}>
                   <Link href={`/standards/${standard.name}`}>
