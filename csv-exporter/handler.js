@@ -10,7 +10,7 @@ const urls = {
 };
 
 // * choose which env to download from, dev, test, prod
-const urlMap = (env) => urls[env] || urls['dev'];
+const urlMap = (env) => env.includes('http') ? env : urls[env] || urls['dev'];
 
 module.exports.datasets = async (event, context) => {
   const help = [];
