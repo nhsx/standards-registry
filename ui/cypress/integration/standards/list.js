@@ -26,8 +26,12 @@ describe('Standards Listing Index', () => {
 
       cy.contains('Search').click();
 
+<<<<<<< HEAD
       cy.get('#browse-results li').should('have.length', 1);
       cy.contains('#browse-results li', 'Allergy').click();
+=======
+      cy.get('#browse-results li').should('have.length', 1)
+>>>>>>> bc7d3ae (Feature - org mapper)
     });
 
     describe('Organisation mapping', () => {
@@ -37,7 +41,11 @@ describe('Standards Listing Index', () => {
 
         cy.contains('Search').click();
 
+<<<<<<< HEAD
         cy.get('#browse-results li').not('have.length', 0)
+=======
+        cy.get('#browse-results li').should('have.length', 6)
+>>>>>>> bc7d3ae (Feature - org mapper)
       });
 
       it('Displays org matches first', () => {

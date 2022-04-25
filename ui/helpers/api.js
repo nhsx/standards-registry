@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { stringify } from 'qs';
-import { findKey } from 'lodash'
+import { findKey } from 'lodash';
 const CKAN_URL = process.env.CKAN_URL;
 
 const typeMap = {
@@ -43,20 +43,17 @@ function getSearchQuery(q) {
     'professional-record-standards-body': [
       'prsb',
       'professional record standards body',
-      'professional records standards body'
+      'professional records standards body',
     ],
-    'nhs-digital': [
-      'nhs',
-      'nhsd',
-      'nhsx',
-      'nhs digital'
-    ]
-  }
+    'nhs-digital': ['nhs', 'nhsd', 'nhsx', 'nhs digital'],
+  };
 
-  const org = findKey(organisationMappings, mappings => mappings.includes(q.toLowerCase()));
+  const org = findKey(organisationMappings, (mappings) =>
+    mappings.includes(q.toLowerCase())
+  );
 
   if (org) {
-    query = `organization:${org} OR ${query}`
+    query = `organization:${org} OR ${query}`;
   }
 
   return query;
