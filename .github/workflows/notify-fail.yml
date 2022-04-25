@@ -1,0 +1,28 @@
+name: notify-fail
+
+on:
+  workflow_run:
+    branches:
+      - master
+    workflows:
+      - build-and-test
+      - deploy-dev
+      - deploy-test
+      - deploy-prod
+    types:
+      - completed
+    conclusion:
+      - failure
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_USERNAME: github-bot
+          SLACK_CHANNEL: developers
+          SLACK_COLOR: danger
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_TITLE: "Build failed"

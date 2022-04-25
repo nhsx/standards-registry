@@ -5,7 +5,7 @@ on:
     branches:
       - master
     workflows:
-      - build-and-test
+      - deploy-dev
     types:
       - completed
     conclusion:
@@ -37,17 +37,6 @@ jobs:
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
-      - name: build and push
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: test-ui-${{ github.sha }}
-        run: |
-          # Build a docker container and push it to ECR
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: UI deploy
         uses: koslib/helm-eks-action@master
         env:
@@ -56,7 +45,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: test-ui-${{ github.sha }}
+          IMAGE_TAG: ui-${{ github.sha }}
         with:
           command: >-
             helm upgrade --debug --install --wait -n test ui ./charts/ui
@@ -85,24 +74,13 @@ jobs:
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
-      - name: build and push
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: test-ckan-${{ github.sha }}
-        run: |
-          # Build a docker container and push it to ECR
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: test-ckan-${{ github.sha }}
+          IMAGE_TAG: ckan-${{ github.sha }}
         with:
           command: >-
             helm upgrade ckan --debug -n test --repo https://marvell-consulting.github.io/ckan-helm-chart --install --wait ckan -f ./charts/ckan/values.yaml
@@ -119,29 +97,27 @@ jobs:
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
 
-  notifyfail:
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    needs:
-      - ui
-      - ckan
-    steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_USERNAME: github-bot
-          SLACK_CHANNEL: developers
-          SLACK_COLOR: danger
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "test deployment: failed"
-          SLACK_MESSAGE: "UI: ${{needs.ui.result}}\nCKAN: ${{needs.ckan.result}}"
-          MSG_MINIMAL: "true"
-  notifypass:
-    runs-on: ubuntu-latest
+  integrationtest:
     if: ${{ success() }}
     needs:
       - ui
       - ckan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: ui/package-lock.json
+      - run: npm ci
+      - run: npm run test:integration -- --baseUrl https://test.nhs.marvell-consulting.com
+
+  notifypass:
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    needs:
+      - integrationtest
     steps:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
