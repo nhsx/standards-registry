@@ -12,6 +12,32 @@ on:
       - success
 
 jobs:
+  deploy-csv-exporter:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]
+    environment: dev
+    defaults:
+      run:
+        working-directory: csv-exporter
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - name: serverless deploy
+        uses: serverless/github-action@v3
+        with:
+          args: deploy
+        env:
+          # SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+          SLS_DEBUG: 1
+          AWS_REGION: eu-west-2
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   ui:
     runs-on: ubuntu-latest
     environment: dev
@@ -150,6 +176,6 @@ jobs:
           SLACK_CHANNEL: developers
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "dev deployment: succeeded"
-          SLACK_MESSAGE: ":+1::rocket:"
-          MSG_MINIMAL: "true"
+          SLACK_TITLE: 'dev deployment: succeeded'
+          SLACK_MESSAGE: ':+1::rocket:'
+          MSG_MINIMAL: 'true'
