@@ -152,6 +152,7 @@ jobs:
     needs:
       - ui
       - ckan
+      - deploy-csv-exporter
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
