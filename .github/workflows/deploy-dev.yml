@@ -14,31 +14,21 @@ on:
 jobs:
   deploy-csv-exporter:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [16.x]
     environment: dev
     defaults:
       run:
         working-directory: csv-exporter
+    env:
+      SLS_DEBUG: 1
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
       - run: npm ci
-      - name: serverless deploy
-        uses: serverless/github-action@v3
-        with:
-          args: -c "cd ./csv-exporter && serverless deploy --aws-profile=k8sDev --verbose"
-          entrypoint: /bin/sh
-        env:
-          SLS_DEBUG: 1
-          AWS_REGION: eu-west-2
-          AWS_PROFILE: dev
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
+      - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
+
   ui:
     runs-on: ubuntu-latest
     environment: dev
