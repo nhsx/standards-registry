@@ -12,6 +12,23 @@ on:
       - success
 
 jobs:
+  deploy-csv-exporter:
+    runs-on: ubuntu-latest
+    environment: dev
+    defaults:
+      run:
+        working-directory: csv-exporter
+    env:
+      SLS_DEBUG: 1
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - run: npm ci
+      - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
+      - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
+
   ui:
     runs-on: ubuntu-latest
     environment: dev
@@ -42,7 +59,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: dev-ui-${{ github.sha }}
+          IMAGE_TAG: ui-${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
@@ -54,7 +71,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: dev-ui-${{ github.sha }}
+          IMAGE_TAG: ui-${{ github.sha }}
         with:
           command: >-
             helm upgrade --install --wait -n dev ui ./charts/ui
@@ -89,7 +106,7 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: dev-ckan-${{ github.sha }}
+          IMAGE_TAG: ckan-${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
@@ -101,7 +118,7 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: dev-ckan-${{ github.sha }}
+          IMAGE_TAG: ckan-${{ github.sha }}
         with:
           command: >-
             helm upgrade ckan --debug -n dev --repo https://marvell-consulting.github.io/ckan-helm-chart --install --wait ckan -f ./charts/ckan/values.yaml
@@ -120,29 +137,32 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
-  notifyfail:
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    needs:
-      - ui
-      - ckan
-    steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_USERNAME: github-bot
-          SLACK_CHANNEL: developers
-          SLACK_COLOR: danger
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "dev deployment: failed"
-          SLACK_MESSAGE: "UI: ${{needs.ui.result}}\nCKAN: ${{needs.ckan.result}}"
-          MSG_MINIMAL: "true"
-  notifypass:
-    runs-on: ubuntu-latest
+
+  integrationtest:
     if: ${{ success() }}
     needs:
       - ui
       - ckan
+      - deploy-csv-exporter
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ui
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+          cache: 'npm'
+          cache-dependency-path: ui/package-lock.json
+      - run: npm ci
+      - run: npm run test:integration -- --baseUrl https://dev.nhs.marvell-consulting.com
+
+  notifypass:
+    runs-on: ubuntu-latest
+    if: ${{ success() }}
+    needs:
+      - integrationtest
     steps:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
@@ -151,6 +171,6 @@ jobs:
           SLACK_CHANNEL: developers
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "dev deployment: succeeded"
-          SLACK_MESSAGE: ":+1::rocket:"
-          MSG_MINIMAL: "true"
+          SLACK_TITLE: 'dev deployment: succeeded'
+          SLACK_MESSAGE: ':+1::rocket:'
+          MSG_MINIMAL: 'true'
