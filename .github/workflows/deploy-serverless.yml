@@ -31,7 +31,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: pwd
       - run: npm ci
       - run: node ./node_modules/serverless/bin/serverless.js config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
       - run: node ./node_modules/serverless/bin/serverless.js deploy --aws-profile=k8sDev --verbose --debug=*
