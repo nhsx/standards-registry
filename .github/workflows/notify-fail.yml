@@ -9,7 +9,6 @@ on:
       - deploy-dev
       - deploy-test
       - deploy-prod
-      - deploy-serverless
     types:
       - completed
     conclusion:
