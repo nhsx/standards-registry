@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { stringify } from 'qs';
+import { findKey } from 'lodash'
 const CKAN_URL = process.env.CKAN_URL;
 
 const typeMap = {
@@ -28,6 +29,36 @@ export function queriseSelections(selections) {
       delete query[prop];
     }
   }
+  return query;
+}
+
+function getSearchQuery(q) {
+  if (!q) {
+    return undefined;
+  }
+
+  let query = `title:${q}~ OR ${q}`;
+
+  const organisationMappings = {
+    'professional-record-standards-body': [
+      'prsb',
+      'professional record standards body',
+      'professional records standards body'
+    ],
+    'nhs-digital': [
+      'nhs',
+      'nhsd',
+      'nhsx',
+      'nhs digital'
+    ]
+  }
+
+  const org = findKey(organisationMappings, mappings => mappings.includes(q.toLowerCase()));
+
+  if (org) {
+    query = `organization:${org} OR ${query}`
+  }
+
   return query;
 }
 
@@ -80,7 +111,7 @@ export async function list({ page = 1, q, sort, filters }) {
 
   fq = serialise(queriseSelections(filters));
 
-  const query = q && `title:${q}~ OR ${q}`;
+  const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
