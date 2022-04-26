@@ -1,15 +1,8 @@
 name: deploy-serverless
 
 on:
-  workflow_run:
-    branches:
-      - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+  workflow_call:
+    - deploy-dev
 
 jobs:
   deploy-csv-exporter:
