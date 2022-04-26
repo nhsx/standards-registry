@@ -12,6 +12,13 @@ import { useRouter } from 'next/router';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
+function Embolden({ children }) {
+  const { getSelections } = useQueryContext();
+  const { q } = getSelections();
+  const re = new RegExp(`(${q})`, 'ig')
+  return <span dangerouslySetInnerHTML={{ __html: children.replace(re, '<b>$1</b>') }} />
+}
+
 function Model({ model }) {
   const {
     name,
@@ -22,12 +29,13 @@ function Model({ model }) {
     description,
   } = model;
   const target = `/standards/${name}`;
+
   return (
     <>
       <Link href={target}>
-        <a>{title}</a>
+        <a><Embolden>{title}</Embolden></a>
       </Link>
-      <p>{description}</p>
+      <p><Embolden>{description}</Embolden></p>
       <Flex className="nhsuk-body-s">
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Type:{' '}
