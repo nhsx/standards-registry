@@ -12,14 +12,14 @@ export const careSettings = [
   'Urgent and Emergency Care',
 ];
 
-export const topic = [
+export const topics = [
   'Appointment / scheduling',
   'Referrals',
   'Access to Records',
   'Clinical decision support',
   'Continuity of care (ToC)',
   'Demographics',
-  'Key care information ',
+  'Key care information',
   'Prescribing ',
   'Dispensing',
   'Vaccination',
@@ -58,17 +58,18 @@ const headings = [
   'Clinical Decision Support',
   'Continuity of Care (ToC)',
   'Demographics',
-  'Key Care Information ',
+  'Key care information',
   'Prescribing ',
   'Dispensing',
   'Vaccination',
   'Messaging',
-  'Patient Communication',
+  'Patient communication',
   'Reference Data ',
   'Information Governance',
   'Security',
   'Tests and diagnostics ',
 ];
+
 export const sample = {
   headings,
   values: [
@@ -111,7 +112,11 @@ export const sample = {
 const sentenceCase = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-export const prepHeadings = (headings) => headings.map((i) => i.trim());
+export const trimArr = (arr) => arr.map((i) => i.trim());
+
+export const keyIn = (key, arr) =>
+  arr.find((val) => val.trim().toLowerCase() === key.trim().toLowerCase()) ||
+  false;
 
 export const joinTitlesToValues = (colTitles, vals) => {
   return vals
@@ -127,19 +132,19 @@ export const joinTitlesToValues = (colTitles, vals) => {
           field = field.toLowerCase();
         }
 
-        // dumb way of segmenting to business and care setting
-        if (topic.includes(colTitles[index])) {
-          result['topic'] = [colTitles[index]]
+        // dumb way of segmenting to topic and care setting
+        if (keyIn(key, topics)) {
+          result['topic'] = [keyIn(key, topics)]
             .concat(result['topic'])
             .filter((i) => i)
             .sort();
-        } else if (careSettings.includes(colTitles[index])) {
-          result['care_setting'] = [colTitles[index]]
+        } else if (keyIn(key, careSettings)) {
+          result['care_setting'] = [keyIn(key, careSettings)]
             .concat(result['care_setting'])
             .filter((i) => i)
             .sort();
         } else {
-          result[colTitles[index]] = field;
+          result[key] = field;
         }
       }
       return result;

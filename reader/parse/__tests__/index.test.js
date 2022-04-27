@@ -1,33 +1,56 @@
-import { joinTitlesToValues, sample, prepHeadings } from '../index';
+import { joinTitlesToValues, sample, trimArr, topics, keyIn } from '../index';
 
 const { headings, values } = sample;
 
 describe('parse', () => {
-  describe('prepHeadings', () => {
-    test('trims headings', () => {
-      expect(prepHeadings(['trim  ', '  space'])).toEqual(['trim', 'space']);
+  describe('trimArr', () => {
+    test('trims space in arrays', () => {
+      expect(trimArr(['trim  ', '  space'])).toEqual(['trim', 'space']);
     });
   });
 
+  describe('keyIn', () => {
+    test('should match exact', () => {
+      expect(keyIn('Appointment / scheduling', topics)).toEqual(
+        'Appointment / scheduling'
+      );
+    });
+    test('should match insensitive and return predefined heading', () => {
+      expect(keyIn('ConTinUity of CaRe (ToC)', topics)).toEqual(
+        'Continuity of care (ToC)'
+      );
+    });
+
+    test('should trim key and then match', () => {
+      expect(keyIn(' ConTinUity of CaRe (ToC)   ', topics)).toEqual(
+        'Continuity of care (ToC)'
+      );
+    });
+
+    test('not match poor result', () => {
+      expect(keyIn('Copostability of CaRe (ToC)', topics)).toEqual(false);
+    });
+  });
   describe('joinTitlesToValues', () => {
-    const result = joinTitlesToValues(prepHeadings(headings), values);
-    test('sets business use and care setting', () => {
-      expect(result.business_use).toEqual([
-        'Patient Communication',
-        'Key Care Information',
+    const result = joinTitlesToValues(trimArr(headings), trimArr(values));
+    test('sets topic and care setting', () => {
+      console.log('top', result.topic);
+      expect(result.topic).toEqual([
         'Demographics',
+        'Key care information',
+        'Patient communication',
         'Referrals',
       ]);
       expect(result.care_setting).toEqual([
-        'Urgent And Emergency Care',
-        'Social care',
-        'GP / Primary Care',
-        'Pharmacy',
-        'Mental Health',
-        'Maternity',
-        'Hospital',
-        'Dentistry',
         'Community health',
+        'Dentistry',
+        'GP / Primary care',
+        'Hospital',
+        'Maternity',
+        'Mental health',
+        'Pharmacy',
+        'Social care',
+        'Urgent and Emergency Care',
       ]);
     });
     test('sets status field to lowercase', () => {
