@@ -2,8 +2,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { google } from 'googleapis';
 import { writeFile } from 'fs/promises';
-import { parseSheet } from './parse/read.js';
-import { writeToCKAN } from './write.js';
+import { parseSheet } from './lib/parse/read.js';
+import { writeToCKAN } from './lib/write.js';
 
 // If modifying these scopes, delete token.json.
 const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
