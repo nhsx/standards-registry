@@ -28,6 +28,7 @@ const report = {
   successes: 0,
   failures: 0,
 };
+
 const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const writeToCKAN = async ({
