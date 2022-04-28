@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'fs/promises';
 import { createWriteStream } from 'fs';
+import { mergeRecord } from './merge-record';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 import slugify from 'slugify';
@@ -75,6 +76,10 @@ export const writeToCKAN = async ({
         ? `/package_update?id=${name}`
         : '/package_create';
       const action = check.success ? 'Update' : 'Create';
+      if (check.success) {
+        const { result: ckanResult } = check;
+        params = { ...params, ckanResult };
+      }
 
       console.log(` * About to ${action} ${ckanUrl}${endpoint}`);
       const write = await fetch(`${ckanUrl}${endpoint}`, {
