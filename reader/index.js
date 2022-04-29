@@ -43,7 +43,6 @@ Found: ${values.length} entries in ${res.data.majorDimension} across range ${res
   console.log('sending ', parsedFileLocation);
   await writeToCKAN({
     fileLocation: `./${parsedFileLocation}`,
-    dryRun: true,
   });
 } catch (err) {
   console.error(err);

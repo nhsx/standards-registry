@@ -126,7 +126,7 @@ export const writeToCKAN = async ({
 
   const sheet = await readSheet(fileLocation);
 
-  for (const record of [sheet[2]]) {
+  for (const record of sheet) {
     await writeRecord({ record, headers, ckanUrl, dryRun });
   }
   logStream.write(`
