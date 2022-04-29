@@ -42,6 +42,12 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
   };
   let recordToWrite = params;
 
+  if (dryRun) {
+    console.log('DRY RUN:');
+    console.log('DRY RUN: RECORD ENTRY', record);
+    return;
+  }
+
   try {
     const lookup =
       `${ckanUrl}/package_show?` +
@@ -65,16 +71,8 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
     const action = check.success ? 'Patch' : 'Create';
 
     console.log(` * About to ${action} ${ckanUrl}${endpoint}`);
+    console.log(' * Writing record', recordToWrite);
 
-    // if (dryRun) {
-    //   console.log('dry run headers', headers);
-    //   console.log('dry run check result', check);
-    //   console.log('dry run params to post', endpoint, recordToWrite);
-    // }
-
-    // if (!dryRun) {
-    console.log(` * Writing to ${ckanUrl}${endpoint}`);
-    console.log(recordToWrite);
     const write = await fetch(`${ckanUrl}${endpoint}`, {
       method: 'POST',
       body: JSON.stringify(recordToWrite),
@@ -83,15 +81,6 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
 
     const writeData = await write.json();
     const { success } = writeData;
-    // }
-
-    // if (dryRun) {
-    //   console.log('dry!');
-    //   console.log('checked record', check);
-    //   console.log('merged record', recordToWrite);
-    //   console.log('written record', writeData);
-    //   throw 'schtop';
-    // }
 
     const statusStr = success ? 'successful' : 'unsuccessful';
     const message = ` * ${action} for "${title}" ${statusStr}\n`;
