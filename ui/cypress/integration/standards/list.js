@@ -26,7 +26,8 @@ describe('Standards Listing Index', () => {
 
       cy.contains('Search').click();
 
-      cy.get('#browse-results li').should('have.length', 1)
+      cy.get('#browse-results li').should('have.length', 1);
+      cy.contains('#browse-results li', 'Allergy').click();
     });
 
     describe('Organisation mapping', () => {
@@ -36,7 +37,7 @@ describe('Standards Listing Index', () => {
 
         cy.contains('Search').click();
 
-        cy.get('#browse-results li').should('have.length', 6)
+        cy.get('#browse-results li').not('have.length', 0)
       });
 
       it('Displays org matches first', () => {
@@ -56,8 +57,7 @@ describe('Standards Listing Index', () => {
         cy.go('back')
         cy.get('#browse-results li a').eq(2).click()
 
-        // TODO: this shows NHS Digital in error
-        cy.contains('td', 'NHS Digital')
+        cy.contains('td', 'Professional Record Standards Body')
       });
 
       it('Matches various variations of prsb', () => {

@@ -156,7 +156,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ui/package-lock.json
       - run: npm ci
-      - run: npm run test:integration -- --baseUrl https://dev.nhs.marvell-consulting.com
+      - run: CYPRESS_baseUrl=https://dev.nhs.marvell-consulting.com npm run test:integration
 
   notifypass:
     runs-on: ubuntu-latest
