@@ -8,6 +8,7 @@
 # testing
 /coverage
 /cypress/videos
+/cypress/plugins/index.js
 
 # next.js
 /.next/
