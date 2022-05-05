@@ -111,7 +111,7 @@ jobs:
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --max-concurrent-uploads=1
       - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
