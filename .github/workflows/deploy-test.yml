@@ -129,6 +129,6 @@ jobs:
           SLACK_CHANNEL: developers
           SLACK_COLOR: good
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: "test deployment: succeeded"
-          SLACK_MESSAGE: ":+1::rocket:"
-          MSG_MINIMAL: "true"
+          SLACK_TITLE: 'test deployment: succeeded'
+          SLACK_MESSAGE: ':+1::rocket:'
+          MSG_MINIMAL: 'true'
