@@ -5,7 +5,7 @@ const ObjectsToCsv = require('objects-to-csv');
 
 const urls = {
   dev: 'https://manage.dev.standards.nhs.uk/api/action',
-  test: 'https://manage.test.nhs.marvell-consulting.com/api/action',
+  test: 'https://manage.test.standards.nhs.uk/api/action',
   prod: 'https://manage.nhs.marvell-consulting.com/api/action',
 };
 
