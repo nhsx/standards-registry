@@ -8,6 +8,7 @@ import {
   Filters,
   Dataset,
   Snippet,
+  FeedbackFooter,
 } from '../components';
 import { getPageProps } from '../helpers/getPageProps';
 
@@ -45,6 +46,7 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
           <Dataset data={data} searchTerm={searchTerm} includeType={true} />
         </Col>
       </Row>
+      <FeedbackFooter />
     </Page>
   );
 }
