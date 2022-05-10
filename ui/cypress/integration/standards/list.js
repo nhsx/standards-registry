@@ -60,16 +60,16 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of prsb', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('professional record standards body');
+        cy.get('input[name="q"]').type('professional record standards body', { force: true });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'Professional Record Standards Body');
+        cy.contains('td', 'Professional Record Standards Body', { force: true });
 
         cy.go('back');
 
-        cy.get('input[name="q"]').type('professional records standards body');
+        cy.get('input[name="q"]').type('professional records standards body', { force: true });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
@@ -79,7 +79,7 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of nhs', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('nhsd');
+        cy.get('input[name="q"]').type('nhsd', { force: true });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
@@ -88,7 +88,7 @@ describe('Standards Listing Index', () => {
 
         cy.go('back');
 
-        cy.get('input[name="q"]').type('nhsx');
+        cy.get('input[name="q"]').type('nhsx', { force: true });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
@@ -97,7 +97,7 @@ describe('Standards Listing Index', () => {
 
         cy.go('back');
 
-        cy.get('input[name="q"]').type('nhs digital');
+        cy.get('input[name="q"]').type('nhs digital', { force: true });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
