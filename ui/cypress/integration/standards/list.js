@@ -56,11 +56,6 @@ describe('Standards Listing Index', () => {
         cy.get('#browse-results li a').eq(1).click();
 
         cy.contains('td', 'Professional Record Standards Body');
-
-        cy.go('back');
-        cy.get('#browse-results li a').eq(2).click();
-
-        cy.contains('td', 'Professional Record Standards Body');
       });
 
       it('Matches various variations of prsb', () => {
