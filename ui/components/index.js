@@ -8,6 +8,7 @@ export { default as Expander } from './Expander';
 export { default as Feedback } from './Feedback';
 export { default as Flex } from './Flex';
 export { default as Filters } from './Filters';
+export * from './FilterSummary'
 export { default as Hero } from './Hero';
 export { default as Link } from './Link';
 export { default as Model } from './Model';
@@ -21,6 +22,7 @@ export { default as PhaseBanner } from './PhaseBanner';
 export { default as Reading } from './Reading';
 export { default as Snippet } from './Snippet';
 export { default as Search } from './Search';
+export * from './Select';
 export { default as Tag } from './Tag';
 export { default as Layout } from './Layout';
 export { default as ReviewDates } from './ReviewDates';

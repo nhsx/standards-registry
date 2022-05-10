@@ -24,7 +24,7 @@ export function queriseSelections(selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
-      query[prop] = `(*${selectionsRef[prop].join('* OR *')}*)`;
+      query[prop] = `(*${selectionsRef[prop].join('* AND *')}*)`;
     } else {
       delete query[prop];
     }
@@ -37,7 +37,7 @@ function getSearchQuery(q) {
     return undefined;
   }
 
-  let query = `title:${q}~ OR ${q}`;
+  let query = `(title:${q}~ OR ${q})`;
 
   const organisationMappings = {
     'professional-record-standards-body': [
@@ -53,7 +53,7 @@ function getSearchQuery(q) {
   );
 
   if (org) {
-    query = `organization:${org} OR ${query}`;
+    query = `(organization:${org} OR ${query})`;
   }
 
   return query;
@@ -70,7 +70,7 @@ export function serialise(obj = {}) {
       acc.push(key + ':' + obj[key]);
       return acc;
     }, [])
-    .join(' OR ');
+    .join(' AND ');
   return `(${str})`;
 }
 

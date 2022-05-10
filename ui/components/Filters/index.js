@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
-import { CheckboxGroup, OptionSelect, Expander } from '../';
+import omit from 'lodash/omit';
+import pickBy from 'lodash/pickBy';
+import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
 
@@ -10,22 +12,53 @@ function Filter({
   onChange,
   field_name: fieldName,
   open,
-  onToggle
+  onToggle,
+  andFilter,
+  numActive = 0
 }) {
+  const { query, updateQuery } = useQueryContext();
+  const filters = omit(query, 'q', 'page', 'sort');
   const toggle = e => {
     e.preventDefault();
     onToggle(fieldName, e.target.open);
   };
+  const summary = (
+    <p className={styles.filterHeader}>
+      {label}>
+      {
+        !andFilter && <span>{numActive} selected</span>
+      }
+    </p>
+  )
+
+  function onSelectChange(val) {
+    updateQuery({ ...query, [fieldName]: val || [] })
+  }
+
   return (
-    <Expander summary={label} className="nhsuk-filter" open={open} onToggle={toggle}>
-      <OptionSelect>
-        <CheckboxGroup
-          onChange={onChange}
-          options={choices}
-          parent={fieldName}
-          small
-        />
-      </OptionSelect>
+    <Expander summary={summary} className="nhsuk-filter" open={open} onToggle={toggle}>
+      {
+        andFilter
+          ? (
+            <Select
+              options={choices}
+              onChange={onSelectChange}
+              showAll={true}
+              value={query[fieldName] || ''}
+            />
+          )
+          : (
+            <OptionSelect>
+              <CheckboxGroup
+                onChange={onChange}
+                options={choices}
+                parent={fieldName}
+                small
+              />
+            </OptionSelect>
+          )
+      }
+
     </Expander>
   );
 }
@@ -115,6 +148,8 @@ export default function Filters({ schema }) {
     setOpenItems([...open]);
   };
 
+  const activeFilters = omit(selections, 'q', 'page', 'sort')
+
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
@@ -124,9 +159,23 @@ export default function Filters({ schema }) {
         }
       </p>
       <div className="nhsuk-expander-group">
-        {filters.map((filter, index) => (
-          <Filter key={index} {...filter} open={openItems.includes(filter.field_name)} onChange={setItem} onToggle={toggle} />
-        ))}
+        {filters.map((filter, index) => {
+          let fieldFilters = activeFilters[filter.field_name] || [];
+          if (!Array.isArray(fieldFilters)) {
+            fieldFilters = [fieldFilters]
+          }
+          const numActive = fieldFilters.length
+          return <Filter
+            key={index}
+            {...filter}
+            open={openItems.includes(filter.field_name)}
+            onChange={setItem}
+            onToggle={toggle}
+            numActive={numActive}
+            // TODO: this should be configured in schema
+            andFilter={filter.field_name === 'standard_category'}
+          />
+        })}
       </div>
     </div>
   );

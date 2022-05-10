@@ -9,6 +9,7 @@ import {
   Filters,
   Dataset,
   FeedbackFooter,
+  FilterSummary,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
 
@@ -37,7 +38,7 @@ export default function Standards({ data, schemaData }) {
           <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} pagination={true} />
+          <Dataset data={data} pagination={true} schema={schemaData} />
         </Col>
       </Row>
       <FeedbackFooter />

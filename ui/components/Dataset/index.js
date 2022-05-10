@@ -1,11 +1,13 @@
 import Link from 'next/link';
-import { Snippet, Tag, Flex, Pagination } from '../';
+import { useState, useEffect } from 'react'
+import { Snippet, Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import classnames from 'classnames';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
+import axios from 'axios';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
@@ -48,10 +50,10 @@ function Model({ model }) {
 function SortMenu({ searchTerm }) {
   const { getSelections, updateQuery } = useQueryContext();
 
-  const sort = (event) => {
+  const sort = (value) => {
     const selections = getSelections();
-    selections.sort = event.target.value;
-    updateQuery(selections, { replace: true });
+    selections.sort = value;
+    updateQuery(selections);
   };
 
   const options = [
@@ -79,26 +81,13 @@ function SortMenu({ searchTerm }) {
 
   const { sort: value } = getSelections();
 
-  return (
-    <div className="nhsuk-form-group">
-      <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor="sort">
-        Sort by
-      </label>
-      <select
-        className="nhsuk-select nhsuk-u-font-size-16"
-        name="sort"
-        id="sort"
-        onChange={sort}
-        value={value}
-      >
-        {options.filter(Boolean).map((option) => (
-          <option value={option.value} key={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
+  return <Select
+    label="Sort by"
+    options={options}
+    value={value}
+    onChange={sort}
+    name="sort"
+  />
 }
 
 const CheckBox = () => {
@@ -161,10 +150,42 @@ const ResultSummary = ({ count, searchTerm, filtersSelected }) => (
   </h3>
 );
 
-export default function Dataset({ data = {}, searchTerm, includeType }) {
-  const { getSelections } = useQueryContext();
+export default function Dataset({ data: initialData = {}, includeType, schema }) {
+  const { getSelections, query } = useQueryContext();
+  const searchTerm = query.q;
+  const [data, setData] = useState(initialData)
+  const [loading, setLoading] = useState(false);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
+
+  async function getData() {
+    const DEFAULT_SORT = {
+      score: 'desc',
+      metadata_modified: 'desc',
+    };
+
+    const { q, page, sort = DEFAULT_SORT, ...filters } = query;
+    const params = {
+      q,
+      page,
+      sort,
+      filters
+    }
+
+    try {
+      setLoading(true)
+      const res = await axios.post('/api/refresh-list', params);
+      setData(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [query])
 
   return (
     <>
@@ -177,6 +198,7 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
       ) : (
         <NoResultsSummary searchTerm={searchTerm} />
       )}
+      <FilterSummary schema={schema} />
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
           <SortMenu searchTerm={searchTerm} />
