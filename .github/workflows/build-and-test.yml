@@ -35,7 +35,7 @@ jobs:
           - 16.x
     env:
       PORT: 3000
-      CKAN_URL: https://manage.test.nhs.marvell-consulting.com/api/3/action
+      CKAN_URL: https://manage.dev.standards.nhs.uk/api/action
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
