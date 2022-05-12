@@ -109,7 +109,6 @@ jobs:
           IMAGE_TAG: ckan-${{ github.sha }}
         run: |
           # Build a docker container and push it to ECR
-          dockerd --max-concurrent-uploads=1
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
@@ -157,7 +156,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ui/package-lock.json
       - run: npm ci
-      - run: BASE_URL=https://dev.nhs.marvell-consulting.com npm run test:integration
+      - run: BASE_URL=https://dev.standards.nhs.uk npm run test:integration
 
   notifypass:
     runs-on: ubuntu-latest

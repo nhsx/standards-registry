@@ -7,7 +7,7 @@ RUN apk upgrade --no-cache
 COPY package.json /app/package.json
 COPY package-lock.json /app/package-lock.json
 
-RUN npm ci --production --no-optional --ignore-scripts
+RUN npm ci --production --include-optional --ignore-scripts
 
 COPY . /app
 

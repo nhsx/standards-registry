@@ -4,13 +4,13 @@ const getAllDataSets = require('./get');
 const ObjectsToCsv = require('objects-to-csv');
 
 const urls = {
-  dev: 'https://manage.dev.nhs.marvell-consulting.com/api/action',
-  test: 'https://manage.test.nhs.marvell-consulting.com/api/action',
+  dev: 'https://manage.dev.standards.nhs.uk/api/action',
+  test: 'https://manage.test.standards.nhs.uk/api/action',
   prod: 'https://manage.nhs.marvell-consulting.com/api/action',
 };
 
 // * choose which env to download from, dev, test, prod
-const urlMap = (env) => env.includes('http') ? env : urls[env] || urls['dev'];
+const urlMap = (env) => (env.includes('http') ? env : urls[env] || urls['dev']);
 
 module.exports.datasets = async (event, context) => {
   const help = [];

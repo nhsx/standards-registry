@@ -112,24 +112,52 @@ export const sample = {
 const sentenceCase = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
+const findKey = (obj, fn) =>
+  Object.keys(obj).find((key) => fn(obj[key], key, obj));
+
+// Cf. https://manage.test.nhs.marvell-consulting.com/api/3/action/organization_list
+const organisationMappings = {
+  'professional-record-standards-body': [
+    'prsb',
+    'professional record standards body',
+    'professional records standards body',
+  ],
+  'nhs-digital': ['nhs', 'nhsd', 'nhsx', 'nhs digital'],
+};
+export const mapOwnerOrg = (key) =>
+  findKey(organisationMappings, (mappings) =>
+    mappings.includes(key.toLowerCase())
+  ) || 'nhs-digital';
+
 export const trimArr = (arr) => arr.map((i) => i.trim());
 
-export const keyIn = (key, arr) =>
-  arr.find((val) => val.trim().toLowerCase() === key.trim().toLowerCase()) ||
-  false;
+export const keyIn = (key, arr) => {
+  const ret = arr.find(
+    (val) => val.trim().toLowerCase() === key.trim().toLowerCase()
+  );
+  if (ret) {
+    // Avoid occasionally invalid entries like "Topic " or " Prescribing"
+    return ret.trim();
+  }
+  return false;
+};
 
 export const joinTitlesToValues = (colTitles, vals) => {
   return vals
     .map((v) => (v.toLowerCase() === 'x' ? true : v))
     .reduce((result, field, index) => {
       const key = colTitles[index];
-      if (!!field) {
+      if (field) {
         if (key === 'standard_category') {
           field = sentenceCase(field.replace('&', 'and'));
         }
 
         if (key === 'status') {
           field = field.toLowerCase();
+        }
+
+        if (key === 'owner_org') {
+          field = mapOwnerOrg(field);
         }
 
         // dumb way of segmenting to topic and care setting
