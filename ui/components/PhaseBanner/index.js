@@ -29,7 +29,8 @@ export default function PhaseBanner({ homepage }) {
               className={classnames('nhsuk-phase-banner', styles.bannerLink, {
                 [styles.homepage]: homepage,
               })}
-              href="mailto:standards.directory@nhsx.nhs.uk"
+              href="https://forms.gle/CKKi5nFzUjuxHB9N6"
+              newWindow={true}
               text="feedback"
             />{' '}
             will help us to improve it.

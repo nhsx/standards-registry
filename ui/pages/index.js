@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import { Hero, Layout, Snippet, Search, Link } from '../components';
+import { Hero, Layout, Snippet, Search, Link, FeedbackFooter } from '../components';
 import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
 import React from 'react';
@@ -181,6 +181,7 @@ export default function Home() {
           linkText="View the community resources"
         />
       </div>
+      <FeedbackFooter />
     </>
   );
 }
