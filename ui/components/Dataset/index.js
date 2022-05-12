@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { Snippet, Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
@@ -81,13 +81,15 @@ function SortMenu({ searchTerm }) {
 
   const { sort: value } = getSelections();
 
-  return <Select
-    label="Sort by"
-    options={options}
-    value={value}
-    onChange={sort}
-    name="sort"
-  />
+  return (
+    <Select
+      label="Sort by"
+      options={options}
+      value={value}
+      onChange={sort}
+      name="sort"
+    />
+  );
 }
 
 const CheckBox = () => {
@@ -150,10 +152,14 @@ const ResultSummary = ({ count, searchTerm, filtersSelected }) => (
   </h3>
 );
 
-export default function Dataset({ data: initialData = {}, includeType, schema }) {
+export default function Dataset({
+  data: initialData = {},
+  includeType,
+  schema,
+}) {
   const { getSelections, query } = useQueryContext();
   const searchTerm = query.q;
-  const [data, setData] = useState(initialData)
+  const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
@@ -169,11 +175,11 @@ export default function Dataset({ data: initialData = {}, includeType, schema })
       q,
       page,
       sort,
-      filters
-    }
+      filters,
+    };
 
     try {
-      setLoading(true)
+      setLoading(true);
       const res = await axios.post('/api/refresh-list', params);
       setData(res.data);
     } catch (err) {
@@ -185,19 +191,16 @@ export default function Dataset({ data: initialData = {}, includeType, schema })
 
   useEffect(() => {
     getData();
-  }, [query])
+  }, [query]);
 
   return (
     <>
-      {count > 0 ? (
-        <ResultSummary
-          filtersSelected={filtersSelected}
-          count={count}
-          searchTerm={searchTerm}
-        />
-      ) : (
-        <NoResultsSummary searchTerm={searchTerm} />
-      )}
+      <ResultSummary
+        filtersSelected={filtersSelected}
+        count={count}
+        searchTerm={searchTerm}
+      />
+
       <FilterSummary schema={schema} />
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
@@ -207,13 +210,17 @@ export default function Dataset({ data: initialData = {}, includeType, schema })
           <CheckBox />
         </div>
       </div>
-      <ul className={styles.list} id="browse-results">
-        {results.map((model) => (
-          <li key={model.id} className={styles.listItem}>
-            <Model model={model} includeType={includeType} />
-          </li>
-        ))}
-      </ul>
+      {count > 0 ? (
+        <ul className={styles.list} id="browse-results">
+          {results.map((model) => (
+            <li key={model.id} className={styles.listItem}>
+              <Model model={model} includeType={includeType} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <NoResultsSummary searchTerm={searchTerm} />
+      )}
       <Pagination count={count} />
     </>
   );

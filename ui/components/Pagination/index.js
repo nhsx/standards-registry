@@ -1,14 +1,10 @@
-import { parse } from 'url';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Snippet } from '../';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 
 export default function Pagination({ limit = 10, count }) {
   const { query, updateQuery } = useQueryContext();
-  const router = useRouter();
   const page = parseInt(query.page, 10) || 1;
 
   const totalPages = Math.ceil(count / limit);
@@ -24,8 +20,8 @@ export default function Pagination({ limit = 10, count }) {
   function goto(newPage) {
     updateQuery({
       ...query,
-      page: newPage
-    })
+      page: newPage,
+    });
   }
 
   return (

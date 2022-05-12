@@ -9,7 +9,6 @@ import {
   Filters,
   Dataset,
   FeedbackFooter,
-  FilterSummary,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
 

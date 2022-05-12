@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
 import omit from 'lodash/omit';
-import pickBy from 'lodash/pickBy';
 import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
@@ -14,51 +13,49 @@ function Filter({
   open,
   onToggle,
   andFilter,
-  numActive = 0
+  numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
-  const filters = omit(query, 'q', 'page', 'sort');
-  const toggle = e => {
+  const toggle = (e) => {
     e.preventDefault();
     onToggle(fieldName, e.target.open);
   };
   const summary = (
     <p className={styles.filterHeader}>
-      {label}>
-      {
-        !andFilter && <span>{numActive} selected</span>
-      }
+      {label}
+
+      {!andFilter && <span>{numActive} selected</span>}
     </p>
-  )
+  );
 
   function onSelectChange(val) {
-    updateQuery({ ...query, [fieldName]: val || [] })
+    updateQuery({ ...query, [fieldName]: val || [] });
   }
 
   return (
-    <Expander summary={summary} className="nhsuk-filter" open={open} onToggle={toggle}>
-      {
-        andFilter
-          ? (
-            <Select
-              options={choices}
-              onChange={onSelectChange}
-              showAll={true}
-              value={query[fieldName] || ''}
-            />
-          )
-          : (
-            <OptionSelect>
-              <CheckboxGroup
-                onChange={onChange}
-                options={choices}
-                parent={fieldName}
-                small
-              />
-            </OptionSelect>
-          )
-      }
-
+    <Expander
+      summary={summary}
+      className="nhsuk-filter"
+      open={open}
+      onToggle={toggle}
+    >
+      {andFilter ? (
+        <Select
+          options={choices}
+          onChange={onSelectChange}
+          showAll={true}
+          value={query[fieldName] || ''}
+        />
+      ) : (
+        <OptionSelect>
+          <CheckboxGroup
+            onChange={onChange}
+            options={choices}
+            parent={fieldName}
+            small
+          />
+        </OptionSelect>
+      )}
     </Expander>
   );
 }
@@ -69,13 +66,9 @@ const pick = (names, fields) =>
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
-  const [ openItems, setOpenItems ] = useState([]);
+  const [openItems, setOpenItems] = useState([]);
   const selections = getSelections();
-  const categories = [
-    'care_setting',
-    'topic',
-    'standard_category'
-  ];
+  const categories = ['care_setting', 'topic', 'standard_category'];
   const filters = pick(categories, fields);
   const allOpen = openItems.length === filters.length;
 
@@ -132,15 +125,15 @@ export default function Filters({ schema }) {
   };
   useEffect(setSelections, [selections]);
 
-  const openAll = event => {
+  const openAll = (event) => {
     event.preventDefault();
-    setOpenItems(filters.map(f => f.field_name));
+    setOpenItems(filters.map((f) => f.field_name));
   };
 
-  const closeAll = event => {
+  const closeAll = (event) => {
     event.preventDefault();
     setOpenItems([]);
-  }
+  };
 
   const toggle = (name, isOpen) => {
     const open = new Set(openItems);
