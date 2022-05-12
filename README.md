@@ -6,10 +6,6 @@
 
 Node.js webserver for the UI client.
 
-### CKAN
-
-TBC.
-
 ## Running a local UI instance
 
 ### Prerequisites
