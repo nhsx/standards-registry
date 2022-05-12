@@ -32,7 +32,7 @@ export default function SearchResults({ data, schemaData }) {
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-three-quarters">
           <Search
-            labelText="Find a standard"
+            labelText="Search"
             placeholder="For example, FHIR, allergies, GP"
             location="browse"
           />

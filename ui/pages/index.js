@@ -7,9 +7,9 @@ import React from 'react';
 const content = {
   title: 'Home - Standards Directory',
   header:
-    'Find standards for data and interoperability in health and social care',
+    'Find standards for data and interoperability in health and adult social care',
   intro:
-    'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.',
+    'Use this directory to find nationally recognised standards for use in technology in England.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -209,11 +209,6 @@ export function HomepageHero({ recent }) {
                 </li>
               ))}
             </ul>
-            <p>
-              <Link href="/standards" className="nhsuk-u-font-size-16">
-                Browse the latest standards
-              </Link>
-            </p>
           </div>
         </div>
       </div>
