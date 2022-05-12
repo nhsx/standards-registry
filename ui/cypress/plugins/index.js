@@ -22,4 +22,4 @@ module.exports = (on, config) => {
   config.baseUrl = process.env.BASE_URL || config.baseUrl;
 
   return config;
-}
+};

@@ -27,7 +27,7 @@ export { default as ReviewDates } from './ReviewDates';
 export { default as MarkdownBlock } from './MarkdownBlock';
 export { MarkdownRender } from './MarkdownBlock';
 export { TableOfContents } from './TableOfContents';
-export { default as FeedbackFooter } from './FeedbackFooter';
+export * from './FeedbackFooter';
 
 export { Table, Thead, Tbody, Tr, Th, Td } from './Table';
 export { Row, Col } from './Grid';
