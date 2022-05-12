@@ -66,11 +66,11 @@ const pick = (names, fields) =>
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
-  const [openItems, setOpenItems] = useState([]);
+  const [openFilters, setOpenFilters] = useState([]);
   const selections = getSelections();
   const categories = ['care_setting', 'topic', 'standard_category'];
   const filters = pick(categories, fields);
-  const allOpen = openItems.length === filters.length;
+  const allOpen = openFilters.length === filters.length;
 
   const addFilter = (filter) => {
     const selections = getSelections();
@@ -108,7 +108,7 @@ export default function Filters({ schema }) {
   };
 
   const setSelections = () => {
-    const open = new Set(openItems);
+    const open = new Set(openFilters);
     for (const filter of filters) {
       const key = filter.field_name;
       const list = selections[key];
@@ -121,53 +121,61 @@ export default function Filters({ schema }) {
         return choice;
       });
     }
-    setOpenItems([...open]);
+    setOpenFilters([...open]);
   };
   useEffect(setSelections, [selections]);
 
   const openAll = (event) => {
     event.preventDefault();
-    setOpenItems(filters.map((f) => f.field_name));
+    setOpenFilters(filters.map((f) => f.field_name));
   };
 
   const closeAll = (event) => {
     event.preventDefault();
-    setOpenItems([]);
+    setOpenFilters([]);
   };
 
   const toggle = (name, isOpen) => {
-    const open = new Set(openItems);
+    const open = new Set(openFilters);
     isOpen ? open.add(name) : open.delete(name);
-    setOpenItems([...open]);
+    setOpenFilters([...open]);
   };
 
-  const activeFilters = omit(selections, 'q', 'page', 'sort')
+  const activeFilters = omit(selections, 'q', 'page', 'sort');
 
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <p className={styles.toggleAll}>
-        {
-          allOpen ? <a href="#" onClick={closeAll}>Close all</a> : <a href="#" onClick={openAll}>Open all</a>
-        }
+        {allOpen ? (
+          <a href="" onClick={closeAll}>
+            Close all
+          </a>
+        ) : (
+          <a href="" onClick={openAll}>
+            Open all
+          </a>
+        )}
       </p>
       <div className="nhsuk-expander-group">
         {filters.map((filter, index) => {
           let fieldFilters = activeFilters[filter.field_name] || [];
           if (!Array.isArray(fieldFilters)) {
-            fieldFilters = [fieldFilters]
+            fieldFilters = [fieldFilters];
           }
-          const numActive = fieldFilters.length
-          return <Filter
-            key={index}
-            {...filter}
-            open={openItems.includes(filter.field_name)}
-            onChange={setItem}
-            onToggle={toggle}
-            numActive={numActive}
-            // TODO: this should be configured in schema
-            andFilter={filter.field_name === 'standard_category'}
-          />
+          const numActive = fieldFilters.length;
+          return (
+            <Filter
+              key={index}
+              {...filter}
+              open={openFilters.includes(filter.field_name)}
+              onChange={setItem}
+              onToggle={toggle}
+              numActive={numActive}
+              // TODO: this should be configured in schema
+              andFilter={filter.field_name === 'standard_category'}
+            />
+          );
         })}
       </div>
     </div>
