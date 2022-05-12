@@ -16,7 +16,6 @@ describe('Standards Listing Index', () => {
       cy.get('input[name="q"]').type('allergies');
 
       cy.contains('Search').click();
-
       cy.get('#browse-results li').should('have.length', 1);
     });
 
@@ -25,6 +24,10 @@ describe('Standards Listing Index', () => {
       cy.get('input[name="q"]').type('alergy');
 
       cy.contains('Search').click();
+
+      cy.get('#resultSummary')
+        .invoke('attr', 'data-loading')
+        .should('eq', 'false');
 
       cy.get('#browse-results li').should('have.length', 1);
       cy.contains('#browse-results li', 'Allergy').click();
@@ -45,9 +48,17 @@ describe('Standards Listing Index', () => {
 
       it('Displays org matches first', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('prsb');
-
+        cy.get('input[name="q"]').type('prsb', {
+          force: true,
+        });
         cy.contains('Search').click();
+
+        cy.get('#resultSummary')
+          .invoke('attr', 'data-loading')
+          .should('eq', 'false');
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(200);
+
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'Professional Record Standards Body');
@@ -60,16 +71,26 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of prsb', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('professional record standards body', { force: true });
+        cy.get('input[name="q"]').type('professional record standards body', {
+          force: true,
+        });
 
         cy.contains('Search').click();
+
+        cy.get('#resultSummary')
+          .invoke('attr', 'data-loading')
+          .should('eq', 'false');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'Professional Record Standards Body', { force: true });
+        cy.contains('td', 'Professional Record Standards Body', {
+          force: true,
+        });
 
         cy.go('back');
 
-        cy.get('input[name="q"]').type('professional records standards body', { force: true });
+        cy.get('input[name="q"]').type('professional records standards body', {
+          force: true,
+        });
 
         cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();

@@ -1,0 +1,3 @@
+videos/**/*.mp4
+screenshots/**/
+!.gitignore

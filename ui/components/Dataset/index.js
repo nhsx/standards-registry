@@ -140,7 +140,7 @@ const NoResultsSummary = ({ searchTerm }) => (
 );
 
 const ResultSummary = ({ count, searchTerm, filtersSelected, loading }) => (
-  <h3>
+  <h3 id="resultSummary" data-loading={loading}>
     {(loading && 'Searching for results') || (
       <Snippet
         num={count}

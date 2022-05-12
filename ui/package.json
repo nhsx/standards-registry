@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test:integration": "cypress run",
     "cypress:open": "cypress open",
-    "test": "npm run lint && npm run test:integration"
+    "test": "npm run lint"
   },
   "dependencies": {
     "axios": "^0.27.2",
