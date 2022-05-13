@@ -48,9 +48,7 @@ describe('Standards Listing Index', () => {
 
       it('Displays org matches first', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('prsb', {
-          force: true,
-        });
+        cy.get('input[name="q"]').type('prsb');
         cy.contains('Search').click();
 
         cy.get('#resultSummary')
