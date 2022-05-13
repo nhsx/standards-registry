@@ -55,9 +55,9 @@ describe('Standards Listing Index', () => {
           .invoke('attr', 'data-loading')
           .should('eq', 'false');
         // eslint-disable-next-line cypress/no-unnecessary-waiting
-        cy.wait(500); // TODO: why is this necessary?
+        cy.wait(500);
 
-        cy.get('#browse-results li a').eq(0).click();
+        cy.get('#browse-results li a').eq(0).click({ force: true });
 
         cy.contains('td', 'Professional Record Standards Body');
 
