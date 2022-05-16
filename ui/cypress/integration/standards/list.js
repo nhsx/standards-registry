@@ -104,7 +104,7 @@ describe('Standards Listing Index', () => {
         cy.get('#resultSummary')
           .invoke('attr', 'data-loading')
           .should('eq', 'false');
-        cy.get('#browse-results li a').eq(0).click();
+        cy.get('#browse-results li a').eq(0).click({ force: true });
 
         cy.contains('td', 'NHS Digital');
 
