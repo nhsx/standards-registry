@@ -83,7 +83,7 @@ export default function Home({ children, ...props }) {
 
       <Breadcrumbs
         labels={{
-          standards: 'Browse directory',
+          standards: 'Published standards',
           content: 'Browse content standards',
           technical: 'Browse technical standards',
           services: 'Browse services',
