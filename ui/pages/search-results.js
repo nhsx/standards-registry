@@ -16,7 +16,7 @@ const content = {
   title: 'Search results',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
-    all: 'Showing all {{num}} result{{#plural}}s{{/plural}}',
+    all: '{{num}} result{{#plural}}s{{/plural}}',
   },
 };
 

@@ -16,7 +16,7 @@ export default function Navigation() {
       url: '/what-information-standards-are'
     },
     {
-      label: 'Community',
+      label: 'Community and links',
       url: '/community'
     }
   ]

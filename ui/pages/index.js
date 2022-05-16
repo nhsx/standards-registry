@@ -161,20 +161,20 @@ export default function Home() {
 
       <div className="nhsuk-grid-row">
         <SoloSection
-          heading="Upcoming standards"
+          heading="Future standards"
           description="Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies."
           link="/roadmap"
           linkText="Search the roadmap"
         />
         <SoloSection
-          heading="Guidance"
+          heading="About interoperability"
           description="Find out what information standards are and what interoperability
         means in health and social care."
           link="/what-information-standards-are"
           linkText="Learn more"
         />
         <SoloSection
-          heading="Community"
+          heading="Community and links"
           description="Connect with other health and social care professionals and share
         knowledge and best practice."
           link="/community"
