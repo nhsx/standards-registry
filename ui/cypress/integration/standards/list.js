@@ -98,12 +98,15 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of nhs', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('nhsd', { force: true });
+        cy.get('input[name="q"]').type('nhsd');
 
         cy.contains('Search').click();
         cy.get('#resultSummary')
           .invoke('attr', 'data-loading')
           .should('eq', 'false');
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(500);
+
         cy.get('#browse-results li a').eq(0).click({ force: true });
 
         cy.contains('td', 'NHS Digital');
