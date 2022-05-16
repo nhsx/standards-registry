@@ -32,30 +32,31 @@ function Filter({
     updateQuery({ ...query, [fieldName]: val || [] });
   }
 
-  return (
+  return useSelect ? (
+    <>
+      {summary}
+      <Select
+        options={choices}
+        onChange={onSelectChange}
+        showAll={true}
+        value={query[fieldName] || ''}
+      />
+    </>
+  ) : (
     <Expander
       summary={summary}
       className="nhsuk-filter"
       open={open}
       onToggle={toggle}
     >
-      {useSelect ? (
-        <Select
+      <OptionSelect>
+        <CheckboxGroup
+          onChange={onChange}
           options={choices}
-          onChange={onSelectChange}
-          showAll={true}
-          value={query[fieldName] || ''}
+          parent={fieldName}
+          small
         />
-      ) : (
-        <OptionSelect>
-          <CheckboxGroup
-            onChange={onChange}
-            options={choices}
-            parent={fieldName}
-            small
-          />
-        </OptionSelect>
-      )}
+      </OptionSelect>
     </Expander>
   );
 }
