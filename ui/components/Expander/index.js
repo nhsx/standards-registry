@@ -13,8 +13,10 @@ export default function Expander({
 }) {
   const [isOpen, setOpen] = useState(open);
   useEffect(() => {
-    setOpen(true);
-  }, []);
+    if (!isOpen) {
+      setOpen(open);
+    }
+  }, [open]);
 
   return (
     <details
