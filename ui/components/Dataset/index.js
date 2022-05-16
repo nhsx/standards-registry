@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
@@ -186,6 +187,8 @@ export default function Dataset({
       setData(res.data);
     } catch (err) {
       console.error(err);
+      const router = useRouter();
+      router.reload(window.location.pathname);
     } finally {
       setLoading(false);
     }
