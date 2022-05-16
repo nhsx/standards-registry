@@ -12,7 +12,7 @@ function Filter({
   field_name: fieldName,
   open,
   onToggle,
-  andFilter,
+  useSelect,
   numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
@@ -24,7 +24,7 @@ function Filter({
     <p className={styles.filterHeader}>
       {label}
 
-      {!andFilter && <span>{numActive} selected</span>}
+      {!useSelect && <span>{numActive} selected</span>}
     </p>
   );
 
@@ -39,7 +39,7 @@ function Filter({
       open={open}
       onToggle={toggle}
     >
-      {andFilter ? (
+      {useSelect ? (
         <Select
           options={choices}
           onChange={onSelectChange}
@@ -155,7 +155,7 @@ export default function Filters({ schema }) {
               onToggle={toggle}
               numActive={numActive}
               // TODO: this should be configured in schema
-              andFilter={filter.field_name === 'standard_category'}
+              useSelect={filter.field_name === 'standard_category'}
             />
           );
         })}
