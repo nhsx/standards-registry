@@ -142,6 +142,10 @@ export default function Filters({ schema }) {
             fieldFilters = [fieldFilters];
           }
           const numActive = fieldFilters.length;
+          // TODO: should be set in schema, hack until we change it
+          if (filter.label === 'Type of standard') {
+            filter.label = 'Type';
+          }
           return (
             <Filter
               key={index}
