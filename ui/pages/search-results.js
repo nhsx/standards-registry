@@ -20,7 +20,7 @@ const content = {
   },
 };
 
-export default function SearchResults({ data, searchTerm, schemaData }) {
+export default function SearchResults({ data, schemaData }) {
   return (
     <Page>
       <h1>
@@ -43,7 +43,7 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
           <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} searchTerm={searchTerm} includeType={true} />
+          <Dataset data={data} schema={schemaData} includeType={true} />
         </Col>
       </Row>
       <FeedbackFooter />

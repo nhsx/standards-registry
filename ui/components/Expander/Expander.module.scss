@@ -1,0 +1,19 @@
+@import 'vars';
+
+.details {
+  border-top: 1px solid $border-colour;
+  margin: 0 !important;
+  padding: $nhsuk-gutter 0;
+
+  &:last-of-type {
+    border-bottom: 1px solid $border-colour;
+  }
+}
+
+.summary {
+  display: block;
+}
+
+.detailsText {
+  border: 0;
+}
