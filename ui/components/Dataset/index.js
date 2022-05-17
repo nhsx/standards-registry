@@ -168,6 +168,10 @@ export default function Dataset({
   const filtersSelected = Object.keys(getSelections).length > 0;
 
   async function getData() {
+    // if there is an existing request, wait for it to complete
+    if (loading) {
+      await loading;
+    }
     const DEFAULT_SORT = {
       score: 'desc',
       metadata_modified: 'desc',
@@ -182,8 +186,9 @@ export default function Dataset({
     };
 
     try {
-      setLoading(true);
-      const res = await axios.post('/api/refresh-list', params);
+      const req = axios.post('/api/refresh-list', params);
+      setLoading(req);
+      const res = await req;
       setData(res.data);
     } catch (err) {
       console.error(err);
