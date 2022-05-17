@@ -11,15 +11,10 @@ function Filter({
   onChange,
   field_name: fieldName,
   open,
-  onToggle,
   useSelect,
   numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
-  const toggle = (e) => {
-    e.preventDefault();
-    onToggle(fieldName, e.target.open);
-  };
   const summary = (
     <p className={styles.filterHeader}>
       {label}
@@ -47,7 +42,6 @@ function Filter({
       summary={summary}
       className="nhsuk-filter"
       open={open}
-      onToggle={toggle}
     >
       <OptionSelect>
         <CheckboxGroup
@@ -103,33 +97,10 @@ export default function Filters({ schema }) {
     const { checked, value } = event.target;
     const parent = event.target.getAttribute('parent');
     const filter = { [parent]: value };
-
     return checked ? addFilter(filter) : removeFilter(filter);
   };
 
-  const setSelections = () => {
-    const open = new Set(openFilters);
-    for (const filter of filters) {
-      const key = filter.field_name;
-      const list = selections[key];
-      filter.choices.map((choice) => {
-        choice.checked = false;
-        if (list && list.includes(choice.value)) {
-          open.add(key);
-          choice.checked = true;
-        }
-        return choice;
-      });
-    }
-    setOpenFilters([...open]);
-  };
-  useEffect(setSelections, [selections]);
-
-  const toggle = (name, isOpen) => {
-    const open = new Set(openFilters);
-    isOpen ? open.add(name) : open.delete(name);
-    setOpenFilters([...open]);
-  };
+  useEffect(() => setOpenFilters(Object.keys(selections)), []);
 
   const activeFilters = omit(selections, 'q', 'page', 'sort');
 
@@ -137,7 +108,7 @@ export default function Filters({ schema }) {
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <div className="nhsuk-expander-group">
-        {filters.map((filter, index) => {
+        {filters.map(filter => {
           let fieldFilters = activeFilters[filter.field_name] || [];
           if (!Array.isArray(fieldFilters)) {
             fieldFilters = [fieldFilters];
@@ -147,13 +118,14 @@ export default function Filters({ schema }) {
           if (filter.label === 'Type of standard') {
             filter.label = 'Type';
           }
+          filter.choices = filter.choices.map(opt => ({ ...opt, checked: fieldFilters.includes(opt.value) }));
+
           return (
             <Filter
-              key={index}
+              key={filter.field_name}
               {...filter}
               open={openFilters.includes(filter.field_name)}
               onChange={setItem}
-              onToggle={toggle}
               numActive={numActive}
               // TODO: this should be configured in schema
               useSelect={filter.field_name === 'standard_category'}

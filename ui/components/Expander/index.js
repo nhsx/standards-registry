@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import classnames from 'classnames';
-import { useEffect } from 'react';
 import styles from './Expander.module.scss';
 
 export default function Expander({
@@ -9,20 +8,16 @@ export default function Expander({
   className,
   small,
   open = false,
-  onToggle = () => {},
 }) {
   const [isOpen, setOpen] = useState(open);
   useEffect(() => {
-    if (!isOpen) {
-      setOpen(open);
-    }
+    setOpen(open);
   }, [open]);
 
   return (
     <details
       className={classnames('nhsuk-details', className, styles.details)}
       open={isOpen}
-      onToggle={onToggle}
     >
       <summary className={classnames('nhsuk-details__summary', styles.summary)}>
         <span
