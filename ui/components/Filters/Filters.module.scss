@@ -1,16 +1,12 @@
 @import 'vars';
 
-.summary {
-  border: 10px solid yellow;
-  &:before {
-    border: 10px solid lime !important;
-    margin: 8px 2px;
-  }
-}
-
 .toggleAll {
   text-align: right;
   font-size: 16px;
+}
+
+.filterTypeHeader {
+  padding-top: $nhsuk-gutter;
 }
 
 .filterHeader {

@@ -38,11 +38,7 @@ function Filter({
       />
     </>
   ) : (
-    <Expander
-      summary={summary}
-      className="nhsuk-filter"
-      open={open}
-    >
+    <Expander summary={summary} className="nhsuk-filter" open={open}>
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
@@ -108,17 +104,16 @@ export default function Filters({ schema }) {
     <div className="nhsuk-filters">
       <h3>Filters</h3>
       <div className="nhsuk-expander-group">
-        {filters.map(filter => {
+        {filters.map((filter) => {
           let fieldFilters = activeFilters[filter.field_name] || [];
           if (!Array.isArray(fieldFilters)) {
             fieldFilters = [fieldFilters];
           }
           const numActive = fieldFilters.length;
-          // TODO: should be set in schema, hack until we change it
-          if (filter.label === 'Type of standard') {
-            filter.label = 'Type';
-          }
-          filter.choices = filter.choices.map(opt => ({ ...opt, checked: fieldFilters.includes(opt.value) }));
+          filter.choices = filter.choices.map((opt) => ({
+            ...opt,
+            checked: fieldFilters.includes(opt.value),
+          }));
 
           return (
             <Filter
