@@ -1,14 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classnames from 'classnames';
-
+import { useEffect } from 'react';
 import styles from './Expander.module.scss';
 
-export default function Expander({ summary, children, className, small, open = false, onToggle = () => {} }) {
-
+export default function Expander({
+  summary,
+  children,
+  className,
+  small,
+  open = false,
+  onToggle = () => {},
+}) {
   const [isOpen, setOpen] = useState(open);
   useEffect(() => {
-    setOpen(open);
-  }, [open])
+    if (!isOpen) {
+      setOpen(open);
+    }
+  }, [open]);
 
   return (
     <details

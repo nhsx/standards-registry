@@ -12,7 +12,7 @@ function Filter({
   field_name: fieldName,
   open,
   onToggle,
-  andFilter,
+  useSelect,
   numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
@@ -24,7 +24,7 @@ function Filter({
     <p className={styles.filterHeader}>
       {label}
 
-      {!andFilter && <span>{numActive} selected</span>}
+      {!useSelect && <span>{numActive} selected</span>}
     </p>
   );
 
@@ -32,30 +32,31 @@ function Filter({
     updateQuery({ ...query, [fieldName]: val || [] });
   }
 
-  return (
+  return useSelect ? (
+    <>
+      {summary}
+      <Select
+        options={choices}
+        onChange={onSelectChange}
+        showAll={true}
+        value={query[fieldName] || ''}
+      />
+    </>
+  ) : (
     <Expander
       summary={summary}
       className="nhsuk-filter"
       open={open}
       onToggle={toggle}
     >
-      {andFilter ? (
-        <Select
+      <OptionSelect>
+        <CheckboxGroup
+          onChange={onChange}
           options={choices}
-          onChange={onSelectChange}
-          showAll={true}
-          value={query[fieldName] || ''}
+          parent={fieldName}
+          small
         />
-      ) : (
-        <OptionSelect>
-          <CheckboxGroup
-            onChange={onChange}
-            options={choices}
-            parent={fieldName}
-            small
-          />
-        </OptionSelect>
-      )}
+      </OptionSelect>
     </Expander>
   );
 }
@@ -70,7 +71,6 @@ export default function Filters({ schema }) {
   const selections = getSelections();
   const categories = ['care_setting', 'topic', 'standard_category'];
   const filters = pick(categories, fields);
-  const allOpen = openFilters.length === filters.length;
 
   const addFilter = (filter) => {
     const selections = getSelections();
@@ -125,16 +125,6 @@ export default function Filters({ schema }) {
   };
   useEffect(setSelections, [selections]);
 
-  const openAll = (event) => {
-    event.preventDefault();
-    setOpenFilters(filters.map((f) => f.field_name));
-  };
-
-  const closeAll = (event) => {
-    event.preventDefault();
-    setOpenFilters([]);
-  };
-
   const toggle = (name, isOpen) => {
     const open = new Set(openFilters);
     isOpen ? open.add(name) : open.delete(name);
@@ -146,17 +136,6 @@ export default function Filters({ schema }) {
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
-      <p className={styles.toggleAll}>
-        {allOpen ? (
-          <a href="" onClick={closeAll}>
-            Close all
-          </a>
-        ) : (
-          <a href="" onClick={openAll}>
-            Open all
-          </a>
-        )}
-      </p>
       <div className="nhsuk-expander-group">
         {filters.map((filter, index) => {
           let fieldFilters = activeFilters[filter.field_name] || [];
@@ -164,6 +143,10 @@ export default function Filters({ schema }) {
             fieldFilters = [fieldFilters];
           }
           const numActive = fieldFilters.length;
+          // TODO: should be set in schema, hack until we change it
+          if (filter.label === 'Type of standard') {
+            filter.label = 'Type';
+          }
           return (
             <Filter
               key={index}
@@ -173,7 +156,7 @@ export default function Filters({ schema }) {
               onToggle={toggle}
               numActive={numActive}
               // TODO: this should be configured in schema
-              andFilter={filter.field_name === 'standard_category'}
+              useSelect={filter.field_name === 'standard_category'}
             />
           );
         })}

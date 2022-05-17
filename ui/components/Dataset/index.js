@@ -119,7 +119,7 @@ const CheckBox = () => {
         className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
         htmlFor="mandated"
       >
-        Nationally mandated
+        Mandatory in England
       </label>
     </div>
   );
