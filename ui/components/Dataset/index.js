@@ -68,11 +68,11 @@ function SortMenu({ searchTerm }) {
       value: 'metadata_modified asc',
     },
     {
-      label: 'A-Z',
+      label: 'A to Z',
       value: 'name asc',
     },
     {
-      label: 'Z-A',
+      label: 'Z to A',
       value: 'name desc',
     },
   ];
@@ -82,7 +82,7 @@ function SortMenu({ searchTerm }) {
   return (
     <div className="nhsuk-form-group">
       <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor="sort">
-        Sort by
+        Ordered by
       </label>
       <select
         className="nhsuk-select nhsuk-u-font-size-16"
