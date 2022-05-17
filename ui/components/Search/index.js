@@ -39,7 +39,7 @@ export default function Search({
   function onFormSubmit(e) {
     e.preventDefault();
     delete query.page; // remove page depth from query when submitting a new search
-    if (navigate) {
+    if (navigate || location === 'nav') {
       router.push(`/search-results?q=${value || ''}`);
     } else {
       updateQuery({ ...query, q: value });
