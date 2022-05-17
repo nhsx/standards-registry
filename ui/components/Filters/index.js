@@ -15,11 +15,13 @@ function Filter({
   numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
-  const summary = (
+  const summary = useSelect ? (
+    <h4 className={styles.filterTypeHeader}>{label}</h4>
+  ) : (
     <p className={styles.filterHeader}>
       {label}
 
-      {!useSelect && <span>{numActive} selected</span>}
+      {<span>{numActive} selected</span>}
     </p>
   );
 
