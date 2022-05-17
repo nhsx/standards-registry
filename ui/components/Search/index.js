@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import classnames from 'classnames';
-import { useRouter } from 'next/router'
 import { useQueryContext } from '../../context/query';
 import styles from './style.module.scss';
 
@@ -30,19 +29,14 @@ export default function Search({
   label = true,
   labelText = 'Search directory',
   location = null,
-  navigate
 }) {
-  const router = useRouter();
   const { query, updateQuery } = useQueryContext();
   const [value, setValue] = useState(query.q);
 
   function onFormSubmit(e) {
     e.preventDefault();
-    if (navigate) {
-      router.push(`/search-results?q=${value}`)
-    } else {
-      updateQuery({ ...query, q: value })
-    }
+    delete query.page; // remove page depth from query when submitting a new search
+    updateQuery({ ...query, q: value });
     return false;
   }
 

@@ -9,8 +9,24 @@ import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import DOMPurify from 'isomorphic-dompurify';
 
 const DATE_FORMAT = 'do MMM yyyy';
+
+function Embolden({ children }) {
+  const { getSelections } = useQueryContext();
+  const { q } = getSelections();
+  const re = new RegExp(`(${q})`, 'ig');
+  const replaced = children.replace(re, '<strong>$1</strong>');
+
+  return (
+    <span
+      dangerouslySetInnerHTML={{
+        __html: DOMPurify.sanitize(replaced),
+      }}
+    />
+  );
+}
 
 function Model({ model }) {
   const {
@@ -22,12 +38,17 @@ function Model({ model }) {
     description,
   } = model;
   const target = `/standards/${name}`;
+
   return (
     <>
       <Link href={target}>
-        <a>{title}</a>
+        <a>
+          <Embolden>{title}</Embolden>
+        </a>
       </Link>
-      <p>{description}</p>
+      <p>
+        <Embolden>{description}</Embolden>
+      </p>
       <Flex className="nhsuk-body-s">
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Type:{' '}
