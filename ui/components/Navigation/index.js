@@ -4,19 +4,19 @@ export default function Navigation() {
 
   const links = [
     {
-      label: 'Directory',
+      label: 'Published standards',
       url: '/standards'
     },
     {
-      label: 'Upcoming standards',
+      label: 'Future standards',
       url: '/roadmap'
     },
     {
-      label: 'Standards guidance',
+      label: 'Guidance',
       url: '/what-information-standards-are'
     },
     {
-      label: 'Community',
+      label: 'Community and links',
       url: '/community'
     }
   ]

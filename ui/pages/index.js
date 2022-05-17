@@ -7,9 +7,9 @@ import React from 'react';
 const content = {
   title: 'Home - Standards Directory',
   header:
-    'Find standards for data and interoperability in health and social care',
+    'Find standards for data and interoperability in health and adult social care',
   intro:
-    'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.',
+    'Use this directory to find nationally recognised standards for use in technology in England.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -161,24 +161,22 @@ export default function Home() {
 
       <div className="nhsuk-grid-row">
         <SoloSection
-          heading="Upcoming standards"
-          description="Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies."
+          heading="Future standards"
+          description="Check standards that have been proposed or are currently in development."
           link="/roadmap"
-          linkText="Search the roadmap"
+          linkText="Go to future standards"
         />
         <SoloSection
           heading="Guidance"
-          description="Find out what information standards are and what interoperability
-        means in health and social care."
+          description="Get an introduction to standards and interoperability in health and adult social care."
           link="/what-information-standards-are"
-          linkText="Learn more"
+          linkText="Go to guidance"
         />
         <SoloSection
-          heading="Community"
-          description="Connect with other health and social care professionals and share
-        knowledge and best practice."
+          heading="Community and links"
+          description="Explore contacts and resources for teams building or buying technology in England."
           link="/community"
-          linkText="View the community resources"
+          linkText="Go to community and links"
         />
       </div>
       <FeedbackFooter />
@@ -209,11 +207,6 @@ export function HomepageHero({ recent }) {
                 </li>
               ))}
             </ul>
-            <p>
-              <Link href="/standards" className="nhsuk-u-font-size-16">
-                Browse the latest standards
-              </Link>
-            </p>
           </div>
         </div>
       </div>

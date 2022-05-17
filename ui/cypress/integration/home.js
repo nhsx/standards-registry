@@ -2,10 +2,10 @@ describe('Homepage', () => {
   it('should show home page and call to action', () => {
     cy.visit('/');
     cy.contains(
-      'Find standards for data and interoperability in health and social care'
+      'Find standards for data and interoperability in health and adult social care'
     );
     cy.contains(
-      'Use this directory to find nationally recognised information standards for interoperable technology in health and adult social care.'
+      'Use this directory to find nationally recognised standards for use in technology in England.'
     );
   });
 

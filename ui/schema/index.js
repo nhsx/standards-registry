@@ -43,7 +43,7 @@ export default [
       ),
     },
     standard_category: {
-      label: 'Type of standard',
+      label: 'Type',
       format: (val) => (
         <>
           <Tag type={val}>{val}</Tag>
@@ -119,7 +119,7 @@ export default [
     },
   },
   {
-    section_title: 'Topic and care setting usage',
+    section_title: 'Topics and care settings',
     topic: {
       label: 'Topic',
       format: (val) => val || 'As yet unspecified',
@@ -130,7 +130,7 @@ export default [
     },
   },
   {
-    section_title: 'Relationships to other standards',
+    section_title: 'Dependencies and related standards',
     dependencies: {
       label: 'Dependencies',
       format: (val) =>

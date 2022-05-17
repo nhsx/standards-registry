@@ -2,7 +2,7 @@ describe('Standards Listing Index', () => {
   it('should accesss standards listing page', () => {
     cy.visit(`/standards`);
     cy.get('ul#browse-results');
-    cy.contains('Browse the standards directory');
+    cy.contains('Published standards');
   });
 
   it('There should be results in the directory ', () => {
@@ -27,12 +27,7 @@ describe('Standards Listing Index', () => {
 
     it('emboldens matches', () => {
       cy.visit('/standards');
-      cy.get('input[name="q"]').type('medicine');
-
-      cy.contains('Search').click();
-      cy.get('#resultSummary')
-        .invoke('attr', 'data-loading')
-        .should('eq', 'false');
+      cy.doSearch('medicine');
       cy.get('#browse-results li').eq(0).contains('strong', 'Medicine');
     });
 
@@ -52,29 +47,21 @@ describe('Standards Listing Index', () => {
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'Professional Record Standards Body');
-
-        cy.go('back');
-
-        cy.get('#browse-results').should('exist');
-
-        cy.get('#browse-results li a').eq(1).click();
-
-        cy.contains('td', 'Professional Record Standards Body');
       });
 
       it('Matches various variations of prsb', () => {
         cy.visit('/standards');
-        cy.doSearch('professional record standards body');
+        cy.doSearch('prsb');
 
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'Professional Record Standards Body');
 
         cy.visit('/standards');
-
         cy.doSearch('professional records standards body');
-        cy.get('#browse-results li a').eq(0).click();
-
+        cy.get('#browse-results li a').eq(0).click({
+          force: true,
+        });
         cy.contains('td', 'Professional Record Standards Body');
       });
 
