@@ -7,6 +7,10 @@ const QueryContext = createContext();
 export function QueryContextWrapper({ children }) {
   const router = useRouter();
 
+  function getRoute() {
+    return router.route;
+  }
+
   function getQuery(props) {
     const { query } = router;
     return stringify({ ...query, ...props });
@@ -31,6 +35,7 @@ export function QueryContextWrapper({ children }) {
 
   const value = {
     query: router.query,
+    getRoute,
     getQuery,
     updateQuery,
     getSelections,
