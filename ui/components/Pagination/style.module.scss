@@ -1,4 +1,4 @@
-@import "vars";
+@import 'vars';
 
 .pagination {
   ul {
@@ -27,8 +27,10 @@
     text-decoration: none;
     padding: $nhsuk-gutter / 2 $nhsuk-gutter $nhsuk-gutter / 2 $nhsuk-gutter;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       outline: 3px solid $yellow;
+      cursor: pointer;
     }
 
     &.current {
@@ -37,8 +39,9 @@
       pointer-events: none;
       cursor: default;
 
-      &:link, &:visited {
-        color: black
+      &:link,
+      &:visited {
+        color: black;
       }
     }
   }
