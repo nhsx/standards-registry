@@ -24,43 +24,46 @@ export function FilterSummary({ schema }) {
     updateQuery(newQuery);
   }
 
-  const activeFilters = omit(query, 'q', 'page', 'sort');
+  const chosenFilters = omit(query, 'q', 'page', 'sort', 'mandated');
 
-  if (!size(activeFilters)) {
+  if (!size(chosenFilters)) {
     return null;
   }
+  const { standard_category } = chosenFilters;
+  // trick to resort category to be last,
+  // TODO: better sorting needed
+  const activeFilters = standard_category
+    ? { ...chosenFilters, standard_category }
+    : chosenFilters;
 
   return (
     <div className={styles.filterSummary}>
-      {Object.keys(activeFilters)
-        .filter((key) => key !== 'mandated') // don't show mandated widget
-        .map((key, index) => {
-          let filters = activeFilters[key];
-          const settings = schema.dataset_fields.find(
-            (f) => f.field_name === key
-          );
-          if (!Array.isArray(filters)) {
-            filters = [filters];
-          }
-          return (
-            <div key={key} className={styles.filterSection}>
-              <h4>
-                {index > 0 && 'and '}
-                {settings.label}
-              </h4>
-              {filters.map((filter, i) => {
-                return (
-                  <span key={i}>
-                    {i > 0 && <span className={styles.and}>and</span>}
-                    <Widget onClick={() => removeFilter(key, filter)}>
-                      {filter}
-                    </Widget>
-                  </span>
-                );
-              })}
-            </div>
-          );
-        })}
+      {Object.keys(activeFilters).map((key, index) => {
+        let filters = activeFilters[key];
+        const settings = schema.dataset_fields.find(
+          (f) => f.field_name === key
+        );
+        if (!Array.isArray(filters)) {
+          filters = [filters];
+        }
+        return (
+          <div key={key} className={styles.filterSection}>
+            {settings.label.toLowerCase() === 'type' && index >= 1 ? (
+              <h4>In</h4>
+            ) : null}
+            {filters.map((filter, i) => {
+              return (
+                <span key={i}>
+                  {i > 0 && <span className={styles.and}>and</span>}
+                  <Widget onClick={() => removeFilter(key, filter)}>
+                    {filter}
+                  </Widget>
+                </span>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 }

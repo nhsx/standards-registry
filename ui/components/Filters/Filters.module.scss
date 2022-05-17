@@ -1,8 +1,12 @@
-@import "vars";
+@import 'vars';
 
 .toggleAll {
   text-align: right;
   font-size: 16px;
+}
+
+.filterTypeHeader {
+  padding-top: $nhsuk-gutter;
 }
 
 .filterHeader {

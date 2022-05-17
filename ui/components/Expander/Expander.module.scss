@@ -12,6 +12,9 @@
 
 .summary {
   display: block;
+  &:before {
+    margin: 8px 2px;
+  }
 }
 
 .detailsText {

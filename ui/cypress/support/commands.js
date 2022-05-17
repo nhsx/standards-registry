@@ -12,11 +12,8 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 Cypress.Commands.add('doSearch', (term) => {
-  cy.get('input[name="q"]').type(term);
-  cy.contains('Search').click();
-  cy.get('#resultSummary')
-    .invoke('attr', 'data-loading')
-    .should('eq', 'false');
+  cy.get('input[name="q"]').type(`${term}{enter}`);
+  cy.get('#resultSummary').invoke('attr', 'data-loading').should('eq', 'false');
 });
 //
 // -- This is a child command --
