@@ -30,17 +30,10 @@ describe('Standards Listing Index', () => {
       cy.get('input[name="q"]').type('medicine');
 
       cy.contains('Search').click();
-
+      cy.get('#resultSummary')
+        .invoke('attr', 'data-loading')
+        .should('eq', 'false');
       cy.get('#browse-results li').eq(0).contains('strong', 'Medicine');
-    });
-
-    it('emboldens matches', () => {
-      cy.visit('/standards');
-      cy.get('input[name="q"]').type('medicine');
-
-      cy.contains('Search').click();
-
-      cy.get('#browse-results li').eq(0).contains('b', 'Medicine');
     });
 
     describe('Organisation mapping', () => {
