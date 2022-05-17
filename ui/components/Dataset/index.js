@@ -164,16 +164,25 @@ export default function Dataset({
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
+  const [queue, setQueue] = useState(null);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
 
+  function pushToQueue() {
+    setQueue(query);
+  }
+
   async function getData() {
+    if (loading || !queue) {
+      return;
+    }
+
     const DEFAULT_SORT = {
       score: 'desc',
       metadata_modified: 'desc',
     };
 
-    const { q, page, sort = DEFAULT_SORT, ...filters } = query;
+    const { q, page, sort = DEFAULT_SORT, ...filters } = queue;
     const params = {
       q,
       page,
@@ -183,6 +192,7 @@ export default function Dataset({
 
     try {
       setLoading(true);
+      setQueue(null);
       const res = await axios.post('/api/refresh-list', params);
       setData(res.data);
     } catch (err) {
@@ -194,9 +204,8 @@ export default function Dataset({
     }
   }
 
-  useEffect(() => {
-    getData();
-  }, [query]);
+  useEffect(() => pushToQueue(), [query]);
+  useEffect(() => getData(), [queue, loading]);
 
   return (
     <>
@@ -204,7 +213,7 @@ export default function Dataset({
         filtersSelected={filtersSelected}
         count={count}
         searchTerm={searchTerm}
-        loading={loading}
+        loading={!!(loading || queue)}
       />
 
       <FilterSummary schema={schema} />

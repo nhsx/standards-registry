@@ -13,55 +13,40 @@ describe('Standards Listing Index', () => {
   describe('Search', () => {
     it('Can search by standard matching', () => {
       cy.visit('/standards');
-      cy.get('input[name="q"]').type('allergies');
-
-      cy.contains('Search').click();
+      cy.doSearch('allergies');
       cy.get('#browse-results li').should('have.length', 1);
     });
 
     it('Can search by fuzzy match', () => {
       cy.visit('/standards');
-      cy.get('input[name="q"]').type('alergy');
-
-      cy.contains('Search').click();
-
-      cy.get('#resultSummary')
-        .invoke('attr', 'data-loading')
-        .should('eq', 'false');
+      cy.doSearch('alergy');
 
       cy.get('#browse-results li').should('have.length', 1);
       cy.contains('#browse-results li', 'Allergy').click();
 
-      cy.get('#browse-results li').should('have.length', 1);
-      cy.contains('#browse-results li', 'Allergy').click();
     });
 
     describe('Organisation mapping', () => {
       it('Can search by organisation', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('prsb');
 
-        cy.contains('Search').click();
+        cy.doSearch('prsb');
 
         cy.get('#browse-results li').not('have.length', 0);
       });
 
       it('Displays org matches first', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('prsb');
-        cy.contains('Search').click();
+        cy.doSearch('prsb');
 
-        cy.get('#resultSummary')
-          .invoke('attr', 'data-loading')
-          .should('eq', 'false');
-        // eslint-disable-next-line cypress/no-unnecessary-waiting
-        cy.wait(500);
-
-        cy.get('#browse-results li a').eq(0).click({ force: true });
+        cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'Professional Record Standards Body');
 
         cy.go('back');
+
+        cy.get('#browse-results').should('exist');
+
         cy.get('#browse-results li a').eq(1).click();
 
         cy.contains('td', 'Professional Record Standards Body');
@@ -69,28 +54,15 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of prsb', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('professional record standards body', {
-          force: true,
-        });
+        cy.doSearch('professional record standards body');
 
-        cy.contains('Search').click();
-
-        cy.get('#resultSummary')
-          .invoke('attr', 'data-loading')
-          .should('eq', 'false');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'Professional Record Standards Body', {
-          force: true,
-        });
+        cy.contains('td', 'Professional Record Standards Body');
 
-        cy.go('back');
+        cy.visit('/standards');
 
-        cy.get('input[name="q"]').type('professional records standards body', {
-          force: true,
-        });
-
-        cy.contains('Search').click();
+        cy.doSearch('professional records standards body');
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'Professional Record Standards Body');
@@ -98,33 +70,22 @@ describe('Standards Listing Index', () => {
 
       it('Matches various variations of nhs', () => {
         cy.visit('/standards');
-        cy.get('input[name="q"]').type('nhsd');
+        cy.doSearch('nhsd');
 
-        cy.contains('Search').click();
-        cy.get('#resultSummary')
-          .invoke('attr', 'data-loading')
-          .should('eq', 'false');
-        // eslint-disable-next-line cypress/no-unnecessary-waiting
-        cy.wait(500);
-
-        cy.get('#browse-results li a').eq(0).click({ force: true });
-
-        cy.contains('td', 'NHS Digital');
-
-        cy.go('back');
-
-        cy.get('input[name="q"]').type('nhsx', { force: true });
-
-        cy.contains('Search').click();
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'NHS Digital');
 
-        cy.go('back');
+        cy.visit('/standards');
 
-        cy.get('input[name="q"]').type('nhs digital', { force: true });
+        cy.doSearch('nhsx');
+        cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('Search').click();
+        cy.contains('td', 'NHS Digital');
+
+        cy.visit('/standards');
+
+        cy.doSearch('nhs digital');
         cy.get('#browse-results li a').eq(0).click();
 
         cy.contains('td', 'NHS Digital');
