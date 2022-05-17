@@ -24,6 +24,7 @@ export function QueryContextWrapper({ children }) {
       });
     }
     return router.push({ query: { ...query, ...props } }, null, {
+      shallow: true,
       scroll: false,
     });
   }

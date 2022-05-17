@@ -14,9 +14,10 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
 # Fetch and build the custom CKAN extensions
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-pages.git#egg=ckanext-pages"
+RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-download-csv-button#egg=ckanext-download-csv-button"
 
 # Add the custom extensions to the plugins list
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages download_csv_button
 
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
@@ -30,6 +31,8 @@ RUN cd /srv/app/src/ckanext-scheming && python setup.py install
 RUN cd /srv/app/src/ckanext-pages && python setup.py install
 
 RUN chown -R ckan:ckan /srv/app
+RUN mkdir /var/lib/ckan
+RUN chown -R ckan:ckan /var/lib/ckan
 
 # Switch to the ckan user
 USER ckan

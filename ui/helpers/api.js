@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { stringify } from 'qs';
+import { findKey } from 'lodash';
 const CKAN_URL = process.env.CKAN_URL;
 
 // TODO: neaten
@@ -15,11 +16,38 @@ export function queriseSelections(selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
-      query[prop] = `(*${selectionsRef[prop].join('* OR *')}*)`;
+      query[prop] = `(*${selectionsRef[prop].join('* AND *')}*)`;
     } else {
       delete query[prop];
     }
   }
+  return query;
+}
+
+function getSearchQuery(q) {
+  if (!q) {
+    return undefined;
+  }
+
+  let query = `(title:${q}~ OR ${q})`;
+
+  const organisationMappings = {
+    'professional-record-standards-body': [
+      'prsb',
+      'professional record standards body',
+      'professional records standards body',
+    ],
+    'nhs-digital': ['nhs', 'nhsd', 'nhsx', 'nhs digital'],
+  };
+
+  const org = findKey(organisationMappings, (mappings) =>
+    mappings.includes(q.toLowerCase())
+  );
+
+  if (org) {
+    query = `(organization:${org} OR ${query})`;
+  }
+
   return query;
 }
 
@@ -34,7 +62,7 @@ export function serialise(obj = {}) {
       acc.push(key + ':' + obj[key]);
       return acc;
     }, [])
-    .join(' OR ');
+    .join(' AND ');
   return `(${str})`;
 }
 
@@ -69,7 +97,8 @@ export async function list({ page = 1, q, sort, filters }) {
 
   fq = serialise(queriseSelections(filters));
 
-  const ckanQuery = stringify({ q, fq, rows, start, sort: sortstring });
+  const query = getSearchQuery(q);
+  const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();

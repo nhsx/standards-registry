@@ -1,16 +1,26 @@
 import Link from 'next/link';
-import { Snippet, Tag, Flex, Pagination } from '../';
+import { useState, useEffect } from 'react';
+import { Snippet, Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import classnames from 'classnames';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const DATE_FORMAT = 'do MMM yyyy';
 
 function Model({ model }) {
-  const { name, status, title, metadata_modified, standard_category, description } = model;
+  const {
+    name,
+    status,
+    title,
+    metadata_modified,
+    standard_category,
+    description,
+  } = model;
   const target = `/standards/${name}`;
   return (
     <>
@@ -19,9 +29,11 @@ function Model({ model }) {
       </Link>
       <p>{description}</p>
       <Flex className="nhsuk-body-s">
-
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Type: <Tag type={standard_category} classes="nhsuk-body-s">{standard_category}</Tag>
+          Type:{' '}
+          <Tag type={standard_category} classes="nhsuk-body-s">
+            {standard_category}
+          </Tag>
         </p>
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Status: {upperFirst(status)}
@@ -39,10 +51,10 @@ function Model({ model }) {
 function SortMenu({ searchTerm }) {
   const { getSelections, updateQuery } = useQueryContext();
 
-  const sort = (event) => {
+  const sort = (value) => {
     const selections = getSelections();
-    selections.sort = event.target.value;
-    updateQuery(selections, { replace: true });
+    selections.sort = value;
+    updateQuery(selections);
   };
 
   const options = [
@@ -71,24 +83,13 @@ function SortMenu({ searchTerm }) {
   const { sort: value } = getSelections();
 
   return (
-    <div className="nhsuk-form-group">
-      <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor="sort">
-        Sort by
-      </label>
-      <select
-        className="nhsuk-select nhsuk-u-font-size-16"
-        name="sort"
-        id="sort"
-        onChange={sort}
-        value={value}
-      >
-        {options.filter(Boolean).map((option) => (
-          <option value={option.value} key={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
+    <Select
+      label="Sort by"
+      options={options}
+      value={value}
+      onChange={sort}
+      name="sort"
+    />
   );
 }
 
@@ -118,7 +119,7 @@ const CheckBox = () => {
         className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
         htmlFor="mandated"
       >
-        Nationally mandated
+        Mandatory in England
       </label>
     </div>
   );
@@ -139,35 +140,74 @@ const NoResultsSummary = ({ searchTerm }) => (
   </>
 );
 
-const ResultSummary = ({ count, searchTerm, filtersSelected }) => (
-  <h3>
-    <Snippet
-      num={count}
-      plural={count > 1 || count === 0}
-      searchTerm={searchTerm}
-      inline
-    >
-      {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
-    </Snippet>
+const ResultSummary = ({ count, searchTerm, filtersSelected, loading }) => (
+  <h3 id="resultSummary" data-loading={loading}>
+    {(loading && 'Searching for results') || (
+      <Snippet
+        num={count}
+        plural={count > 1 || count === 0}
+        searchTerm={searchTerm}
+        inline
+      >
+        {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
+      </Snippet>
+    )}
   </h3>
 );
 
-export default function Dataset({ data = {}, searchTerm, includeType }) {
-  const { getSelections } = useQueryContext();
+export default function Dataset({
+  data: initialData = {},
+  includeType,
+  schema,
+}) {
+  const { getSelections, query } = useQueryContext();
+  const searchTerm = query.q;
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
 
+  async function getData() {
+    const DEFAULT_SORT = {
+      score: 'desc',
+      metadata_modified: 'desc',
+    };
+
+    const { q, page, sort = DEFAULT_SORT, ...filters } = query;
+    const params = {
+      q,
+      page,
+      sort,
+      filters,
+    };
+
+    try {
+      setLoading(true);
+      const res = await axios.post('/api/refresh-list', params);
+      setData(res.data);
+    } catch (err) {
+      console.error(err);
+      const router = useRouter();
+      router.reload(window.location.pathname);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  }, [query]);
+
   return (
     <>
-      {count > 0 ? (
-        <ResultSummary
-          filtersSelected={filtersSelected}
-          count={count}
-          searchTerm={searchTerm}
-        />
-      ) : (
-        <NoResultsSummary searchTerm={searchTerm} />
-      )}
+      <ResultSummary
+        filtersSelected={filtersSelected}
+        count={count}
+        searchTerm={searchTerm}
+        loading={loading}
+      />
+
+      <FilterSummary schema={schema} />
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
           <SortMenu searchTerm={searchTerm} />
@@ -176,13 +216,17 @@ export default function Dataset({ data = {}, searchTerm, includeType }) {
           <CheckBox />
         </div>
       </div>
-      <ul className={styles.list}>
-        {results.map((model) => (
-          <li key={model.id} className={styles.listItem}>
-            <Model model={model} includeType={includeType} />
-          </li>
-        ))}
-      </ul>
+      {count > 0 ? (
+        <ul className={styles.list} id="browse-results">
+          {results.map((model) => (
+            <li key={model.id} className={styles.listItem}>
+              <Model model={model} includeType={includeType} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <NoResultsSummary searchTerm={searchTerm} />
+      )}
       <Pagination count={count} />
     </>
   );

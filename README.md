@@ -6,10 +6,6 @@
 
 Node.js webserver for the UI client.
 
-### CKAN
-
-TBC.
-
 ## Running a local UI instance
 
 ### Prerequisites
@@ -31,7 +27,7 @@ Create a `.env` file containing the following content:
 
 ```
 touch .env.local
-echo "CKAN_URL=https://manage.test.nhs.marvell-consulting.com/api/action" >> .env.local
+echo "CKAN_URL=https://manage.test.standards.nhs.uk/api/action" >> .env.local
 ```
 
 ### Running the server

@@ -29,37 +29,30 @@ jobs:
 
   integrationtest:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 16.x
-    env:
-      PORT: 3000
-      CKAN_URL: https://manage.test.nhs.marvell-consulting.com/api/3/action
+    defaults:
+      run:
+        working-directory: ui
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-          cache-dependency-path: ui/package-lock.json
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm start &
-      - run: npm run test:integration
-
-  notify:
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    needs:
-      - test
-      - integrationtest
-    steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
+          working-directory: ui
+          build: npm run build --if-present
+          start: npm start
         env:
-          SLACK_USERNAME: github-bot
-          SLACK_CHANNEL: developers
-          SLACK_COLOR: danger
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: Build failed
+          CKAN_URL: https://manage.test.standards.nhs.uk/api/action
+          PORT: 3000
+
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ui/cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: ui/cypress/videos

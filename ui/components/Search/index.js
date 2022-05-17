@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classnames from 'classnames';
+import { useRouter } from 'next/router'
 import { useQueryContext } from '../../context/query';
 import styles from './style.module.scss';
 
@@ -29,15 +30,29 @@ export default function Search({
   label = true,
   labelText = 'Search directory',
   location = null,
+  navigate
 }) {
-  const { query } = useQueryContext();
+  const router = useRouter();
+  const { query, updateQuery } = useQueryContext();
   const [value, setValue] = useState(query.q);
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    if (navigate) {
+      router.push(`/search-results?q=${value}`)
+    } else {
+      updateQuery({ ...query, q: value })
+    }
+    return false;
+  }
+
   return (
     <div className="nhsuk-form-group">
       <form
         className={classnames('nhsuk-search', styles.search)}
         method="GET"
         action="/search-results"
+        onSubmit={onFormSubmit}
       >
         {label && <label className="nhsuk-label">{labelText}</label>}
         <input
