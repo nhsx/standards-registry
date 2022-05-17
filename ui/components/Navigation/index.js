@@ -12,7 +12,7 @@ export default function Navigation() {
       url: '/roadmap'
     },
     {
-      label: 'About interoperability',
+      label: 'Guidance',
       url: '/what-information-standards-are'
     },
     {
