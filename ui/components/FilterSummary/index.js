@@ -24,11 +24,17 @@ export function FilterSummary({ schema }) {
     updateQuery(newQuery);
   }
 
-  const activeFilters = omit(query, 'q', 'page', 'sort');
+  const chosenFilters = omit(query, 'q', 'page', 'sort');
 
-  if (!size(activeFilters)) {
+  if (!size(chosenFilters)) {
     return null;
   }
+  const { standard_category } = chosenFilters;
+  // trick to resort category to be last,
+  // TODO: better sorting needed
+  const activeFilters = standard_category
+    ? { ...chosenFilters, standard_category }
+    : chosenFilters;
 
   return (
     <div className={styles.filterSummary}>
@@ -44,10 +50,9 @@ export function FilterSummary({ schema }) {
           }
           return (
             <div key={key} className={styles.filterSection}>
-              <h4>
-                {index > 0 && 'and '}
-                {settings.label}
-              </h4>
+              {settings.label.toLowerCase() === 'type' && index >= 1 ? (
+                <h4>In</h4>
+              ) : null}
               {filters.map((filter, i) => {
                 return (
                   <span key={i}>
