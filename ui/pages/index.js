@@ -162,23 +162,21 @@ export default function Home() {
       <div className="nhsuk-grid-row">
         <SoloSection
           heading="Future standards"
-          description="Stay up to date with standards and APIs that are being proposed or drafted by standard development bodies."
+          description="Check standards that have been proposed or are currently in development."
           link="/roadmap"
-          linkText="Search the roadmap"
+          linkText="Go to future standards"
         />
         <SoloSection
-          heading="About interoperability"
-          description="Find out what information standards are and what interoperability
-        means in health and social care."
+          heading="Guidance"
+          description="Get an introduction to standards and interoperability in health and adult social care."
           link="/what-information-standards-are"
-          linkText="Learn more"
+          linkText="Go to guidance"
         />
         <SoloSection
           heading="Community and links"
-          description="Connect with other health and social care professionals and share
-        knowledge and best practice."
+          description="Explore contacts and resources for teams building or buying technology in England."
           link="/community"
-          linkText="View the community resources"
+          linkText="Go to community and links"
         />
       </div>
       <FeedbackFooter />
