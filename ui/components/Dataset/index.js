@@ -105,7 +105,7 @@ function SortMenu({ searchTerm }) {
 
   return (
     <Select
-      label="Sort by"
+      label="Order by"
       options={options}
       value={value}
       onChange={sort}

@@ -28,7 +28,7 @@ const SearchButton = ({ style, children }) => (
 export default function Search({
   placeholder,
   label = true,
-  labelText = 'Search directory',
+  labelText = 'Search',
   location = null,
   navigate = null,
 }) {
