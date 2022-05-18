@@ -9,14 +9,13 @@ export function FeedbackFooter() {
         Feedback
       </h2>
       <p className="nhsuk-u-font-size-16">
-        Let us know about your visit to the standards directory today by filling in
-        {' '}
+        This is a new service — your{' '}
         <Link
           newWindow={true}
           href="https://forms.gle/CKKi5nFzUjuxHB9N6"
-          text="our survey"
-        />
-        .
+          text="feedback"
+        />{' '}
+        will help us to improve it.
       </p>
     </div>
   );

@@ -1,5 +1,12 @@
 import classnames from 'classnames';
-import { Hero, Layout, Snippet, Search, Link, FeedbackFooter } from '../components';
+import {
+  Hero,
+  Layout,
+  Snippet,
+  Search,
+  Link,
+  FeedbackFooter,
+} from '../components';
 import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
 import React from 'react';
@@ -30,7 +37,9 @@ const HomeSection = ({ children, title, link, linkText, lineBreak = true }) => (
     <div className="nhsuk-grid-column-full">
       <h2>{title}</h2>
     </div>
-    {children}
+    <div className="nhsuk-grid-column-full">
+      <div className={styles.grid}>{children}</div>
+    </div>
     <div className="nhsuk-grid-column-full">
       <p>
         <Link href={link}>{linkText}</Link>
@@ -42,6 +51,15 @@ const HomeSection = ({ children, title, link, linkText, lineBreak = true }) => (
   </div>
 );
 
+const HomeElement = ({ link, linkText, description }) => (
+  <div className={styles.element}>
+    <h5>
+      <Link href={link}>{linkText}</Link>
+    </h5>
+    <p>{description}</p>
+  </div>
+);
+
 export default function Home() {
   return (
     <>
@@ -50,35 +68,21 @@ export default function Home() {
         link="/standards"
         linkText="Browse all care settings"
       >
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?care_setting=Hospital">Hospital</Link>
-          </h5>
-          <p>
-            Patient services, maternity, assessments, discharge, accident and
-            emergency care.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?care_setting=GP+%2F+Primary+care">
-              GP / Primary Care
-            </Link>
-          </h5>
-          <p>
-            Physical and mental health, GP care records, diagnostics, clinical
-            referrals, treatments.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?care_setting=Social+care">Social care</Link>
-          </h5>
-          <p>
-            Adult social care, social services, shared care records, community
-            care and support.
-          </p>
-        </div>
+        <HomeElement
+          link="/standards?care_setting=Hospital"
+          linkText="Hospital"
+          description="Including discharges, referrals, dosing and screening."
+        />
+        <HomeElement
+          link="/standards?care_setting=GP+%2F+Primary+care"
+          linkText="GP and Primary Care"
+          description="Including referrals, diagnostics, and treatments."
+        />
+        <HomeElement
+          link="/standards?care_setting=Social+care"
+          linkText="Social care"
+          description="Including referrals, end of life and personalised care."
+        />
       </HomeSection>
 
       <HomeSection
@@ -86,37 +90,21 @@ export default function Home() {
         link="/standards"
         linkText="Browse all topics"
       >
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?topic=Appointment+%2F+scheduling">
-              Appointments
-            </Link>
-          </h5>
-          <p>
-            Appointment booking and management, clinical referrals, key care
-            information.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?topic=Access+to+records">
-              Access to records
-            </Link>
-          </h5>
-          <p>
-            Retrieve structured information from a patient and shared care
-            records.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?topic=Vaccination">Vaccination</Link>
-          </h5>
-          <p>
-            Coronavirus (COVID-19), seasonal flu, immunisation, treatment and
-            prevention protocols.
-          </p>
-        </div>
+        <HomeElement
+          link="/standards?topic=Appointment+%2F+scheduling"
+          linkText="Appointments"
+          description="Including appointment bookings and clinical referrals."
+        />
+        <HomeElement
+          link="/standards?topic=Access+to+records"
+          linkText="Access to records"
+          description="Including retrieving structured information from care records."
+        />
+        <HomeElement
+          link="/standards?topic=Vaccination"
+          linkText="Vaccination"
+          description="Including immunisations and adverse reactions."
+        />
       </HomeSection>
       <HomeSection
         title="Browse by type"
@@ -124,39 +112,21 @@ export default function Home() {
         linkText="Browse all standard types"
         lineBreak={false}
       >
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?standard_category=Technical+standards+and+specifications">
-              Technical specifications and APIs
-            </Link>
-          </h5>
-          <p>
-            Find technical standards to exchange information with other
-            technology products and services.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?standard_category=Record+standard">
-              Clinical and care record standards
-            </Link>
-          </h5>
-          <p>
-            Explore clinical codes and data formats to collect, process and
-            share information consistently.
-          </p>
-        </div>
-        <div className="nhsuk-grid-column-one-third">
-          <h5>
-            <Link href="/standards?standard_category=Data+definitions+and+terminologies">
-              Medical and data dictionaries
-            </Link>
-          </h5>
-          <p>
-            Use approved medical terminologies and definitions to support
-            information systems.
-          </p>
-        </div>
+        <HomeElement
+          link="/standards?standard_category=Technical+standards+and+specifications"
+          linkText="Technical standards and specifications"
+          description="Including FHIR and HL7 standards for interoperability and APIs."
+        />
+        <HomeElement
+          link="/standards?standard_category=Record+standard"
+          linkText="Record standards"
+          description="Including formatting standards for clinical and care records."
+        />
+        <HomeElement
+          link="/standards?standard_category=Data+definitions+and+terminologies"
+          linkText="Data definitions and terminologies"
+          description="Including dictionaries for medicines, devices and data."
+        />
       </HomeSection>
 
       <div className="nhsuk-grid-row">
