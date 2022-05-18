@@ -71,19 +71,17 @@ export default function Home() {
         <HomeElement
           link="/standards?care_setting=Hospital"
           linkText="Hospital"
-          description="Patient services, maternity, assessments, discharge, accident and emergency care."
+          description="Including discharges, referrals, dosing and screening."
         />
         <HomeElement
           link="/standards?care_setting=GP+%2F+Primary+care"
-          linkText="GP / Primary Care"
-          description="Physical and mental health, GP care records, diagnostics,
-            clinical referrals, treatments."
+          linkText="GP and Primary Care"
+          description="Including referrals, diagnostics, and treatments."
         />
         <HomeElement
           link="/standards?care_setting=Social+care"
           linkText="Social care"
-          description="Adult social care, social services, shared care records,
-            community care and support."
+          description="Including referrals, end of life and personalised care."
         />
       </HomeSection>
 
@@ -95,17 +93,17 @@ export default function Home() {
         <HomeElement
           link="/standards?topic=Appointment+%2F+scheduling"
           linkText="Appointments"
-          description="Appointment booking and management, clinical referrals, key care information."
+          description="Including appointment bookings and clinical referrals."
         />
         <HomeElement
           link="/standards?topic=Access+to+records"
           linkText="Access to records"
-          description="Retrieve structured information from a patient and shared care records."
+          description="Including retrieving structured information from care records."
         />
         <HomeElement
           link="/standards?topic=Vaccination"
           linkText="Vaccination"
-          description="Coronavirus (COVID-19), seasonal flu, immunisation, treatment and prevention protocols."
+          description="Including immunisations and adverse reactions."
         />
       </HomeSection>
       <HomeSection
