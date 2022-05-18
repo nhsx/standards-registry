@@ -70,7 +70,7 @@ export default function Home() {
       >
         <HomeElement
           link="/standards?care_setting=Hospital"
-          linkText="Hospital"
+          linkText="Hospitals"
           description="Including discharges, referrals, dosing and screening."
         />
         <HomeElement
