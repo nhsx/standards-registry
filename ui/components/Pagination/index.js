@@ -1,14 +1,10 @@
-import { parse } from 'url';
 import classnames from 'classnames';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Snippet } from '../';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 
 export default function Pagination({ limit = 10, count }) {
-  const { query, getQuery } = useQueryContext();
-  const router = useRouter();
+  const { query, updateQuery } = useQueryContext();
   const page = parseInt(query.page, 10) || 1;
 
   const totalPages = Math.ceil(count / limit);
@@ -21,9 +17,11 @@ export default function Pagination({ limit = 10, count }) {
     return Array.from(Array(totalPages).keys()).slice(start, end);
   };
 
-  function href(change) {
-    const url = parse(router.asPath);
-    return `${url.pathname}?${getQuery({ page: change })}`;
+  function goto(newPage) {
+    updateQuery({
+      ...query,
+      page: newPage,
+    });
   }
 
   return (
@@ -35,27 +33,25 @@ export default function Pagination({ limit = 10, count }) {
       </div>
       <ul>
         <li className={styles.item} id="prevButton">
-          <Link href={href(page - 1)}>
-            <a
-              className={classnames(styles.link, {
-                [styles.current]: page <= 1,
-              })}
-            >
-              « Previous
-            </a>
-          </Link>
+          <a
+            className={classnames(styles.link, {
+              [styles.current]: page <= 1,
+            })}
+            onClick={() => goto(page - 1)}
+          >
+            « Previous
+          </a>
         </li>
         {pagesToShow().map((num) => (
           <li className={styles.item} key={num}>
-            <Link href={href(num + 1)}>
-              <a
-                className={classnames(styles.link, {
-                  [styles.current]: page === num + 1,
-                })}
-              >
-                {num + 1}
-              </a>
-            </Link>
+            <a
+              className={classnames(styles.link, {
+                [styles.current]: page === num + 1,
+              })}
+              onClick={() => goto(num + 1)}
+            >
+              {num + 1}
+            </a>
           </li>
         ))}
         <li className={styles.item} id="nextButton">
@@ -63,7 +59,7 @@ export default function Pagination({ limit = 10, count }) {
             className={classnames(styles.link, {
               [styles.current]: page >= totalPages,
             })}
-            href={href(page + 1)}
+            onClick={() => goto(page + 1)}
           >
             Next »
           </a>

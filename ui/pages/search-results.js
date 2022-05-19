@@ -16,11 +16,11 @@ const content = {
   title: 'Search results',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
-    all: 'Showing all {{num}} result{{#plural}}s{{/plural}}',
+    all: '{{num}} result{{#plural}}s{{/plural}}',
   },
 };
 
-export default function SearchResults({ data, searchTerm, schemaData }) {
+export default function SearchResults({ data, schemaData }) {
   return (
     <Page>
       <h1>
@@ -32,7 +32,7 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-three-quarters">
           <Search
-            labelText="Find a standard"
+            labelText="Search"
             placeholder="For example, FHIR, allergies, GP"
             location="browse"
           />
@@ -43,7 +43,7 @@ export default function SearchResults({ data, searchTerm, schemaData }) {
           <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} searchTerm={searchTerm} includeType={true} />
+          <Dataset data={data} schema={schemaData} includeType={true} />
         </Col>
       </Row>
       <FeedbackFooter />

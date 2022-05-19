@@ -1,0 +1,30 @@
+@import 'vars';
+
+.filterSummary {
+  margin: $nhsuk-gutter 0;
+  border-top: 1px solid $border-colour;
+  border-bottom: 1px solid $border-colour;
+  padding-top: $nhsuk-gutter;
+}
+
+.filterSection {
+  margin-bottom: $nhsuk-gutter;
+
+  h4 {
+    margin-bottom: $nhsuk-gutter / 2;
+  }
+}
+
+.and {
+  margin-right: 10px;
+}
+
+.widget {
+  background-color: $light-grey;
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid $border-colour;
+  cursor: pointer;
+}

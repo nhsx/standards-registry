@@ -1,5 +1,6 @@
 @import 'vars';
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
+@import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
 
 .title {
   margin-bottom: $nhsuk-gutter * 2;
@@ -26,6 +27,25 @@
     text-decoration: none;
     display: inline-block;
     color: $text-colour;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: $nhsuk-gutter * 3;
+  // Switch to single column below tablet size as per nhs system
+  @include mq($until: tablet) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .element {
+    height: 100%;
+
+    h5 {
+      min-height: 35%;
+    }
   }
 }
 

@@ -3,14 +3,6 @@ import { stringify } from 'qs';
 import { findKey } from 'lodash';
 const CKAN_URL = process.env.CKAN_URL;
 
-const typeMap = {
-  'Technical standards and specifications': 'Technical specifications and APIs',
-  'Record standard': 'Clinical and care record standards',
-  'Data definitions and terminologies': 'Medical data and dictionaries',
-  'Information code of practice and governance standard':
-    'Data governance and information',
-};
-
 // TODO: neaten
 export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
@@ -24,7 +16,7 @@ export function queriseSelections(selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
-      query[prop] = `(*${selectionsRef[prop].join('* OR *')}*)`;
+      query[prop] = `(*${selectionsRef[prop].join('* AND *')}*)`;
     } else {
       delete query[prop];
     }
@@ -37,7 +29,7 @@ function getSearchQuery(q) {
     return undefined;
   }
 
-  let query = `title:${q}~ OR ${q}`;
+  let query = `(title:${q}~ OR ${q})`;
 
   const organisationMappings = {
     'professional-record-standards-body': [
@@ -53,7 +45,7 @@ function getSearchQuery(q) {
   );
 
   if (org) {
-    query = `organization:${org} OR ${query}`;
+    query = `(organization:${org} OR ${query})`;
   }
 
   return query;
@@ -70,16 +62,13 @@ export function serialise(obj = {}) {
       acc.push(key + ':' + obj[key]);
       return acc;
     }, [])
-    .join(' OR ');
+    .join(' AND ');
   return `(${str})`;
 }
 
 export async function read({ id }) {
   const response = await fetch(`${CKAN_URL}/package_show?id=${id}`);
   const data = await response.json();
-  if (typeMap[data.result.standard_category]) {
-    data.result.standard_category = typeMap[data.result.standard_category];
-  }
   return data.result;
 }
 
@@ -113,11 +102,6 @@ export async function list({ page = 1, q, sort, filters }) {
 
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
-  data.result.results.forEach((record) => {
-    if (typeMap[record.standard_category]) {
-      record.standard_category = typeMap[record.standard_category];
-    }
-  });
   return data.result;
 }
 
@@ -126,17 +110,6 @@ export async function schema(dataset = 'dataset') {
     `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
   );
   const data = await response.json();
-
-  const category = data.result.dataset_fields.find(
-    (field) => field.field_name === 'standard_category'
-  );
-  if (category) {
-    category.choices.forEach((choice) => {
-      if (typeMap[choice.value]) {
-        choice.label = typeMap[choice.value];
-      }
-    });
-  }
 
   return data.result;
 }
