@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
-import { CheckboxGroup, OptionSelect, Expander } from '../';
+import omit from 'lodash/omit';
+import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
 
@@ -10,14 +11,36 @@ function Filter({
   onChange,
   field_name: fieldName,
   open,
-  onToggle
+  useSelect,
+  numActive = 0,
 }) {
-  const toggle = e => {
-    e.preventDefault();
-    onToggle(fieldName, e.target.open);
-  };
-  return (
-    <Expander summary={label} className="nhsuk-filter" open={open} onToggle={toggle}>
+  const { query, updateQuery } = useQueryContext();
+  const summary = useSelect ? (
+    <h4 className={styles.filterTypeHeader}>{label}</h4>
+  ) : (
+    <p className={styles.filterHeader}>
+      {label}
+
+      {<span>{numActive} selected</span>}
+    </p>
+  );
+
+  function onSelectChange(val) {
+    updateQuery({ ...query, [fieldName]: val || [] });
+  }
+
+  return useSelect ? (
+    <>
+      {summary}
+      <Select
+        options={choices}
+        onChange={onSelectChange}
+        showAll={true}
+        value={query[fieldName] || ''}
+      />
+    </>
+  ) : (
+    <Expander summary={summary} className="nhsuk-filter" open={open}>
       <OptionSelect>
         <CheckboxGroup
           onChange={onChange}
@@ -36,15 +59,10 @@ const pick = (names, fields) =>
 export default function Filters({ schema }) {
   const { dataset_fields: fields } = schema;
   const { getSelections, updateQuery } = useQueryContext();
-  const [ openItems, setOpenItems ] = useState([]);
+  const [openFilters, setOpenFilters] = useState([]);
   const selections = getSelections();
-  const categories = [
-    'care_setting',
-    'topic',
-    'standard_category'
-  ];
+  const categories = ['care_setting', 'topic', 'standard_category'];
   const filters = pick(categories, fields);
-  const allOpen = openItems.length === filters.length;
 
   const addFilter = (filter) => {
     const selections = getSelections();
@@ -77,56 +95,40 @@ export default function Filters({ schema }) {
     const { checked, value } = event.target;
     const parent = event.target.getAttribute('parent');
     const filter = { [parent]: value };
-
     return checked ? addFilter(filter) : removeFilter(filter);
   };
 
-  const setSelections = () => {
-    const open = new Set(openItems);
-    for (const filter of filters) {
-      const key = filter.field_name;
-      const list = selections[key];
-      filter.choices.map((choice) => {
-        choice.checked = false;
-        if (list && list.includes(choice.value)) {
-          open.add(key);
-          choice.checked = true;
-        }
-        return choice;
-      });
-    }
-    setOpenItems([...open]);
-  };
-  useEffect(setSelections, [selections]);
+  useEffect(() => setOpenFilters(Object.keys(selections)), []);
 
-  const openAll = event => {
-    event.preventDefault();
-    setOpenItems(filters.map(f => f.field_name));
-  };
-
-  const closeAll = event => {
-    event.preventDefault();
-    setOpenItems([]);
-  }
-
-  const toggle = (name, isOpen) => {
-    const open = new Set(openItems);
-    isOpen ? open.add(name) : open.delete(name);
-    setOpenItems([...open]);
-  };
+  const activeFilters = omit(selections, 'q', 'page', 'sort');
 
   return (
     <div className="nhsuk-filters">
       <h3>Filters</h3>
-      <p className={styles.toggleAll}>
-        {
-          allOpen ? <a href="#" onClick={closeAll}>Close all</a> : <a href="#" onClick={openAll}>Open all</a>
-        }
-      </p>
       <div className="nhsuk-expander-group">
-        {filters.map((filter, index) => (
-          <Filter key={index} {...filter} open={openItems.includes(filter.field_name)} onChange={setItem} onToggle={toggle} />
-        ))}
+        {filters.map((filter) => {
+          let fieldFilters = activeFilters[filter.field_name] || [];
+          if (!Array.isArray(fieldFilters)) {
+            fieldFilters = [fieldFilters];
+          }
+          const numActive = fieldFilters.length;
+          filter.choices = filter.choices.map((opt) => ({
+            ...opt,
+            checked: fieldFilters.includes(opt.value),
+          }));
+
+          return (
+            <Filter
+              key={filter.field_name}
+              {...filter}
+              open={openFilters.includes(filter.field_name)}
+              onChange={setItem}
+              numActive={numActive}
+              // TODO: this should be configured in schema
+              useSelect={filter.field_name === 'standard_category'}
+            />
+          );
+        })}
       </div>
     </div>
   );

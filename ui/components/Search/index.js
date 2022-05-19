@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
 import { useQueryContext } from '../../context/query';
 import styles from './style.module.scss';
 
@@ -27,17 +28,32 @@ const SearchButton = ({ style, children }) => (
 export default function Search({
   placeholder,
   label = true,
-  labelText = 'Search directory',
+  labelText = 'Search',
   location = null,
+  navigate = null,
 }) {
-  const { query } = useQueryContext();
+  const router = useRouter();
+  const { query, updateQuery } = useQueryContext();
   const [value, setValue] = useState(query.q);
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    delete query.page; // remove page depth from query when submitting a new search
+    if (navigate || location === 'nav') {
+      router.push(`/search-results?q=${value || ''}`);
+    } else {
+      updateQuery({ ...query, q: value });
+    }
+    return false;
+  }
+
   return (
     <div className="nhsuk-form-group">
       <form
         className={classnames('nhsuk-search', styles.search)}
         method="GET"
         action="/search-results"
+        onSubmit={onFormSubmit}
       >
         {label && <label className="nhsuk-label">{labelText}</label>}
         <input

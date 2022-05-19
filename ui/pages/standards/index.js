@@ -15,18 +15,17 @@ import { getPageProps } from '../../helpers/getPageProps';
 export default function Standards({ data, schemaData }) {
   return (
     <Page>
-      <h1>Browse the standards directory</h1>
+      <h1>Published standards</h1>
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Find standards, services and APIs to build interoperable technology in
-          health and social care.
+          Explore all published data standards and information codes of practice in England or view future standards.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-three-quarters">
           <Search
-            labelText="Find a standard"
+            labelText="Search"
             placeholder="For example, FHIR, allergies, GP"
             location="browse"
           />
@@ -37,7 +36,7 @@ export default function Standards({ data, schemaData }) {
           <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} pagination={true} />
+          <Dataset data={data} pagination={true} schema={schemaData} />
         </Col>
       </Row>
       <FeedbackFooter />
