@@ -11,7 +11,10 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
 
-const DATE_FORMAT = 'do MMM yyyy';
+const DATE_FORMAT = 'd MMM yyyy';
+
+export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
+  format(parseISO(date), dateFormat);
 
 function Embolden({ children }) {
   const { getSelections } = useQueryContext();
@@ -62,7 +65,7 @@ function Model({ model }) {
         <p
           className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
         >
-          Last updated: {format(parseISO(metadata_modified), DATE_FORMAT)}
+          Last updated: {formatDate(metadata_modified)}
         </p>
       </Flex>
     </>
@@ -188,6 +191,7 @@ export default function Dataset({
   const [queue, setQueue] = useState(null);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(getSelections).length > 0;
+  const router = useRouter();
 
   function pushToQueue() {
     setQueue(query);
@@ -218,7 +222,7 @@ export default function Dataset({
       setData(res.data);
     } catch (err) {
       console.error(err);
-      const router = useRouter();
+
       router.reload(window.location.pathname);
     } finally {
       setLoading(false);
