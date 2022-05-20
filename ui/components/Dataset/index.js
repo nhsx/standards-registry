@@ -11,8 +11,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
 
-const DATE_FORMAT = 'd MMM yyyy';
-
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
   format(parseISO(date), dateFormat);
 
