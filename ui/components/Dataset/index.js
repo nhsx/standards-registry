@@ -191,44 +191,43 @@ export default function Dataset({
   const filtersSelected = Object.keys(getSelections).length > 0;
   const router = useRouter();
 
-  function pushToQueue() {
+  useEffect(() => {
     setQueue(query);
-  }
+  }, [query]);
+  useEffect(() => {
+    async function getData() {
+      if (loading || !queue) {
+        return;
+      }
 
-  async function getData() {
-    if (loading || !queue) {
-      return;
+      const DEFAULT_SORT = {
+        score: 'desc',
+        metadata_modified: 'desc',
+      };
+
+      const { q, page, sort = DEFAULT_SORT, ...filters } = queue;
+      const params = {
+        q,
+        page,
+        sort,
+        filters,
+      };
+
+      try {
+        setLoading(true);
+        setQueue(null);
+        const res = await axios.post('/api/refresh-list', params);
+        setData(res.data);
+      } catch (err) {
+        console.error(err);
+
+        router.reload(window.location.pathname);
+      } finally {
+        setLoading(false);
+      }
     }
-
-    const DEFAULT_SORT = {
-      score: 'desc',
-      metadata_modified: 'desc',
-    };
-
-    const { q, page, sort = DEFAULT_SORT, ...filters } = queue;
-    const params = {
-      q,
-      page,
-      sort,
-      filters,
-    };
-
-    try {
-      setLoading(true);
-      setQueue(null);
-      const res = await axios.post('/api/refresh-list', params);
-      setData(res.data);
-    } catch (err) {
-      console.error(err);
-
-      router.reload(window.location.pathname);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => pushToQueue(), [query]);
-  useEffect(() => getData(), [queue, loading]);
+    getData();
+  }, [queue, loading, router]);
 
   return (
     <>

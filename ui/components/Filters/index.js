@@ -98,7 +98,7 @@ export default function Filters({ schema }) {
     return checked ? addFilter(filter) : removeFilter(filter);
   };
 
-  useEffect(() => setOpenFilters(Object.keys(selections)), []);
+  useEffect(() => setOpenFilters(Object.keys(selections)), [selections]);
 
   const activeFilters = omit(selections, 'q', 'page', 'sort');
 
