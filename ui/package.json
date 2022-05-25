@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "test": "next lint && jest && pretty-quick --check",
+    "prettier": "pretty-quick --write",
+    "test": "next lint && pretty-quick --check && jest",
     "test:integration": "cypress run",
     "test:watch": "jest --watch"
   },
