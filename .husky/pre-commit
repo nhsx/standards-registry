@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx eslint ui/ --fix && npx prettier ui/ --write --loglevel warn
+npx eslint ui/ --fix && npx pretty-quick --staged ui/ --write --loglevel warn
 
