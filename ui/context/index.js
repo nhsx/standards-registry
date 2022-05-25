@@ -6,9 +6,7 @@ export function PageContext({ children, content, data, query }) {
   return (
     <QueryContextWrapper value={query}>
       <ContentContextWrapper value={content}>
-        <ModelContextWrapper value={data}>
-          { children }
-        </ModelContextWrapper>
+        <ModelContextWrapper value={data}>{children}</ModelContextWrapper>
       </ContentContextWrapper>
     </QueryContextWrapper>
   );

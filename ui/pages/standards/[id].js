@@ -1,11 +1,4 @@
-import {
-  Page,
-  Reading,
-  Row,
-  Col,
-  Model,
-  ReviewDates,
-} from '../../components';
+import { Page, Reading, Row, Col, Model, ReviewDates } from '../../components';
 
 import { read } from '../../helpers/api';
 import schema from '../../schema';

@@ -9,7 +9,6 @@ import {
 } from '../components';
 import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
-import React from 'react';
 
 const content = {
   title: 'Home - Standards Directory',

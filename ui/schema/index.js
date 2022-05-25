@@ -60,17 +60,17 @@ export default [
                   and associated protocols.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Clinical and care record standards</strong> define what
-                  information to collect, the purpose of the information and how
-                  to format it for consistency of meaning - for example creating
-                  a standardised way to register a new patient.
+                  <strong>Clinical and care record standards</strong> define
+                  what information to collect, the purpose of the information
+                  and how to format it for consistency of meaning - for example
+                  creating a standardised way to register a new patient.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Medical and data dictionaries</strong> define the format
-                  of specific data items in ways that allow them to be consistently
-                  represented. Labelling of medicines or formatting of dates of
-                  birth are examples. This category also includes reference sets
-                  and controlled lists.
+                  <strong>Medical and data dictionaries</strong> define the
+                  format of specific data items in ways that allow them to be
+                  consistently represented. Labelling of medicines or formatting
+                  of dates of birth are examples. This category also includes
+                  reference sets and controlled lists.
                 </Paragraph>
                 <Paragraph>
                   <strong>Data protection and governance</strong> define rules
