@@ -2,7 +2,7 @@ import upperFirst from 'lodash/upperFirst';
 import { Details, Tag, Link, MarkdownBlock, Paragraph } from '../components';
 
 // `!!val?.length` => check whether empty array or unset val
-export default [
+const schema = [
   {
     section_title: 'About this standard',
     owner: {
@@ -162,3 +162,5 @@ export default [
     },
   },
 ];
+
+export default schema;
