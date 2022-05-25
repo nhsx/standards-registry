@@ -9,7 +9,7 @@
     "lint": "next lint",
     "cypress:open": "cypress open",
     "prettier": "pretty-quick --write",
-    "test": "next lint && pretty-quick --check && jest",
+    "test": "next lint && prettier --check . && jest",
     "test:integration": "cypress run",
     "test:watch": "jest --watch"
   },
