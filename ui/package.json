@@ -39,7 +39,12 @@
     "eslint-config-next": "11.1.2",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^26.2.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-wdio": "^7.19.4",
+    "husky": "^8.0.1",
     "jest": "^28.1.0",
-    "jest-environment-jsdom": "^28.1.0"
+    "jest-environment-jsdom": "^28.1.0",
+    "prettier": "^2.6.2"
   }
 }

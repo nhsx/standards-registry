@@ -8,6 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'next/core-web-vitals',
+    'prettier',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -31,4 +32,9 @@ module.exports = {
       plugins: ['jest'],
     },
   ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };
