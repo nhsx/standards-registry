@@ -1,6 +1,7 @@
 {
   "editor.formatOnSave": true,
   "prettier.configPath": "ui/.prettierrc",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "workbench.colorTheme": "One Monokai",
   "workbench.preferredDarkColorTheme": "One Monokai",
   "editor.tabSize": 2

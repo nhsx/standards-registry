@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
 
   if (!pageData) {
     return {
-      notFound: true
+      notFound: true,
     };
   }
 

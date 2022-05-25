@@ -1,4 +1,4 @@
-import '../styles/globals.scss'
+import '../styles/globals.scss';
 import { PageContext } from '../context';
 import { Layout as DefaultLayout } from '../components';
 
@@ -13,4 +13,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;

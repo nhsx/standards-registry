@@ -1,4 +1,4 @@
-@import "vars";
+@import 'vars';
 
 .tag {
   border-radius: 0.3em;
@@ -7,7 +7,7 @@
   white-space: nowrap;
   font-weight: normal;
 }
-// TODO: other status colors? 
+// TODO: other status colors?
 .draft {
   background-color: $pink;
   border-color: adjust-color($pink, $lightness: -5%);
