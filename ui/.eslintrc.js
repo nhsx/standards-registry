@@ -22,6 +22,10 @@ module.exports = {
     'react/prop-types': [0],
     'react/react-in-jsx-scope': [0], // next puts react in global scope
     'no-console': [2, { allow: ['warn', 'error'] }],
+    // Lint precommit hook is run from the root, which expects a "pages" directory
+    // Our pages live in the ui folder, so let the linter know that.
+    // https://nextjs.org/docs/messages/no-html-link-for-pages#options
+    '@next/next/no-html-link-for-pages': ['error', 'ui/pages/'],
   },
   overrides: [
     {
