@@ -1,0 +1,9 @@
+# Ignore build artifacts
+coverage
+.next
+package-lock.json
+
+*.md
+
+# Ignore all HTML files
+*.html
