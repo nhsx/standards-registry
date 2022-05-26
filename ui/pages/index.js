@@ -52,9 +52,9 @@ const HomeSection = ({ children, title, link, linkText, lineBreak = true }) => (
 
 const HomeElement = ({ link, linkText, description }) => (
   <div className={styles.element}>
-    <h5>
+    <h3 className="nhsuk-heading-xs">
       <Link href={link}>{linkText}</Link>
-    </h5>
+    </h3>
     <p>{description}</p>
   </div>
 );
