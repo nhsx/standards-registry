@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
 
 const content = {
-  title: 'Home - Standards Directory',
+  title: 'NHS Standards Directory',
   header:
     'Find standards for data and interoperability in health and adult social care',
   intro:

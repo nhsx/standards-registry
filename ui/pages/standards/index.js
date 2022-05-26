@@ -11,11 +11,17 @@ import {
   FeedbackFooter,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
-
+import { useContentContext } from '../../context/content';
+import { useQueryContext } from '../../context/query';
 export default function Standards({ data, schemaData }) {
+  const { query } = useQueryContext();
+  const { setPageTitle } = useContentContext();
+  const pageTitle = query.q
+    ? `${query.q} - Search Results`
+    : 'Published standards';
   return (
-    <Page>
-      <h1>Published standards</h1>
+    <Page title={setPageTitle(pageTitle)}>
+      <h1>{pageTitle}</h1>
       <Reading>
         <Snippet>intro</Snippet>
         <p>
