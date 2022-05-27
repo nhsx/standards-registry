@@ -163,7 +163,7 @@ const NoResultsSummary = ({ searchTerm }) => (
 );
 
 const ResultSummary = ({ count, searchTerm, filtersSelected, loading }) => (
-  <h3 id="resultSummary" data-loading={loading}>
+  <h2 id="resultSummary" data-loading={loading}>
     {(loading && 'Searching for results') || (
       <Snippet
         num={count}
@@ -174,7 +174,7 @@ const ResultSummary = ({ count, searchTerm, filtersSelected, loading }) => (
         {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
       </Snippet>
     )}
-  </h3>
+  </h2>
 );
 
 export default function Dataset({
