@@ -1,6 +1,16 @@
-export function Select({ options, onChange, id, value, label, showAll }) {
+import classNames from 'classnames';
+
+export function Select({
+  options,
+  onChange,
+  id,
+  value,
+  label,
+  showAll,
+  className,
+}) {
   return (
-    <div className="nhsuk-form-group">
+    <div className={classNames('nhsuk-form-group', className)}>
       {label && (
         <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor={id}>
           {label}
