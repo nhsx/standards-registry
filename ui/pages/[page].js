@@ -1,5 +1,6 @@
-import { Page, MarkdownRender, TableOfContents } from '../components';
+import { Page, TableOfContents } from '../components';
 import { getPages } from '../helpers/api';
+import ReactMarkdown from 'react-markdown';
 
 const StaticPage = ({ pageData }) => {
   const { content, title, show_table_of_contents: showContents } = pageData;
@@ -9,7 +10,7 @@ const StaticPage = ({ pageData }) => {
         {showContents && <TableOfContents content={content} />}
         <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
-          <MarkdownRender md={content} />
+          <ReactMarkdown>{content}</ReactMarkdown>
         </div>
       </div>
     </Page>
