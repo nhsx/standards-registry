@@ -1,20 +1,9 @@
-import { parse } from 'marked';
-
-const createMarkup = (htmlstr) => {
-  return {
-    __html: htmlstr,
-  };
-};
+import ReactMarkdown from 'react-markdown';
 
 export default function MarkdownBlock({ md }) {
   return (
-    <div
-      className="nhsuk-u-font-size-16"
-      dangerouslySetInnerHTML={createMarkup(parse(md))}
-    />
+    <div className="nhsuk-u-font-size-16">
+      <ReactMarkdown>{md}</ReactMarkdown>
+    </div>
   );
 }
-
-export const MarkdownRender = ({ md }) => (
-  <div dangerouslySetInnerHTML={createMarkup(parse(md))} />
-);
