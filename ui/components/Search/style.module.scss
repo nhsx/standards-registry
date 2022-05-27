@@ -1,3 +1,4 @@
+@import 'vars';
 @import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
@@ -23,12 +24,11 @@
   padding: 8px;
   &:hover {
     border: none;
-    background-color: $color_nhsuk-grey-1;
   }
   &:active,
   &:focus {
-    outline: 0px;
-    color: white;
+    box-shadow: none;
+    background: $yellow;
   }
 }
 
