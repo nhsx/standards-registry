@@ -12,7 +12,7 @@ const trim = (value) =>
     .trim();
 
 export default function Content({ children, inline, small, large, ...props }) {
-  const content = useContentContext();
+  const { content } = useContentContext();
   const str = get(content, children);
   if (!str) {
     return null;

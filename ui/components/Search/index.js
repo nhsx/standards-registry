@@ -55,18 +55,20 @@ export default function Search({
         action="/search-results"
         onSubmit={onFormSubmit}
       >
-        {label && <label className="nhsuk-label">{labelText}</label>}
-        <input
-          type="text"
-          className={classnames(
-            'nhsuk-input',
-            location === 'browse' ? styles.inputBrowse : styles.input
-          )}
-          placeholder={placeholder}
-          name="q"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
+        <label className={'nhsuk-label'}>
+          {label && labelText}
+          <input
+            type="text"
+            className={classnames(
+              'nhsuk-input',
+              location === 'browse' ? styles.inputBrowse : styles.input
+            )}
+            placeholder={placeholder}
+            name="q"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+        </label>
 
         {location === 'nav' ? (
           <SearchButton style={styles.button}>

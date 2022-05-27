@@ -11,7 +11,7 @@ import styles from '../styles/Home.module.scss';
 import { list } from '../helpers/api';
 
 const content = {
-  title: 'Home - Standards Directory',
+  title: 'NHS Standards Directory',
   header:
     'Find standards for data and interoperability in health and adult social care',
   intro:
@@ -52,9 +52,9 @@ const HomeSection = ({ children, title, link, linkText, lineBreak = true }) => (
 
 const HomeElement = ({ link, linkText, description }) => (
   <div className={styles.element}>
-    <h5>
+    <h3 className="nhsuk-heading-xs">
       <Link href={link}>{linkText}</Link>
-    </h5>
+    </h3>
     <p>{description}</p>
   </div>
 );

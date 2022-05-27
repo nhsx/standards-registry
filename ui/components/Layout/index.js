@@ -6,22 +6,22 @@ import {
   Breadcrumbs,
   Navigation,
   PhaseBanner,
-  Snippet,
   Search,
   Col,
   Row,
 } from '../';
+import { useContentContext } from '../../context/content';
 import styles from './style.module.scss';
 import classnames from 'classnames';
 
 export default function Home({ children, ...props }) {
   useRouter();
+  const { content } = useContentContext();
+  const { title } = content;
   return (
     <div className={styles.container}>
       <Head>
-        <title>
-          <Snippet>title</Snippet>
-        </title>
+        <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
       <a className="nhsuk-skip-link" href="#maincontent">

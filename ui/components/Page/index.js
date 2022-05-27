@@ -2,11 +2,11 @@ import Head from 'next/head';
 import { useContentContext } from '../../context/content';
 
 export default function Page({ children, title }) {
-  const context = useContentContext();
+  const { content } = useContentContext();
   return (
     <>
       <Head>
-        <title>{title || context.title}</title>
+        <title>{title || content.title}</title>
       </Head>
       {children}
     </>

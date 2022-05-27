@@ -2,10 +2,12 @@ import { Page, Reading, Row, Col, Model, ReviewDates } from '../../components';
 
 import { read } from '../../helpers/api';
 import schema from '../../schema';
+import { useContentContext } from '../../context/content';
 
 const Id = ({ data }) => {
+  const { setPageTitle } = useContentContext();
   return (
-    <Page title={data.title}>
+    <Page title={setPageTitle(data.title)}>
       <Reading>
         <h1>{data.title}</h1>
         <div className="nhsuk-u-reading-width">
