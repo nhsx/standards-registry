@@ -15,9 +15,7 @@ function Filter({
   numActive = 0,
 }) {
   const { query, updateQuery } = useQueryContext();
-  const summary = useSelect ? (
-    <h4 className={styles.filterTypeHeader}>{label}</h4>
-  ) : (
+  const summary = useSelect ? null : (
     <p className={styles.filterHeader}>
       {label}
 
@@ -30,15 +28,17 @@ function Filter({
   }
 
   return useSelect ? (
-    <>
+    <label className="nhsuk-heading-m nhsuk-u-padding-top-3">
+      {label}
       {summary}
       <Select
+        className="nhsuk-u-padding-top-4"
         options={choices}
         onChange={onSelectChange}
         showAll={true}
         value={query[fieldName] || ''}
       />
-    </>
+    </label>
   ) : (
     <Expander summary={summary} className="nhsuk-filter" open={open}>
       <OptionSelect>
