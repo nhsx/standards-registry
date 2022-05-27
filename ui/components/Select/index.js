@@ -7,20 +7,21 @@ export function Select({
   value,
   label,
   showAll,
+  name,
   className,
 }) {
   return (
     <div className={classNames('nhsuk-form-group', className)}>
       {label && (
-        <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor={id}>
+        <label className="nhsuk-label nhsuk-u-font-size-16" htmlFor={name}>
           {label}
         </label>
       )}
 
       <select
         className="nhsuk-select nhsuk-u-font-size-16"
-        name={id}
-        id={id}
+        name={name}
+        id={id || name}
         onChange={(e) => onChange(e.target.value)}
         value={value}
       >
