@@ -32,11 +32,8 @@ export default function Content({ children, inline, small, large, ...props }) {
   }
 
   return (
-    <ReactMarkdown
-      includeElementIndex={true}
-      components={{ p: conditionalInline }}
-    >
+    <Markdown includeElementIndex={true} components={{ p: conditionalInline }}>
       {source}
-    </ReactMarkdown>
+    </Markdown>
   );
 }
