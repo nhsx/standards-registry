@@ -42,7 +42,10 @@ export function Row({ children, className }) {
 
   return (
     <div className={classnames('nhsuk-grid-row', className)}>
-      {Children.map(children, (child) => cloneElement(child, { total }))}
+      {Children.map(
+        children,
+        (child) => child && cloneElement(child, { total })
+      )}
     </div>
   );
 }

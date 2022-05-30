@@ -55,14 +55,29 @@ export default function Search({
   }
 
   return (
-    <div className="nhsuk-form-group">
+    <div
+      className={classnames(
+        'nhsuk-form-group',
+        location === 'nav' && styles.searchFormInNavWrapper
+      )}
+    >
       <form
-        className={classnames('nhsuk-search', styles.search)}
+        className={classnames(
+          'nhsuk-search',
+          styles.search,
+          location === 'nav' && styles.searchInNav
+        )}
         method="GET"
         action="/search-results"
         onSubmit={onFormSubmit}
       >
-        <label className={'nhsuk-label'}>
+        <label
+          className={classnames(
+            'nhsuk-label',
+            styles.searchLabel,
+            location === 'nav' && styles.labelInNav
+          )}
+        >
           {label && labelText}
           <input
             type="text"

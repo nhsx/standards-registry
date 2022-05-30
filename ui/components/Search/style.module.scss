@@ -2,14 +2,31 @@
 @import 'node_modules/nhsuk-frontend/packages/core/tools/_sass-mq.scss';
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
+.searchFormInNavWrapper {
+  float: right;
+  margin-right: $nhsuk-gutter;
+  margin-bottom: $nhsuk-gutter;
+}
+
 .search {
   position: relative;
+}
+
+.searchInNav {
+  display: inline-block;
+}
+
+.labelInNav {
+  float: left;
 }
 
 .input {
   padding-left: 0.5em;
   border: none;
   background-color: $color_nhsuk-grey-5;
+  &:focus {
+    border: none;
+  }
 }
 
 .buttonText {
@@ -33,18 +50,16 @@
 }
 
 .button {
-  position: absolute;
   line-height: 50%;
-  bottom: 0;
-  right: 0;
 }
 
 @include mq($until: tablet) {
-  .input {
-    margin: 10px 0 0;
+  .searchFormInNavWrapper {
+    float: left;
+    margin: $nhsuk-gutter;
   }
   .button {
-    width: 40px;
+    width: 44px;
     height: 40px;
     padding: 1px;
 
@@ -59,10 +74,3 @@
     height: 27px !important;
   }
 }
-
-// Placeholder for tablet+ specific styling
-// @include mq($from: tablet) {
-// .button {
-// background-color: red;
-// }
-// }
