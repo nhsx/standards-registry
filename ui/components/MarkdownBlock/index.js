@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import { parse } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 
 export default function MarkdownBlock({ md }) {
   return (
@@ -10,5 +11,5 @@ export default function MarkdownBlock({ md }) {
 }
 
 export const MarkdownRender = ({ md }) => (
-  <div dangerouslySetInnerHTML={{ __html: parse(md) }} />
+  <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(parse(md)) }} />
 );
