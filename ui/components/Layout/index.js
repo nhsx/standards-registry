@@ -106,8 +106,11 @@ export default function Home({ children, ...props }) {
             <p className="nhsuk-footer__copyright">&copy; Crown copyright</p>
             <ul className="nhsuk-footer__list">
               <li className="nhsuk-footer__list-item">
-                <Link href="/cookie-policy">
-                  <a className="nhsuk-footer__list-item-link">Cookies</a>
+                <Link
+                  href="/cookie-policy"
+                  className="nhsuk-footer__list-item-link"
+                >
+                  Cookies
                 </Link>
               </li>
             </ul>
