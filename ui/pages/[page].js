@@ -1,16 +1,17 @@
-import { Page, TableOfContents } from '../components';
+import { parse } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
+import { fromMarkdown } from 'mdast-util-from-markdown';
 import { getPages } from '../helpers/api';
-import ReactMarkdown from 'react-markdown';
+import { Page, TableOfContents } from '../components';
 
-const StaticPage = ({ pageData }) => {
-  const { content, title, show_table_of_contents: showContents } = pageData;
+const StaticPage = ({ content, showToc, title, parsed }) => {
   return (
     <Page title={title}>
       <div className="nhsuk-grid-row">
-        {showContents && <TableOfContents content={content} />}
+        {showToc && <TableOfContents content={parsed} />}
         <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
-          <ReactMarkdown>{content}</ReactMarkdown>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
         </div>
       </div>
     </Page>
@@ -27,10 +28,21 @@ export async function getServerSideProps(context) {
       notFound: true,
     };
   }
+  const {
+    title,
+    content: unsanitised,
+    show_table_of_contents: showToc,
+  } = pageData;
+
+  const content = DOMPurify.sanitize(parse(unsanitised));
+  const parsed = fromMarkdown(DOMPurify.sanitize(unsanitised));
 
   return {
     props: {
-      pageData,
+      showToc,
+      content,
+      title,
+      parsed,
     },
   };
 }
