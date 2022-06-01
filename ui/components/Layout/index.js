@@ -102,7 +102,18 @@ export default function Home({ children, ...props }) {
       <footer role="contentinfo">
         <div className="nhsuk-footer" id="nhsuk-footer">
           <div className="nhsuk-width-container">
+            <h2 className="nhsuk-u-visually-hidden">Support links</h2>
             <p className="nhsuk-footer__copyright">&copy; Crown copyright</p>
+            <ul className="nhsuk-footer__list">
+              <li className="nhsuk-footer__list-item">
+                <Link
+                  href="/cookie-policy"
+                  className="nhsuk-footer__list-item-link"
+                >
+                  Cookies
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </footer>
