@@ -1,5 +1,4 @@
 import { Link } from '../';
-import { fromMarkdown } from 'mdast-util-from-markdown';
 
 const TocItem = ({ text }) => (
   <li>
