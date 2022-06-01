@@ -27,7 +27,6 @@ export { default as Tag } from './Tag';
 export { default as Layout } from './Layout';
 export { default as ReviewDates } from './ReviewDates';
 export { default as MarkdownBlock } from './MarkdownBlock';
-export { MarkdownRender } from './MarkdownBlock';
 export { TableOfContents } from './TableOfContents';
 export * from './FeedbackFooter';
 
