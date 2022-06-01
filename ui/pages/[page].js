@@ -1,8 +1,8 @@
-import DOMPurify from 'isomorphic-dompurify';
-import { Page, TableOfContents } from '../components';
-import { getPages } from '../helpers/api';
 import { parse } from 'marked';
+import DOMPurify from 'isomorphic-dompurify';
 import { fromMarkdown } from 'mdast-util-from-markdown';
+import { getPages } from '../helpers/api';
+import { Page, TableOfContents } from '../components';
 
 const StaticPage = ({ content, showToc, title, parsed }) => {
   return (
