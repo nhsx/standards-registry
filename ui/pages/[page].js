@@ -1,12 +1,12 @@
+import DOMPurify from 'isomorphic-dompurify';
 import { Page, TableOfContents, MarkdownRender } from '../components';
 import { getPages } from '../helpers/api';
 
-const StaticPage = ({ pageData }) => {
-  const { content, title, show_table_of_contents: showContents } = pageData;
+const StaticPage = ({ content, showToc, title }) => {
   return (
     <Page title={title}>
       <div className="nhsuk-grid-row">
-        {showContents && <TableOfContents content={content} />}
+        {showToc && <TableOfContents content={content} />}
         <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
           <MarkdownRender md={content} />
@@ -26,10 +26,18 @@ export async function getServerSideProps(context) {
       notFound: true,
     };
   }
+  const {
+    title,
+    content: unsanitised,
+    show_table_of_contents: showToc,
+  } = pageData;
+  const content = DOMPurify.sanitize(unsanitised);
 
   return {
     props: {
-      pageData,
+      showToc,
+      content,
+      title,
     },
   };
 }
