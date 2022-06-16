@@ -19,11 +19,10 @@ describe('Homepage', () => {
     it('Can search from the homepage', () => {
       cy.visit('/');
       cy.doSearch('allergies');
-      cy.get('#browse-results li').should('have.length', 1);
+      cy.get('#browse-results li').not('have.length', 0);
     });
     it('Blank search returns results', () => {
       cy.visit('/');
-      // cy.wait(1);
       cy.doSearch(' ');
       cy.get('#browse-results li').not('have.length', 0);
     });
