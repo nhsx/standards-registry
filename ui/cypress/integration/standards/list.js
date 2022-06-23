@@ -21,7 +21,7 @@ describe('Standards Listing Index', () => {
       cy.visit('/standards');
       cy.doSearch('alergy');
 
-      cy.get('#browse-results li').should('have.length', 1);
+      cy.get('#browse-results li').should('have.length.of.at.least', 1);
       cy.contains('#browse-results li', 'Allergy').click();
     });
 
