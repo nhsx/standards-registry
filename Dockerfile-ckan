@@ -27,8 +27,9 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.allow_html = true"
 # https://docs.ckan.org/en/2.9/maintaining/tracking.html
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.tracking_enabled = true"
 
-RUN cd /srv/app/src/ckanext-scheming && python setup.py install
-RUN cd /srv/app/src/ckanext-pages && python setup.py install
+RUN cd /srv/app/src/ckanext-scheming && python setup.py develop
+RUN cd /srv/app/src/ckanext-pages && python setup.py develop
+RUN ckan -c ${APP_DIR}/production.ini search-index rebuild -r
 
 RUN chown -R ckan:ckan /srv/app
 RUN mkdir /var/lib/ckan
