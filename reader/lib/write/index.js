@@ -118,15 +118,16 @@ export const writeToCKAN = async ({
   ckanUrl = config.CKAN_URL,
   ckanApiKey = config.CKAN_API_KEY,
   fileLocation = './test.json',
+  data = null,
 } = {}) => {
   const headers = {
     Authorization: ckanApiKey,
     'Content-Type': 'application/json',
   };
 
-  const sheet = await readSheet(fileLocation);
+  const results = data ? data.result.results : await readSheet(fileLocation);
 
-  for (const record of sheet) {
+  for (const record of results) {
     await writeRecord({ record, headers, ckanUrl, dryRun });
   }
   logStream.write(`

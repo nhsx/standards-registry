@@ -11,6 +11,7 @@
   "license": "WTFPL",
   "devDependencies": {
     "@babel/preset-env": "^7.16.5",
+    "commander": "^9.3.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.14.0",
     "googleapis": "^92.0.0",
