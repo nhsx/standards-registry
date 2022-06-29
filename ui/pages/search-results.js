@@ -14,7 +14,7 @@ import { getPageProps } from '../helpers/getPageProps';
 import { useQueryContext } from '../context/query';
 
 const content = {
-  title: 'Search results - NHS Standards Directory',
+  title: 'Search results',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
     all: '{{num}} result{{#plural}}s{{/plural}}',
@@ -28,7 +28,7 @@ export default function SearchResults({ data, schemaData }) {
     ? [query.q, content.title].join(' - ')
     : content.title;
   return (
-    <Page title={title}>
+    <Page title={`${title} - NHS Standards Directory`}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>
