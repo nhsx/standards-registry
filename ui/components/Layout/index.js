@@ -139,7 +139,10 @@ export default function Home({ children, ...props }) {
                   </Link>
                 </li>
                 <li className="nhsuk-footer__list-item">
-                  <Link href="/about" className="nhsuk-footer__list-item-link">
+                  <Link
+                    href="/about-this-service"
+                    className="nhsuk-footer__list-item-link"
+                  >
                     About this service
                   </Link>
                 </li>
