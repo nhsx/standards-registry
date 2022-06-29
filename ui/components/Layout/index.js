@@ -107,11 +107,45 @@ export default function Home({ children, ...props }) {
             <ul className="nhsuk-footer__list">
               <li className="nhsuk-footer__list-item">
                 <Link
+                  href="/accessibility-statement"
+                  className="nhsuk-footer__list-item-link"
+                >
+                  Accessibility statement
+                </Link>
+              </li>
+              <li className="nhsuk-footer__list-item">
+                <Link
                   href="/cookie-policy"
                   className="nhsuk-footer__list-item-link"
                 >
                   Cookies
                 </Link>
+              </li>
+              <li className="nhsuk-footer__list-item">
+                <Link
+                  href="/privacy-policy"
+                  className="nhsuk-footer__list-item-link"
+                >
+                  Privacy
+                </Link>
+              </li>
+              <li className="nhsuk-footer__list-item">
+                <Link href="/site-map" className="nhsuk-footer__list-item-link">
+                  Site map
+                </Link>
+              </li>
+              <li className="nhsuk-footer__list-item">
+                <Link href="/about" className="nhsuk-footer__list-item-link">
+                  About this service
+                </Link>
+              </li>
+              <li className="nhsuk-footer__list-item">
+                <a
+                  className="nhsuk-footer__list-item-link"
+                  href="mailto:england.standards.directory@nhs.net"
+                >
+                  Contact: england.standards.directory@nhs.net
+                </a>
               </li>
             </ul>
           </div>
