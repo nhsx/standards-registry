@@ -1,3 +1,57 @@
+@import "vars";
+
 .tbody * {
   font-size: 16px;
+}
+
+.th {
+  font-size: 1.1em;
+  white-space: nowrap;
+  &[aria-sort="asc"] {
+    a:after {
+      content: ' ▲';
+    }
+  }
+  &[aria-sort="desc"] {
+    a:after {
+      content: ' ▼';
+    }
+  }
+}
+
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+  .table, .thead, .tbody, .th, .td, .tr {
+		display: block;
+	}
+
+  .thead .tr {
+    position: absolute;
+		top: -9999px;
+		left: -9999px;
+  }
+
+  .tr {
+    border-bottom: 2px solid $border-colour;
+  }
+
+  .td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+    border-bottom: 2px solid lighten($border-colour, 20%);
+	}
+
+  .td:before {
+    font-weight: bold;
+    content:attr(title);
+		position: absolute;
+		top: 16px;
+		left: 16px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
 }

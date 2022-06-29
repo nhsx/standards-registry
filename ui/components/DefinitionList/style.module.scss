@@ -1,0 +1,15 @@
+.dl {
+  display: block;
+
+  > * {
+    display: block
+  }
+}
+
+.dt {
+  font-weight: bold;
+}
+
+.dd {
+  margin-left: 0;
+}

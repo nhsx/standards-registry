@@ -1,5 +1,5 @@
 import upperFirst from 'lodash/upperFirst';
-import { Details, Tag, Link, MarkdownBlock, Paragraph } from '../components';
+import { Details, Tag, Link, MarkdownBlock, Paragraph, Dl, Dd, Dt } from '../components';
 
 // `!!val?.length` => check whether empty array or unset val
 const schema = [
@@ -160,3 +160,64 @@ const schema = [
 ];
 
 export default schema;
+
+export const upcomingStandard = [
+  {
+    id: 'name',
+    title: 'Name',
+    sortable: true,
+    formatter: (val, row) => {
+      return (
+        <>
+          <p>
+            <strong>{row.title}</strong><br />
+            {row.description}
+          </p>
+        </>
+      )
+    }
+  },
+  {
+    id: 'standard_category',
+    title: 'Standard type',
+    sortable: true
+  },
+  {
+    id: 'status',
+    title: 'Stage',
+    sortable: true,
+    formatter: val => <strong>{upperFirst(val)}</strong>
+  },
+  {
+    id: 'dates',
+    title: 'Estimated dates',
+    formatter: (_, row) => (
+      <Dl>
+        <Dt>Publication due</Dt>
+        <Dd></Dd>
+
+        <Dt>Implement from</Dt>
+        <Dd></Dd>
+
+        <Dt>Comply by</Dt>
+        <Dd></Dd>
+      </Dl>
+    )
+  },
+  {
+    id: 'other',
+    title: 'Further information',
+    formatter: (_, row) => (
+      <Dl>
+        <Dt>Owner</Dt>
+        <Dd>{ row.owner }</Dd>
+
+        <Dt>Submit feedback</Dt>
+        <Dd dangerouslySetInnerHTML={{__html: row.submitFeedback || 'Not available' }} />
+
+        <Dt>Documentation</Dt>
+        <Dd dangerouslySetInnerHTML={{__html: row.documentation || 'Not available' }} />
+      </Dl>
+    )
+  }
+];

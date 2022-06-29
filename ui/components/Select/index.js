@@ -8,7 +8,7 @@ export function Select({
   label,
   showAll,
   name,
-  className,
+  className
 }) {
   return (
     <div className={classNames('nhsuk-form-group', className)}>
