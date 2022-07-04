@@ -12,7 +12,6 @@ on:
     types:
       - completed
     conclusion:
-      - pass
       - failure
 
 jobs:
