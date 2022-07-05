@@ -2,9 +2,10 @@ import classnames from 'classnames';
 import { Snippet } from '../';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
+import Link from 'next/link';
 
 export default function Pagination({ limit = 10, count }) {
-  const { query, updateQuery } = useQueryContext();
+  const { query, getRoute, getQuery } = useQueryContext();
   const page = parseInt(query.page, 10) || 1;
 
   const totalPages = Math.ceil(count / limit);
@@ -17,15 +18,21 @@ export default function Pagination({ limit = 10, count }) {
     return Array.from(Array(totalPages).keys()).slice(start, end);
   };
 
-  function goto(newPage) {
-    updateQuery({
-      ...query,
-      page: newPage,
-    });
-  }
+  const pageLink = (props) =>
+    [
+      getRoute(),
+      getQuery({
+        ...query,
+        ...props,
+      }),
+    ].join('?');
 
   return (
-    <div className={classnames('nhsuk-pagination', styles.pagination)}>
+    <nav
+      role="navigation"
+      aria-label="Pagination Navigation"
+      className={classnames('nhsuk-pagination', styles.pagination)}
+    >
       <div className={styles.summary}>
         <Snippet from={from} to={to} total={count} inline>
           pagination.summary
@@ -33,38 +40,67 @@ export default function Pagination({ limit = 10, count }) {
       </div>
       <ul>
         <li className={styles.item} id="prevButton">
-          <a
-            className={classnames(styles.link, {
-              [styles.current]: page <= 1,
-            })}
-            onClick={() => goto(page - 1)}
+          <Link
+            shallow={true}
+            href={
+              page <= 1
+                ? '#'
+                : pageLink({
+                    page: page - 1,
+                  })
+            }
           >
-            « Previous
-          </a>
+            <a
+              aria-label="Previous page"
+              className={classnames(styles.link, {
+                [styles.current]: page <= 1,
+              })}
+            >
+              « Previous
+            </a>
+          </Link>
         </li>
         {pagesToShow().map((num) => (
           <li className={styles.item} key={num}>
-            <a
-              className={classnames(styles.link, {
-                [styles.current]: page === num + 1,
+            <Link
+              shallow={true}
+              href={pageLink({
+                page: num + 1,
               })}
-              onClick={() => goto(num + 1)}
             >
-              {num + 1}
-            </a>
+              <a
+                aria-label={`Goto Page ${num + 1}`}
+                className={classnames(styles.link, {
+                  [styles.current]: page === num + 1,
+                })}
+              >
+                {num + 1}
+              </a>
+            </Link>
           </li>
         ))}
         <li className={styles.item} id="nextButton">
-          <a
-            className={classnames(styles.link, {
-              [styles.current]: page >= totalPages,
-            })}
-            onClick={() => goto(page + 1)}
+          <Link
+            shallow={true}
+            href={
+              page >= totalPages
+                ? '#'
+                : pageLink({
+                    page: page + 1,
+                  })
+            }
           >
-            Next »
-          </a>
+            <a
+              aria-label="Next page"
+              className={classnames(styles.link, {
+                [styles.current]: page >= totalPages,
+              })}
+            >
+              Next »
+            </a>
+          </Link>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }
