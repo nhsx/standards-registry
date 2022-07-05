@@ -7,9 +7,13 @@ import styles from './FilterSummary.module.scss';
 
 function Widget({ children, onClick }) {
   return (
-    <div onClick={onClick} className={styles.widget}>
+    <button
+      aria-label={`X, click to remove ${children}`}
+      onClick={onClick}
+      className={styles.widget}
+    >
       X {children}
-    </div>
+    </button>
   );
 }
 
@@ -47,21 +51,21 @@ export function FilterSummary({ schema }) {
           filters = [filters];
         }
         return (
-          <div key={key} className={styles.filterSection}>
+          <ul key={key} className={styles.filterSection}>
             {settings.label.toLowerCase() === 'type' && index >= 1 ? (
               <h4>In</h4>
             ) : null}
             {filters.map((filter, i) => {
               return (
-                <span key={i}>
+                <li key={i}>
                   {i > 0 && <span className={styles.and}>and</span>}
                   <Widget onClick={() => removeFilter(key, filter)}>
                     {filter}
                   </Widget>
-                </span>
+                </li>
               );
             })}
-          </div>
+          </ul>
         );
       })}
     </div>
