@@ -40,7 +40,7 @@ export default function Home({ children, ...props }) {
                       'nhsuk-header__link nhsuk-header__link--service',
                       styles.logo
                     )}
-                    aria-label="NHS homepage"
+                    aria-label="NHS Standards Directory homepage"
                   >
                     <svg
                       className="nhsuk-logo"
