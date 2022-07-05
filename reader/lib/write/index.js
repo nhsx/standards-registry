@@ -26,10 +26,13 @@ const report = {
 
 const sleep = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const isPublished = (status) =>
+  ['active', 'deprecated', 'retired', 'draft'].includes(status) ? true : false;
+
 const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
   await sleep(150); //sleep .15s between hits to the api
 
-  const { title, reference_code } = record;
+  const { title, reference_code, status, is_published_standard } = record;
   // Slugify titles in a similar fashion to CKAN auto-slug
   const name = slugify(title, { lower: true, strict: true });
   console.log('\n * Processing record:\n  ', title);
@@ -38,6 +41,7 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
     ...{
       name,
       mandated: !!reference_code,
+      is_published_standard: is_published_standard || isPublished(status),
     },
   };
   let recordToWrite = params;
