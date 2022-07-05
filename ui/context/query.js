@@ -12,6 +12,10 @@ export function QueryContextWrapper({ children }) {
     return stringify({ ...query, ...props });
   }
 
+  function getRoute() {
+    return router.route;
+  }
+
   function getSelections() {
     return router.query;
   }
@@ -32,6 +36,7 @@ export function QueryContextWrapper({ children }) {
   const value = {
     query: router.query,
     getQuery,
+    getRoute,
     updateQuery,
     getSelections,
   };
