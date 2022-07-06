@@ -18,9 +18,12 @@
   }
 }
 
-@media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
-  .filters {
-    // display: none;
-  }
+.clearAll {
+  margin-bottom: 1em;
+  z-index: 10;
+  float: right;
+}
+
+.clear {
+  clear: both;
 }

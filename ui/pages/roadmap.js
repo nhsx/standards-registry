@@ -53,7 +53,7 @@ export default function Roadmap({ data, schemaData }) {
     getData();
   }, [query]);
 
-  const resultSummary = `${count} result${count > 1 ? 's' : ''}`
+  const resultSummary = `${count} result${count === 1 ? '' : 's'}`
 
   return (
     <Page>
@@ -66,7 +66,7 @@ export default function Roadmap({ data, schemaData }) {
         trigger="Filter by care setting"
         closeLabel="Back to results"
         className={styles.onlyMobile}
-        closeButton="Back to results"
+        closeButton="Show results"
       >
         <Filters
           schema={schemaData}
@@ -74,12 +74,15 @@ export default function Roadmap({ data, schemaData }) {
           categories={['care_setting']}
           showTitle
           expanded
+          clearAll
+          fullHeight
         />
       </Modal>
       <Filters
         schema={schemaData}
         categories={['care_setting']}
         className={classnames(styles.onlyDesktop, styles.threeColumn)}
+        clearAll
       />
       <ResponsiveTable
         schema={schema}

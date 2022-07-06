@@ -110,9 +110,7 @@ export async function list({ page = 1, q, sort, inactive, orderBy, order, ...fil
       .join(', ');
   }
 
-  if (inactive) {
-    filters.is_published_standard = false;
-  }
+  filters.is_published_standard = !inactive;
 
   fq = serialise(queriseSelections(filters));
 
