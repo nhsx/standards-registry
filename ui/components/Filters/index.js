@@ -1,4 +1,4 @@
-import classnames from 'classnames'
+import classnames from 'classnames';
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
 import omit from 'lodash/omit';
@@ -16,12 +16,11 @@ export function Filter({
   useSelect,
   numActive = 0,
   onlyChild,
-  expanded,
-  fullHeight
+  fullHeight,
 }) {
   const { query, updateQuery } = useQueryContext();
   if (onlyChild) {
-    label = `Filter by ${label}`
+    label = `Filter by ${label}`;
   }
   const summary = useSelect ? null : (
     <p className={styles.filterHeader}>
@@ -48,7 +47,11 @@ export function Filter({
       />
     </label>
   ) : (
-    <Expander summary={summary} className={classnames('nhsuk-filter', styles.filter)} open={open}>
+    <Expander
+      summary={summary}
+      className={classnames('nhsuk-filter', styles.filter)}
+      open={open}
+    >
       <OptionSelect fullHeight={fullHeight}>
         <CheckboxGroup
           onChange={onChange}
@@ -62,41 +65,51 @@ export function Filter({
 }
 
 const select = (names, fields) =>
-  (Array.isArray(names) ? names : [names]).map((name) => fields.find((val) => val.field_name === name));
+  (Array.isArray(names) ? names : [names]).map((name) =>
+    fields.find((val) => val.field_name === name)
+  );
 
-export function Filters({ schema, categories = ['care_setting', 'topic', 'standard_category'], title = 'Filters', showTitle, before, expanded, className, clearAll, fullHeight }) {
+export function Filters({
+  schema,
+  categories = ['care_setting', 'topic', 'standard_category'],
+  title = 'Filters',
+  showTitle,
+  before,
+  expanded,
+  className,
+  clearAll,
+  fullHeight,
+}) {
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
   const [openFilters, setOpenFilters] = useState([]);
   const filters = select(categories, fields);
 
-  const setItem = name => (event) => {
+  const setItem = (name) => (event) => {
     const { checked, value } = event.target;
     let filter = query[name];
     if (filter && !Array.isArray(filter)) {
-      filter = [filter]
+      filter = [filter];
     }
     if (checked) {
       return updateQuery({
-        [name]: filter
-          ? [ ...filter, value ]
-          : [value]
-      })
+        [name]: filter ? [...filter, value] : [value],
+      });
     }
     if (!filter || !filter.includes(value)) {
       return;
     }
-    const newVal = filter.filter(val => val !== value);
+    const newVal = filter.filter((val) => val !== value);
     return updateQuery({
-      [name]: newVal.length
-        ? newVal
-        : null
+      [name]: newVal.length ? newVal : null,
     });
   };
 
   function onClearAllClick(e) {
     e.preventDefault();
-    updateQuery(pick(query, 'q', 'page', 'orderBy', 'order'), { overwrite: true })
+    updateQuery(pick(query, 'q', 'page', 'orderBy', 'order'), {
+      overwrite: true,
+    });
   }
 
   useEffect(() => setOpenFilters(Object.keys(query)), [query]);
@@ -106,15 +119,13 @@ export function Filters({ schema, categories = ['care_setting', 'topic', 'standa
 
   return (
     <div className={classnames('nhsuk-filters', styles.filters, className)}>
-      {
-        showTitle && title && <h2 className="nhsuk-heading-m">{title}</h2>
-      }
-      {
-        clearAll && <a href="#" className={styles.clearAll} onClick={onClearAllClick}>Clear all</a>
-      }
-      {
-        before
-      }
+      {showTitle && title && <h2 className="nhsuk-heading-m">{title}</h2>}
+      {clearAll && (
+        <a href="#" className={styles.clearAll} onClick={onClearAllClick}>
+          Clear all
+        </a>
+      )}
+      {before}
       <div className={classnames('nhsuk-expander-group', styles.clear)}>
         {filters.map((filter) => {
           let fieldFilters = activeFilters[filter.field_name] || [];

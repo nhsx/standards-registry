@@ -23,7 +23,9 @@ export function QueryContextWrapper({ children }) {
   function updateQuery(props, { replace, overwrite } = {}) {
     const { query } = router;
 
-    const newQuery = overwrite ? props : pickBy({ ...query, ...props }, Boolean)
+    const newQuery = overwrite
+      ? props
+      : pickBy({ ...query, ...props }, Boolean);
 
     if (replace) {
       return router.replace({ query: newQuery }, null, {

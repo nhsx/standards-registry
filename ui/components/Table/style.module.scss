@@ -1,4 +1,4 @@
-@import "vars";
+@import 'vars';
 
 .table {
   width: 100%;
@@ -12,12 +12,12 @@
 .th {
   font-size: 1.1em;
   white-space: nowrap;
-  &[aria-sort="asc"] {
+  &[aria-sort='asc'] {
     a:after {
       content: ' ▼';
     }
   }
-  &[aria-sort="desc"] {
+  &[aria-sort='desc'] {
     a:after {
       content: ' ▲';
     }
@@ -25,15 +25,20 @@
 }
 
 @media only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px) {
-  .table, .thead, .tbody, .th, .td, .tr {
-		display: block;
-	}
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  .table,
+  .thead,
+  .tbody,
+  .th,
+  .td,
+  .tr {
+    display: block;
+  }
 
   .thead .tr {
     position: absolute;
-		top: -9999px;
-		left: -9999px;
+    top: -9999px;
+    left: -9999px;
   }
 
   .tr {
@@ -41,22 +46,22 @@
   }
 
   .td {
-		/* Behave  like a "row" */
-		border: none;
-		border-bottom: 1px solid #eee;
-		position: relative;
-		padding-left: 50%;
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
     border-bottom: 2px solid lighten($border-colour, 20%);
-	}
+  }
 
   .td:before {
     font-weight: bold;
-    content:attr(title);
-		position: absolute;
-		top: 16px;
-		left: 16px;
-		width: 45%;
-		padding-right: 10px;
-		white-space: nowrap;
-	}
+    content: attr(title);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
 }

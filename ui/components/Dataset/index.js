@@ -2,14 +2,12 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
-import size from 'lodash/size';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import classnames from 'classnames';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
 
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
@@ -102,7 +100,7 @@ function SortMenu({ searchTerm }) {
     },
   ];
 
-  const value = `${query.orderBy} ${query.order}`
+  const value = `${query.orderBy} ${query.order}`;
 
   return (
     <Select
@@ -175,33 +173,29 @@ export default function Dataset({
   includeType,
   schema,
 }) {
-  const { updateQuery, query } = useQueryContext();
+  const { query } = useQueryContext();
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(query).length > 0;
-  const router = useRouter();
-
-  console.log(data)
-
-  async function getData() {
-    try {
-      setLoading(true);
-      const res = await axios.post('/api/refresh-list', query);
-      setData(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   useEffect(() => {
+    async function getData() {
+      try {
+        setLoading(true);
+        const res = await axios.post('/api/refresh-list', query);
+        setData(res.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    }
     if (!loading) {
       getData();
     }
-  }, [query]);
+  }, [query, loading]);
 
   return (
     <>
