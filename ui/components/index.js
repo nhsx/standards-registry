@@ -13,7 +13,7 @@ export * from './FilterSummary';
 export { default as Hero } from './Hero';
 export { default as Link } from './Link';
 export { default as Model } from './Model';
-export * from './Modal'
+export * from './Modal';
 export { default as Navigation } from './Navigation';
 export { default as OptionSelect } from './OptionSelect';
 export { default as Page } from './Page';

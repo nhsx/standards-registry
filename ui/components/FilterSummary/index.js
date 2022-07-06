@@ -24,7 +24,14 @@ export function FilterSummary({ schema }) {
     updateQuery(newQuery);
   }
 
-  const chosenFilters = omit(query, 'q', 'page', 'orderBy', 'order', 'mandated');
+  const chosenFilters = omit(
+    query,
+    'q',
+    'page',
+    'orderBy',
+    'order',
+    'mandated'
+  );
 
   if (!size(chosenFilters)) {
     return null;

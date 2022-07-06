@@ -1,6 +1,6 @@
 import classnames from 'classnames';
-import { forwardRef } from 'react'
-import { useQueryContext } from '../../context/query'
+import { forwardRef } from 'react';
+import { useQueryContext } from '../../context/query';
 import styles from './style.module.scss';
 
 export function Tbody({ children }) {
@@ -18,7 +18,10 @@ export function Tbody({ children }) {
 
 export function Thead({ children }) {
   return (
-    <thead role="rowgroup" className={classnames('nhsuk-table__head', styles.thead)}>
+    <thead
+      role="rowgroup"
+      className={classnames('nhsuk-table__head', styles.thead)}
+    >
       {children}
     </thead>
   );
@@ -32,33 +35,37 @@ export function Tr({ children }) {
   );
 }
 
-export function Th({ children, sortable, col, ...props }) {
+export function Th({ children, sortable, col }) {
   const { query, updateQuery } = useQueryContext();
   const { orderBy, order } = query;
 
   function onClick(e) {
     e.preventDefault();
     if (orderBy !== col) {
-      updateQuery({ orderBy: col, order: 'asc' })
+      updateQuery({ orderBy: col, order: 'asc' });
     } else {
       if (order === 'asc') {
-        updateQuery({ order: 'desc' })
+        updateQuery({ order: 'desc' });
       } else {
-        updateQuery({ orderBy: null, order: null })
+        updateQuery({ orderBy: null, order: null });
       }
     }
   }
 
-
   return (
-    <th className={classnames(styles.th)} role="columnheader" scope="col" aria-sort={orderBy === col ? order : null}>
-      {
-        sortable
-          ? <a href="#" onClick={onClick}>
-            { children }
-          </a>
-          : children
-      }
+    <th
+      className={classnames(styles.th)}
+      role="columnheader"
+      scope="col"
+      aria-sort={orderBy === col ? order : null}
+    >
+      {sortable ? (
+        <a href="#" onClick={onClick}>
+          {children}
+        </a>
+      ) : (
+        children
+      )}
     </th>
   );
 }
@@ -82,8 +89,14 @@ export function Td({ children, classes, title }) {
 
 export const Table = forwardRef(({ children }, ref) => {
   return (
-    <table className={classnames('nhsuk-table', styles.table)} role="table" ref={ref}>
+    <table
+      className={classnames('nhsuk-table', styles.table)}
+      role="table"
+      ref={ref}
+    >
       {children}
     </table>
   );
-})
+});
+
+Table.displayName = 'Table';

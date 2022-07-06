@@ -87,11 +87,19 @@ export async function getPages() {
   return data.result;
 }
 
-export async function list({ page = 1, q, sort, inactive, orderBy, order, ...filters }) {
+export async function list({
+  page = 1,
+  q,
+  sort,
+  inactive,
+  orderBy,
+  order,
+  ...filters
+}) {
   if (!sort && orderBy) {
     sort = {
-      [orderBy]: order || 'asc'
-    }
+      [orderBy]: order || 'asc',
+    };
   } else {
     sort = DEFAULT_SORT;
   }
