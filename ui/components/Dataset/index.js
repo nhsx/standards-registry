@@ -183,6 +183,8 @@ export default function Dataset({
   const filtersSelected = Object.keys(query).length > 0;
   const router = useRouter();
 
+  console.log(data)
+
   async function getData() {
     try {
       setLoading(true);

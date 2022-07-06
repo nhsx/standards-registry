@@ -1,7 +1,30 @@
 import upperFirst from 'lodash/upperFirst';
 import { Details, Tag, Link, MarkdownBlock, Paragraph, Dl, Dd, Dt } from '../components';
+import format from 'date-fns/format'
 
 // `!!val?.length` => check whether empty array or unset val
+
+function truncate(str, chars = 50) {
+  if (str.length > chars) {
+    return `${str.substring(0, chars)}...`
+  }
+  return str;
+}
+
+function formatDate(date) {
+  if (!date) {
+    return 'Date not set'
+  }
+  return format(new Date(date), 'MMM yyyy')
+}
+
+function TruncateLink({ link, email }) {
+  if (!link) {
+    return 'Not available'
+  }
+  return <a href={email ? `mailto:${link}` : link}>{truncate(link, 50)}</a>
+}
+
 const schema = [
   {
     section_title: 'About this standard',
@@ -193,14 +216,14 @@ export const upcomingStandard = [
     title: 'Estimated dates',
     formatter: (_, row) => (
       <Dl>
-        <Dt>Publication due</Dt>
-        <Dd></Dd>
+        <Dt>Publication due:</Dt>
+        <Dd>{ formatDate(row.publication_due_date) }</Dd>
 
-        <Dt>Implement from</Dt>
-        <Dd></Dd>
+        <Dt>Implement from:</Dt>
+        <Dd>{ formatDate(row.implementation_from_date) }</Dd>
 
-        <Dt>Comply by</Dt>
-        <Dd></Dd>
+        <Dt>Comply by:</Dt>
+        <Dd>{ formatDate(row.comply_by_date) }</Dd>
       </Dl>
     )
   },
@@ -210,13 +233,17 @@ export const upcomingStandard = [
     formatter: (_, row) => (
       <Dl>
         <Dt>Owner</Dt>
-        <Dd>{ row.owner }</Dd>
+        <Dd>{ row?.organization?.title }</Dd>
 
         <Dt>Submit feedback</Dt>
-        <Dd dangerouslySetInnerHTML={{__html: row.submitFeedback || 'Not available' }} />
+        <Dd>
+          <TruncateLink link={row.submit_feedback} email />
+        </Dd>
 
         <Dt>Documentation</Dt>
-        <Dd dangerouslySetInnerHTML={{__html: row.documentation || 'Not available' }} />
+        <Dd>
+          <TruncateLink link={row.documentation_link} />
+        </Dd>
       </Dl>
     )
   }

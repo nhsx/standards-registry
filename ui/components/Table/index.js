@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { forwardRef } from 'react'
 import { useQueryContext } from '../../context/query'
 import styles from './style.module.scss';
 
@@ -79,10 +80,10 @@ export function Td({ children, classes, title }) {
   );
 }
 
-export function Table({ children }) {
+export const Table = forwardRef(({ children }, ref) => {
   return (
-    <table className={classnames('nhsuk-table', styles.table)} role="table">
+    <table className={classnames('nhsuk-table', styles.table)} role="table" ref={ref}>
       {children}
     </table>
   );
-}
+})

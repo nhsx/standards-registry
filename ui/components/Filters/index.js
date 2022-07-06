@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';
 import omit from 'lodash/omit';
+import pick from 'lodash/pick';
 import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
@@ -15,7 +16,8 @@ export function Filter({
   useSelect,
   numActive = 0,
   onlyChild,
-  expanded
+  expanded,
+  fullHeight
 }) {
   const { query, updateQuery } = useQueryContext();
   if (onlyChild) {
@@ -47,7 +49,7 @@ export function Filter({
     </label>
   ) : (
     <Expander summary={summary} className={classnames('nhsuk-filter', styles.filter)} open={open}>
-      <OptionSelect>
+      <OptionSelect fullHeight={fullHeight}>
         <CheckboxGroup
           onChange={onChange}
           options={choices}
@@ -59,14 +61,14 @@ export function Filter({
   );
 }
 
-const pick = (names, fields) =>
+const select = (names, fields) =>
   (Array.isArray(names) ? names : [names]).map((name) => fields.find((val) => val.field_name === name));
 
-export function Filters({ schema, categories = ['care_setting', 'topic', 'standard_category'], title = 'Filters', showTitle, before, expanded, className }) {
+export function Filters({ schema, categories = ['care_setting', 'topic', 'standard_category'], title = 'Filters', showTitle, before, expanded, className, clearAll, fullHeight }) {
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
   const [openFilters, setOpenFilters] = useState([]);
-  const filters = pick(categories, fields);
+  const filters = select(categories, fields);
 
   const setItem = name => (event) => {
     const { checked, value } = event.target;
@@ -92,9 +94,14 @@ export function Filters({ schema, categories = ['care_setting', 'topic', 'standa
     });
   };
 
+  function onClearAllClick(e) {
+    e.preventDefault();
+    updateQuery(pick(query, 'q', 'page', 'orderBy', 'order'), { overwrite: true })
+  }
+
   useEffect(() => setOpenFilters(Object.keys(query)), [query]);
 
-  const activeFilters = omit(query, 'q', 'page', 'sort');
+  const activeFilters = omit(query, 'q', 'page', 'orderBy', 'order');
   showTitle = showTitle || filters.length > 1;
 
   return (
@@ -103,9 +110,12 @@ export function Filters({ schema, categories = ['care_setting', 'topic', 'standa
         showTitle && title && <h2 className="nhsuk-heading-m">{title}</h2>
       }
       {
+        clearAll && <a href="#" className={styles.clearAll} onClick={onClearAllClick}>Clear all</a>
+      }
+      {
         before
       }
-      <div className="nhsuk-expander-group">
+      <div className={classnames('nhsuk-expander-group', styles.clear)}>
         {filters.map((filter) => {
           let fieldFilters = activeFilters[filter.field_name] || [];
           if (!Array.isArray(fieldFilters)) {
@@ -127,6 +137,7 @@ export function Filters({ schema, categories = ['care_setting', 'topic', 'standa
               // TODO: this should be configured in schema
               useSelect={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
+              fullHeight={fullHeight}
             />
           );
         })}
