@@ -1,19 +1,22 @@
 import classnames from 'classnames';
 
-// const typeMap = {
-//   'technical standards and specifications': 'nhsuk-tag--blue',
-//   'information codes of practice': 'nhsuk-tag--red',
-//   'record standard': 'nhsuk-tag--orange',
-//   'data definitions and terminologies': 'nhsuk-tag--green',
-// };
+const colorMap = {
+  active: 'nhsuk-tag--green',
+  deprecated: 'nhsuk-tag--orange',
+  retired: 'nhsuk-tag--red',
+  draft: 'nhsuk-tag--grey',
+  // proposed: 'nhsuk-tag--grey',
+  // awaiting: 'nhsuk-tag--grey',
+  // discontinued: 'nhsuk-tag--grey',
+};
 
 export default function TypeTag({ children, classes, type }) {
   return (
     <span
       className={classnames(
         'nhsuk-tag',
-        classes
-        // typeMap[type.toLowerCase()] || null
+        classes,
+        colorMap[type.toLowerCase()] || null
       )}
     >
       {children}
