@@ -25,8 +25,8 @@ export default function Standards({ data, schemaData }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Explore all published data standards and information codes of practice
-          in England or view future standards.
+          Explore published standards and APIs used to format and exchange
+          healthcare data in England.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">
