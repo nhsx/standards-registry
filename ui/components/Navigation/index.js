@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Navigation() {
   const links = [
     {
-      label: 'Published standards',
+      label: 'Current standards',
       url: '/standards',
     },
     {

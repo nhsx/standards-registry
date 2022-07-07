@@ -18,7 +18,7 @@ export default function Standards({ data, schemaData }) {
   const { setPageTitle } = useContentContext();
   const pageTitle = query.q
     ? `${query.q} - Search Results`
-    : 'Published standards';
+    : 'Current standards';
   return (
     <Page title={setPageTitle(pageTitle)}>
       <h1>{pageTitle}</h1>
