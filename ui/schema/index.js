@@ -13,7 +13,7 @@ const schema = [
       label: 'Status',
       format: (val) => (
         <>
-          {upperFirst(val)}
+          <Tag type={val}>{upperFirst(val)}</Tag>
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
@@ -46,7 +46,7 @@ const schema = [
       label: 'Type',
       format: (val) => (
         <>
-          <Tag type={val}>{val}</Tag>
+          {val}
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
