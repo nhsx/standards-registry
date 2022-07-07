@@ -34,7 +34,7 @@ function Model({ model }) {
     name,
     status,
     title,
-    metadata_modified,
+    metadata_created,
     standard_category,
     description,
   } = model;
@@ -63,7 +63,7 @@ function Model({ model }) {
         <p
           className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
         >
-          Last updated: {formatDate(metadata_modified)}
+          Date added: {formatDate(metadata_created)}
         </p>
       </Flex>
     </>
@@ -85,12 +85,12 @@ function SortMenu({ searchTerm }) {
       value: 'score desc',
     },
     {
-      label: 'Updated (newest)',
-      value: 'metadata_modified desc',
+      label: 'Added (newest)',
+      value: 'metadata_created desc',
     },
     {
-      label: 'Updated (oldest)',
-      value: 'metadata_modified asc',
+      label: 'Added (oldest)',
+      value: 'metadata_created asc',
     },
     {
       label: 'A to Z',
