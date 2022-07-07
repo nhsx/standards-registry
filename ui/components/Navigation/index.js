@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Navigation() {
   const links = [
     {
-      label: 'Published standards',
+      label: 'Current standards',
       url: '/standards',
     },
     {
@@ -11,11 +11,11 @@ export default function Navigation() {
       url: '/roadmap',
     },
     {
-      label: 'Guidance',
+      label: 'About standards',
       url: '/what-information-standards-are',
     },
     {
-      label: 'Community and links',
+      label: 'Help and resources',
       url: '/community',
     },
   ];

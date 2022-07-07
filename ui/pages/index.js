@@ -12,10 +12,9 @@ import { list } from '../helpers/api';
 
 const content = {
   title: 'NHS Standards Directory',
-  header:
-    'Find standards for data and interoperability in health and adult social care',
+  header: 'Find standards to exchange data in health and adult social care',
   intro:
-    'Use this directory to find nationally recognised standards for use in technology in England.',
+    'Use this directory to find nationally recognised standards needed for interoperability in England.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -131,21 +130,21 @@ export default function Home() {
       <div className="nhsuk-grid-row">
         <SoloSection
           heading="Future standards"
-          description="Check standards that have been proposed or are currently in development."
+          description="Check standards being developed or proposed as future requirements in England."
           link="/roadmap"
-          linkText="Go to future standards"
+          linkText="View future standards"
         />
         <SoloSection
-          heading="Guidance"
+          heading="About standards"
           description="Get an introduction to standards and interoperability in health and adult social care."
           link="/what-information-standards-are"
-          linkText="Go to guidance"
+          linkText="View about standards"
         />
         <SoloSection
-          heading="Community and links"
+          heading="Help and resources"
           description="Explore contacts and resources for teams building or buying technology in England."
           link="/community"
-          linkText="Go to community and links"
+          linkText="View help and resources"
         />
       </div>
       <FeedbackFooter />

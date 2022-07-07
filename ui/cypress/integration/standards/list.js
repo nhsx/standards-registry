@@ -2,7 +2,7 @@ describe('Standards Listing Index', () => {
   it('should accesss standards listing page', () => {
     cy.visit(`/standards`);
     cy.get('ul#browse-results');
-    cy.contains('Published standards');
+    cy.contains('Current standards');
   });
 
   it('There should be results in the directory ', () => {
