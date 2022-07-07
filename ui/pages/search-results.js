@@ -15,6 +15,8 @@ import { useQueryContext } from '../context/query';
 
 const content = {
   title: 'Search results',
+  intro:
+    'Explore published standards and APIs used to format and exchange healthcare data in England.',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
     all: '{{num}} result{{#plural}}s{{/plural}}',
