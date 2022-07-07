@@ -63,7 +63,7 @@ function Model({ model }) {
         <p
           className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
         >
-          Added: {formatDate(metadata_created)}
+          Date added: {formatDate(metadata_created)}
         </p>
       </Flex>
     </>
