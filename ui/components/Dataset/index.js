@@ -52,13 +52,13 @@ function Model({ model }) {
       </p>
       <Flex className="nhsuk-body-s">
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Type:{' '}
-          <Tag type={standard_category} classes="nhsuk-body-s">
-            {standard_category}
-          </Tag>
+          Type: {standard_category}
         </p>
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Status: {upperFirst(status)}
+          Status:{' '}
+          <Tag type={status} classes="nhsuk-body-s">
+            {upperFirst(status)}
+          </Tag>
         </p>
         <p
           className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
