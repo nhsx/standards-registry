@@ -14,7 +14,7 @@ const content = {
   title: 'NHS Standards Directory',
   header: 'Find standards to exchange data in health and adult social care',
   intro:
-    'Use this directory to find nationally recognised standards for use in technology in England.',
+    'Use this directory to find nationally recognised standards needed for interoperability in England.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (

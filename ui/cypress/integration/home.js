@@ -5,7 +5,7 @@ describe('Homepage', () => {
       'Find standards to exchange data in health and adult social care'
     );
     cy.contains(
-      'Use this directory to find nationally recognised standards for use in technology in England.'
+      'Use this directory to find nationally recognised standards needed for interoperability in England.'
     );
   });
 
