@@ -130,9 +130,9 @@ export default function Home() {
       <div className="nhsuk-grid-row">
         <SoloSection
           heading="Future standards"
-          description="Check standards that have been proposed or are currently in development."
+          description="Check standards being developed or proposed as future requirements in England."
           link="/roadmap"
-          linkText="Go to future standards"
+          linkText="View future standards"
         />
         <SoloSection
           heading="About standards"
