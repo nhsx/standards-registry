@@ -142,10 +142,10 @@ export default function Home() {
           linkText="View about standards"
         />
         <SoloSection
-          heading="Community and links"
+          heading="Help and resources"
           description="Explore contacts and resources for teams building or buying technology in England."
           link="/community"
-          linkText="Go to community and links"
+          linkText="View help and resources"
         />
       </div>
       <FeedbackFooter />
