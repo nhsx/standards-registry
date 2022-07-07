@@ -11,7 +11,7 @@ export default function Navigation() {
       url: '/roadmap',
     },
     {
-      label: 'Guidance',
+      label: 'About standards',
       url: '/what-information-standards-are',
     },
     {

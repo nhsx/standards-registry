@@ -136,10 +136,10 @@ export default function Home() {
           linkText="Go to future standards"
         />
         <SoloSection
-          heading="Guidance"
+          heading="About standards"
           description="Get an introduction to standards and interoperability in health and adult social care."
           link="/what-information-standards-are"
-          linkText="Go to guidance"
+          linkText="View about standards"
         />
         <SoloSection
           heading="Community and links"
