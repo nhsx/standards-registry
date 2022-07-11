@@ -65,13 +65,13 @@ const schema = [
                   sets and controlled lists are also included.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Technical standards and specifications</strong> specify
-                  how to make information available technically including how the
-                  data is structured and transported.
+                  <strong>Technical standards and specifications</strong>{' '}
+                  specify how to make information available technically
+                  including how the data is structured and transported.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Information codes of practice</strong> are legal or best
-                  practice guidelines on how information should be handled.
+                  <strong>Information codes of practice</strong> are legal or
+                  best practice guidelines on how information should be handled.
                 </Paragraph>
               </div>
             </Details>
