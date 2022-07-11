@@ -54,28 +54,24 @@ const schema = [
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
-                  <strong>Technical specifications and APIs</strong> specify how
-                  information is to be made available technically. This includes
-                  how the data is structured and transported, its architecture
-                  and associated protocols.
+                  <strong>Record standards</strong> define what information to
+                  collect and how to format it, for example when registering a
+                  new patient.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Clinical and care record standards</strong> define
-                  what information to collect, the purpose of the information
-                  and how to format it for consistency of meaning - for example
-                  creating a standardised way to register a new patient.
+                  <strong>Data definitions and terminologies</strong> define the
+                  format of individual data items so they can be consistently
+                  represented, for example dates or medication names. Reference
+                  sets and controlled lists are also included.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Medical and data dictionaries</strong> define the
-                  format of specific data items in ways that allow them to be
-                  consistently represented. Labelling of medicines or formatting
-                  of dates of birth are examples. This category also includes
-                  reference sets and controlled lists.
+                  <strong>Technical standards and specifications</strong> specify
+                  how to make information available technically including how the
+                  data is structured and transported.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Data protection and governance</strong> define rules
-                  for what information can be legally processed and how that
-                  information should be securely handled.
+                  <strong>Information codes of practice</strong> are legal or best
+                  practice guidelines on how information should be handled.
                 </Paragraph>
               </div>
             </Details>
