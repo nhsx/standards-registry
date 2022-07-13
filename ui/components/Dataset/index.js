@@ -199,10 +199,12 @@ export default function Dataset({
         setLoading(false);
       }
     }
+
     if (!loading) {
       getData();
     }
-  }, [query, loading]);
+
+  }, [query]);
 
   return (
     <>
