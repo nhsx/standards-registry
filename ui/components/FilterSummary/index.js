@@ -40,8 +40,11 @@ export function FilterSummary({ schema }) {
     ? { ...chosenFilters, standard_category }
     : chosenFilters;
 
+  let showAnd = false;
+
   return (
     <div className={styles.filterSummary}>
+      <ul className={styles.filterSection}>
       {Object.keys(activeFilters).map((key, index) => {
         let filters = activeFilters[key];
         const settings = schema.dataset_fields.find(
@@ -50,24 +53,29 @@ export function FilterSummary({ schema }) {
         if (!Array.isArray(filters)) {
           filters = [filters];
         }
+        const isType = settings.label.toLowerCase() === 'standard type'
         return (
-          <ul key={key} className={styles.filterSection}>
-            {settings.label.toLowerCase() === 'type' && index >= 1 ? (
+          <>
+            {isType && index >= 1 ? (
               <h4>In</h4>
             ) : null}
             {filters.map((filter, i) => {
               return (
                 <li key={i}>
-                  {i > 0 && <span className={styles.and}>and</span>}
+                  {showAnd && !isType && <span className={styles.and}>and</span>}
+                  {
+                    showAnd = true
+                  }
                   <Widget onClick={() => removeFilter(key, filter)}>
                     {filter}
                   </Widget>
                 </li>
               );
             })}
-          </ul>
+          </>
         );
       })}
+      </ul>
     </div>
   );
 }

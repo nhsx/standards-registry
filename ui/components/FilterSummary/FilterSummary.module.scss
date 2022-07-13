@@ -17,6 +17,10 @@
     font-size: 16px;
   }
 
+  li {
+    display: inline-block;
+  }
+
   h4 {
     margin-bottom: $nhsuk-gutter / 2;
   }
