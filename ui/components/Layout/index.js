@@ -19,6 +19,15 @@ export default function Home({ children, ...props }) {
   useRouter();
   const { content } = useContentContext();
   const { title } = content;
+
+  function toggleNav(e) {
+    const el = document.querySelector('#header-navigation');
+    if (Array.from(el.classList).includes('js-show')) {
+      el.classList.remove('js-show')
+    } else {
+      el.classList.add('js-show')
+    }
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -73,11 +82,15 @@ export default function Home({ children, ...props }) {
                 </Link>
               </div>
             </Col>
+            <div class="nhsuk-header__menu">
+              <button class="nhsuk-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false" onClick={toggleNav}>Menu</button>
+            </div>
             {!props.hideBannerSearch && (
               <Search label={false} placeholder="Search" location="nav" />
             )}
           </Row>
         </div>
+
         <Navigation />
       </header>
 
