@@ -12,8 +12,10 @@
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
 Cypress.Commands.add('doSearch', (term) => {
-  cy.get('input[name="q"]').type(`${term}{enter}`);
-  cy.get('#resultSummary').invoke('attr', 'data-loading').should('eq', 'false');
+  cy.intercept('POST', '/api/refresh-list').as('refresh');
+  cy.get('input[name="q"]').type(term);
+  cy.get('button#search-button').click();
+  cy.wait('@refresh').its('response.statusCode').should('eq', 200);
 });
 //
 // -- This is a child command --
