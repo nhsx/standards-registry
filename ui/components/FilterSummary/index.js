@@ -45,36 +45,34 @@ export function FilterSummary({ schema }) {
   return (
     <div className={styles.filterSummary}>
       <ul className={styles.filterSection}>
-      {Object.keys(activeFilters).map((key, index) => {
-        let filters = activeFilters[key];
-        const settings = schema.dataset_fields.find(
-          (f) => f.field_name === key
-        );
-        if (!Array.isArray(filters)) {
-          filters = [filters];
-        }
-        const isType = settings.label.toLowerCase() === 'standard type'
-        return (
-          <>
-            {isType && index >= 1 ? (
-              <h4>In</h4>
-            ) : null}
-            {filters.map((filter, i) => {
-              return (
-                <li key={i}>
-                  {showAnd && !isType && <span className={styles.and}>and</span>}
-                  {
-                    showAnd = true
-                  }
-                  <Widget onClick={() => removeFilter(key, filter)}>
-                    {filter}
-                  </Widget>
-                </li>
-              );
-            })}
-          </>
-        );
-      })}
+        {Object.keys(activeFilters).map((key, index) => {
+          let filters = activeFilters[key];
+          const settings = schema.dataset_fields.find(
+            (f) => f.field_name === key
+          );
+          if (!Array.isArray(filters)) {
+            filters = [filters];
+          }
+          const isType = settings.label.toLowerCase() === 'standard type';
+          return (
+            <>
+              {isType && index >= 1 ? <h4>In</h4> : null}
+              {filters.map((filter, i) => {
+                return (
+                  <li key={i}>
+                    {showAnd && !isType && (
+                      <span className={styles.and}>and</span>
+                    )}
+                    {(showAnd = true)}
+                    <Widget onClick={() => removeFilter(key, filter)}>
+                      {filter}
+                    </Widget>
+                  </li>
+                );
+              })}
+            </>
+          );
+        })}
       </ul>
     </div>
   );
