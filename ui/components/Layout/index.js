@@ -23,9 +23,9 @@ export default function Home({ children, ...props }) {
   function toggleNav() {
     const el = document.querySelector('#header-navigation');
     if (Array.from(el.classList).includes('js-show')) {
-      el.classList.remove('js-show')
+      el.classList.remove('js-show');
     } else {
-      el.classList.add('js-show')
+      el.classList.add('js-show');
     }
   }
   return (
@@ -83,7 +83,15 @@ export default function Home({ children, ...props }) {
               </div>
             </Col>
             <div className="nhsuk-header__menu">
-              <button className="nhsuk-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false" onClick={toggleNav}>Menu</button>
+              <button
+                className="nhsuk-header__menu-toggle"
+                id="toggle-menu"
+                aria-controls="header-navigation"
+                aria-expanded="false"
+                onClick={toggleNav}
+              >
+                Menu
+              </button>
             </div>
             {!props.hideBannerSearch && (
               <Search label={false} placeholder="Search" location="nav" />
