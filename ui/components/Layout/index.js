@@ -20,7 +20,7 @@ export default function Home({ children, ...props }) {
   const { content } = useContentContext();
   const { title } = content;
 
-  function toggleNav(e) {
+  function toggleNav() {
     const el = document.querySelector('#header-navigation');
     if (Array.from(el.classList).includes('js-show')) {
       el.classList.remove('js-show')
@@ -82,8 +82,8 @@ export default function Home({ children, ...props }) {
                 </Link>
               </div>
             </Col>
-            <div class="nhsuk-header__menu">
-              <button class="nhsuk-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false" onClick={toggleNav}>Menu</button>
+            <div className="nhsuk-header__menu">
+              <button className="nhsuk-header__menu-toggle" id="toggle-menu" aria-controls="header-navigation" aria-expanded="false" onClick={toggleNav}>Menu</button>
             </div>
             {!props.hideBannerSearch && (
               <Search label={false} placeholder="Search" location="nav" />
