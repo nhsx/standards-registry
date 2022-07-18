@@ -1,0 +1,20 @@
+.modal {
+  background-color: white;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1em;
+}
+
+.close {
+  float: right;
+  z-index: 100;
+  position: relative;
+}
+
+.closeButton {
+  width: 100%;
+}

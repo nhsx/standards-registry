@@ -6,6 +6,10 @@
   overflow-x: hidden;
   max-height: 300px;
 
+  &.fullHeight {
+    max-height: unset;
+  }
+
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     appearance: none;
