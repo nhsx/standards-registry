@@ -1,5 +1,6 @@
 import get from 'lodash/get';
-import { Table, Tbody, Tr, Td } from '../';
+import classnames from 'classnames';
+import styles from './style.module.scss';
 
 const format = ({ options, vals, data }) =>
   options.format ? options.format(vals, data) : vals;
@@ -7,7 +8,7 @@ const format = ({ options, vals, data }) =>
 const Rows = (props) => {
   const { options, vals, data } = props;
   return (
-    <Td>
+    <dd>
       {Array.isArray(vals) && vals.length > 0 ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
@@ -19,36 +20,34 @@ const Rows = (props) => {
       ) : (
         format(props)
       )}
-    </Td>
+    </dd>
   );
 };
 
 const Section = ({ entry, data }) => {
   return (
     <>
-      <h2 className="nhsuk-heading-m">{entry.section_title}</h2>
-      <Table>
-        <Tbody>
-          {Object.keys(entry)
-            .filter((key) => entry[key].label)
-            .map((key, index) => {
-              const options = entry[key];
-              const val = options.accessor
-                ? get(data, options.accessor, data[key])
-                : data[key];
-              return (
-                <Tr key={index}>
-                  <Td>
-                    <span className="nhsuk-u-font-weight-bold">
-                      {options.label}
-                    </span>
-                  </Td>
-                  <Rows vals={val} options={options} data={data}></Rows>
-                </Tr>
-              );
-            })}
-        </Tbody>
-      </Table>
+      <h2 className={classnames(styles.sectionTitle, 'nhsuk-heading-m')}>
+        {entry.section_title}
+      </h2>
+      {Object.keys(entry)
+        .filter((key) => entry[key].label)
+        .map((key, index) => {
+          const options = entry[key];
+          const val = options.accessor
+            ? get(data, options.accessor, data[key])
+            : data[key];
+          return (
+            <dl key={index} className={classnames(styles.grid)}>
+              <dt>
+                <span className="nhsuk-u-font-weight-bold">
+                  {options.label}
+                </span>
+              </dt>
+              <Rows vals={val} options={options} data={data}></Rows>
+            </dl>
+          );
+        })}
     </>
   );
 };
