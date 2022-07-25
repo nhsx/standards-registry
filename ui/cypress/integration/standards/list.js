@@ -46,7 +46,7 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'Professional Record Standards Body');
+        cy.contains('dd', 'Professional Record Standards Body');
       });
 
       it('Matches various variations of prsb', () => {
@@ -55,14 +55,14 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'Professional Record Standards Body');
+        cy.contains('dd', 'Professional Record Standards Body');
 
         cy.visit('/standards');
         cy.doSearch('professional records standards body');
         cy.get('#browse-results li a').eq(0).click({
           force: true,
         });
-        cy.contains('td', 'Professional Record Standards Body');
+        cy.contains('dd', 'Professional Record Standards Body');
       });
 
       it('Matches various variations of nhs', () => {
@@ -71,21 +71,21 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'NHS Digital');
+        cy.contains('dd', 'NHS Digital');
 
         cy.visit('/standards');
 
         cy.doSearch('nhsx');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'NHS Digital');
+        cy.contains('dd', 'NHS Digital');
 
         cy.visit('/standards');
 
         cy.doSearch('nhs digital');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('td', 'NHS Digital');
+        cy.contains('dd', 'NHS Digital');
       });
     });
   });
