@@ -1,0 +1,18 @@
+@import 'vars';
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 6fr;
+  gap: 10px;
+  padding: 16px 0;
+  margin: 5px 0 0;
+  @include borderBottom($light-grey);
+
+  * {
+    font-size: 16px;
+  }
+}
+
+.sectionTitle {
+  margin-top: $nhsuk-gutter * 2;
+}
