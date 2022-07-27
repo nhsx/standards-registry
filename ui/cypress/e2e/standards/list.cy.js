@@ -1,3 +1,5 @@
+import { a11yLog } from '../../support/custom';
+
 describe('Standards Listing Index', () => {
   it('should accesss standards listing page', () => {
     cy.visit(`/standards`);
@@ -13,8 +15,11 @@ describe('Standards Listing Index', () => {
   describe('Search', () => {
     it('Can search by standard matching', () => {
       cy.visit('/standards');
+      cy.injectAxe();
       cy.doSearch('allergies');
       cy.get('#browse-results li').not('have.length', 0);
+      // cy.checkA11y(context, options, violationCallback, skipFailures);
+      cy.checkA11y(null, null, a11yLog, true);
     });
 
     it('Can search by fuzzy match', () => {
