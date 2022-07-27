@@ -10,12 +10,15 @@ const impactMap = {
 export function a11yLog(violations) {
   cy.task(
     'log',
-    `${violations.length} accessibility violation${
+    `
+    ${violations.length} accessibility violation${
       violations.length === 1 ? '' : 's'
-    } ${violations.length === 1 ? 'was' : 'were'} detected`
+    } ${violations.length === 1 ? 'was' : 'were'} detected
+    `
   );
-  cy.task('log', 'violeations', violations);
-  cy.task('log', 'noeds', violations.nodes);
+
+  // Uncomment to log out all violations
+  // cy.task('log',  violations);
 
   // pluck specific keys to keep the table readable
   const violationData = violations.map(
