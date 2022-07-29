@@ -56,7 +56,14 @@ export function FilterSummary({ schema }) {
           const isType = settings.label.toLowerCase() === 'standard type';
           return (
             <>
-              {isType && index >= 1 ? <h4>In</h4> : null}
+              {isType && index >= 1 ? (
+                <h4>
+                  <span className="nhsuk-u-visually-hidden">
+                    The filters selected are inside this type
+                  </span>
+                  In
+                </h4>
+              ) : null}
               {filters.map((filter, i) => {
                 return (
                   <li key={i}>
