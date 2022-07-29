@@ -33,9 +33,8 @@
 .bannerLink {
   &.homepage {
     color: white;
-    &:hover {
-      background-color: $color_transparent_nhsuk-blue-50;
-      color: white;
+    &:focus {
+      color: black;
     }
   }
 }

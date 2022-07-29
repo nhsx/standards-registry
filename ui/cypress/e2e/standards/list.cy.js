@@ -1,4 +1,4 @@
-import { a11yLog } from '../../support/custom';
+import { a11yLog, failLevel } from '../../support/custom';
 
 describe('Standards Listing Index', () => {
   it('should accesss standards listing page', () => {
@@ -18,8 +18,8 @@ describe('Standards Listing Index', () => {
       cy.injectAxe();
       cy.doSearch('allergies');
       cy.get('#browse-results li').not('have.length', 0);
-      // cy.checkA11y(context, options, violationCallback, skipFailures);
-      cy.checkA11y(null, null, a11yLog, true);
+
+      cy.checkA11y(null, null, a11yLog, failLevel);
     });
 
     it('Can search by fuzzy match', () => {

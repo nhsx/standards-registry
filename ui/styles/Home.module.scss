@@ -11,6 +11,9 @@
   padding: 2em 2em 1em;
   a {
     color: white;
+    &:focus {
+      color: black;
+    }
   }
 }
 
@@ -50,6 +53,9 @@
 }
 
 .homeSection {
+  &:first-child {
+    padding-top: 2 * $nhsuk-gutter;
+  }
   hr {
     border: 2px solid $nhsuk-border-color;
   }

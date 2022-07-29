@@ -5,11 +5,17 @@
 .searchFormInNavWrapper {
   float: right;
   margin-right: $nhsuk-gutter;
-  margin-bottom: $nhsuk-gutter;
+  // margin-bottom: $nhsuk-gutter;
+  margin-bottom: 0;
+  line-height: 0.5;
 }
 
 .search {
   position: relative;
+}
+
+.searchLabel {
+  margin-bottom: 0;
 }
 
 .searchInNav {
