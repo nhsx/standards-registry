@@ -5,6 +5,8 @@ const impactMap = {
   critical: 'critical 🔥',
 };
 
+export const failLevel = ['serious', 'critical'];
+
 // From https://github.com/component-driven/cypress-axe
 // Define at the top of the spec file or just import it
 export function a11yLog(violations) {

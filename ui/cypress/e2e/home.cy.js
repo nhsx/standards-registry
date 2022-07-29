@@ -1,3 +1,5 @@
+import { a11yLog, failLevel } from '../support/custom';
+
 describe('Homepage', () => {
   it('should show home page and call to action', () => {
     cy.visit('/');
@@ -25,6 +27,17 @@ describe('Homepage', () => {
       cy.visit('/');
       cy.doSearch(' ');
       cy.get('#browse-results li').not('have.length', 0);
+    });
+  });
+
+  describe('a11y', () => {
+    it('has sufficient contrast on focussed links', () => {
+      cy.visit('/');
+      cy.injectAxe();
+      cy.get('.nhsuk-phase-banner__text a').focus();
+      cy.checkA11y(null, null, a11yLog, failLevel);
+      cy.get('#recent-standards a').first().focus();
+      cy.checkA11y(null, null, a11yLog, failLevel);
     });
   });
 });
