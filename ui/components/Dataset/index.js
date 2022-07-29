@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Snippet, Tag, Flex, Pagination, FilterSummary, Select } from '../';
+import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
@@ -162,17 +162,10 @@ const NoResultsSummary = ({ searchTerm }) => (
   </>
 );
 
-const ResultSummary = ({ count, searchTerm, filtersSelected, loading }) => (
+const ResultSummary = ({ count, loading }) => (
   <h2 id="resultSummary" data-loading={loading}>
     {(loading && 'Searching for results') || (
-      <Snippet
-        num={count}
-        plural={count > 1 || count === 0}
-        searchTerm={searchTerm}
-        inline
-      >
-        {searchTerm || filtersSelected ? 'filters.summary' : 'filters.all'}
-      </Snippet>
+      <span role="status">{`${count} result${count === 1 ? '' : 's'}`}</span>
     )}
   </h2>
 );

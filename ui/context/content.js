@@ -3,10 +3,6 @@ import merge from 'lodash/merge';
 
 const CONTENT = {
   title: 'NHS Standards Directory',
-  filters: {
-    summary: '{{num}} result{{#plural}}s{{/plural}}',
-    all: '{{num}} result{{#plural}}s{{/plural}}',
-  },
   pagination: {
     summary: 'Showing {{from}} - {{to}} of {{total}} results',
   },
