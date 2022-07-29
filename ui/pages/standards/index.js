@@ -21,7 +21,12 @@ export default function Standards({ data, schemaData }) {
     : 'Current standards';
   return (
     <Page title={setPageTitle(pageTitle)}>
-      <h1>{pageTitle}</h1>
+      <h1>
+        {pageTitle}
+        <span className="nhsuk-u-visually-hidden">
+          Search or browse published standards
+        </span>
+      </h1>
       <Reading>
         <Snippet>intro</Snippet>
         <p>
