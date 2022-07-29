@@ -31,11 +31,11 @@
     "urlencoded-body-parser": "^3.0.0"
   },
   "devDependencies": {
+    "@-ralph/cypress-axe": "^1.0.0-rc",
     "@babel/preset-env": "^7.17.12",
     "@babel/preset-react": "^7.17.12",
     "axe-core": "^4.4.3",
     "cypress": "^10.3.1",
-    "cypress-axe": "^1.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
     "eslint-config-prettier": "^8.5.0",

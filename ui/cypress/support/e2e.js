@@ -21,4 +21,4 @@ import './commands';
 
 // Accessibility testing
 // https://github.com/component-driven/cypress-axe
-import 'cypress-axe';
+import '@-ralph/cypress-axe';
