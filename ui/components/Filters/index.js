@@ -104,7 +104,7 @@ export default function Filters({ schema }) {
 
   return (
     <div className="nhsuk-filters">
-      <h3>Filters</h3>
+      <h2 className="nhsuk-heading-m">Filters</h2>
       <div className="nhsuk-expander-group">
         {filters.map((filter) => {
           let fieldFilters = activeFilters[filter.field_name] || [];
