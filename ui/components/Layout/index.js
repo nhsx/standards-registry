@@ -79,6 +79,7 @@ export default function Home({ children, ...props }) {
           </Row>
         </div>
         <Navigation />
+        <PhaseBanner />
       </header>
 
       <Breadcrumbs
@@ -89,8 +90,6 @@ export default function Home({ children, ...props }) {
           services: 'Browse services',
         }}
       />
-
-      <PhaseBanner homepage={props.homepage} />
 
       {props.Hero && <props.Hero {...props} />}
 
