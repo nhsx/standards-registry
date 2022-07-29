@@ -2,16 +2,22 @@
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
 .phaseBanner {
-  background-color: $blue;
+  &.homepage {
+    background-color: $blue;
+  }
 }
 
 .inner {
   padding-top: $nhsuk-gutter-smaller;
   padding-bottom: $nhsuk-gutter-smaller;
+
   @include borderBottom;
-  @include borderTop(rgba(255, 255, 255, 0.2));
-  border-bottom: 0;
-  color: $white;
+
+  &.homepage {
+    @include borderTop(rgba(255, 255, 255, 0.2));
+    border-bottom: 0;
+    color: $white;
+  }
 }
 
 .tag {
@@ -19,11 +25,13 @@
   background-color: $color_nhsuk-blue;
   border: none;
   margin-right: $nhsuk-gutter-smaller;
-  border: 1px solid white;
+
+  &.homepage {
+    border: 1px solid white;
+  }
 }
 .bannerLink {
-  color: white;
-  &:visited {
+  &.homepage {
     color: white;
   }
 }

@@ -79,25 +79,21 @@ export default function Home({ children, ...props }) {
           </Row>
         </div>
         <Navigation />
-        <PhaseBanner />
       </header>
 
-      <Breadcrumbs
-        labels={{
-          standards: 'Current standards',
-          content: 'Browse content standards',
-          technical: 'Browse technical standards',
-          services: 'Browse services',
-        }}
-      />
-
-      {props.Hero && <props.Hero {...props} />}
-
-      <div className="nhsuk-width-container">
-        <main className={styles.main} id="maincontent" role="main">
-          {children}
-        </main>
-      </div>
+      <main className={styles.main} id="maincontent" role="main">
+        <PhaseBanner homepage={props.homepage} />
+        {props.Hero && <props.Hero {...props} />}
+        <Breadcrumbs
+          labels={{
+            standards: 'Current standards',
+            content: 'Browse content standards',
+            technical: 'Browse technical standards',
+            services: 'Browse services',
+          }}
+        />
+        <div className="nhsuk-width-container">{children}</div>
+      </main>
 
       <footer role="contentinfo">
         <div className="nhsuk-footer" id="nhsuk-footer">
