@@ -5,6 +5,7 @@
   background-color: $white;
   padding-top: $nhsuk-gutter;
   padding-bottom: $nhsuk-gutter;
+  margin-bottom: $nhsuk-gutter * 3;
 }
 
 // override the setting to remove breadcrumbs in node_modules/nhsuk-frontend/packages/components/breadcrumb/_breadcrumb.scss
