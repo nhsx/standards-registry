@@ -2,6 +2,7 @@
 @import 'node_modules/nhsuk-frontend/packages/core/settings/_colours.scss';
 
 .phaseBanner {
+  background-color: white;
   &.homepage {
     background-color: $blue;
   }
