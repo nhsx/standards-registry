@@ -161,7 +161,11 @@ export function HomepageHero({ recent }) {
             <Snippet inline>header</Snippet>
           </h1>
           <Snippet large>intro</Snippet>
-          <Search placeholder="For example, FHIR, allergies, GP" navigate />
+          <Search
+            placeholder="For example, FHIR, allergies, GP"
+            navigate
+            homepage
+          />
         </div>
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>
