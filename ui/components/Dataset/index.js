@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import isEqual from 'lodash/isEqual';
+import { useState, useMemo } from 'react';
 import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
@@ -174,13 +175,14 @@ export default function Dataset({
   schema,
 }) {
   const { query } = useQueryContext();
+  const [currentQuery, setCurrentQuery] = useState(query);
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
   const { count = 0, results = [] } = data;
   const filtersSelected = Object.keys(query).length > 0;
 
-  useEffect(() => {
+  useMemo(() => {
     async function getData() {
       try {
         setLoading(true);
@@ -193,8 +195,9 @@ export default function Dataset({
       }
     }
 
-    if (!loading) {
+    if (!isEqual(query, currentQuery)) {
       getData();
+      setCurrentQuery(query);
     }
   }, [query]);
 
