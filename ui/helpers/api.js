@@ -10,6 +10,10 @@ export function queriseSelections(selections) {
   if (!selections) return;
 
   for (const prop in selections) {
+    if (typeof selections[prop] === 'boolean') {
+      query[prop] = selectionsRef[prop];
+      continue;
+    }
     if (typeof selections[prop] === 'string') {
       selectionsRef[prop] = [selectionsRef[prop]];
     }
@@ -94,6 +98,8 @@ export async function list({ page = 1, q, sort, filters }) {
         .join(', ');
     }
   }
+
+  filters.is_published_standard = true;
 
   fq = serialise(queriseSelections(filters));
 
