@@ -99,6 +99,10 @@ export async function list({ page = 1, q, sort, filters }) {
     }
   }
 
+  if (!filters) {
+    filters = {};
+  }
+
   filters.is_published_standard = true;
 
   fq = serialise(queriseSelections(filters));
