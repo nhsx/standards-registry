@@ -3,6 +3,11 @@ import { stringify } from 'qs';
 import { findKey } from 'lodash';
 const CKAN_URL = process.env.CKAN_URL;
 
+const DEFAULT_SORT = {
+  score: 'desc',
+  metadata_modified: 'desc',
+};
+
 // TODO: neaten
 export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
@@ -82,34 +87,43 @@ export async function getPages() {
   return data.result;
 }
 
-export async function list({ page = 1, q, sort, filters }) {
+export async function list({
+  page = 1,
+  q,
+  sort,
+  inactive,
+  orderBy,
+  order,
+  ...filters
+}) {
+  if (!sort && orderBy) {
+    sort = {
+      [orderBy]: order || 'asc',
+    };
+  } else {
+    sort = DEFAULT_SORT;
+  }
+
   let sortstring, fq;
   const rows = 10;
 
   const start = (page - 1) * rows;
   // e.g.
   // sort=score desc, metadata_modified desc
-  if (sort) {
-    if (typeof sort === 'string') {
-      sortstring = sort;
-    } else {
-      sortstring = Object.entries(sort)
-        .map((i) => i.join(' '))
-        .join(', ');
-    }
+  if (typeof sort === 'string') {
+    sortstring = sort;
+  } else {
+    sortstring = Object.entries(sort)
+      .map((i) => i.join(' '))
+      .join(', ');
   }
 
-  if (!filters) {
-    filters = {};
-  }
-
-  filters.is_published_standard = true;
+  filters.is_published_standard = !inactive;
 
   fq = serialise(queriseSelections(filters));
 
   const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
-
   const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
   const data = await response.json();
   return data.result;

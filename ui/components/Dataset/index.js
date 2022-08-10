@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import isEqual from 'lodash/isEqual';
+import { useState, useMemo } from 'react';
 import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
 import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
@@ -8,7 +9,6 @@ import classnames from 'classnames';
 import styles from './style.module.scss';
 import { useQueryContext } from '../../context/query';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import DOMPurify from 'isomorphic-dompurify';
 
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
@@ -71,12 +71,11 @@ function Model({ model }) {
 }
 
 function SortMenu({ searchTerm }) {
-  const { getSelections, updateQuery } = useQueryContext();
+  const { query, updateQuery } = useQueryContext();
 
   const sort = (value) => {
-    const selections = getSelections();
-    selections.sort = value;
-    updateQuery(selections);
+    const [orderBy, order] = value.split(' ');
+    updateQuery({ orderBy, order });
   };
 
   const options = [
@@ -102,7 +101,7 @@ function SortMenu({ searchTerm }) {
     },
   ];
 
-  const { sort: value } = getSelections();
+  const value = `${query.orderBy} ${query.order}`;
 
   return (
     <Select
@@ -175,52 +174,32 @@ export default function Dataset({
   includeType,
   schema,
 }) {
-  const { getSelections, query } = useQueryContext();
+  const { query } = useQueryContext();
+  const [currentQuery, setCurrentQuery] = useState(query);
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
-  const [queue, setQueue] = useState(null);
   const { count = 0, results = [] } = data;
-  const filtersSelected = Object.keys(getSelections).length > 0;
-  const router = useRouter();
+  const filtersSelected = Object.keys(query).length > 0;
 
-  useEffect(() => {
-    setQueue(query);
-  }, [query]);
-  useEffect(() => {
+  useMemo(() => {
     async function getData() {
-      if (loading || !queue) {
-        return;
-      }
-
-      const DEFAULT_SORT = {
-        score: 'desc',
-        metadata_modified: 'desc',
-      };
-
-      const { q, page, sort = DEFAULT_SORT, ...filters } = queue;
-      const params = {
-        q,
-        page,
-        sort,
-        filters,
-      };
-
       try {
         setLoading(true);
-        setQueue(null);
-        const res = await axios.post('/api/refresh-list', params);
+        const res = await axios.post('/api/refresh-list', query);
         setData(res.data);
       } catch (err) {
         console.error(err);
-
-        router.reload(window.location.pathname);
       } finally {
         setLoading(false);
       }
     }
-    getData();
-  }, [queue, loading, router]);
+
+    if (!isEqual(query, currentQuery)) {
+      getData();
+      setCurrentQuery(query);
+    }
+  }, [query]);
 
   return (
     <>
@@ -228,7 +207,7 @@ export default function Dataset({
         filtersSelected={filtersSelected}
         count={count}
         searchTerm={searchTerm}
-        loading={!!(loading || queue)}
+        loading={!!loading}
       />
 
       <FilterSummary schema={schema} />

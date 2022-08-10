@@ -1,1 +1,9 @@
 @import 'node_modules/nhsuk-frontend/packages/nhsuk';
+
+body {
+  &.modal-open,
+  &.modal-open .nhsuk-width-container {
+    height: 1vh;
+    overflow: hidden;
+  }
+}

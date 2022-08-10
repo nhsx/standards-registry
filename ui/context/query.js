@@ -1,6 +1,7 @@
-import { stringify } from 'qs';
 import { useRouter } from 'next/router';
 import { createContext, useContext } from 'react';
+import { pickBy } from 'lodash';
+import { stringify } from 'qs';
 
 const QueryContext = createContext();
 
@@ -20,14 +21,19 @@ export function QueryContextWrapper({ children }) {
     return router.query;
   }
 
-  function updateQuery(props, { replace } = {}) {
+  function updateQuery(props, { replace, overwrite } = {}) {
     const { query } = router;
+
+    const newQuery = overwrite
+      ? props
+      : pickBy({ ...query, ...props }, Boolean);
+
     if (replace) {
-      return router.replace({ query: { ...query, ...props } }, null, {
+      return router.replace({ query: newQuery }, null, {
         scroll: false,
       });
     }
-    return router.push({ query: { ...query, ...props } }, null, {
+    return router.push({ query: newQuery }, null, {
       shallow: true,
       scroll: false,
     });
