@@ -1,4 +1,7 @@
 # Weekly Reports
+
+* [11th August 2022](./reports/2022-08-11.md)
+
 * [4th August 2022](./reports/2022-08-04.md)
 
 * [28th July 2022](./reports/2022-07-28.md)
