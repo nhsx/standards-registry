@@ -5,6 +5,10 @@
   margin: 0 !important;
   padding: $nhsuk-gutter 0;
 
+  &.no-border-top {
+    border-top: none;
+  }
+
   &:last-of-type {
     border-bottom: 1px solid $border-colour;
   }

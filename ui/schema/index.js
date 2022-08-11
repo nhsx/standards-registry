@@ -213,7 +213,7 @@ export const upcomingStandard = [
   {
     id: 'standard_category',
     title: 'Standard type',
-    sortable: true,
+    sortable: false,
   },
   {
     id: 'status',

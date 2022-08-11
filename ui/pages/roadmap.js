@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useQueryContext } from '../context/query';
 import classnames from 'classnames';
 import axios from 'axios';
+import omit from 'lodash/omit';
 import { Page, Reading, Filters, Modal, ResponsiveTable } from '../components';
 
 import styles from '../styles/Roadmap.module.scss';
@@ -39,6 +40,10 @@ export default function Roadmap({ data, schemaData }) {
     getData();
   }, [query, loading]);
 
+  const activeFilters = omit(query, 'q', 'page', 'orderBy', 'order');
+  const numSelected = activeFilters.care_setting
+    ? activeFilters.care_setting.length
+    : 0;
   const resultSummary = `${count} result${count === 1 ? '' : 's'}`;
 
   return (
@@ -56,7 +61,7 @@ export default function Roadmap({ data, schemaData }) {
         </p>
       </Reading>
       <Modal
-        trigger="Filter by care setting"
+        trigger={`Filter by care setting (${numSelected})`}
         closeLabel="Back to results"
         className={styles.onlyMobile}
         closeButton="Show results"
@@ -76,6 +81,7 @@ export default function Roadmap({ data, schemaData }) {
         categories={['care_setting']}
         className={classnames(styles.onlyDesktop, styles.threeColumn)}
         clearAll
+        noBorderTop
       />
       <ResponsiveTable schema={schema} results={results} />
     </Page>

@@ -8,6 +8,7 @@ export default function Expander({
   className,
   small,
   open = false,
+  noBorderTop,
 }) {
   const [isOpen, setOpen] = useState(open);
   useEffect(() => {
@@ -16,7 +17,9 @@ export default function Expander({
 
   return (
     <details
-      className={classnames('nhsuk-details', className, styles.details)}
+      className={classnames('nhsuk-details', className, styles.details, {
+        [styles['no-border-top']]: noBorderTop,
+      })}
       open={isOpen}
     >
       <summary className={classnames('nhsuk-details__summary', styles.summary)}>
