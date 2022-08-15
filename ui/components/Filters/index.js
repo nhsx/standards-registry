@@ -17,10 +17,13 @@ export function Filter({
   numActive = 0,
   onlyChild,
   fullHeight,
+  clearAll,
+  onClearAllClick,
+  noBorderTop,
 }) {
   const { query, updateQuery } = useQueryContext();
-  if (onlyChild) {
-    label = `Filter by ${label}`;
+  if (onlyChild && !fullHeight) {
+    label = `Filter by ${label.toLowerCase()}`;
   }
   const summary = useSelect ? null : (
     <p className={styles.filterHeader}>
@@ -51,6 +54,7 @@ export function Filter({
       summary={summary}
       className={classnames('nhsuk-filter', styles.filter)}
       open={open}
+      noBorderTop={noBorderTop}
     >
       <OptionSelect fullHeight={fullHeight}>
         <CheckboxGroup
@@ -60,6 +64,11 @@ export function Filter({
           small
         />
       </OptionSelect>
+      {clearAll && (
+        <a href="#" className={styles.clearAll} onClick={onClearAllClick}>
+          Clear all
+        </a>
+      )}
     </Expander>
   );
 }
@@ -79,6 +88,7 @@ export function Filters({
   className,
   clearAll,
   fullHeight,
+  noBorderTop,
 }) {
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
@@ -120,11 +130,6 @@ export function Filters({
   return (
     <div className={classnames('nhsuk-filters', styles.filters, className)}>
       {showTitle && title && <h2 className="nhsuk-heading-m">{title}</h2>}
-      {clearAll && (
-        <a href="#" className={styles.clearAll} onClick={onClearAllClick}>
-          Clear all
-        </a>
-      )}
       {before}
       <div className={classnames('nhsuk-expander-group', styles.clear)}>
         {filters.map((filter) => {
@@ -149,6 +154,9 @@ export function Filters({
               useSelect={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
+              onClearAllClick={onClearAllClick}
+              clearAll={clearAll}
+              noBorderTop={noBorderTop}
             />
           );
         })}

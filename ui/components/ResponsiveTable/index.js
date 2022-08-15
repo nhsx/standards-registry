@@ -87,11 +87,11 @@ export function ResponsiveTable({ schema, results }) {
                 .map((s) => {
                   return [
                     {
-                      label: `${s.title} ↓`,
+                      label: `${s.title} A-Z`,
                       value: `${s.id} asc`,
                     },
                     {
-                      label: `${s.title} ↑`,
+                      label: `${s.title} Z-A`,
                       value: `${s.id} desc`,
                     },
                   ];
