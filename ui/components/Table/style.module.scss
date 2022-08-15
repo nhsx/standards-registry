@@ -58,10 +58,16 @@
     font-weight: bold;
     content: attr(title);
     position: absolute;
+    font-size: 16px;
     top: 16px;
     left: 16px;
     width: 45%;
     padding-right: 10px;
-    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .td:before {
+    top: 6px;
   }
 }
