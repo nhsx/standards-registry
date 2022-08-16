@@ -92,11 +92,11 @@ function SortMenu({ searchTerm }) {
       value: 'metadata_created asc',
     },
     {
-      label: 'A to Z',
+      label: 'Name (A to Z)',
       value: 'name asc',
     },
     {
-      label: 'Z to A',
+      label: 'Name (Z to A)',
       value: 'name desc',
     },
   ];

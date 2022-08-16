@@ -78,20 +78,16 @@ export function ResponsiveTable({ schema, results }) {
             className={styles.select}
             value={orderBy && order && `${orderBy} ${order}`}
             options={flatten([
-              {
-                label: 'Default',
-                value: '',
-              },
               ...schema
                 .filter((s) => s.sortable)
                 .map((s) => {
                   return [
                     {
-                      label: `${s.title} A-Z`,
+                      label: `${s.title} (A to Z)`,
                       value: `${s.id} asc`,
                     },
                     {
-                      label: `${s.title} Z-A`,
+                      label: `${s.title} (Z to A)`,
                       value: `${s.id} desc`,
                     },
                   ];
@@ -105,7 +101,12 @@ export function ResponsiveTable({ schema, results }) {
         <Thead>
           <Tr>
             {schema.map((s) => (
-              <Th key={s.id} sortable={s.sortable} col={s.id}>
+              <Th
+                key={s.id}
+                sortable={s.sortable}
+                col={s.id}
+                defaultSort={s.defaultSort}
+              >
                 {s.title}
               </Th>
             ))}

@@ -12,14 +12,38 @@
 .th {
   font-size: 1.1em;
   white-space: nowrap;
+
+  a {
+    position: relative;
+    padding-right: 10px;
+  }
+
+  &[aria-sort] {
+    a:before {
+      content: ' \25bc';
+      position: absolute;
+      right: 0px;
+      top: 9px;
+      font-size: 0.5em;
+    }
+
+    a:after {
+      content: ' \25b2';
+      position: absolute;
+      right: 0px;
+      top: 1px;
+      font-size: 0.5em;
+    }
+  }
+
   &[aria-sort='asc'] {
     a:after {
-      content: ' ▼';
+      color: #ccc;
     }
   }
   &[aria-sort='desc'] {
-    a:after {
-      content: ' ▲';
+    a:before {
+      color: #ccc;
     }
   }
 }

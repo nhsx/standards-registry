@@ -2,6 +2,7 @@ import { upcomingStandard as schema } from '../schema';
 import { getPageProps } from '../helpers/getPageProps';
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../context/query';
+import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 import axios from 'axios';
 import omit from 'lodash/omit';
@@ -14,6 +15,7 @@ export default function Roadmap({ data, schemaData }) {
   const [count, setCount] = useState(data.count || 0);
   const [loading, setLoading] = useState(false);
   const { query } = useQueryContext();
+  const [currentQuery, setCurrentQuery] = useState(query);
 
   useEffect(() => {
     if (loading) {
@@ -37,8 +39,11 @@ export default function Roadmap({ data, schemaData }) {
       }
     }
 
-    getData();
-  }, [query, loading]);
+    if (!isEqual(query, currentQuery)) {
+      getData();
+      setCurrentQuery(query);
+    }
+  }, [query]);
 
   const activeFilters = omit(query, 'q', 'page', 'orderBy', 'order');
   const numSelected = activeFilters.care_setting
@@ -89,5 +94,14 @@ export default function Roadmap({ data, schemaData }) {
 }
 
 export async function getServerSideProps(context) {
-  return getPageProps({ query: { ...context.query, inactive: true } });
+  const { id, defaultSort } = schema.find((s) => s.defaultSort);
+  return getPageProps({
+    query: {
+      sort: {
+        [id]: defaultSort,
+      },
+      ...context.query,
+      inactive: true,
+    },
+  });
 }
