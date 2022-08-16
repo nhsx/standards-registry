@@ -198,6 +198,7 @@ export const upcomingStandard = [
     id: 'name',
     title: 'Name',
     sortable: true,
+    defaultSort: 'asc',
     formatter: (val, row) => {
       return (
         <>

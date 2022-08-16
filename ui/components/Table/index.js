@@ -35,20 +35,21 @@ export function Tr({ children }) {
   );
 }
 
-export function Th({ children, sortable, col }) {
+export function Th({ children, sortable, col, defaultSort }) {
   const { query, updateQuery } = useQueryContext();
-  const { orderBy, order } = query;
+  let { orderBy, order } = query;
+
+  if (defaultSort && !orderBy) {
+    orderBy = col;
+    order = defaultSort;
+  }
 
   function onClick(e) {
     e.preventDefault();
     if (orderBy !== col) {
       updateQuery({ orderBy: col, order: 'asc' });
     } else {
-      if (order === 'asc') {
-        updateQuery({ order: 'desc' });
-      } else {
-        updateQuery({ orderBy: null, order: null });
-      }
+      updateQuery({ order: order === 'asc' ? 'desc' : 'asc', orderBy: col });
     }
   }
 
@@ -57,7 +58,7 @@ export function Th({ children, sortable, col }) {
       className={classnames(styles.th)}
       role="columnheader"
       scope="col"
-      aria-sort={orderBy === col ? order : null}
+      aria-sort={orderBy === col ? order : 'none'}
     >
       {sortable ? (
         <a href="#" onClick={onClick}>

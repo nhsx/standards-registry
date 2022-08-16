@@ -5,7 +5,7 @@ const CKAN_URL = process.env.CKAN_URL;
 
 const DEFAULT_SORT = {
   score: 'desc',
-  metadata_modified: 'desc',
+  metadata_created: 'desc',
 };
 
 // TODO: neaten
@@ -96,12 +96,14 @@ export async function list({
   order,
   ...filters
 }) {
-  if (!sort && orderBy) {
-    sort = {
-      [orderBy]: order || 'asc',
-    };
-  } else {
-    sort = DEFAULT_SORT;
+  if (!sort) {
+    if (orderBy) {
+      sort = {
+        [orderBy]: order || 'asc',
+      };
+    } else {
+      sort = DEFAULT_SORT;
+    }
   }
 
   let sortstring, fq;
