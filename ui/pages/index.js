@@ -12,9 +12,9 @@ import { list } from '../helpers/api';
 
 const content = {
   title: 'NHS Standards Directory',
-  header: 'Find standards to exchange data in health and adult social care',
+  header: 'Find standards to record, handle and exchange data in England',
   intro:
-    'Use this directory to find nationally recognised standards needed for interoperability in England.',
+    'Use this directory to find nationally recognised standards for use in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
