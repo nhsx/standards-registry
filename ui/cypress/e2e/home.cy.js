@@ -4,10 +4,10 @@ describe('Homepage', () => {
   it('should show home page and call to action', () => {
     cy.visit('/');
     cy.contains(
-      'Find standards to exchange data in health and adult social care'
+      'Find standards to record, handle and exchange data in England'
     );
     cy.contains(
-      'Use this directory to find nationally recognised standards needed for interoperability in England.'
+      'Use this directory to find nationally recognised standards for use in health and adult social care.'
     );
   });
 

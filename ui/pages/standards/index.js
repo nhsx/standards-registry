@@ -30,8 +30,8 @@ export default function Standards({ data, schemaData }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Explore published standards and APIs used to format and exchange
-          healthcare data in England.
+          Use this directory to find nationally recognised standards for use in
+          health and adult social care.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">
