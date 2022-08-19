@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
-  Analytics,
+  Cookies,
   Breadcrumbs,
   Flex,
   Navigation,
@@ -15,6 +16,7 @@ import classnames from 'classnames';
 
 export default function Home({ children, ...props }) {
   useRouter();
+
   const { content } = useContentContext();
   const { title } = content;
 
@@ -35,6 +37,8 @@ export default function Home({ children, ...props }) {
       <a className="nhsuk-skip-link" href="#maincontent">
         Skip to main content
       </a>
+
+      <Cookies />
 
       <header className="nhsuk-header" role="banner">
         <div className="nhsuk-width-container nhsuk-header__container">
@@ -181,7 +185,6 @@ export default function Home({ children, ...props }) {
           </div>
         </div>
       </footer>
-      <Analytics />
     </div>
   );
 }
