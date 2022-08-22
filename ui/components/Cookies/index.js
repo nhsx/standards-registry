@@ -38,11 +38,7 @@ export const Cookies = () => {
             </p>
             <p>
               You can{' '}
-              <a
-                id="nhsuk-cookie-banner__link"
-                href="/cookie-policy/"
-                tabIndex="1"
-              >
+              <a id="nhsuk-cookie-banner__link" href="/cookie-policy/">
                 read more about our cookies
               </a>{' '}
               before you choose.
@@ -54,7 +50,6 @@ export const Cookies = () => {
                   className="nhsuk-button"
                   id="nhsuk-cookie-banner__link_accept_analytics"
                   href="#"
-                  tabIndex="2"
                 >
                   I&lsquo;m OK with analytics cookies
                 </button>
@@ -65,7 +60,6 @@ export const Cookies = () => {
                   className="nhsuk-button"
                   id="nhsuk-cookie-banner__link_accept"
                   href="#"
-                  tabIndex="3"
                 >
                   Do not use analytics cookies
                 </button>
