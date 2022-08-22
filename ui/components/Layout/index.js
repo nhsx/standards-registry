@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
+  Analytics,
   Cookies,
   Breadcrumbs,
   Flex,
@@ -30,6 +31,7 @@ export default function Home({ children, ...props }) {
   return (
     <div className={styles.container}>
       <Head>
+        {/* <Analytics /> */}
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
