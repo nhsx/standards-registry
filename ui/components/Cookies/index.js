@@ -28,23 +28,19 @@ export const Cookies = () => {
           id="cookiebanner"
         >
           <div className="nhsuk-width-container">
-            <h2 className="nhsuk-heading-s">Cookies on the NHS website</h2>
+            <h2 className="nhsuk-heading-s">
+              Cookies on the NHS Standards Directory
+            </h2>
             <p>
-              We&lsquo;ve put some small files called cookies on your device to
-              make our site work.
+              We use essential cookies to make this service work. We&lsquo;d
+              also like to use other cookies to see how you use the service and
+              make it better. Please accept if that&lsquo;s OK.
             </p>
             <p>
-              We&lsquo;d also like to use analytics cookies. These send
-              information about how our site is used to services called Adobe
-              Analytics, Hotjar and Google Analytics. We use this information to
-              improve our site.
-            </p>
-            <p>
-              Let us know if this is OK. We&lsquo;ll use a cookie to save your
-              choice. You can{' '}
+              You can{' '}
               <a
                 id="nhsuk-cookie-banner__link"
-                href="/our-policies/cookies-policy/"
+                href="/cookie-policy/"
                 tabIndex="1"
               >
                 read more about our cookies
