@@ -21,10 +21,10 @@ export default function PhaseBanner({ homepage }) {
             })}
           >
             {' '}
-            BETA{' '}
+            NEW SERVICE{' '}
           </strong>
           <span className="nhsuk-phase-banner__text">
-            This is a new service — your{' '}
+            Not all information may be accurate yet. Your{' '}
             <Link
               className={classnames('nhsuk-phase-banner', styles.bannerLink, {
                 [styles.homepage]: homepage,
@@ -33,7 +33,7 @@ export default function PhaseBanner({ homepage }) {
               newWindow={true}
               text="feedback"
             />{' '}
-            will help us to improve it.
+            is important.
           </span>
         </span>
       </div>
