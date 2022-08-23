@@ -66,7 +66,7 @@ export function FilterSummary({ schema }) {
             }
             const isType = settings.label.toLowerCase() === 'standard type';
             return (
-              <>
+              <div key={key}>
                 {isType && index >= 1 ? (
                   <h4>
                     <span className="nhsuk-u-visually-hidden">
@@ -88,7 +88,7 @@ export function FilterSummary({ schema }) {
                     </li>
                   );
                 })}
-              </>
+              </div>
             );
           })}
       </ul>
