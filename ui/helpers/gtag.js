@@ -1,7 +1,6 @@
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export const pageview = (url) => {
-  console.log('trying to send', url, GA_TRACKING_ID);
-  window.gtag('config', GA_TRACKING_ID, {
+export const pageview = (url, trackingId) => {
+  window.gtag('config', trackingId, {
     page_path: url,
   });
 };

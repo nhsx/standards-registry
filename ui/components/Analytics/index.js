@@ -11,7 +11,7 @@ export function Analytics() {
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
-      pageview(url);
+      pageview(url, GA_TRACKING_ID);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
