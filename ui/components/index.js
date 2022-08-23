@@ -1,3 +1,4 @@
+export { Analytics } from './Analytics';
 export { Cookies } from './Cookies';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Card } from './Card';

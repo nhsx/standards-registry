@@ -3,25 +3,19 @@ import { setCookie, hasCookie } from 'cookies-next';
 import classnames from 'classnames';
 import styles from './style.module.scss';
 
-// import { useRouter } from 'next/router';
-// import ReactGA from 'react-ga4';
-
-export const Cookies = () => {
-  // const router = useRouter();
-
+export const Cookies = ({ choice }) => {
+  const [consentChoice, setConsentChoice] = useState(choice);
   useEffect(() => {
     setConsentChoice(hasCookie('localConsent'));
-  }, []);
-
-  const [consentChoice, setConsentChoice] = useState(true);
+  }, [choice]);
 
   const handleCookies = (choice) => {
-    setConsentChoice(true);
+    setConsentChoice(choice);
     setCookie('localConsent', choice, { maxAge: 60 * 60 * 24 * 365 });
   };
 
   return (
-    !consentChoice && (
+    (!consentChoice && (
       <div id="nhsuk-cookie-banner" data-nosnippet="true">
         <div
           className={classnames('nhsuk-cookie-banner', styles.banner)}
@@ -68,32 +62,7 @@ export const Cookies = () => {
           </div>
         </div>
       </div>
-    )
+    )) ||
+    null
   );
 };
-
-// useEffect(() => {
-//   if (!process.env.NEXT_PUBLIC_TRACKING_ID) {
-//     return null;
-//   }
-//   // https://www.npmjs.com/package/react-ga4
-//   ReactGA.initialize([
-//     {
-//       trackingId: process.env.NEXT_PUBLIC_TRACKING_ID,
-//       gaOptions: {}, // optional
-//       gtagOptions: {}, // optional
-//     },
-//     // {
-//     //   trackingId: 'your second GA measurement id',
-//     // },
-//   ]);
-
-//   const handleRouteChange = (url) => {
-//     if (process.env.NODE_ENV === 'production') {
-//       ReactGA.send({ hitType: 'pageview', page: url });
-//     }
-//   };
-//   router.events.on('routeChangeComplete', handleRouteChange);
-
-//   return () => router.events.off('routeChangeComplete', handleRouteChange);
-// }, [router]);

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
+  Analytics,
   Cookies,
   Breadcrumbs,
   Flex,
@@ -33,6 +34,7 @@ export default function Home({ children, ...props }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
+      <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">
         Skip to main content
       </a>
