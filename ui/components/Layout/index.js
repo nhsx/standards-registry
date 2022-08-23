@@ -31,10 +31,10 @@ export default function Home({ children, ...props }) {
   return (
     <div className={styles.container}>
       <Head>
-        {/* <Analytics /> */}
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
+      <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">
         Skip to main content
       </a>

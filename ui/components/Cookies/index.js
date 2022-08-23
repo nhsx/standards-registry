@@ -2,32 +2,12 @@ import { useEffect, useState } from 'react';
 import { setCookie, hasCookie } from 'cookies-next';
 import classnames from 'classnames';
 import styles from './style.module.scss';
-import ReactGA from 'react-ga4';
 
 export const Cookies = ({ choice }) => {
   const [consentChoice, setConsentChoice] = useState(choice);
   useEffect(() => {
     setConsentChoice(hasCookie('localConsent'));
   }, [choice]);
-
-  // console.log(consentChoice, setConsentChoice);
-
-  if (consentChoice === true) {
-    // console.log(
-    //   'should be initialising',
-    //   process.env.NEXT_PUBLIC_TRACKING_ID,
-    //   ReactGA
-    // );
-    ReactGA.initialize([
-      {
-        trackingId: process.env.NEXT_PUBLIC_TRACKING_ID,
-        // gaOptions: {...}, // optional
-        // gtagOptions: {...}, // optional
-      },
-    ]);
-    ReactGA.send('pageview');
-    ReactGA.send('pageview');
-  }
 
   const handleCookies = (choice) => {
     setConsentChoice(choice);

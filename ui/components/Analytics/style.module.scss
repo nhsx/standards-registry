@@ -1,0 +1,24 @@
+@import 'vars';
+
+.banner {
+  background: white;
+  position: relative;
+  box-shadow: 0 0 4px 0 #212b32;
+  padding: 24px 0 19px;
+  width: 100%;
+
+  button {
+    margin-bottom: $nhsuk-gutter;
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  display: inline;
+  margin-right: $nhsuk-gutter * 2;
+}
