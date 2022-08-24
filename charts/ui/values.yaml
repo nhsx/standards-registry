@@ -15,5 +15,4 @@ ui:
   config:
     ckanurl: ckanurl
     tracking_id: tracking_id
-    NEXT_PUBLIC_TAG_ID: GOOGLE_TAG_ID
-    NEXT_PUBLIC_TRACKING_ID: tracking_id
+    google_tag_id: google_tag_id
