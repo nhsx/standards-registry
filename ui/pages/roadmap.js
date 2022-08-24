@@ -59,7 +59,8 @@ export default function Roadmap({ data, schemaData }) {
           Find standards being assessed by the Data Alliance Partnership Board
           with a view to mandatory implementation in England. For more
           information or to propose a new standard email
-          england.interop.standards@nhs.net
+          {' '}
+          <a href="mailto:england.interop.standards@nhs.net">england.interop.standards@nhs.net</a>.
         </p>
         <p>
           <strong>{resultSummary}</strong>
