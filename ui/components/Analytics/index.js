@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { pageview } from '../../helpers/gtag';
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_TRACKING_ID;
-export const GA_TAG_ID = process.env.NEXT_PUBLIC_TAG_ID;
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_TRACKING_ID;
+const GA_TAG_ID = process.env.NEXT_PUBLIC_TAG_ID;
 
 export function Analytics() {
   const router = useRouter();
