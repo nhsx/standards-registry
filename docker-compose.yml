@@ -1,9 +1,11 @@
-version: "3.9"
+version: '3.9'
 services:
   webapp:
     build: ./ui
     environment:
       PORT: 3000
       CKAN_URL: $CKAN_URL
+      TRACKING_ID: $TRACKING_ID
+      GOOGLE_TAG_ID: $GOOGLE_TAG_ID
     ports:
-      - "3000:3000"
+      - '3000:3000'
