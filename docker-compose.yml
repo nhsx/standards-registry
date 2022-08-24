@@ -5,7 +5,7 @@ services:
     environment:
       PORT: 3000
       CKAN_URL: $CKAN_URL
-      TRACKING_ID: $TRACKING_ID
-      GOOGLE_TAG_ID: $GOOGLE_TAG_ID
+      NEXT_PUBLIC_TRACKING_ID: $TRACKING_ID
+      NEXT_PUBLIC_TAG_ID: $GOOGLE_TAG_ID
     ports:
       - '3000:3000'
