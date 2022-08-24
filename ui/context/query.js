@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { createContext, useContext } from 'react';
 import { pickBy } from 'lodash';
-import { stringify } from 'qs';
 
 const QueryContext = createContext();
 
@@ -10,7 +9,7 @@ export function QueryContextWrapper({ children }) {
 
   function getQuery(props) {
     const { query } = router;
-    return stringify({ ...query, ...props });
+    return new URLSearchParams({ ...query, ...props });
   }
 
   function getRoute() {

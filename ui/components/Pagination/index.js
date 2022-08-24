@@ -5,7 +5,7 @@ import { useQueryContext } from '../../context/query';
 import Link from 'next/link';
 
 export default function Pagination({ limit = 10, count }) {
-  const { query, getRoute, getQuery } = useQueryContext();
+  const { query, getRoute, updateQuery } = useQueryContext();
   const page = parseInt(query.page, 10) || 1;
 
   const totalPages = Math.ceil(count / limit);
@@ -18,14 +18,17 @@ export default function Pagination({ limit = 10, count }) {
     return Array.from(Array(totalPages).keys()).slice(start, end);
   };
 
-  const pageLink = (props) =>
-    [
-      getRoute(),
-      getQuery({
-        ...query,
-        ...props,
-      }),
-    ].join('?');
+  const pageLink = (props) => {
+    return {
+      pathname: getRoute(),
+      query: { ...query, ...props },
+    };
+  };
+
+  const changePage = (page) => (e) => {
+    e.preventDefault();
+    updateQuery({ ...query, page });
+  };
 
   return (
     <nav
@@ -55,6 +58,7 @@ export default function Pagination({ limit = 10, count }) {
               className={classnames(styles.link, {
                 [styles.current]: page <= 1,
               })}
+              onClick={changePage(page - 1)}
             >
               « Previous
             </a>
@@ -73,6 +77,7 @@ export default function Pagination({ limit = 10, count }) {
                 className={classnames(styles.link, {
                   [styles.current]: page === num + 1,
                 })}
+                onClick={changePage(num + 1)}
               >
                 {num + 1}
               </a>
@@ -95,6 +100,7 @@ export default function Pagination({ limit = 10, count }) {
               className={classnames(styles.link, {
                 [styles.current]: page >= totalPages,
               })}
+              onClick={changePage(page + 1)}
             >
               Next »
             </a>
