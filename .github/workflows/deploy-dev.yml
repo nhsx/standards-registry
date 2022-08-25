@@ -47,25 +47,27 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Login to Public ECR
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: public.ecr.aws
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
-      - name: build and push
-        id: build-image
+      - name: Build and push
+        uses: docker/build-push-action@v3
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ui-${{ github.sha }}
-          TRACKING_ID: ${{ secrets.TRACKING_ID }}
-        run: |
-          # Build a docker container and push it to ECR
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        with:
+          id: build-image
+          push: true
+          tags: ui-${{ github.sha }}
+          secrets: |
+            NEXT_PUBLIC_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
+            NEXT_PUBLIC_TRACKING_ID: ${{ secrets.TRACKING_ID }}
+
       - name: deploy
         uses: koslib/helm-eks-action@master
         env:
@@ -77,9 +79,6 @@ jobs:
           command: >-
             helm upgrade --install --wait -n dev ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
-            --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
-            --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
-            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   ckan:
     runs-on: ubuntu-latest
