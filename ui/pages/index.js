@@ -143,7 +143,7 @@ export default function Home() {
         <SoloSection
           heading="Help and resources"
           description="Explore contacts and resources for teams building or buying technology in England."
-          link="/community"
+          link="/help-and-resources"
           linkText="View help and resources"
         />
       </div>

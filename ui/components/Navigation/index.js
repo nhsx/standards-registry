@@ -16,7 +16,7 @@ export default function Navigation() {
     },
     {
       label: 'Help and resources',
-      url: '/community',
+      url: '/help-and-resources',
     },
   ];
 
