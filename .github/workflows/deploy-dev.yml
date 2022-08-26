@@ -67,7 +67,6 @@ jobs:
           DOCKER_BUILDKIT=1 docker build -t $ECR_REPOSITORY:$IMAGE_TAG . --build-arg $NEXT_PUBLIC_TAG_ID --build-arg $NEXT_PUBLIC_TRACKING_ID
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
       - name: deploy
         uses: koslib/helm-eks-action@master
         env:
