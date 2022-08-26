@@ -52,7 +52,7 @@ export const Cookies = ({ choice }) => {
                 <button
                   onClick={() => handleCookies(false)}
                   className="nhsuk-button"
-                  id="nhsuk-cookie-banner__link_accept"
+                  id="nhsuk-cookie-banner__link_reject"
                   href="#"
                 >
                   Do not use analytics cookies

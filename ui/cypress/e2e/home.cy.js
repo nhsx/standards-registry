@@ -40,4 +40,24 @@ describe('Homepage', () => {
       cy.checkA11y(null, null, a11yLog, failLevel);
     });
   });
+
+  describe('cookies', () => {
+    it('clicking approve removes banner, sets consent preference:true', () => {
+      cy.visit('/');
+      cy.get('#nhsuk-cookie-banner').should('be.visible');
+      cy.getCookie('localConsent').should('not.exist');
+      cy.get('#nhsuk-cookie-banner__link_accept_analytics').click();
+      cy.get('#nhsuk-cookie-banner').should('not.exist');
+      cy.getCookie('localConsent').should('have.property', 'value', 'true');
+    });
+
+    it('clicking reject removes banner, sets consent preference:false', () => {
+      cy.visit('/');
+      cy.get('#nhsuk-cookie-banner').should('be.visible');
+      cy.getCookie('localConsent').should('not.exist');
+      cy.get('#nhsuk-cookie-banner__link_reject').click();
+      cy.get('#nhsuk-cookie-banner').should('not.exist');
+      cy.getCookie('localConsent').should('have.property', 'value', 'false');
+    });
+  });
 });
