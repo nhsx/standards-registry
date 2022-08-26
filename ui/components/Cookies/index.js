@@ -4,13 +4,13 @@ import classnames from 'classnames';
 import styles from './style.module.scss';
 
 export const Cookies = ({ choice }) => {
-  const [consentChoice, setConsentChoice] = useState(choice);
+  const [consentChoice, consentChoiceSet] = useState(choice);
   useEffect(() => {
-    setConsentChoice(hasCookie('localConsent'));
+    consentChoiceSet(hasCookie('localConsent'));
   }, [choice]);
 
   const handleCookies = (choice) => {
-    setConsentChoice(choice);
+    consentChoiceSet(true);
     setCookie('localConsent', choice, { maxAge: 60 * 60 * 24 * 365 });
   };
 
@@ -52,7 +52,7 @@ export const Cookies = ({ choice }) => {
                 <button
                   onClick={() => handleCookies(false)}
                   className="nhsuk-button"
-                  id="nhsuk-cookie-banner__link_accept"
+                  id="nhsuk-cookie-banner__link_reject"
                   href="#"
                 >
                   Do not use analytics cookies
