@@ -11,8 +11,13 @@ RUN npm ci --production --include-optional --ignore-scripts
 
 COPY . /app
 
-RUN echo "NEXT_PUBLIC_TAG_ID=GTM-MB5X8WW" >> .env.production
-RUN echo "NEXT_PUBLIC_TRACKING_ID=G-TDNNX6ZNCT" >> .env.production
+RUN --mount=type=secret,id=NEXT_PUBLIC_TAG_ID \
+--mount=type=secret,id=NEXT_PUBLIC_TRACKING_ID \
+export NEXT_PUBLIC_TAG_ID=$(cat /run/secrets/NEXT_PUBLIC_TAG_ID) && \
+export NEXT_PUBLIC_TRACKING_ID=$(cat /run/secrets/NEXT_PUBLIC_TRACKING_ID)
+
+RUN echo "NEXT_PUBLIC_TAG_ID=$NEXT_PUBLIC_TAG_ID" >> .env.production
+RUN echo "NEXT_PUBLIC_TRACKING_ID=$NEXT_PUBLIC_TRACKING_ID" >> .env.production
 
 RUN npm run build --production  --if-present
 
