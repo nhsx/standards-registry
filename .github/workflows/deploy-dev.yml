@@ -54,20 +54,6 @@ jobs:
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        env:
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ui-${{ github.sha }}
-        with:
-          id: build-image
-          push: true
-          tags: ui-${{ github.sha }}
-          secrets: |
-            NEXT_PUBLIC_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
-            NEXT_PUBLIC_TRACKING_ID: ${{ secrets.TRACKING_ID }}
-
       - name: build and push
         id: build-image
         env:
