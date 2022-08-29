@@ -42,7 +42,8 @@ jobs:
           build: npm run build --if-present
           start: npm start
         env:
-          CKAN_URL: https://manage.test.standards.nhs.uk/api/action
+          CKAN_URL: https://manage.test.standards.nhs.uk/api/action,
+          PAGES_CKAN_URL: https://manage.test.nhs.marvell-consulting.com/api/action,
           PORT: 3000
 
       - uses: actions/upload-artifact@v2

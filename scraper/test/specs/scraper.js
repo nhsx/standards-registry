@@ -3,7 +3,7 @@ const fs = require('fs');
 const Url = require('url');
 const stringify = require('csv-stringify');
 
-const PRSB = 'https://theprsb.org/standards/';
+const PRSB = 'https://theprsb.org/current-standards/';
 const NHSD = 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections';
 const API_CATALOGUE = 'https://digital.nhs.uk/developer/api-catalogue';
 

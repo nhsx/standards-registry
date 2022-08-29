@@ -171,7 +171,7 @@ export function HomepageHero({ recent }) {
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
               {recent.map((standard) => (
                 <li key={standard.id}>
-                  <Link href={`/standards/${standard.name}`}>
+                  <Link href={`/current-standards/${standard.name}`}>
                     {standard.title}
                   </Link>
                 </li>

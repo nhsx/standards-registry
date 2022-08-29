@@ -27,7 +27,7 @@ Create a `.env` file containing the following content:
 
 ```
 touch .env.local
-echo "CKAN_URL=https://manage.test.standards.nhs.uk/api/action" >> .env.local
+echo "CKAN_URL=https://manage.test.standards.nhs.uk/api/action\nPAGES_CKAN_URL=https://manage.test.standards.nhs.uk/api/action" >> .env.local
 ```
 
 ### Running the server
@@ -45,7 +45,7 @@ This will run a development instance of the interface serving data from the test
 
 ### Making changes
 
-The UI service is a [Next.js](https://nextjs.org/docs/getting-started) app. 
+The UI service is a [Next.js](https://nextjs.org/docs/getting-started) app.
 
 * Pages are stored in the `./pages` folder - [documentation on how to add new pages to the app](https://nextjs.org/docs/basic-features/built-in-css-support)
 * Components that are used across multiple pages are stored in the `./components` folder
