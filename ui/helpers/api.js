@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { stringify } from 'qs';
 import { findKey } from 'lodash';
-const CKAN_URL = process.env.CKAN_URL;
+const { CKAN_URL, PAGES_CKAN_URL } = process.env;
 
 const DEFAULT_SORT = {
   score: 'desc',
@@ -82,7 +82,7 @@ export async function read({ id }) {
 }
 
 export async function getPages() {
-  const response = await fetch(`${CKAN_URL}/ckanext_pages_list`);
+  const response = await fetch(`${PAGES_CKAN_URL}/ckanext_pages_list`);
   const data = await response.json();
   return data.result;
 }

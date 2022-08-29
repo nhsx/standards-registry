@@ -1,4 +1,4 @@
-import { list, schema } from './api';
+import { list, schema, getPages } from './api';
 
 export async function getPageProps({ query }, options = {}) {
   return {
@@ -6,6 +6,7 @@ export async function getPageProps({ query }, options = {}) {
       ...{
         data: await list(query),
         schemaData: await schema(),
+        pages: await getPages(),
         searchTerm: query.q || '',
       },
       ...options,

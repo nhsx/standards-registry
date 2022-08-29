@@ -39,6 +39,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      pages,
       showToc,
       content,
       title,
