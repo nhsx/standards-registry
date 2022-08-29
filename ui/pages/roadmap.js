@@ -6,7 +6,7 @@ import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 import axios from 'axios';
 import omit from 'lodash/omit';
-import { Page, Reading, Filters, Modal, ResponsiveTable } from '../components';
+import { Page, Reading, Filters, Modal, ResponsiveTable, Pagination } from '../components';
 
 import styles from '../styles/Roadmap.module.scss';
 
@@ -89,6 +89,7 @@ export default function Roadmap({ data, schemaData }) {
         noBorderTop
       />
       <ResponsiveTable schema={schema} results={results} />
+      <Pagination count={count} />
     </Page>
   );
 }
