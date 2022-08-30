@@ -154,14 +154,29 @@ jobs:
       run:
         working-directory: ui
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
         with:
-          node-version: 16.x
-          cache: 'npm'
-          cache-dependency-path: ui/package-lock.json
-      - run: npm ci
-      - run: BASE_URL=https://dev.standards.nhs.uk npm run test:integration
+          working-directory: ui
+          build: npm run build --if-present
+          start: npm start
+        env:
+          CKAN_URL: https://manage.dev.standards.nhs.uk/api/action
+          PAGES_CKAN_URL: https://manage.test.standards.nhs.uk/api/action
+          PORT: 3000
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ui/cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: ui/cypress/videos
 
   notifypass:
     runs-on: ubuntu-latest
