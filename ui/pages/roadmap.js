@@ -12,7 +12,7 @@ import {
   Filters,
   Modal,
   ResponsiveTable,
-  Pagination
+  Pagination,
 } from '../components';
 
 import styles from '../styles/Roadmap.module.scss';
