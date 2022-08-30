@@ -17,6 +17,4 @@ COPY . /app
 # RUN echo "NEXT_PUBLIC_TAG_ID=${NEXT_PUBLIC_TAG_ID}" >> .env.production
 # RUN echo "NEXT_PUBLIC_TRACKING_ID=${NEXT_PUBLIC_TRACKING_ID}" >> .env.production
 
-RUN npm run build --production  --if-present
-
-CMD npm start
+RUN npm run build --production  --if-present && npm start
