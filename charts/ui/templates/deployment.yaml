@@ -24,6 +24,8 @@ spec:
           env:
             - name: CKAN_URL
               value: {{ .Values.ui.config.ckanurl }}
+            - name: PAGES_CKAN_URL
+              value: {{ .Values.ui.config.pagesckanurl }}
             - name: TRACKING_ID
               value: {{ .Values.ui.config.tracking_id }}
             - name: NEXT_PUBLIC_TAG_ID

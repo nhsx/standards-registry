@@ -74,7 +74,7 @@ export const sample = {
   headings,
   values: [
     'About Me',
-    'https://theprsb.org/standards/aboutme/',
+    'https://theprsb.org/current-standards/aboutme/',
     'Part of a suite of social care standards, About Me information is the most important details that a person wants to share with professionals in health and social care.',
     'prsb',
     '',

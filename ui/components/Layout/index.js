@@ -13,9 +13,24 @@ import {
 import { useContentContext } from '../../context/content';
 import styles from './style.module.scss';
 import classnames from 'classnames';
+import { usePages } from '../../context';
 
 export default function Home({ children, ...props }) {
+  const pages = usePages();
   useRouter();
+
+  const links = [
+    'current-standards',
+    'future-standards',
+    'about-standards',
+    'help-and-resources',
+  ].map((name) => {
+    const page = pages.find((p) => p.name === name);
+    return {
+      url: `/${page.name}`,
+      label: page.short_title,
+    };
+  });
 
   const { content } = useContentContext();
   const { title } = content;
@@ -100,7 +115,7 @@ export default function Home({ children, ...props }) {
           </div>
         </div>
 
-        <Navigation />
+        <Navigation links={links} />
       </header>
 
       <main className={styles.main} id="maincontent" role="main">

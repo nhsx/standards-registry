@@ -47,7 +47,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Login to Public ECR
-        uses: docker/login-action@v2
+        uses: docker/login-action@v1
         with:
           registry: public.ecr.aws
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -60,11 +60,11 @@ jobs:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ui-${{ github.sha }}
-          NEXT_PUBLIC_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
-          NEXT_PUBLIC_TRACKING_ID: ${{ secrets.TRACKING_ID }}
+          GOOGLE_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
+          TRACKING_ID: ${{ secrets.TRACKING_ID }}
         run: |
           # Build a docker container and push it to ECR
-          DOCKER_BUILDKIT=1 docker build -t $ECR_REPOSITORY:$IMAGE_TAG . --build-arg $NEXT_PUBLIC_TAG_ID --build-arg $NEXT_PUBLIC_TRACKING_ID
+          docker build --build-arg NEXT_PUBLIC_TAG_ID=$GOOGLE_TAG_ID --build-arg NEXT_PUBLIC_TRACKING_ID=$TRACKING_ID -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: deploy
@@ -74,10 +74,15 @@ jobs:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ui-${{ github.sha }}
+          PAGES_CKAN_URL: 'https://manage.test.standards.nhs.uk/api/action'
         with:
           command: >-
             helm upgrade --install --wait -n dev ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
+            --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
+            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            --set ui.config.pagesckanurl='${{ secrets.PAGES_CKAN_URL }}'
 
   ckan:
     runs-on: ubuntu-latest

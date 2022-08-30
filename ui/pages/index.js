@@ -8,6 +8,7 @@ import {
   FeedbackFooter,
 } from '../components';
 import styles from '../styles/Home.module.scss';
+import { getPages } from '../helpers/api';
 import { list } from '../helpers/api';
 
 const content = {
@@ -58,7 +59,7 @@ const HomeElement = ({ link, linkText, description }) => (
   </div>
 );
 
-export default function Home() {
+export default function Home({ pages }) {
   return (
     <>
       <HomeSection
@@ -128,24 +129,21 @@ export default function Home() {
       </HomeSection>
 
       <div className="nhsuk-grid-row">
-        <SoloSection
-          heading="Future standards"
-          description="Check standards being developed or proposed as future requirements in England."
-          link="/roadmap"
-          linkText="View future standards"
-        />
-        <SoloSection
-          heading="About standards"
-          description="Get an introduction to standards and interoperability in health and adult social care."
-          link="/what-information-standards-are"
-          linkText="View about standards"
-        />
-        <SoloSection
-          heading="Help and resources"
-          description="Explore contacts and resources for teams building or buying technology in England."
-          link="/help-and-resources"
-          linkText="View help and resources"
-        />
+        {['future-standards', 'about-standards', 'help-and-resources'].map(
+          (key) => {
+            const page = pages.find((p) => p.name === key);
+            const { short_title, name, homepage_snippet } = page;
+            return (
+              <SoloSection
+                key={key}
+                heading={short_title}
+                description={homepage_snippet}
+                link={`/${name}`}
+                linkText={`View ${short_title.toLowerCase()}`}
+              />
+            );
+          }
+        )}
       </div>
       <FeedbackFooter />
     </>
@@ -173,7 +171,7 @@ export function HomepageHero({ recent }) {
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
               {recent.map((standard) => (
                 <li key={standard.id}>
-                  <Link href={`/standards/${standard.name}`}>
+                  <Link href={`/current-standards/${standard.name}`}>
                     {standard.title}
                   </Link>
                 </li>
@@ -198,9 +196,12 @@ Home.Layout = HomeLayout;
 
 export async function getServerSideProps() {
   const recent = await list({ sort: { metadata_modified: 'desc' } });
+  const pages = await getPages();
+
   return {
     props: {
       recent: recent.results.slice(0, 3),
+      pages,
       content,
     },
   };

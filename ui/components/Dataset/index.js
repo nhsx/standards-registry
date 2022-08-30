@@ -38,7 +38,7 @@ function Model({ model }) {
     standard_category,
     description,
   } = model;
-  const target = `/standards/${name}`;
+  const target = `/current-standards/${name}`;
 
   return (
     <>
