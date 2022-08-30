@@ -31,6 +31,10 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      analytics: {
+        trackingId: process.env.NEXT_PUBLIC_TRACKING_ID,
+        tagId: process.env.NEXT_PUBLIC_TAG_ID,
+      },
       pages,
       data,
     },
