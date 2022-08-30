@@ -11,8 +11,13 @@ RUN npm ci --production --include-optional --ignore-scripts
 
 COPY . /app
 
-RUN echo "NEXT_PUBLIC_TAG_ID=$NEXT_PUBLIC_TAG_ID" >> .env.production
-RUN echo "NEXT_PUBLIC_TRACKING_ID=$NEXT_PUBLIC_TRACKING_ID" >> .env.production
+ARG NEXT_PUBLIC_TAG_ID
+ARG NEXT_PUBLIC_TRACKING_ID
+
+RUN echo "tag" $NEXT_PUBLIC_TAG_ID
+
+RUN echo "NEXT_PUBLIC_TAG_ID=${NEXT_PUBLIC_TAG_ID}" >> .env.production
+RUN echo "NEXT_PUBLIC_TRACKING_ID=${NEXT_PUBLIC_TRACKING_ID}" >> .env.production
 
 RUN npm run build --production  --if-present
 
