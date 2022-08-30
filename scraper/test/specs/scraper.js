@@ -4,22 +4,18 @@ const Url = require('url');
 const stringify = require('csv-stringify');
 
 const PRSB = 'https://theprsb.org/current-standards/';
-const NHSD = 'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections';
+const NHSD =
+  'https://digital.nhs.uk/data-and-information/information-standards/information-standards-and-data-collections-including-extractions/publications-and-notifications/standards-and-collections';
 const API_CATALOGUE = 'https://digital.nhs.uk/developer/api-catalogue';
 
-const columns = [
-  'owner',
-  'title',
-  'url',
-  'description',
-  'approval'
-];
+const columns = ['owner', 'title', 'url', 'description', 'approval'];
 
 describe('WebScraper', () => {
-
   before(() => {
     this.output = stringify({ header: true, columns });
-    this.output.pipe(fs.createWriteStream(path.resolve(__dirname, '../../standards.csv')));
+    this.output.pipe(
+      fs.createWriteStream(path.resolve(__dirname, '../../standards.csv'))
+    );
   });
 
   after(() => {
@@ -30,7 +26,7 @@ describe('WebScraper', () => {
     await browser.url(PRSB);
     await browser.$('table').waitForDisplayed();
     const standards = await browser.$$('table tbody tr');
-    for await (row of standards)  {
+    for await (row of standards) {
       const link = await row.$('td:nth-child(1) a');
       const url = await link.getAttribute('href');
       const title = await link.getText();
@@ -40,9 +36,9 @@ describe('WebScraper', () => {
         url,
         title,
         description,
-        approval: ''
+        approval: '',
       });
-    };
+    }
   });
 
   it('NHS Digital', async () => {
@@ -61,7 +57,11 @@ describe('WebScraper', () => {
       if (type === 'Standard') {
         const url = await row.$('td:nth-child(3) a').getAttribute('href');
         const linkText = await row.$('td:nth-child(3) a').getText();
-        const approval = linkText.match(/^((DAPB|DCB|ISB|SCCI) ?[0-9]*).*$/) ? linkText.match(/^((DAPB|DCB|ISB|SCCI) ?[0-9]*).*$/)[1].replace(' ', '') : '';
+        const approval = linkText.match(/^((DAPB|DCB|ISB|SCCI) ?[0-9]*).*$/)
+          ? linkText
+              .match(/^((DAPB|DCB|ISB|SCCI) ?[0-9]*).*$/)[1]
+              .replace(' ', '')
+          : '';
 
         // some links are /root/referenced/urls - normalise those
         if (Url.parse(url).hostname === null) {
@@ -77,22 +77,25 @@ describe('WebScraper', () => {
       let description = '';
       if (Url.parse(page.url).hostname === Url.parse(NHSD).hostname) {
         await browser.url(page.url);
-        description = await browser.$('.nhsd-o-hero [data-uipath="document.summary"]').getText();
+        description = await browser
+          .$('.nhsd-o-hero [data-uipath="document.summary"]')
+          .getText();
       }
       this.output.write({
         owner: 'nhsd',
         ...page,
-        description: description.trim()
+        description: description.trim(),
       });
-    };
-
+    }
   });
 
   it('API Catalogue', async () => {
     await browser.url(API_CATALOGUE);
     await browser.$('[data-uipath="website.glossary.list"]').waitForDisplayed();
-    const standards = await browser.$$('[data-uipath="website.glossary.list"] h2');
-    for await (row of standards)  {
+    const standards = await browser.$$(
+      '[data-uipath="website.glossary.list"] h2'
+    );
+    for await (row of standards) {
       const link = await row.$('a');
       let url = await link.getAttribute('href');
       const title = await link.getText();
@@ -106,10 +109,8 @@ describe('WebScraper', () => {
         url,
         title,
         description,
-        approval: ''
+        approval: '',
       });
-    };
+    }
   });
-
 });
-
