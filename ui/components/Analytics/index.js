@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { pageview } from '../../helpers/gtag';
 
-export function Analytics({ analytics }) {
+export function Analytics({ analytics } = {}) {
   const { trackingId, tagId } = analytics;
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
-      pageview(url, GA_TRACKING_ID);
+      pageview(url, trackingId);
     };
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
