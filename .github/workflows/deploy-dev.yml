@@ -61,6 +61,8 @@ jobs:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ui-${{ github.sha }}
+          NEXT_PUBLIC_TRACKING_ID: ${{ secrets.TRACKING_ID }}
+          NEXT_PUBLIC_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
         run: |
           # Build a docker container and push it to ECR
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
