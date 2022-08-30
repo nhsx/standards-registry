@@ -1,15 +1,16 @@
 name: deploy-dev
 
 on:
-  workflow_run:
-    branches:
-      - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+  - push
+  # workflow_run:
+  #   branches:
+  #     - master
+  #   workflows:
+  #     - build-and-test
+  #   types:
+  #     - completed
+  #   conclusion:
+  #     - success
 
 jobs:
   deploy-csv-exporter:
@@ -60,11 +61,9 @@ jobs:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory
           IMAGE_TAG: ui-${{ github.sha }}
-          GOOGLE_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
-          TRACKING_ID: ${{ secrets.TRACKING_ID }}
         run: |
           # Build a docker container and push it to ECR
-          docker build --build-arg NEXT_PUBLIC_TAG_ID=$GOOGLE_TAG_ID --build-arg NEXT_PUBLIC_TRACKING_ID=$TRACKING_ID -t $ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: deploy

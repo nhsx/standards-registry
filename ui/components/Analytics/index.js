@@ -4,10 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { pageview } from '../../helpers/gtag';
 
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_TRACKING_ID;
-export const GA_TAG_ID = process.env.NEXT_PUBLIC_TAG_ID;
-
-export function Analytics() {
+export function Analytics({ analytics }) {
+  const { trackingId, tagId } = analytics;
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -26,7 +24,7 @@ export function Analytics() {
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
       />
 
       <Script
@@ -47,7 +45,7 @@ export function Analytics() {
                       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                      })(window,document,'script','dataLayer','${GA_TAG_ID}');`,
+                      })(window,document,'script','dataLayer','${tagId}');`,
         }}
       />
 

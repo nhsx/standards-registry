@@ -203,6 +203,10 @@ export async function getServerSideProps() {
       recent: recent.results.slice(0, 3),
       pages,
       content,
+      analytics: {
+        trackingId: process.env.NEXT_PUBLIC_TRACKING_ID,
+        tagId: process.env.NEXT_PUBLIC_TAG_ID,
+      },
     },
   };
 }

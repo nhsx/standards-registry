@@ -17,6 +17,8 @@ import { usePages } from '../../context';
 
 export default function Home({ children, ...props }) {
   const pages = usePages();
+  console.log('props', props);
+  const { analytics } = props;
   useRouter();
 
   const links = [
@@ -49,7 +51,7 @@ export default function Home({ children, ...props }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <Analytics />
+      <Analytics analytics={analytics} />
       <a className="nhsuk-skip-link" href="#maincontent">
         Skip to main content
       </a>
