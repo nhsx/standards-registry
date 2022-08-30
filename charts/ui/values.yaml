@@ -16,3 +16,4 @@ ui:
     ckanurl: ckanurl
     tracking_id: tracking_id
     google_tag_id: google_tag_id
+    pagesckanurl: pagesckanurl
