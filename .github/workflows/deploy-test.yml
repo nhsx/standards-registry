@@ -140,6 +140,7 @@ jobs:
           build: npm run build --if-present
           start: npm start
         env:
+          BASE_URL: https://test.standards.nhs.uk
           CKAN_URL: https://manage.test.standards.nhs.uk/api/action
           PAGES_CKAN_URL: https://manage.test.standards.nhs.uk/api/action
           PORT: 3000
