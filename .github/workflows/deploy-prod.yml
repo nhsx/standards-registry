@@ -61,6 +61,7 @@ jobs:
           command: >-
             helm upgrade --debug --install --wait -n prod ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.config.pagesckanurl='${{ secrets.PAGES_CKAN_URL }}'
             --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
   ckan:

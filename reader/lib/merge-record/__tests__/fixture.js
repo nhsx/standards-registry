@@ -22,7 +22,7 @@ export const fromCkan = {
     description:
       'Part of a suite of social care standards, About Me information is the most important details that a person wants to share with professionals in health and social care.',
     documentation_help_text: '',
-    documentation_link: 'https://theprsb.org/standards/aboutme/',
+    documentation_link: 'https://theprsb.org/current-standards/aboutme/',
     endorsements: '',
     id: '392dabed-9b86-4608-80df-4cb2cd6b7d79',
     isopen: false,
@@ -73,7 +73,7 @@ export const fromCkan = {
 
 export const fromParsed = {
   title: 'About Me',
-  documentation_link: 'https://theprsb.org/standards/aboutme/',
+  documentation_link: 'https://theprsb.org/current-standards/aboutme/',
   description:
     'Part of a suite of social care standards, About Me information is the most important details that a person wants to share with professionals in health and social care.',
   owner_org: 'professional-record-standards-body',

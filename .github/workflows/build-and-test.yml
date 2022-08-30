@@ -43,6 +43,7 @@ jobs:
           start: npm start
         env:
           CKAN_URL: https://manage.test.standards.nhs.uk/api/action
+          PAGES_CKAN_URL: https://manage.test.standards.nhs.uk/api/action
           PORT: 3000
 
       - uses: actions/upload-artifact@v2

@@ -1,6 +1,6 @@
 import { Page, Reading, Row, Col, Model, ReviewDates } from '../../components';
 
-import { read } from '../../helpers/api';
+import { read, getPages } from '../../helpers/api';
 import schema from '../../schema';
 import { useContentContext } from '../../context/content';
 
@@ -27,9 +27,11 @@ const Id = ({ data }) => {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const data = await read({ id });
+  const pages = await getPages();
 
   return {
     props: {
+      pages,
       data,
     },
   };

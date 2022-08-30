@@ -1,25 +1,6 @@
 import Link from 'next/link';
 
-export default function Navigation() {
-  const links = [
-    {
-      label: 'Current standards',
-      url: '/standards',
-    },
-    {
-      label: 'Future standards',
-      url: '/roadmap',
-    },
-    {
-      label: 'About standards',
-      url: '/what-information-standards-are',
-    },
-    {
-      label: 'Help and resources',
-      url: '/help-and-resources',
-    },
-  ];
-
+export default function Navigation({ links }) {
   return (
     <nav
       className="nhsuk-header__navigation"
