@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1.0-experimental
+
 FROM node:16-alpine
 
 WORKDIR /app
