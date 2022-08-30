@@ -82,7 +82,7 @@ jobs:
             --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
             --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            --set ui.config.pagesckanurl='https://manage.test.standards.nhs.uk/api/action'
+            --set ui.config.pagesckanurl='${{ secrets.PAGES_CKAN_URL }}'
 
   ckan:
     runs-on: ubuntu-latest
