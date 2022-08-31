@@ -181,9 +181,9 @@ export default function Home({ children, ...props }) {
                 <li className="nhsuk-footer__list-item">
                   <a
                     className="nhsuk-footer__list-item-link"
-                    href="mailto:england.standards.directory@nhs.net"
+                    href="mailto:england.interop.standards@nhs.net"
                   >
-                    Contact: england.standards.directory@nhs.net
+                    Contact: england.interop.standards@nhs.net
                   </a>
                 </li>
               </ul>
