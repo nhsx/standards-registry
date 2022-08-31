@@ -62,9 +62,10 @@ jobs:
           command: >-
             helm upgrade --debug --install --wait -n prod ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
-            --set ui.config.pagesckanurl=$PAGES_CKAN_URL
             --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
+            --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
             --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            --set ui.config.pagesckanurl=$PAGES_CKAN_URL
   ckan:
     runs-on: ubuntu-latest
     environment: prod
