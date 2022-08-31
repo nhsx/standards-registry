@@ -88,13 +88,24 @@ jobs:
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
+      - name: build and push
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REPOSITORY: nhsx-standards-directory-prod
+          IMAGE_TAG: prod-ckan-${{ github.sha }}
+        run: |
+          # Build a docker container and push it to ECR
+          docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-ckan .
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: ckan deploy
         uses: koslib/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: nhsx-standards-directory-prod
-          IMAGE_TAG: ckan-${{ github.sha }}
+          IMAGE_TAG: prod-ckan-${{ github.sha }}
         with:
           command: >-
             helm upgrade --debug ckan -n prod --repo https://marvell-consulting.github.io/ckan-helm-chart --install --wait ckan -f ./charts/ckan/values.yaml
