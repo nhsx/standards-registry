@@ -60,25 +60,26 @@ const HomeElement = ({ link, linkText, description }) => (
 );
 
 export default function Home({ pages }) {
+  const standardsPage = 'current-standards';
   return (
     <>
       <HomeSection
         title="Browse by care setting"
-        link="/standards"
+        link={`/${standardsPage}`}
         linkText="Browse all care settings"
       >
         <HomeElement
-          link="/standards?care_setting=Hospital"
+          link={`/${standardsPage}?care_setting=Hospital`}
           linkText="Hospitals"
           description="Including discharges, referrals, dosing and screening."
         />
         <HomeElement
-          link="/standards?care_setting=GP+%2F+Primary+care"
+          link={`/${standardsPage}?care_setting=GP+%2F+Primary+care`}
           linkText="GP and Primary Care"
           description="Including referrals, diagnostics, and treatments."
         />
         <HomeElement
-          link="/standards?care_setting=Social+care"
+          link={`/${standardsPage}?care_setting=Social+care`}
           linkText="Social care"
           description="Including referrals, end of life and personalised care."
         />
@@ -86,43 +87,43 @@ export default function Home({ pages }) {
 
       <HomeSection
         title="Browse by topic"
-        link="/standards"
+        link={`/${standardsPage}`}
         linkText="Browse all topics"
       >
         <HomeElement
-          link="/standards?topic=Appointment+%2F+scheduling"
+          link={`/${standardsPage}?topic=Appointment+%2F+scheduling`}
           linkText="Appointments"
           description="Including appointment bookings and clinical referrals."
         />
         <HomeElement
-          link="/standards?topic=Access+to+records"
+          link={`/${standardsPage}?topic=Access+to+records`}
           linkText="Access to records"
           description="Including retrieving structured information from care records."
         />
         <HomeElement
-          link="/standards?topic=Vaccination"
+          link={`/${standardsPage}?topic=Vaccination`}
           linkText="Vaccination"
           description="Including immunisations and adverse reactions."
         />
       </HomeSection>
       <HomeSection
         title="Browse by type"
-        link="/standards"
+        link={`/${standardsPage}`}
         linkText="Browse all standard types"
         lineBreak={false}
       >
         <HomeElement
-          link="/standards?standard_category=Technical+standards+and+specifications"
+          link={`/${standardsPage}?standard_category=Technical+standards+and+specifications`}
           linkText="Technical standards and specifications"
           description="Including FHIR and HL7 standards for interoperability and APIs."
         />
         <HomeElement
-          link="/standards?standard_category=Record+standard"
+          link={`/${standardsPage}?standard_category=Record+standard`}
           linkText="Record standards"
           description="Including formatting standards for clinical and care records."
         />
         <HomeElement
-          link="/standards?standard_category=Data+definitions+and+terminologies"
+          link={`/${standardsPage}?standard_category=Data+definitions+and+terminologies`}
           linkText="Data definitions and terminologies"
           description="Including dictionaries for medicines, devices and data."
         />
@@ -151,6 +152,7 @@ export default function Home({ pages }) {
 }
 
 export function HomepageHero({ recent }) {
+  const standardsPage = 'current-standards';
   return (
     <Hero>
       <div className="nhsuk-grid-row">
@@ -171,7 +173,7 @@ export function HomepageHero({ recent }) {
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
               {recent.map((standard) => (
                 <li key={standard.id}>
-                  <Link href={`/current-standards/${standard.name}`}>
+                  <Link href={`/${standardsPage}/${standard.name}`}>
                     {standard.title}
                   </Link>
                 </li>
