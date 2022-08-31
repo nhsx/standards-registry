@@ -12,6 +12,55 @@ describe('Standards Listing Index', () => {
     cy.get('#browse-results li').should('have.length', 10);
   });
 
+  describe.only('filters and pagination', () => {
+    it('Can change page', () => {
+      cy.visit('/current-standards');
+      cy.get('.nhsuk-pagination').contains('a', 'Next').click();
+      cy.url().should('contain', 'page=2');
+
+      cy.get('.nhsuk-pagination').contains('a', 'Next').click();
+      cy.url().should('contain', 'page=3');
+
+      cy.get('.nhsuk-pagination').contains('a', 'Prev').click();
+      cy.url().should('contain', 'page=2');
+
+      cy.get('.nhsuk-pagination').contains('a', 'Prev').click();
+      cy.url().should('contain', 'page=1');
+    });
+
+    it('Can filter by mandated, and remove filter (regression)', () => {
+      cy.visit('/current-standards');
+      let results;
+      cy.get('span[role="status"]').should((el) => {
+        results = parseInt(el.text().replace(' Results', ''));
+      });
+      cy.get('#mandated').click();
+
+      cy.get('span[role="status"]').should((el) => {
+        const filteredResults = parseInt(el.text().replace(' Results', ''));
+        expect(filteredResults).to.be.lessThan(results);
+      });
+
+      cy.get('#mandated').click();
+
+      cy.get('span[role="status"]').should((el) => {
+        const filteredResults = parseInt(el.text().replace(' Results', ''));
+        expect(filteredResults).to.be.equal(results);
+      });
+    });
+
+    it('Resets page when filtered', () => {
+      cy.visit('/current-standards');
+      cy.get('.nhsuk-pagination').contains('a', 'Next').click();
+      cy.url().should('contain', 'page=2');
+
+      cy.get('#mandated').click();
+
+      cy.url().should('not.contain', 'page');
+      cy.url().should('contain', 'mandated');
+    });
+  });
+
   describe('Search', () => {
     it('Can search by standard matching', () => {
       cy.visit('/current-standards');
