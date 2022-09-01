@@ -33,7 +33,7 @@ jobs:
       - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
       - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
 
-  ui:
+  build-ui-container:
     runs-on: ubuntu-latest
     environment: dev
     defaults:
@@ -73,7 +73,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   deploy-ui:
-    needs: ui
+    needs: build-ui-container
     uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@STAN-940/templated-builds
     with:
       app_name: dev-ui
@@ -84,22 +84,8 @@ jobs:
       google_tag_id: ${{ secrets.GOOGLE_TAG_ID }}
       ecr_registry: ${{ secrets.ECR_REGISTRY }}
       kubeconfig_file: ${{ secrets.KUBECONFIG_FILE }}
-      # - name: deploy
-      #   uses: koslib/helm-eks-action@master
-      #   env:
-      #     KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
-      #     ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-      #     ECR_REPOSITORY: nhsx-standards-directory
-      #     IMAGE_TAG: ui-${{ github.sha }}
-      #     PAGES_CKAN_URL: 'https://manage.test.standards.nhs.uk/api/action'
-      #   with:
-      #     command: >-
-      #       helm upgrade --install --wait -n dev ui ./charts/ui
-      #       --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
-      #       --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
-      #       --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
-      #       --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      #       --set ui.config.pagesckanurl=$PAGES_CKAN_URL
+      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   ckan:
     runs-on: ubuntu-latest
@@ -163,7 +149,7 @@ jobs:
   integrationtest:
     if: ${{ success() }}
     needs:
-      - ui
+      - deploy-ui
       - ckan
       - deploy-csv-exporter
     runs-on: ubuntu-latest

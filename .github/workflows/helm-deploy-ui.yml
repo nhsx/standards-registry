@@ -34,13 +34,37 @@ on:
         required: true
       kubeconfig_file:
         required: true
-
+      aws_access_key_id:
+        required: true
+      aws_secret_access_key:
+        required: true
 jobs:
   helm-upgrade:
     runs-on: ubuntu-latest
     environment: ${{inputs.environment}}
+    defaults:
+      run:
+        working-directory: ui
+    env:
+      AWS_REGION: eu-west-2
 
     steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: configure credentials (using us-east-1)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.aws_access_key_id }}
+          aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
+          aws-region: us-east-1
+      - name: Login to Public ECR
+        uses: docker/login-action@v1
+        with:
+          registry: public.ecr.aws
+          username: ${{ secrets.aws_access_key_id }}
+          password: ${{ secrets.aws_secret_access_key }}
+        env:
+          AWS_REGION: ${{ env.AWS_REGION }}
       - uses: koslib/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kubeconfig_file }}
@@ -49,7 +73,7 @@ jobs:
           IMAGE_TAG: ui-${{ github.sha }}
         with:
           command: >-
-            helm upgrade --debug --install --wait -n {{inputs.environment}} ui ./charts/ui
+            helm upgrade --debug --install --wait -n ${{inputs.environment}} ui ./charts/ui
             --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
             --set ui.config.tracking_id='${{ secrets.tracking_id }}'
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
