@@ -18,7 +18,7 @@ on:
         required: false
         type: string
       ecr_repository:
-        default: 'nhsx-standards-directory'
+        default: nhsx-standards-directory
         description: 'The ECR registry to pull a docker image from'
         required: false
         type: string
@@ -47,16 +47,19 @@ jobs:
         working-directory: ui
     env:
       AWS_REGION: eu-west-2
+      IMAGE_TAG: ui-${{ github.sha }}
 
     steps:
       - name: checkout
         uses: actions/checkout@v2
+
       - name: configure credentials (using us-east-1)
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.aws_access_key_id }}
           aws-secret-access-key: ${{ secrets.aws_secret_access_key }}
           aws-region: us-east-1
+
       - name: Login to Public ECR
         uses: docker/login-action@v1
         with:
@@ -65,17 +68,24 @@ jobs:
           password: ${{ secrets.aws_secret_access_key }}
         env:
           AWS_REGION: ${{ env.AWS_REGION }}
-      - uses: koslib/helm-eks-action@master
+
+      - name: build and push
+        id: build-image
+        run: |
+          # Build a docker container and push it to ECR
+          docker build --build-arg NEXT_PUBLIC_TAG_ID=${{ secrets.google_tag_id }} --build-arg NEXT_PUBLIC_TRACKING_ID=${{ secrets.tracking_id }} -t ${{ inputs.ecr_repository }}:$IMAGE_TAG .
+          docker tag ${{ inputs.ecr_repository }}:$IMAGE_TAG ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
+          docker push ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
+
+      - name: update helm
+        uses: koslib/helm-eks-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kubeconfig_file }}
-          ECR_REGISTRY: ${{ secrets.ecr_registry }}
-          ECR_REPOSITORY: ${{ inputs.ecr_repository }}
-          IMAGE_TAG: ui-${{ github.sha }}
         with:
           command: >-
             helm upgrade --debug --install --wait -n ${{inputs.environment}} ui ./charts/ui
-            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.config.ckanurl='${{ secrets.ckan_url }}'
             --set ui.config.tracking_id='${{ secrets.tracking_id }}'
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
-            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            --set ui.container.image=${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
             --set ui.config.pagesckanurl=${{ inputs.pages_ckan_url }}

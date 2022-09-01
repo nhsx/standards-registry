@@ -33,47 +33,7 @@ jobs:
       - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
       - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
 
-  build-ui-container:
-    runs-on: ubuntu-latest
-    environment: dev
-    defaults:
-      run:
-        working-directory: ui
-    env:
-      AWS_REGION: eu-west-2
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: configure credentials (using us-east-1)
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Login to Public ECR
-        uses: docker/login-action@v1
-        with:
-          registry: public.ecr.aws
-          username: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        env:
-          AWS_REGION: ${{ env.AWS_REGION }}
-      - name: build and push
-        id: build-image
-        env:
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ui-${{ github.sha }}
-          GOOGLE_TAG_ID: ${{ secrets.GOOGLE_TAG_ID }}
-          TRACKING_ID: ${{ secrets.TRACKING_ID }}
-        run: |
-          # Build a docker container and push it to ECR
-          docker build --build-arg NEXT_PUBLIC_TAG_ID=$GOOGLE_TAG_ID --build-arg NEXT_PUBLIC_TRACKING_ID=$TRACKING_ID -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
   deploy-ui:
-    needs: build-ui-container
     uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@STAN-940/templated-builds
     with:
       app_name: dev-ui
