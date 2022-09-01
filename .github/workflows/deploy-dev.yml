@@ -1,15 +1,19 @@
 name: deploy-dev
-
+# TODO: move all helm jobs to shared workflow
+# ui
+# ckan
+# Put correct spec for running job back in
 on:
-  workflow_run:
-    branches:
-      - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+  - push
+  # workflow_run:
+  #   branches:
+  #     - master
+  #   workflows:
+  #     - build-and-test
+  #   types:
+  #     - completed
+  #   conclusion:
+  #     - success
 
 jobs:
   deploy-csv-exporter:
@@ -67,22 +71,35 @@ jobs:
           docker build --build-arg NEXT_PUBLIC_TAG_ID=$GOOGLE_TAG_ID --build-arg NEXT_PUBLIC_TRACKING_ID=$TRACKING_ID -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      - name: deploy
-        uses: koslib/helm-eks-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
-          ECR_REPOSITORY: nhsx-standards-directory
-          IMAGE_TAG: ui-${{ github.sha }}
-          PAGES_CKAN_URL: 'https://manage.test.standards.nhs.uk/api/action'
-        with:
-          command: >-
-            helm upgrade --install --wait -n dev ui ./charts/ui
-            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
-            --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
-            --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
-            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-            --set ui.config.pagesckanurl=$PAGES_CKAN_URL
+
+  deploy-ui:
+    needs: ui
+    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@STAN-940/templated-builds
+    with:
+      app_name: dev-ui
+      environment: dev
+    secrets:
+      ckan_url: ${{ secrets.CKAN_URL }}
+      tracking_id: ${{ secrets.TRACKING_ID }}
+      google_tag_id: ${{ secrets.GOOGLE_TAG_ID }}
+      ecr_registry: ${{ secrets.ECR_REGISTRY }}
+      kubeconfig_file: ${{ secrets.KUBECONFIG_FILE }}
+      # - name: deploy
+      #   uses: koslib/helm-eks-action@master
+      #   env:
+      #     KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
+      #     ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+      #     ECR_REPOSITORY: nhsx-standards-directory
+      #     IMAGE_TAG: ui-${{ github.sha }}
+      #     PAGES_CKAN_URL: 'https://manage.test.standards.nhs.uk/api/action'
+      #   with:
+      #     command: >-
+      #       helm upgrade --install --wait -n dev ui ./charts/ui
+      #       --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+      #       --set ui.config.tracking_id='${{ secrets.TRACKING_ID }}'
+      #       --set ui.config.google_tag_id='${{ secrets.GOOGLE_TAG_ID }}'
+      #       --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      #       --set ui.config.pagesckanurl=$PAGES_CKAN_URL
 
   ckan:
     runs-on: ubuntu-latest

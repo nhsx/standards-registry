@@ -1,0 +1,57 @@
+# TODO: workflow trigger
+# non secret inputs
+# secret inputs
+on:
+  workflow_call:
+    inputs:
+      app_name:
+        description: 'Which app is being deployed [ui|ckan]'
+        required: true
+        type: string
+      environment:
+        description: 'Which environment to deploy to [dev|test|prod]'
+        required: true
+        type: string
+      pages_ckan_url:
+        default: 'https://manage.standards.nhs.uk/api/action'
+        description: 'The url used to read static page information from'
+        required: false
+        type: string
+      ecr_repository:
+        default: 'nhsx-standards-directory'
+        description: 'The ECR registry to pull a docker image from'
+        required: false
+        type: string
+    # TODO: answer question of whether secrets can be called without specifying them as input secrets
+    secrets:
+      ckan_url:
+        required: true
+      tracking_id:
+        required: true
+      google_tag_id:
+        required: true
+      ecr_registry:
+        required: true
+      kubeconfig_file:
+        required: true
+
+jobs:
+  helm-upgrade:
+    runs-on: ubuntu-latest
+    environment: ${{inputs.environment}}
+
+    steps:
+      - uses: koslib/helm-eks-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.kubeconfig_file }}
+          ECR_REGISTRY: ${{ secrets.ecr_registry }}
+          ECR_REPOSITORY: ${{ inputs.ecr_repository }}
+          IMAGE_TAG: ui-${{ github.sha }}
+        with:
+          command: >-
+            helm upgrade --debug --install --wait -n {{inputs.environment}} ui ./charts/ui
+            --set ui.config.ckanurl='${{ secrets.CKAN_URL }}'
+            --set ui.config.tracking_id='${{ secrets.tracking_id }}'
+            --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
+            --set ui.container.image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            --set ui.config.pagesckanurl=${{ inputs.pages_ckan_url }}
