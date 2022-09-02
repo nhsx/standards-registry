@@ -17,3 +17,4 @@ ui:
     tracking_id: tracking_id
     google_tag_id: google_tag_id
     pagesckanurl: pagesckanurl
+    google_site_code: google_site_code

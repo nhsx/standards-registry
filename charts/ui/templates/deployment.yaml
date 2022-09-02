@@ -32,3 +32,5 @@ spec:
               value: {{ .Values.ui.config.google_tag_id }}
             - name: NEXT_PUBLIC_TRACKING_ID
               value: {{ .Values.ui.config.tracking_id }}
+            - name: NEXT_PUBLIC_SITE_CODE
+              value: {{ .Values.ui.config.google_site_code }}
