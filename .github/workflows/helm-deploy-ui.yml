@@ -16,7 +16,7 @@ on:
         type: string
       ecr_repository:
         default: nhsx-standards-directory
-        description: 'The ECR registry to pull a docker image from'
+        description: 'The ECR registry to use for the built image'
         required: false
         type: string
 
@@ -34,7 +34,7 @@ on:
       aws_secret_access_key:
         required: true
 jobs:
-  helm-upgrade:
+  container-and-helm:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     defaults:
@@ -79,7 +79,7 @@ jobs:
         with:
           command: >-
             helm upgrade --debug --install --wait -n ${{inputs.environment}} ui ./charts/ui
-            --set ui.config.ckanurl='${{ secrets.ckan_url }}'
+            --set ui.config.ckanurl='${{ inputs.ckan_url }}'
             --set ui.config.tracking_id='${{ secrets.tracking_id }}'
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
             --set ui.container.image=${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
