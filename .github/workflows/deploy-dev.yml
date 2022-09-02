@@ -30,7 +30,7 @@ jobs:
       - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
 
   deploy-ui:
-    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@STAN-940/templated-builds
+    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@master
     with:
       environment: dev
     secrets:
