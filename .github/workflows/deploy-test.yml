@@ -84,7 +84,7 @@ jobs:
   integrationtest:
     if: ${{ success() }}
     needs:
-      - ui
+      - deploy-ui
       - ckan
     runs-on: ubuntu-latest
     defaults:
