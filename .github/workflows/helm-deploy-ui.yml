@@ -1,11 +1,8 @@
-# TODO: workflow trigger
-# non secret inputs
-# secret inputs
 on:
   workflow_call:
     inputs:
-      app_name:
-        description: 'Which app is being deployed [ui|ckan]'
+      ckan_url:
+        description: 'The ckan url to use, e.g. https://manage.dev.standards.nhs.uk/api/action'
         required: true
         type: string
       environment:
@@ -22,10 +19,8 @@ on:
         description: 'The ECR registry to pull a docker image from'
         required: false
         type: string
-    # TODO: answer question of whether secrets can be called without specifying them as input secrets
+
     secrets:
-      ckan_url:
-        required: true
       tracking_id:
         required: true
       google_tag_id:
@@ -41,7 +36,7 @@ on:
 jobs:
   helm-upgrade:
     runs-on: ubuntu-latest
-    environment: ${{inputs.environment}}
+    environment: ${{ inputs.environment }}
     defaults:
       run:
         working-directory: ui

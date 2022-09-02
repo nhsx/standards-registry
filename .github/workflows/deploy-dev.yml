@@ -36,7 +36,6 @@ jobs:
   deploy-ui:
     uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@STAN-940/templated-builds
     with:
-      app_name: dev-ui
       environment: dev
     secrets:
       ckan_url: ${{ secrets.CKAN_URL }}
