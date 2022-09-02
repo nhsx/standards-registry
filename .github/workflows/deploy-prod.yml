@@ -86,6 +86,17 @@ jobs:
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
 
+  integrationtest:
+    if: ${{ success() }}
+    needs:
+      - deploy-ui
+      - ckan
+    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
+    with:
+      base_url: https://data.standards.nhs.uk
+      ckan_url: https://manage.standards.nhs.uk/api/action
+      pages_ckan_url: https://manage.standards.nhs.uk/api/action
+
   notifypass:
     runs-on: ubuntu-latest
     if: ${{ success() }}
