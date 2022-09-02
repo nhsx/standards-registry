@@ -16,6 +16,7 @@ jobs:
     uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@master
     with:
       environment: prod
+      ecr_repository: nhsx-standards-directory-prod
     secrets:
       ckan_url: ${{ secrets.CKAN_URL }}
       tracking_id: ${{ secrets.TRACKING_ID }}
