@@ -1,0 +1,48 @@
+on:
+  workflow_call:
+    inputs:
+      base_url:
+        description: 'The ui url, e.g. https://dev.standards.nhs.uk'
+        required: true
+        type: string
+      ckan_url:
+        description: 'The CKAN API endpoint for the frontend to call, e.g. https://manage.dev.standards.nhs.uk/api/action'
+        required: true
+        type: string
+      pages_ckan_url:
+        description: 'The url we use to get static content, usually prod, e.g.  https://manage.standards.nhs.uk/api/action'
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ui
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          working-directory: ui
+          build: npm run build --if-present --omit-dev
+          start: npm start
+        env:
+          BASE_URL: ${{ inputs.base_url }}
+          CKAN_URL: ${{ inputs.ckan_url }}
+          PAGES_CKAN_URL: ${{ inputs.pages_ckan_url }}
+          PORT: 3000
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ui/cypress/screenshots
+      # Test run video was always captured, so this action uses "always()" condition
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: ui/cypress/videos
