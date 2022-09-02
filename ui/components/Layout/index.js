@@ -19,6 +19,8 @@ export default function Home({ children, ...props }) {
   const pages = usePages();
   useRouter();
 
+  const siteCode = process.env.NEXT_PUBLIC_SITE_CODE;
+
   const links = [
     'current-standards',
     'future-standards',
@@ -48,6 +50,7 @@ export default function Home({ children, ...props }) {
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
+        <meta name="google-site-verification" content={siteCode} />
       </Head>
       <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">

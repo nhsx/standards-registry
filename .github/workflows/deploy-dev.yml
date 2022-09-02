@@ -41,6 +41,7 @@ jobs:
       kubeconfig_file: ${{ secrets.KUBECONFIG_FILE }}
       aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      google_site_code: ${{ secrets.GOOGLE_SITE_CODE }}
 
   ckan:
     runs-on: ubuntu-latest

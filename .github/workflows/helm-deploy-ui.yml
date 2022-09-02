@@ -32,6 +32,8 @@ on:
         required: true
       aws_secret_access_key:
         required: true
+      google_site_code:
+        required: true
 jobs:
   container-and-helm:
     runs-on: ubuntu-latest
@@ -67,7 +69,11 @@ jobs:
         id: build-image
         run: |
           # Build a docker container and push it to ECR
-          docker build --build-arg NEXT_PUBLIC_TAG_ID=${{ secrets.google_tag_id }} --build-arg NEXT_PUBLIC_TRACKING_ID=${{ secrets.tracking_id }} -t ${{ inputs.ecr_repository }}:$IMAGE_TAG .
+          docker build \
+          --build-arg NEXT_PUBLIC_TAG_ID=${{ secrets.google_tag_id }} \
+          --build-arg NEXT_PUBLIC_TRACKING_ID=${{ secrets.tracking_id }} \
+          --build-arg NEXT_PUBLIC_SITE_CODE=${{ secrets.google_site_code }} \
+          -t ${{ inputs.ecr_repository }}:$IMAGE_TAG .
           docker tag ${{ inputs.ecr_repository }}:$IMAGE_TAG ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
           docker push ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
 
