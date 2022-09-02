@@ -1,19 +1,15 @@
 name: deploy-dev
-# TODO: move all helm jobs to shared workflow
-# ui
-# ckan
-# Put correct spec for running job back in
+
 on:
-  - push
-  # workflow_run:
-  #   branches:
-  #     - master
-  #   workflows:
-  #     - build-and-test
-  #   types:
-  #     - completed
-  #   conclusion:
-  #     - success
+  workflow_run:
+    branches:
+      - master
+    workflows:
+      - deploy-test
+    types:
+      - completed
+    conclusion:
+      - success
 
 jobs:
   deploy-csv-exporter:
