@@ -1,16 +1,15 @@
 name: deploy-dev
 
 on:
-  - push
-  # workflow_run:
-  #   branches:
-  #     - master
-  #   workflows:
-  #     - build-and-test
-  #   types:
-  #     - completed
-  #   conclusion:
-  #     - success
+  workflow_run:
+    branches:
+      - master
+    workflows:
+      - build-and-test
+    types:
+      - completed
+    conclusion:
+      - success
 
 jobs:
   deploy-csv-exporter:
@@ -109,7 +108,7 @@ jobs:
       - deploy-csv-exporter
       - deploy-ui
       - ckan
-    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@STAN-938/point-pages-at-prod
+    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
     with:
       base_url: https://dev.standards.nhs.uk
       ckan_url: https://manage.dev.standards.nhs.uk/api/action
