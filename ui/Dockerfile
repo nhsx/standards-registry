@@ -16,6 +16,7 @@ ARG NEXT_PUBLIC_TRACKING_ID
 
 RUN echo "NEXT_PUBLIC_TAG_ID=${NEXT_PUBLIC_TAG_ID}" >> .env.production
 RUN echo "NEXT_PUBLIC_TRACKING_ID=${NEXT_PUBLIC_TRACKING_ID}" >> .env.production
+RUN echo "NEXT_PUBLIC_SITE_CODE=${NEXT_PUBLIC_SITE_CODE}" >> .env.production
 
 RUN npm run build --production  --if-present
 
