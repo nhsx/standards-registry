@@ -1,10 +1,6 @@
 on:
   workflow_call:
     inputs:
-      ckan_url:
-        description: 'The ckan url to use, e.g. https://manage.dev.standards.nhs.uk/api/action'
-        required: true
-        type: string
       environment:
         description: 'Which environment to deploy to [dev|test|prod]'
         required: true
@@ -21,6 +17,9 @@ on:
         type: string
 
     secrets:
+      ckan_url:
+        description: 'The ckan url to use, e.g. https://manage.dev.standards.nhs.uk/api/action'
+        required: true
       tracking_id:
         required: true
       google_tag_id:
@@ -79,7 +78,7 @@ jobs:
         with:
           command: >-
             helm upgrade --debug --install --wait -n ${{inputs.environment}} ui ./charts/ui
-            --set ui.config.ckanurl='${{ inputs.ckan_url }}'
+            --set ui.config.ckanurl='${{ secrets.ckan_url }}'
             --set ui.config.tracking_id='${{ secrets.tracking_id }}'
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
             --set ui.container.image=${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
