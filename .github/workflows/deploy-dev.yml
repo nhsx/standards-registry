@@ -5,7 +5,7 @@ on:
     branches:
       - master
     workflows:
-      - deploy-test
+      - build-and-test
     types:
       - completed
     conclusion:
