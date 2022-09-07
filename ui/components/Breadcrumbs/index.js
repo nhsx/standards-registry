@@ -18,7 +18,7 @@ export default function Breadcrumbs({ labels }) {
 
   useEffect(() => {
     if (router) {
-      const path = router.asPath.trim().split('?').shift();
+      const path = router.asPath.trim().split('?').shift().split('#').shift();
       const linkPath = path.trim().split('/');
       linkPath.shift();
 
