@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { createContext, useContext } from 'react';
-import { pickBy } from 'lodash';
+import { pickBy, size, omit } from 'lodash';
 
 const QueryContext = createContext();
 
@@ -22,6 +22,17 @@ export function QueryContextWrapper({ children }) {
 
   function updateQuery(props, { replace, overwrite } = {}) {
     const { query } = router;
+
+    if (query.page && size(omit(props, 'page'))) {
+      delete query.page;
+    }
+
+    if (query.page && props.page) {
+      if (parseInt(query.page) === parseInt(props.page)) {
+        delete query.page;
+        delete props.page;
+      }
+    }
 
     const newQuery = overwrite
       ? props
