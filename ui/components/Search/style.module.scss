@@ -2,6 +2,15 @@
   &.full-width {
     float: none;
     width: 100%;
+
+    :global {
+      .nhsuk-header__search-wrap {
+        display: block;
+      }
+      .nhsuk-search__close {
+        display: none;
+      }
+    }
   }
 
   :global {
