@@ -8,7 +8,7 @@ const format = ({ options, vals, data }) =>
 const Rows = (props) => {
   const { options, vals, data } = props;
   return (
-    <dd>
+    <dd className={styles.breakWord}>
       {Array.isArray(vals) && vals.length > 0 ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
