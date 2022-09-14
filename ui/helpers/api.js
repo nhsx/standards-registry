@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 import { stringify } from 'qs';
 import { findKey } from 'lodash';
 const { CKAN_URL, PAGES_CKAN_URL } = process.env;
@@ -7,6 +7,19 @@ const DEFAULT_SORT = {
   score: 'desc',
   metadata_created: 'desc',
 };
+
+async function callApi(url) {
+  try {
+    const {
+      data: { result },
+    } = await axios.get(url);
+
+    return result;
+  } catch (err) {
+    const message = err.response.data;
+    console.error(message);
+  }
+}
 
 // TODO: neaten
 export function queriseSelections(selections) {
@@ -76,15 +89,11 @@ export function serialise(obj = {}) {
 }
 
 export async function read({ id }) {
-  const response = await fetch(`${CKAN_URL}/package_show?id=${id}`);
-  const data = await response.json();
-  return data.result;
+  return callApi(`${CKAN_URL}/package_show?id=${id}`);
 }
 
 export async function getPages() {
-  const response = await fetch(`${PAGES_CKAN_URL}/ckanext_pages_list`);
-  const data = await response.json();
-  return data.result;
+  return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
 export async function list({
@@ -126,24 +135,14 @@ export async function list({
 
   const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
-  const response = await fetch(`${CKAN_URL}/package_search?${ckanQuery}`);
-  const data = await response.json();
-  return data.result;
+  return callApi(`${CKAN_URL}/package_search?${ckanQuery}`);
 }
 
 export async function schema(dataset = 'dataset') {
-  const response = await fetch(
-    `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
-  );
-  const data = await response.json();
-
-  return data.result;
+  return callApi(`${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`);
 }
 
 export async function filterSearch(query = '') {
   // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
-  const response = await fetch(`${CKAN_URL}/package_search${query}`);
-
-  const data = await response.json();
-  return data.result;
+  return callApi(`${CKAN_URL}/package_search${query}`);
 }
