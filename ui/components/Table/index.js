@@ -71,7 +71,7 @@ export function Th({ children, sortable, col, defaultSort }) {
   );
 }
 
-export function Td({ children, classes, title }) {
+export function Td({ children, classes, title, ...props }) {
   return (
     <td
       role="cell"
@@ -82,6 +82,7 @@ export function Td({ children, classes, title }) {
         styles.td,
         classes
       )}
+      {...props}
     >
       {children}
     </td>
