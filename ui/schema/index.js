@@ -118,11 +118,12 @@ const schema = [
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
             <>
-              <Link
-                href={data.documentation_link}
-                text="View documentation for this standard"
-                newWindow={true}
-              />
+              <Link href={data.documentation_link} newWindow={true}>
+                View documentation for this standard
+                <span class="nhsuk-u-visually-hidden">
+                  opens in a new window
+                </span>
+              </Link>
               <br />
               (opens in new window)
             </>
