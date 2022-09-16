@@ -14,8 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: Run site performance test
+      - name: make artifacts directory
         run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+
+      - name: Run site performance test
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
