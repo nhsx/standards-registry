@@ -46,11 +46,3 @@ jobs:
         with:
           name: cypress-videos
           path: ui/cypress/videos
-
-  site-quality-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run site quality test
-        uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
-        with:
-          test_url: ${{ inputs.base_url }}
