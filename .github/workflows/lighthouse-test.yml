@@ -11,9 +11,11 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - name: Lighthouse
-      - uses: actions/checkout@master
-      - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Run site performance test
+        run: mkdir -p ${{ github.workspace }}/tmp/artifacts
         uses: foo-software/lighthouse-check-action@master
         with:
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
