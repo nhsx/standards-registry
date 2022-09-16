@@ -31,8 +31,12 @@ export default function PhaseBanner({ homepage }) {
               })}
               href="https://forms.gle/CKKi5nFzUjuxHB9N6"
               newWindow={true}
-              text="feedback"
-            />{' '}
+            >
+              feedback
+              <span className="nhsuk-u-visually-hidden">
+                opens in a new window
+              </span>
+            </Link>{' '}
             will help us improve it.
           </span>
         </span>
