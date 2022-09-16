@@ -111,9 +111,8 @@ jobs:
           MSG_MINIMAL: 'true'
 
   site-quality-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run site quality test
-        uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
-        with:
-          test_url: https://test.standards.nhs.uk
+    needs:
+      - integrationtest
+    uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
+    with:
+      test_url: https://test.standards.nhs.uk
