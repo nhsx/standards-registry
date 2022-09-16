@@ -1,0 +1,28 @@
+name: Lighthouse
+on:
+  workflow_call:
+    inputs:
+      test_url:
+        description: 'The url to test on workflow call, e.g. "https://dev.standards.nhs.uk"'
+        required: true
+        type: string
+        default: 'https://data.standards.nhs.uk'
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lighthouse
+      - uses: actions/checkout@master
+      - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          outputDirectory: ${{ github.workspace }}/tmp/artifacts
+          urls: ${{ inputs.test_url }}
+          slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Lighthouse reports
+          path: ${{ github.workspace }}/tmp/artifacts
