@@ -15,9 +15,10 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-pages.git#egg=ckanext-pages"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-download-csv-button#egg=ckanext-download-csv-button"
+RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-nhs-theme#egg=ckanext-nhs-theme"
 
 # Add the custom extensions to the plugins list
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages download_csv_button
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages download_csv_button nhs_theme
 
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
