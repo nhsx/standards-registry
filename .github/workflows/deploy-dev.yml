@@ -137,3 +137,5 @@ jobs:
     uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
     with:
       test_url: https://dev.standards.nhs.uk
+    secrets:
+      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}

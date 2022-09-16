@@ -6,6 +6,10 @@ on:
         required: true
         type: string
         default: 'https://data.standards.nhs.uk'
+    secrets:
+      slack_webhook:
+        description: 'For posting to slack'
+        required: true
 
 jobs:
   lighthouse:
@@ -22,7 +26,7 @@ jobs:
         with:
           outputDirectory: ${{ github.workspace }}/tmp/artifacts
           urls: ${{ inputs.test_url }}
-          slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK }}
+          slackWebhookUrl: ${{ secrets.slack_webhook }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@master
