@@ -12,7 +12,7 @@ export function FeedbackFooter() {
         This is a new service — your{' '}
         <Link newWindow={true} href="https://forms.gle/CKKi5nFzUjuxHB9N6">
           feedback
-          <span class="nhsuk-u-visually-hidden">opens in a new window</span>
+          <span className="nhsuk-u-visually-hidden">opens in a new window</span>
         </Link>{' '}
         will help us to improve it.
       </p>

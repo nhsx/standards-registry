@@ -33,7 +33,9 @@ export default function PhaseBanner({ homepage }) {
               newWindow={true}
             >
               feedback
-              <span class="nhsuk-u-visually-hidden">opens in a new window</span>
+              <span className="nhsuk-u-visually-hidden">
+                opens in a new window
+              </span>
             </Link>{' '}
             will help us improve it.
           </span>

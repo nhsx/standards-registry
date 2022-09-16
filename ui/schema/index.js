@@ -120,7 +120,7 @@ const schema = [
             <>
               <Link href={data.documentation_link} newWindow={true}>
                 View documentation for this standard
-                <span class="nhsuk-u-visually-hidden">
+                <span className="nhsuk-u-visually-hidden">
                   opens in a new window
                 </span>
               </Link>
