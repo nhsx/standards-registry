@@ -33,7 +33,8 @@ export { default as ReviewDates } from './ReviewDates';
 export { default as MarkdownBlock } from './MarkdownBlock';
 export { TableOfContents } from './TableOfContents';
 export * from './FeedbackFooter';
+export * from './CookiesTable';
 
-export { Table, Thead, Tbody, Tr, Th, Td } from './Table';
-export { Row, Col } from './Grid';
-export { CheckboxGroup, Button } from './Form';
+export * from './Table';
+export * from './Grid';
+export * from './Form';
