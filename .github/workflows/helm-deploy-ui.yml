@@ -70,6 +70,7 @@ jobs:
         run: |
           # Build a docker container and push it to ECR
           docker build \
+          --build-arg NEXT_PUBLIC_ENV=${{ inputs.environment }} \
           --build-arg NEXT_PUBLIC_TAG_ID=${{ secrets.google_tag_id }} \
           --build-arg NEXT_PUBLIC_TRACKING_ID=${{ secrets.tracking_id }} \
           --build-arg NEXT_PUBLIC_SITE_CODE=${{ secrets.google_site_code }} \
