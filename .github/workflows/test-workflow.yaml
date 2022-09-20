@@ -14,6 +14,6 @@ jobs:
     steps:
       - name: Ubuntu GitHub Actions environment variables List
       - run: env
-      - run: echo ${{jobs.<job_id>.environment}}
-      - run: echo ${{jobs.<job_id>}}
-      - run: echo ${{jobs}}
+      - name: List job related vars
+
+      - run: echo ${{jobs.<job_id>.environment}}  ${{jobs.<job_id>}} ${{jobs}}
