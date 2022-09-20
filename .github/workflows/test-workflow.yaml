@@ -1,0 +1,19 @@
+name: test-for-variables
+
+on:
+  - push
+
+defaults:
+  run:
+    working-directory: ui
+
+jobs:
+  test-envs:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Ubuntu GitHub Actions environment variables List
+      - run: env
+      - run: echo ${{jobs.<job_id>.environment}}
+      - run: echo ${{jobs.<job_id>}}
+      - run: echo ${{jobs}}
