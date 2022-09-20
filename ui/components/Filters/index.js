@@ -80,7 +80,7 @@ const select = (names, fields) =>
 
 export function Filters({
   schema,
-  categories = ['care_setting', 'topic', 'standard_category'],
+  categories = ['care_setting', 'topic', 'status', 'standard_category'],
   title = 'Filters',
   showTitle,
   before,
@@ -93,7 +93,29 @@ export function Filters({
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
   const [openFilters, setOpenFilters] = useState([]);
-  const filters = select(categories, fields);
+  const filters = select(categories, fields).map((item) =>
+    item.field_name === 'status' ? mapStatus(item) : item
+  );
+
+  function mapStatus(item) {
+    return {
+      ...item,
+      label: 'Status',
+      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
+        (value) => {
+          const choice = item.choices.find((c) => c.value === value);
+          if (value === 'in-development') {
+            return {
+              ...choice,
+              value,
+              label: 'In development (APIs only)',
+            };
+          }
+          return choice;
+        }
+      ),
+    };
+  }
 
   const setItem = (name) => (event) => {
     const { checked, value } = event.target;

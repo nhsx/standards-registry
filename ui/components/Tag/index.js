@@ -4,7 +4,7 @@ const colorMap = {
   active: 'nhsuk-tag--green',
   deprecated: 'nhsuk-tag--orange',
   retired: 'nhsuk-tag--red',
-  draft: 'nhsuk-tag--grey',
+  'in-development': 'nhsuk-tag--grey',
   // proposed: 'nhsuk-tag--grey',
   // awaiting: 'nhsuk-tag--grey',
   // discontinued: 'nhsuk-tag--grey',
