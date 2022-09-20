@@ -89,4 +89,5 @@ jobs:
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
             --set ui.container.image=${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
             --set ui.config.pagesckanurl=${{ inputs.pages_ckan_url }}
+            --set ui.config.environment=${{ inputs.environment }}
             --set ui.config.google_site_code=${{ inputs.google_site_code }}

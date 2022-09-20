@@ -15,6 +15,8 @@ import styles from './style.module.scss';
 import classnames from 'classnames';
 import { usePages } from '../../context';
 
+const isDevelopment = process.env.NEXT_PUBLIC_ENV !== 'prod';
+
 export default function Home({ children, ...props }) {
   const pages = usePages();
   useRouter();
@@ -51,6 +53,7 @@ export default function Home({ children, ...props }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
         <meta name="google-site-verification" content={siteCode} />
+        {isDevelopment && <meta name="robots" content="noindex" />}
       </Head>
       <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">
