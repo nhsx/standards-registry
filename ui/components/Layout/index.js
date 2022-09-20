@@ -53,9 +53,7 @@ export default function Home({ children, ...props }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
         <meta name="google-site-verification" content={siteCode} />
-        {
-          isDevelopment && <meta name="robots" content="noindex" />
-        }
+        {isDevelopment && <meta name="robots" content="noindex" />}
       </Head>
       <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">
