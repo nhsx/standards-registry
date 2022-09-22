@@ -12,16 +12,14 @@ const colorMap = {
 
 export default function TypeTag({ children, classes, type }) {
   return (
-    type && (
-      <span
-        className={classnames(
-          'nhsuk-tag',
-          classes,
-          colorMap[type.toLowerCase()] || null
-        )}
-      >
-        {children}
-      </span>
-    )
+    <span
+      className={classnames(
+        'nhsuk-tag',
+        classes,
+        colorMap[type.toLowerCase()] || null
+      )}
+    >
+      {children}
+    </span>
   );
 }
