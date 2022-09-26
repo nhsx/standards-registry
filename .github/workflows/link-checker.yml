@@ -27,6 +27,7 @@ jobs:
       - name: Link Checker
         id: link-report
         uses: celinekurpershoek/link-checker@v1.0.2
+        continue-on-error: true
         with:
           # Required:
           url: ${{ inputs.base_url }}
