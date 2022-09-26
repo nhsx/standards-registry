@@ -40,3 +40,4 @@ jobs:
     uses: nhsx/standards-registry/.github/workflows/link-checker.yml@master
     with:
       base_url: http://localhost:3000
+      local: true
