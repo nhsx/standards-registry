@@ -24,7 +24,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.5.1
         with:
           fail: ${{ inputs.fail }}
-          args: ${{ base_url }} --verbose --format verbose
+          args: ${{ inputs.base_url }} --verbose --format verbose
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
