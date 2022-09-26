@@ -37,7 +37,7 @@ jobs:
           recursiveLinks: ${{ inputs.recursive }}
 
       - name: Recover link checker result
-        run: echo "${{steps.link-report.outputs.result}}"
+        run: echo "${{steps.link-report.outputs}}"
 
       - name: Create Issue From File
         if: steps.link-report.outputs.exit_code != 0
