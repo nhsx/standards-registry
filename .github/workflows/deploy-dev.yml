@@ -114,6 +114,14 @@ jobs:
       ckan_url: https://manage.dev.standards.nhs.uk/api/action
       pages_ckan_url: https://manage.standards.nhs.uk/api/action
 
+  link-checker:
+    if: ${{ success() }}
+    needs:
+      - deploy-ui
+    uses: nhsx/standards-registry/.github/workflows/link-checker.yml@master
+    with:
+      base_url: https://dev.standards.nhs.uk
+
   notifypass:
     runs-on: ubuntu-latest
     if: ${{ success() }}
