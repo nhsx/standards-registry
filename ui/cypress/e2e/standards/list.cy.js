@@ -76,7 +76,7 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'NHS Englan');
+        cy.contains('dd', 'NHS England');
 
         cy.visit('/current-standards');
 
