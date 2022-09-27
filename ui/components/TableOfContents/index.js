@@ -1,45 +1,47 @@
 import { Link } from '../';
+import classnames from 'classnames';
+import styles from './style.module.scss';
 
 const TocItem = ({ text }) => (
-  <li>
-    <Link
-      text={text}
-      href={'#' + text.toLowerCase().trim().replaceAll(/%20| /gm, '-')}
-    />
-  </li>
+  <Link
+    text={text}
+    href={'#' + text.toLowerCase().trim().replaceAll(/%20| /gm, '-')}
+  />
 );
 
-const TocList = ({ depth, text }) => {
-  // # = depth:1
-  // ## = depth:2
-  // ### = depth:3 etc
-  // starting at depth-2 means h1s and h2s at top level
-  // this is because we don't expect to get h1 content in this component
-  // but we'll still render it into the TOC if we do
+const TocList = ({ depth, text, minDepth }) => {
   return (
-    <>
-      {(depth - 2 >= 0 && (
+    <li className={classnames({ [styles.noMarker]: depth > minDepth })}>
+      {depth > minDepth ? (
         <ul className="nhsuk-list-bullet">
-          <TocList depth={depth - 1} text={text} />
+          <TocList depth={depth - 1} text={text} minDepth={minDepth} />
         </ul>
-      )) || <TocItem text={text} />}
-    </>
+      ) : (
+        <TocItem text={text} />
+      )}
+    </li>
   );
 };
 
 export const TableOfContents = ({ content }) => {
   const headings = content.children.filter((i) => i.type === 'heading');
+  const depths = headings.map((h) => h.depth);
+  const minDepth = Math.min(...depths);
+
   return (
     <div className="nhsuk-grid-column-one-third">
       <h3 className="nhsuk-heading-s">Contents</h3>
-
-      {headings.map((heading, i) => {
-        const { depth, children } = heading;
-        const text = children
-          .reduce((i, child) => (i = [...i, child.value]), [])
-          .join(' ');
-        return <TocList text={text} depth={depth} key={i} />;
-      })}
+      <ul className="nhsuk-list-bullet">
+        {headings.map((heading, i) => {
+          const { depth, children } = heading;
+          const text = children
+            .reduce((i, child) => (i = [...i, child.value]), [])
+            .join(' ');
+          return (
+            <TocList text={text} depth={depth} key={i} minDepth={minDepth} />
+          );
+        })}
+      </ul>
     </div>
   );
 };
