@@ -17,6 +17,12 @@ import {
 
 import styles from '../styles/Roadmap.module.scss';
 
+const pageProps = {
+  title: 'Future standards',
+  description:
+    'Find data standards proposed or in development as future requirements for health and social care services in England.',
+};
+
 export default function Roadmap({ data, schemaData }) {
   const [results, setResults] = useState(data.results);
   const [count, setCount] = useState(data.count || 0);
@@ -59,7 +65,7 @@ export default function Roadmap({ data, schemaData }) {
   const resultSummary = `${count} result${count === 1 ? '' : 's'}`;
 
   return (
-    <Page>
+    <Page {...pageProps}>
       <Reading>
         <h1>Roadmap of future requirements in England</h1>
         <p>

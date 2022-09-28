@@ -6,14 +6,16 @@ import {
   Search,
   Link,
   FeedbackFooter,
+  Page,
 } from '../components';
 import styles from '../styles/Home.module.scss';
 import { getPages } from '../helpers/api';
 import { list } from '../helpers/api';
 
 const content = {
-  title: 'NHS Standards Directory',
   header: 'Find standards to record, handle and exchange data in England',
+  description:
+    'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
   intro:
     'Use this directory to find nationally recognised standards for use in health and adult social care.',
 };
@@ -62,7 +64,7 @@ const HomeElement = ({ link, linkText, description }) => (
 export default function Home({ pages }) {
   const standardsPage = 'current-standards';
   return (
-    <>
+    <Page description={content.description}>
       <HomeSection
         title="Browse by care setting"
         link={`/${standardsPage}`}
@@ -147,7 +149,7 @@ export default function Home({ pages }) {
         )}
       </div>
       <FeedbackFooter />
-    </>
+    </Page>
   );
 }
 
