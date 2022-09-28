@@ -59,6 +59,28 @@ describe('Standards Listing Index', () => {
       cy.url().should('not.contain', 'page');
       cy.url().should('contain', 'mandated');
     });
+
+    it.only('Can filter by status', () => {
+      cy.visit('/current-standards');
+      let results;
+      cy.get('span[role="status"]').should((el) => {
+        results = parseInt(el.text().replace(' Results', ''));
+      });
+      cy.contains('summary', 'Status').click();
+      cy.contains('label', 'In development (APIs only)').click();
+
+      cy.get('span[role="status"]').should((el) => {
+        const filteredResults = parseInt(el.text().replace(' Results', ''));
+        expect(filteredResults).to.be.lessThan(results);
+      });
+
+      cy.contains('label', 'In development (APIs only)').click();
+      // deselecting collapses details/summary element
+      cy.contains('summary', 'Status').click();
+      cy.contains('label', 'Retired').click();
+
+      cy.get('#browse-results li').eq(0).contains('span.nhsuk-tag', 'Retired');
+    });
   });
 
   describe('Search', () => {
