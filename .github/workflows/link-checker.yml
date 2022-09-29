@@ -5,44 +5,29 @@ on:
         description: 'The ui url, e.g. https://dev.standards.nhs.uk'
         required: true
         type: string
-      recursive:
-        description: Whether or not to recur through all URLs on all reachable pages (can take a while)
+      blc_args:
+        description: The broken link checker argumernts to pass
         required: false
-        type: boolean
-        default: false
+        type: string
 
 jobs:
   linkChecker:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 16.x
-    defaults:
-      run:
-        working-directory: ui
+    name: Check for broken links
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Link Checker
+      - name: Link Checker with issue creation
         id: link-report
-        uses: celinekurpershoek/link-checker@v1.0.2
-        continue-on-error: true
+        uses: roc/link-checker@master
         with:
-          # Required:
-          url: ${{ inputs.base_url }}
-          # optional:
-          honorRobotExclusions: false
-          ignorePatterns: 'github,google'
-          recursiveLinks: ${{ inputs.recursive }}
-
-      - name: Recover link checker result
-        run: echo "${{steps.link-report.outputs}}"
+          url: ${{inputs.base_url}}
+          blc_args: ${{inputs.blc_args}}
+          allow_failures: true
+          output_file: dev/blc/out.md
 
       - name: Create Issue From File
-        if: steps.link-report.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v4
+        if: ${{ steps.link-report.outputs.exit_code != 0 }}
         with:
-          title: Link Checker Report for ${{ inputs.base_url }}
-          content-filepath: ${{steps.link-report.outputs}}
+          title: Link Checker Report for ${{inputs.base_utl}}
+          content-filepath: ${{steps.link-report.outputs.report}}
           labels: report, automated issue

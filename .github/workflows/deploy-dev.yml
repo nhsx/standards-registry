@@ -121,6 +121,7 @@ jobs:
     uses: nhsx/standards-registry/.github/workflows/link-checker.yml@master
     with:
       base_url: https://dev.standards.nhs.uk
+      blc_args: --follow true --recursive
 
   notifypass:
     runs-on: ubuntu-latest
