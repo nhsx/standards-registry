@@ -117,7 +117,7 @@ jobs:
   link-checker:
     if: ${{ success() }}
     needs:
-      - deploy-ui
+      - integrationtest
     uses: nhsx/standards-registry/.github/workflows/link-checker.yml@master
     with:
       base_url: https://dev.standards.nhs.uk
