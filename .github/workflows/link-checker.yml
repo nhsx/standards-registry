@@ -25,7 +25,13 @@ jobs:
           output_file: dev/blc/out.md
 
       - name: Remove verbose output from link checker report
-        run: sort ${{ steps.link-report.outputs.report }} | uniq -u | sed '/───OK───/d' | sed '/Getting/d' | sed '/Finished/d' | sort -r > ${{ steps.link-report.outputs.report }}
+        run: |
+          sort ${{ steps.link-report.outputs.report }} | uniq -u | sed '/───OK───/d' | sed '/Getting/d' | sed '/Finished/d' | sort -r > quick.txt
+          cat ${{ steps.link-report.outputs.report }} | sed '/───OK───/d' | sed '/Finished/d' | awk '!x[$0]++' > long.txt
+          echo '### Quick report' > ${{ steps.link-report.outputs.report }}
+          cat quick.txt >> ${{ steps.link-report.outputs.report }}
+          echo '### Full report' >> ${{ steps.link-report.outputs.report }}
+          cat long.txt >> ${{ steps.link-report.outputs.report }}
 
       - name: Create Issue From File
         uses: peter-evans/create-issue-from-file@v4
