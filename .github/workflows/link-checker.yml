@@ -25,9 +25,7 @@ jobs:
           output_file: dev/blc/out.md
 
       - name: Remove verbose output from link checker report
-        run: |
-          sed -i. '/├───OK───/d' ${{steps.link-report.outputs.report}}
-          sed -i. '/SKIPPED/d' ${{steps.link-report.outputs.report}}
+        run: sort ${{ steps.link-report.outputs.report }} | uniq -u | sed '/───OK───/d' | sed '/Getting/d' | sed '/Finished/d' | sort -r > ${{ steps.link-report.outputs.report }}
 
       - name: Create Issue From File
         uses: peter-evans/create-issue-from-file@v4
