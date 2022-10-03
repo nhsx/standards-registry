@@ -11,7 +11,6 @@ import {
   FeedbackFooter,
 } from '../components';
 import { getPageProps } from '../helpers/getPageProps';
-import { useQueryContext } from '../context/query';
 
 const content = {
   title: 'Search results',
@@ -24,13 +23,8 @@ const content = {
 };
 
 export default function SearchResults({ data, schemaData }) {
-  const { query } = useQueryContext();
-  const { q: searchTerm } = query;
-  const title = searchTerm
-    ? [query.q, content.title].join(' - ')
-    : content.title;
   return (
-    <Page title={`${title} - NHS Standards Directory`}>
+    <Page title={content.title}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>

@@ -148,8 +148,13 @@ const SiteMap = ({ pages }) => {
     'about-this-service',
   ].map((page) => pages.find((p) => p.name === page));
 
+  const pageProps = {
+    title: 'Site map',
+    description: 'View a complete list of pages in our website.',
+  };
+
   return (
-    <Page title="Site map">
+    <Page {...pageProps}>
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-two-thirds">
           <h1>Site map</h1>

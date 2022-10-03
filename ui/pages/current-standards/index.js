@@ -11,19 +11,18 @@ import {
   FeedbackFooter,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
-import { useContentContext } from '../../context/content';
-import { useQueryContext } from '../../context/query';
-export default function Standards({ data, schemaData }) {
-  const { query } = useQueryContext();
-  const { setPageTitle } = useContentContext();
-  const pageTitle = query.q
-    ? `${query.q} - Search Results`
-    : 'Current standards';
 
+const pageProps = {
+  title: 'Current standards',
+  description:
+    'Find published data standards for health and social care including standards required for use in England.',
+};
+
+export default function Standards({ data, schemaData }) {
   return (
-    <Page title={setPageTitle(pageTitle)}>
+    <Page {...pageProps}>
       <h1>
-        {pageTitle}
+        {pageProps.title}
         <span className="nhsuk-u-visually-hidden">
           Search or browse published standards
         </span>
