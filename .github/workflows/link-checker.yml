@@ -24,6 +24,11 @@ jobs:
           allow_failures: true
           output_file: dev/blc/out.md
 
+      - name: Remove verbose output from link checker report
+        run: |
+          sed -i. '/OKAY/d' ${{steps.link-report.outputs.report}}
+          sed -i. '/SKIPPED/d' ${{steps.link-report.outputs.report}}
+
       - name: Create Issue From File
         uses: peter-evans/create-issue-from-file@v4
         if: ${{ steps.link-report.outputs.exit_code != 0 }}
