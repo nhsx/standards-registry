@@ -31,6 +31,6 @@ jobs:
         uses: peter-evans/create-issue-from-file@v4
         if: ${{ steps.link-report.outputs.exit_code != 0 }}
         with:
-          title: Link Checker Report for ${{inputs.base_utl}}
+          title: 'Link Checker Report for ${{inputs.base_url}}'
           content-filepath: ${{steps.link-report.outputs.report}}
           labels: report, automated issue
