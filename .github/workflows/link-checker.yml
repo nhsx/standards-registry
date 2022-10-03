@@ -26,7 +26,7 @@ jobs:
 
       - name: Remove verbose output from link checker report
         run: |
-          sed -i. '/OKAY/d' ${{steps.link-report.outputs.report}}
+          sed -i. '/├───OK───/d' ${{steps.link-report.outputs.report}}
           sed -i. '/SKIPPED/d' ${{steps.link-report.outputs.report}}
 
       - name: Create Issue From File
