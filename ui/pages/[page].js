@@ -20,9 +20,9 @@ const descriptions = {
     'Check who owns and manages the NHS Data Standards Directory and what the service is for.',
 };
 
-const StaticPage = ({ content, showToc, title, parsed, page }) => {
+const StaticPage = ({ content, showToc, title, parsed, description, page }) => {
   return (
-    <Page title={title} description={descriptions[page]}>
+    <Page title={title} description={description || descriptions[page]}>
       <div className="nhsuk-grid-row">
         {showToc && <TableOfContents content={parsed} />}
         <div className="nhsuk-grid-column-two-thirds">
@@ -49,6 +49,7 @@ export async function getServerSideProps(context) {
     title,
     content: unsanitised,
     show_table_of_contents: showToc,
+    meta_description: description,
   } = pageData;
 
   const content = DOMPurify.sanitize(parse(unsanitised));
@@ -58,6 +59,7 @@ export async function getServerSideProps(context) {
     props: {
       pages,
       showToc,
+      description,
       content,
       title,
       parsed,
