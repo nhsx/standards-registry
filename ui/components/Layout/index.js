@@ -29,7 +29,10 @@ export default function Home({ children, ...props }) {
     'about-standards',
     'help-and-resources',
   ].map((name) => {
-    const page = pages.find((p) => p.name === name);
+    const page = pages.find((p) => p.name === name) || {
+      name,
+      short_title: 'missing',
+    };
     return {
       url: `/${page.name}`,
       label: page.short_title,
