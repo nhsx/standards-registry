@@ -135,16 +135,19 @@ export default function Home({ pages }) {
         {['future-standards', 'about-standards', 'help-and-resources'].map(
           (key) => {
             const page = pages.find((p) => p.name === key);
-            const { short_title, name, homepage_snippet } = page;
-            return (
-              <SoloSection
-                key={key}
-                heading={short_title}
-                description={homepage_snippet}
-                link={`/${name}`}
-                linkText={`View ${short_title.toLowerCase()}`}
-              />
-            );
+            if (page) {
+              const { title, short_title, name, homepage_snippet } = page;
+              const displayTitle = short_title || title;
+              return (
+                <SoloSection
+                  key={key}
+                  heading={displayTitle}
+                  description={homepage_snippet}
+                  link={`/${name}`}
+                  linkText={`View ${displayTitle.toLowerCase()}`}
+                />
+              );
+            }
           }
         )}
       </div>
