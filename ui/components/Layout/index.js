@@ -31,7 +31,7 @@ export default function Home({ children, ...props }) {
   ].map((name) => {
     const page = pages.find((p) => p.name === name) || {
       name,
-      short_title: 'missing',
+      short_title: '',
     };
     return {
       url: `/${page.name}`,
