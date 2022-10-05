@@ -29,13 +29,10 @@ export default function Home({ children, ...props }) {
     'about-standards',
     'help-and-resources',
   ].map((name) => {
-    const page = pages.find((p) => p.name === name) || {
-      name,
-      short_title: '',
-    };
+    const page = pages.find((p) => p.name === name);
     return {
       url: `/${page.name}`,
-      label: page.short_title,
+      label: page.short_title || page.title,
     };
   });
 
