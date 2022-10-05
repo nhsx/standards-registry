@@ -16,7 +16,8 @@ export default function TypeTag({ children, classes, type }) {
       className={classnames(
         'nhsuk-tag',
         classes,
-        (type && colorMap[type.toLowerCase()]) || null
+        (type && typeof type === 'string' && colorMap[type.toLowerCase()]) ||
+          null
       )}
     >
       {children}
