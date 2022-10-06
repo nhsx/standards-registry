@@ -4,25 +4,9 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import { getPages } from '../helpers/api';
 import { Page, TableOfContents, CookiesTable } from '../components';
 
-// TODO: pull these from CKAN
-const descriptions = {
-  'about-standards':
-    'Find out about the different types and benefits of data standards in health and social care and how to report a gap in standards.',
-  'help-and-resources':
-    'Explore resources for the data standards community in health and social care including links to discussion forums and government regulations.',
-  'accessibility-statement':
-    'Check how accessible our website is for disabled people and others.',
-  'cookie-policy':
-    'Check how we use cookies to collect and store information about visits to our website.',
-  'privacy-policy':
-    'Check how we collect, use, share and store data for people visiting our website.',
-  'about-this-service':
-    'Check who owns and manages the NHS Data Standards Directory and what the service is for.',
-};
-
 const StaticPage = ({ content, showToc, title, parsed, description, page }) => {
   return (
-    <Page title={title} description={description || descriptions[page]}>
+    <Page title={title} description={description}>
       <div className="nhsuk-grid-row">
         {showToc && <TableOfContents content={parsed} />}
         <div className="nhsuk-grid-column-two-thirds">
