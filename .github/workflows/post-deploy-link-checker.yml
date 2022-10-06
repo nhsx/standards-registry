@@ -23,3 +23,6 @@ jobs:
           echo github.ref_name ${{github.ref_name}}
           echo ${{github.event}}
           echo ${{steps}}
+          env
+          echo "github.event" ${{ github.event }}
+          echo "Triggered by: $GITHUB_EVENT_NAME"
