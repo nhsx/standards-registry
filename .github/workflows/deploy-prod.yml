@@ -110,8 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ success() }}
     needs:
-      - deploy-ui
-      - ckan
+      - integrationtest
     steps:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@v2
