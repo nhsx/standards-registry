@@ -1,0 +1,26 @@
+on:
+  - push
+
+# TODO:
+# * install sitemap generator
+# * run generator
+# * save file output to ui/public/sitemap.xml
+
+defaults:
+  run:
+    working-directory: ui/public
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    name: Generate xml sitemap
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Install sitemap-generator-cli
+        run: npm install -g sitemap-generator-cli
+      - name: Generate sitemap
+        run: npx sitemap-generator-cli -lqg --verbose -p "1.0,0.8,0.6,0.4,0.2" https://data.standards.nhs.uk
