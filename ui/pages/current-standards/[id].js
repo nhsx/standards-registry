@@ -4,12 +4,13 @@ import { read, getPages } from '../../helpers/api';
 import schema from '../../schema';
 
 const Id = ({ data }) => {
+  const { title, description } = data;
   return (
-    <Page title={data.title}>
+    <Page title={title} description={description}>
       <Reading>
-        <h1>{data.title}</h1>
+        <h1>{title}</h1>
         <div className="nhsuk-u-reading-width">
-          <p>{data.description}</p>
+          <p>{description}</p>
         </div>
       </Reading>
       <Row>
