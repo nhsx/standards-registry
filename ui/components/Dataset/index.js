@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
-import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import classnames from 'classnames';
@@ -56,7 +55,7 @@ function Model({ model }) {
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Status:{' '}
           <Tag type={status} classes="nhsuk-body-s">
-            {upperFirst(status)}
+            {status}
           </Tag>
         </p>
         <p

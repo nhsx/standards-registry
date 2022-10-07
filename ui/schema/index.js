@@ -45,7 +45,7 @@ const schema = [
       label: 'Status',
       format: (val) => (
         <>
-          <Tag type={val}>{upperFirst(val)}</Tag>
+          <Tag type={val}>{val}</Tag>
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"

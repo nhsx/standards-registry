@@ -1,13 +1,20 @@
 import classnames from 'classnames';
+import { upperFirst } from 'lodash';
+
+const formatTagValue = (value) => upperFirst(value.replace(/-/g, ' '));
 
 const colorMap = {
+  proposed: 'nhsuk-tag--white',
+  draft: 'nhsuk-tag--grey',
+  'awaiting-approval': 'nhsuk-tag--aqua-green',
+  cancelled: 'nhsuk-tag--pink',
+  'draft-in-progress': 'nhsuk-tag--grey',
+  'on-hold': 'nhsuk-tag--yellow',
+
   active: 'nhsuk-tag--green',
+  'in-development': 'nhsuk-tag--grey',
   deprecated: 'nhsuk-tag--orange',
   retired: 'nhsuk-tag--red',
-  draft: 'nhsuk-tag--grey',
-  // proposed: 'nhsuk-tag--grey',
-  // awaiting: 'nhsuk-tag--grey',
-  // discontinued: 'nhsuk-tag--grey',
 };
 
 export default function TypeTag({ children, classes, type }) {
@@ -20,7 +27,7 @@ export default function TypeTag({ children, classes, type }) {
           null
       )}
     >
-      {children}
+      {formatTagValue(children)}
     </span>
   );
 }
