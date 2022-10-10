@@ -32,7 +32,7 @@ export const Cookies = ({ choice }) => {
             </p>
             <p>
               You can{' '}
-              <a id="nhsuk-cookie-banner__link" href="/cookie-policy/">
+              <a id="nhsuk-cookie-banner__link" href="/cookie-policy">
                 read more about our cookies
               </a>{' '}
               before you choose.
