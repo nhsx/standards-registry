@@ -23,4 +23,7 @@ jobs:
       - name: Install sitemap-generator-cli
         run: npm install -g sitemap-generator-cli
       - name: Generate sitemap
-        run: npx sitemap-generator-cli -lqg --verbose -p "1.0,0.8,0.6,0.4,0.2" https://data.standards.nhs.uk
+        run: |
+          npx sitemap-generator-cli -lqg --verbose -p "1.0,0.8,0.6,0.4,0.2" https://data.standards.nhs.uk
+          pwd
+          cat sitemap.xml
