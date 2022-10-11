@@ -106,6 +106,12 @@ jobs:
       base_url: https://data.standards.nhs.uk
       blc_args: --follow true --recursive
 
+  sitemap-generator:
+    if: ${{ success() }}
+    needs:
+      - integrationtest
+    uses: nhsx/standards-registry/.github/workflows/sitemap.yml@master
+
   notifypass:
     runs-on: ubuntu-latest
     if: ${{ success() }}
