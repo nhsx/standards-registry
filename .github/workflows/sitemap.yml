@@ -1,12 +1,11 @@
 on:
   - push
 
-# TODO:
-# * install sitemap generator
-# * run generator
-# * save file output to ui/public/sitemap.xml
-# * commit output to branch
-# * open pull request
+# * installs sitemap generator
+# * runs generator with priority map and lastmod
+# * saves file output to ui/public/sitemap.xml
+# * commits output to branch
+# * opens pull request
 
 defaults:
   run:
@@ -32,20 +31,9 @@ jobs:
           cat sitemap.xml
           # add a newline to the sitemap at the end of the file
           echo >> sitemap.xml
-          echo "::set-output name=date::$(date)"
+          echo "::set-output name=date::`date`"
           echo "::set-output name=workflowurl::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID?check_suite_focus=true"
-      # # see https://github.com/marketplace/actions/add-commit for examples
-      # - name: Commit the sitemap
-      #   uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
-      #   with:
-      #     add: sitemap.xml
-      #     author_name: Sitemap Bot 🗺
-      #     author_email: botchat@marvell-consulting.com
-      #     committer_name: Sitemap Bot 🗺🤖🗺
-      #     default_author: github_actions
-      #     message: Automated sitemap commit, generated on ${{ steps.sitemap.outputs.date }}
-      #     new_branch: sitemap-updates
-      #     pathspec_error_handling: ignore
+
       - name: Create Pull Request
         env:
           GITHUB_WORKFLOW_URL: ${{ steps.sitemap.outputs.workflowurl }}
@@ -64,6 +52,7 @@ jobs:
           labels: |
             sitemap
             automated pr
+          assignees: roc
           reviewers: |
             roc
             easternbloc
