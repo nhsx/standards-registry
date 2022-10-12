@@ -6,7 +6,6 @@ export function DatasetSchema({
   title,
   description,
   documentation_link: url,
-  license,
   keywords,
   metadata_created: dateCreated,
   metadata_modified: dateModified,
@@ -22,7 +21,6 @@ export function DatasetSchema({
     dateModified,
     identifier,
     url,
-    license,
     author: organization.name,
     keywords,
   };
