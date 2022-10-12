@@ -1,4 +1,12 @@
-import { Page, Reading, Row, Col, Model, ReviewDates } from '../../components';
+import {
+  Page,
+  Reading,
+  Row,
+  Col,
+  Model,
+  ReviewDates,
+  DatasetSchema,
+} from '../../components';
 
 import { read, getPages } from '../../helpers/api';
 import schema from '../../schema';
@@ -6,20 +14,23 @@ import schema from '../../schema';
 const Id = ({ data }) => {
   const { title, description } = data;
   return (
-    <Page title={title} description={description}>
-      <Reading>
-        <h1>{title}</h1>
-        <div className="nhsuk-u-reading-width">
-          <p>{description}</p>
-        </div>
-      </Reading>
-      <Row>
-        <Col className="nhsuk-grid-column-two-thirds">
-          <Model schema={schema} data={data} />
-          <ReviewDates data={data} />
-        </Col>
-      </Row>
-    </Page>
+    <>
+      <DatasetSchema {...data} />
+      <Page title={title} description={description}>
+        <Reading>
+          <h1>{title}</h1>
+          <div className="nhsuk-u-reading-width">
+            <p>{description}</p>
+          </div>
+        </Reading>
+        <Row>
+          <Col className="nhsuk-grid-column-two-thirds">
+            <Model schema={schema} data={data} />
+            <ReviewDates data={data} />
+          </Col>
+        </Row>
+      </Page>
+    </>
   );
 };
 
