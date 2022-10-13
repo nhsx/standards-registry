@@ -11,18 +11,33 @@ export function DatasetSchema({
   metadata_modified: dateModified,
   organization,
   reference_code: identifier,
+  topic: topics,
+  care_setting: careSettings,
+  standard_category: category,
 }) {
+  keywords = [category, topics.join(', '), careSettings.join(', ')];
+
+  const creator = {
+    '@type': 'organization',
+    name: organization.name,
+  };
+
   const datasetJSON = {
     '@context': 'https://schema.org/',
     '@type': 'Dataset',
     name: title,
+    creator,
     description,
     dateCreated,
     dateModified,
     identifier,
     url,
-    author: organization.name,
     keywords,
+    isAccessibleForFree: true,
+    includedInDataCatalog: {
+      '@type': 'DataCatalog',
+      name: 'data.standards.nhs.uk',
+    },
   };
 
   return (
