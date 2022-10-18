@@ -64,8 +64,10 @@ export function WebPageSchema({ title, description, host }) {
     title,
     description,
     url: [host, router.asPath].join(''),
-    // Contact point for page: email
-    // creator nhs digitial org
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'england.interop.standards@nhs.net',
+    },
   };
   return addJsonToHead(data);
 }
