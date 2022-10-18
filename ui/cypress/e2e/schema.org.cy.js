@@ -1,6 +1,10 @@
 const parseJsonSchema = (elem) =>
   JSON.parse(
-    JSON.stringify(elem.text()).replaceAll('&quot;', '"').trim().slice(1, -1)
+    JSON.stringify(elem.text())
+      .replaceAll('&quot;', '"')
+      .replaceAll('\\', '')
+      .trim()
+      .slice(1, -1)
   );
 
 describe('Schema.org representations', () => {
@@ -11,9 +15,14 @@ describe('Schema.org representations', () => {
         .get('head script[class="structured-data-list"]')
         .then((jsonSchema) => {
           expect(jsonSchema).to.have.attr('type', 'application/ld+json');
+
           expect(parseJsonSchema(jsonSchema)).to.deep.equal({
             '@context': 'https://schema.org/',
             '@type': 'WebPage',
+            contactPoint: {
+              '@type': 'ContactPoint',
+              email: 'england.interop.standards@nhs.net',
+            },
             title: 'Help and resources',
             description:
               'Explore resources for the data standards community in health and social care including links to discussion forums and government regulations.',
