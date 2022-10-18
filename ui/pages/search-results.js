@@ -23,7 +23,7 @@ const content = {
   },
 };
 
-export default function SearchResults({ data, schemaData }) {
+export default function SearchResults({ data, schemaData, host }) {
   const { query } = useQueryContext();
   const { q: searchTerm } = query;
   const title = searchTerm
@@ -31,7 +31,7 @@ export default function SearchResults({ data, schemaData }) {
     : content.title;
 
   return (
-    <Page title={`${title} - NHS Standards Directory`}>
+    <Page title={`${title} - NHS Standards Directory`} host={host}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>

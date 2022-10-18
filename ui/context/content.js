@@ -12,13 +12,15 @@ const ContentContext = createContext();
 
 export function ContentContextWrapper({ children, value }) {
   const content = merge({}, CONTENT, value);
-
   const delimiter = ' - ';
+  const contentMerge = (content) => {
+    return { ...CONTENT, ...content };
+  };
 
   const setPageTitle = (pageTitle) =>
     pageTitle ? [pageTitle, content.title].join(delimiter) : content.title;
 
-  const functions = { content, setPageTitle };
+  const functions = { content, setPageTitle, contentMerge };
   return (
     <ContentContext.Provider value={functions}>
       {children}

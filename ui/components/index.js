@@ -25,7 +25,7 @@ export { default as PhaseBanner } from './PhaseBanner';
 export { default as Reading } from './Reading';
 export * from './ResponsiveTable';
 export { default as Snippet } from './Snippet';
-export { DatasetSchema } from './DatasetSchema';
+export { DatasetSchema, WebPageSchema } from './DatasetSchema';
 export { default as Search } from './Search';
 export * from './Select';
 export { default as Tag } from './Tag';
