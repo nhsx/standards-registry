@@ -3,9 +3,11 @@ import { useRouter } from 'next/router';
 
 const addJsonToHead = (schemaJSON) => (
   <Head>
-    <script className="structured-data-list" type="application/ld+json">
-      {JSON.stringify(schemaJSON)}
-    </script>
+    <script
+      className="structured-data-list"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJSON) }}
+    />
   </Head>
 );
 
