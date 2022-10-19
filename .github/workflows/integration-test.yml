@@ -35,13 +35,13 @@ jobs:
           CKAN_URL: ${{ inputs.ckan_url }}
           PAGES_CKAN_URL: ${{ inputs.pages_ckan_url }}
           PORT: 3000
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@master
         if: failure()
         with:
           name: cypress-screenshots
           path: ui/cypress/screenshots
       # Test run video was always captured, so this action uses "always()" condition
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@master
         if: always()
         with:
           name: cypress-videos
