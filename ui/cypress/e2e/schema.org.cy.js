@@ -1,3 +1,6 @@
+// Cypress does weird things with the JSON/LD in the document head
+// so this is a way of extracting and removing odd additional chars that .text() produces etc. There's probably a better way
+// of doing this but none is forthcoming in the docs
 const parseJsonSchema = (elem) =>
   JSON.parse(
     JSON.stringify(elem.text())
