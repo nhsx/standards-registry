@@ -77,7 +77,7 @@ jobs:
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: ckan deploy
-        uses: koslib/helm-eks-action@master
+        uses: koslib/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}

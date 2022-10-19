@@ -79,7 +79,7 @@ jobs:
           docker push ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
 
       - name: update helm
-        uses: koslib/helm-eks-action@master
+        uses: koslib/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kubeconfig_file }}
         with:
