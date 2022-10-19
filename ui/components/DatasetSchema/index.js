@@ -1,4 +1,13 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+
+const addJsonToHead = (schemaJSON) => (
+  <Head>
+    <script className="structured-data-list" type="application/ld+json">
+      {JSON.stringify(schemaJSON)}
+    </script>
+  </Head>
+);
 
 // See https://schema.org/Dataset for more
 
@@ -40,11 +49,25 @@ export function DatasetSchema({
     },
   };
 
-  return (
-    <Head>
-      <script className="structured-data-list" type="application/ld+json">
-        {JSON.stringify(datasetJSON)}
-      </script>
-    </Head>
-  );
+  return addJsonToHead(datasetJSON);
+}
+
+// Schema:title - Title
+// Schema:description - Description
+// Schema:url - defined url of page
+
+export function WebPageSchema({ title, description, host }) {
+  const router = useRouter();
+  const data = {
+    '@context': 'https://schema.org/',
+    '@type': 'WebPage',
+    title,
+    description,
+    url: [host, router.asPath].join(''),
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'england.interop.standards@nhs.net',
+    },
+  };
+  return addJsonToHead(data);
 }

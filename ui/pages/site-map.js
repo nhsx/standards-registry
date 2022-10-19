@@ -2,8 +2,9 @@ import { Fragment } from 'react';
 import { Page } from '../components';
 import Link from 'next/link';
 import { getPages } from '../helpers/api';
+import { getHost } from '../helpers/getHost';
 
-const SiteMap = ({ pages }) => {
+const SiteMap = ({ pages, host }) => {
   const feedbackLink =
     'https://docs.google.com/forms/d/e/1FAIpQLSc3t0kyD6f8kkvgRnqtj5uUmozq_oACBWrOqhrDBmzzqlfRHA/viewform';
 
@@ -148,10 +149,12 @@ const SiteMap = ({ pages }) => {
     'about-this-service',
   ].map((page) => pages.find((p) => p.name === page));
 
-  const pageProps = {
+  const staticPageProps = {
     title: 'Site map',
     description: 'View a complete list of pages in our website.',
   };
+
+  const pageProps = { ...staticPageProps, host };
 
   return (
     <Page {...pageProps}>
@@ -188,26 +191,28 @@ const SiteMap = ({ pages }) => {
 
             {orderedPages.map((page, index) => {
               return (
-                <li key={index}>
-                  <p>
-                    <Link href={`/${page.name}`}>
-                      <a>{page.short_title || page.title}</a>
-                    </Link>
-                  </p>
-                  {children[page.name] && (
-                    <ul>
-                      {children[page.name].map((child, index) => {
-                        return (
-                          <li key={index}>
-                            <Link href={`/${page.name}#${child.anchor}`}>
-                              <a>{child.title}</a>
-                            </Link>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </li>
+                page && (
+                  <li key={index}>
+                    <p>
+                      <Link href={`/${page.name}`}>
+                        <a>{page.short_title || page.title}</a>
+                      </Link>
+                    </p>
+                    {children[page.name] && (
+                      <ul>
+                        {children[page.name].map((child, index) => {
+                          return (
+                            <li key={index}>
+                              <Link href={`/${page.name}#${child.anchor}`}>
+                                <a>{child.title}</a>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
+                  </li>
+                )
               );
             })}
             <li>
@@ -224,11 +229,12 @@ const SiteMap = ({ pages }) => {
 
 export default SiteMap;
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req }) {
   const pages = await getPages();
 
   return {
     props: {
+      host: await getHost(req),
       pages,
     },
   };

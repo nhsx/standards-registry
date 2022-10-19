@@ -3,10 +3,19 @@ import DOMPurify from 'isomorphic-dompurify';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { getPages } from '../helpers/api';
 import { Page, TableOfContents, CookiesTable } from '../components';
+import { getHost } from '../helpers/getHost';
 
-const StaticPage = ({ content, showToc, title, parsed, description, page }) => {
+const StaticPage = ({
+  content,
+  showToc,
+  title,
+  parsed,
+  description,
+  page,
+  host,
+}) => {
   return (
-    <Page title={title} description={description}>
+    <Page title={title} description={description} host={host}>
       <div className="nhsuk-grid-row">
         {showToc && <TableOfContents content={parsed} />}
         <div className="nhsuk-grid-column-two-thirds">
@@ -20,6 +29,7 @@ const StaticPage = ({ content, showToc, title, parsed, description, page }) => {
 };
 
 export async function getServerSideProps(context) {
+  const { req } = context;
   const { page } = context.params;
   const pages = await getPages();
   const pageData = pages.filter((i) => i.name === page).pop();
@@ -41,6 +51,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      host: await getHost(req),
       pages,
       showToc,
       description,

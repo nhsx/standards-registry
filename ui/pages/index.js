@@ -11,8 +11,9 @@ import {
 import styles from '../styles/Home.module.scss';
 import { getPages } from '../helpers/api';
 import { list } from '../helpers/api';
+import { useContentContext } from '../context';
 
-const content = {
+const staticPageContent = {
   header: 'Find standards to record, handle and exchange data in England',
   description:
     'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
@@ -61,10 +62,12 @@ const HomeElement = ({ link, linkText, description }) => (
   </div>
 );
 
-export default function Home({ pages }) {
+export default function Home({ pages, host, ...props }) {
+  const { contentMerge } = useContentContext();
+  const pageContent = contentMerge(staticPageContent);
   const standardsPage = 'current-standards';
   return (
-    <Page description={content.description}>
+    <Page description={pageContent.description} host={host} {...props}>
       <HomeSection
         title="Browse by care setting"
         link={`/${standardsPage}`}
@@ -209,7 +212,7 @@ export async function getServerSideProps() {
     props: {
       recent: recent.results.slice(0, 3),
       pages,
-      content,
+      content: staticPageContent,
     },
   };
 }

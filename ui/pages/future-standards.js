@@ -17,13 +17,13 @@ import {
 
 import styles from '../styles/Roadmap.module.scss';
 
-const pageProps = {
+const staticPageProps = {
   title: 'Future standards',
   description:
     'Find data standards proposed or in development as future requirements for health and social care services in England.',
 };
 
-export default function Roadmap({ data, schemaData }) {
+export default function Roadmap({ data, schemaData, ...props }) {
   const [results, setResults] = useState(data.results);
   const [count, setCount] = useState(data.count || 0);
   const [loading, setLoading] = useState(false);
@@ -63,6 +63,8 @@ export default function Roadmap({ data, schemaData }) {
     ? activeFilters.care_setting.length
     : 0;
   const resultSummary = `${count} result${count === 1 ? '' : 's'}`;
+
+  const pageProps = { ...staticPageProps, ...props };
 
   return (
     <Page {...pageProps}>
@@ -109,7 +111,7 @@ export default function Roadmap({ data, schemaData }) {
 
 export async function getServerSideProps(context) {
   const { id, defaultSort } = schema.find((s) => s.defaultSort);
-  return getPageProps({
+  return getPageProps(context, {
     query: {
       sort: {
         [id]: defaultSort,

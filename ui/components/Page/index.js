@@ -1,16 +1,16 @@
 import Head from 'next/head';
 import { useContentContext } from '../../context/content';
+import { WebPageSchema } from '../DatasetSchema';
 
-export default function Page({ children, ...props }) {
+export default function Page({ children, host, description, title }) {
   const { setPageTitle } = useContentContext();
-  const title = setPageTitle(props.title);
+  const pageTitle = setPageTitle(title);
   return (
     <>
+      <WebPageSchema title={title} description={description} host={host} />
       <Head>
-        <title>{title}</title>
-        {props.description && (
-          <meta name="description" value={props.description} />
-        )}
+        <title>{pageTitle}</title>
+        {description && <meta name="description" value={description} />}
       </Head>
       {children}
     </>

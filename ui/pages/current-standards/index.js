@@ -12,13 +12,14 @@ import {
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
 
-const pageProps = {
+const staticPageProps = {
   title: 'Current standards',
   description:
     'Find published data standards for health and social care including standards required for use in England.',
 };
 
-export default function Standards({ data, schemaData }) {
+export default function Standards({ data, schemaData, host }) {
+  const pageProps = { ...staticPageProps, host };
   return (
     <Page {...pageProps}>
       <h1>
