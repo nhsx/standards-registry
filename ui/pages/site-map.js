@@ -3,7 +3,6 @@ import { Page } from '../components';
 import Link from 'next/link';
 import { getPages } from '../helpers/api';
 import { getHost } from '../helpers/getHost';
-getHost;
 
 const SiteMap = ({ pages, host }) => {
   const feedbackLink =

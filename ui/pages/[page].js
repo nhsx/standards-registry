@@ -4,7 +4,6 @@ import { fromMarkdown } from 'mdast-util-from-markdown';
 import { getPages } from '../helpers/api';
 import { Page, TableOfContents, CookiesTable } from '../components';
 import { getHost } from '../helpers/getHost';
-getHost;
 
 const StaticPage = ({
   content,
