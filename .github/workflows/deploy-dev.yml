@@ -21,7 +21,7 @@ jobs:
     env:
       SLS_DEBUG: 1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -50,7 +50,7 @@ jobs:
       AWS_REGION: eu-west-2
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: configure credentials (using us-east-1)
         uses: aws-actions/configure-aws-credentials@v1
         with:
