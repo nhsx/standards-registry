@@ -22,9 +22,9 @@ jobs:
       SLS_DEBUG: 1
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16
       - run: npm ci
       - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
       - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
