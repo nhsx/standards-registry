@@ -30,6 +30,7 @@ RUN ckan config-tool ${APP_DIR}/production.ini "ckan.tracking_enabled = true"
 
 RUN cd /srv/app/src/ckanext-scheming && python setup.py develop
 RUN cd /srv/app/src/ckanext-pages && python setup.py develop
+RUN cd /srv/app/src/ckanext-nhs-theme && python setup.py develop
 
 RUN chown -R ckan:ckan /srv/app
 RUN mkdir /var/lib/ckan
