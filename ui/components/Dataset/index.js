@@ -28,14 +28,7 @@ function Embolden({ children }) {
 }
 
 function Model({ model }) {
-  const {
-    name,
-    status,
-    title,
-    metadata_created,
-    standard_category,
-    description,
-  } = model;
+  const { name, status, title, metadata_created, description } = model;
   const target = `/current-standards/${name}`;
 
   return (
