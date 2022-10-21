@@ -50,17 +50,12 @@ function Model({ model }) {
       </p>
       <Flex className="nhsuk-body-s">
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Type: {standard_category}
-        </p>
-        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Status:{' '}
           <Tag type={status} classes="nhsuk-body-s">
             {status}
           </Tag>
         </p>
-        <p
-          className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
-        >
+        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Date added: {formatDate(metadata_created)}
         </p>
       </Flex>
@@ -125,7 +120,12 @@ const CheckBox = () => {
   };
 
   return (
-    <div className={classnames('nhsuk-checkboxes__item', styles.checkboxItem)}>
+    <div
+      className={classnames(
+        'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+        styles.checkboxItem
+      )}
+    >
       <input
         className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
         id="mandated"
