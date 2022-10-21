@@ -99,7 +99,8 @@ export default function Roadmap({ data, schemaData, page }) {
 
 export async function getServerSideProps(context) {
   const { id, defaultSort } = schema.find((s) => s.defaultSort);
-  const pageProps = await getPageProps(context, {
+  const pageProps = await getPageProps({
+    ...context,
     query: {
       sort: {
         [id]: defaultSort,
