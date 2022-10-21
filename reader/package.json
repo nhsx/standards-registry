@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "migrate": "babel-node -r dotenv/config ./lib/migrations/index.js",
+    "new-migration": "./bin/new-migration.js"
   },
-  "type": "module",
   "author": "ralph",
   "license": "WTFPL",
   "devDependencies": {
-    "@babel/preset-env": "^7.16.5",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "babel-jest": "^29.1.2",
     "commander": "^9.3.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.14.0",
@@ -18,5 +21,10 @@
     "jest": "^27.4.5",
     "node-fetch": "^3.1.0",
     "slugify": "^1.6.4"
+  },
+  "dependencies": {
+    "@babel/node": "^7.19.1",
+    "axios": "^1.1.2",
+    "minimist": "^1.2.7"
   }
 }
