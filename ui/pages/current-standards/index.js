@@ -31,8 +31,8 @@ export default function Standards({ data, schemaData, host }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Use this directory to find nationally recognised standards for use in
-          health and adult social care.
+          Use this directory to find nationally recognised data standards for
+          use in health and adult social care.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">

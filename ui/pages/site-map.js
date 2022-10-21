@@ -95,7 +95,7 @@ const SiteMap = ({ pages, host }) => {
     'help-and-resources': [
       {
         anchor: 'standards-directory-team',
-        title: 'Standards Directory team',
+        title: 'Data Standards Directory team',
       },
       {
         anchor: 'standard-development-bodies',

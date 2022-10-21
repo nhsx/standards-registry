@@ -31,7 +31,7 @@ export default function SearchResults({ data, schemaData, host }) {
     : content.title;
 
   return (
-    <Page title={`${title} - NHS Standards Directory`} host={host}>
+    <Page title={`${title} - NHS Data Standards Directory`} host={host}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>

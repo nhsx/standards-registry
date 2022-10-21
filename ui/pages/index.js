@@ -18,7 +18,7 @@ const staticPageContent = {
   description:
     'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
   intro:
-    'Use this directory to find nationally recognised standards for use in health and adult social care.',
+    'Use this directory to find nationally recognised data standards for use in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (

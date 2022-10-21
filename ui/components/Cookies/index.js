@@ -23,7 +23,7 @@ export const Cookies = ({ choice }) => {
         >
           <div className="nhsuk-width-container">
             <h2 className="nhsuk-heading-s">
-              Cookies on the NHS Standards Directory
+              Cookies on the NHS Data Standards Directory
             </h2>
             <p>
               We use essential cookies to make this service work. We&lsquo;d
