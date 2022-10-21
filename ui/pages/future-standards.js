@@ -17,13 +17,7 @@ import {
 
 import styles from '../styles/Roadmap.module.scss';
 
-const staticPageProps = {
-  title: 'Future standards',
-  description:
-    'Find data standards proposed or in development as future requirements for health and social care services in England.',
-};
-
-export default function Roadmap({ data, schemaData, ...props }) {
+export default function Roadmap({ data, schemaData, page }) {
   const [results, setResults] = useState(data.results);
   const [count, setCount] = useState(data.count || 0);
   const [loading, setLoading] = useState(false);
@@ -64,20 +58,12 @@ export default function Roadmap({ data, schemaData, ...props }) {
     : 0;
   const resultSummary = `${count} result${count === 1 ? '' : 's'}`;
 
-  const pageProps = { ...staticPageProps, ...props };
-
+  const { title, content } = page;
   return (
-    <Page {...pageProps}>
+    <Page {...page}>
       <Reading>
-        <h1>Roadmap of future requirements in England</h1>
-        <p>
-          Find standards being assessed by the Data Alliance Partnership Board
-          with a view to mandatory implementation in England. For more
-          information or to propose a new standard email{' '}
-          <a href="mailto:england.interop.standards@nhs.net">
-            england.interop.standards@nhs.net
-          </a>
-        </p>
+        <h1>{title}</h1>
+        <p dangerouslySetInnerHTML={{ __html: content }} />
         <p>
           <strong>{resultSummary}</strong>
         </p>
@@ -113,7 +99,7 @@ export default function Roadmap({ data, schemaData, ...props }) {
 
 export async function getServerSideProps(context) {
   const { id, defaultSort } = schema.find((s) => s.defaultSort);
-  return getPageProps(context, {
+  const pageProps = await getPageProps(context, {
     query: {
       sort: {
         [id]: defaultSort,
@@ -122,4 +108,10 @@ export async function getServerSideProps(context) {
       inactive: true,
     },
   });
+  const page = 'future-standards';
+  pageProps.props.page = pageProps.props.pages
+    .filter((i) => i.name === page)
+    .pop();
+
+  return pageProps;
 }
