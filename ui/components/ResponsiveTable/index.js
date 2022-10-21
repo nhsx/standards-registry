@@ -123,7 +123,7 @@ export function ResponsiveTable({ schema, results }) {
                       <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
                         {value.map((val, index) => (
                           <li key={index}>
-                            {val.formatter ? val.formatter(val, result) : val}
+                            {s.formatter ? s.formatter(val, result) : val}
                           </li>
                         ))}
                       </ul>
