@@ -76,7 +76,7 @@ export default function Home({ children, ...props }) {
                   'nhsuk-header__link nhsuk-header__link--service',
                   styles.logo
                 )}
-                aria-label="NHS Standards Directory homepage"
+                aria-label="NHS Data Standards Directory homepage"
               >
                 <svg
                   className="nhsuk-logo"
@@ -103,7 +103,7 @@ export default function Home({ children, ...props }) {
                     styles.serviceName
                   )}
                 >
-                  Standards Directory
+                  Data Standards Directory
                 </span>
               </a>
             </Link>
