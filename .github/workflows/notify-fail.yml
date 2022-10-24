@@ -27,4 +27,4 @@ jobs:
           SLACK_COLOR: danger
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_ICON: https://i.pinimg.com/originals/24/e4/35/24e435f2b98abc26385bef1cf1243d6f.png
-          SLACK_MESSAGE: $GITHUB_REF
+          SLACK_MESSAGE: ${{ github.ref }}
