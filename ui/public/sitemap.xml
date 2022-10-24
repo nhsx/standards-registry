@@ -186,31 +186,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=1</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=2</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=3</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=4</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=5</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://data.standards.nhs.uk/current-standards?standard_category=Information+code+of+practice+and+governance+standard</loc>
     <lastmod>2022-10-21</lastmod>
     <priority>0.6</priority>
@@ -716,16 +691,6 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=6</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=7</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://data.standards.nhs.uk/current-standards/overseas-visitor-charging-category</loc>
     <lastmod>2022-10-21</lastmod>
     <priority>0.4</priority>
@@ -986,16 +951,6 @@
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=8</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=9</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
     <loc>https://data.standards.nhs.uk/current-standards/birth-notifications</loc>
     <lastmod>2022-10-21</lastmod>
     <priority>0.2</priority>
@@ -1026,16 +981,6 @@
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=10</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=11</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
     <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=10</loc>
     <lastmod>2022-10-21</lastmod>
     <priority>0.2</priority>
@@ -1047,16 +992,6 @@
   </url>
   <url>
     <loc>https://data.standards.nhs.uk/current-standards?page=13</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=12</loc>
-    <lastmod>2022-10-21</lastmod>
-    <priority>0.2</priority>
-  </url>
-  <url>
-    <loc>https://data.standards.nhs.uk/future-standards?page=13</loc>
     <lastmod>2022-10-21</lastmod>
     <priority>0.2</priority>
   </url>
