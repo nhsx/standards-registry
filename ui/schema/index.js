@@ -34,6 +34,8 @@ function TruncateLink({ link, email }) {
   return <a href={email ? `mailto:${link}` : link}>{truncate(link, 50)}</a>;
 }
 
+const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
+
 const CategoryDetails = function () {
   return (
     <Details
@@ -219,7 +221,7 @@ export const upcomingStandard = [
     id: 'status',
     title: 'Stage',
     sortable: true,
-    formatter: (val) => <strong>{upperFirst(val)}</strong>,
+    formatter: (val) => <strong>{sentenceCase(val)}</strong>,
   },
   {
     id: 'dates',
