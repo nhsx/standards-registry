@@ -20,7 +20,7 @@ const Rows = (props) => {
       ) : (
         format(props)
       )}
-      {options.more && options.more}
+      {options.more}
     </dd>
   );
 };
