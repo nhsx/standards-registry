@@ -34,6 +34,37 @@ function TruncateLink({ link, email }) {
   return <a href={email ? `mailto:${link}` : link}>{truncate(link, 50)}</a>;
 }
 
+const CategoryDetails = function () {
+  return (
+    <Details
+      className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
+      summary="What this type means"
+    >
+      <div className="nhsuk-details__text">
+        <Paragraph>
+          <strong>Record standards</strong> define what information to collect
+          and how to format it, for example when registering a new patient.
+        </Paragraph>
+        <Paragraph>
+          <strong>Data definitions and terminologies</strong> define the format
+          of individual data items so they can be consistently represented, for
+          example dates or medication names. Reference sets and controlled lists
+          are also included.
+        </Paragraph>
+        <Paragraph>
+          <strong>Technical standards and specifications</strong> specify how to
+          make information available technically including how the data is
+          structured and transported.
+        </Paragraph>
+        <Paragraph>
+          <strong>Information codes of practice</strong> are legal or best
+          practice guidelines on how information should be handled.
+        </Paragraph>
+      </div>
+    </Details>
+  );
+};
+
 const schema = [
   {
     section_title: 'About this standard',
@@ -76,40 +107,7 @@ const schema = [
     },
     standard_category: {
       label: 'Type',
-      format: (val) => (
-        <>
-          {val}
-          {
-            <Details
-              className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
-              summary="What this type means"
-            >
-              <div className="nhsuk-details__text">
-                <Paragraph>
-                  <strong>Record standards</strong> define what information to
-                  collect and how to format it, for example when registering a
-                  new patient.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Data definitions and terminologies</strong> define the
-                  format of individual data items so they can be consistently
-                  represented, for example dates or medication names. Reference
-                  sets and controlled lists are also included.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Technical standards and specifications</strong>{' '}
-                  specify how to make information available technically
-                  including how the data is structured and transported.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Information codes of practice</strong> are legal or
-                  best practice guidelines on how information should be handled.
-                </Paragraph>
-              </div>
-            </Details>
-          }
-        </>
-      ),
+      more: <CategoryDetails />,
     },
     documentation_help_text: {
       label: 'Documentation',

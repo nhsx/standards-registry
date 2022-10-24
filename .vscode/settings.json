@@ -4,5 +4,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "workbench.colorTheme": "One Monokai",
   "workbench.preferredDarkColorTheme": "One Monokai",
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  }
 }
