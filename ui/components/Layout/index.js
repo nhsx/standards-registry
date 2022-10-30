@@ -24,7 +24,7 @@ export default function Home({ children, ...props }) {
   const siteCode = process.env.NEXT_PUBLIC_SITE_CODE;
 
   const links = [
-    'current-standards',
+    'published-standards',
     'future-standards',
     'about-standards',
     'help-and-resources',
@@ -134,7 +134,7 @@ export default function Home({ children, ...props }) {
         {props.Hero && <props.Hero {...props} />}
         <Breadcrumbs
           labels={{
-            standards: 'Current standards',
+            standards: 'Published standards',
             content: 'Browse content standards',
             technical: 'Browse technical standards',
             services: 'Browse services',

@@ -139,7 +139,7 @@ const SiteMap = ({ pages, host }) => {
   };
 
   const orderedPages = [
-    'current-standards',
+    'published-standards',
     'future-standards',
     'about-standards',
     'help-and-resources',
@@ -177,7 +177,7 @@ const SiteMap = ({ pages, host }) => {
                         const query = filter ? `?${category}=${filter}` : '';
                         return (
                           <li key={filter}>
-                            <Link href={`/current-standards${query}`}>
+                            <Link href={`/published-standards${query}`}>
                               <a>{title}</a>
                             </Link>
                           </li>

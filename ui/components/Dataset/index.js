@@ -29,7 +29,7 @@ function Embolden({ children }) {
 
 function Model({ model }) {
   const { name, status, title, metadata_created, description } = model;
-  const target = `/current-standards/${name}`;
+  const target = `/published-standards/${name}`;
 
   return (
     <>
@@ -131,7 +131,7 @@ const CheckBox = () => {
         className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
         htmlFor="mandated"
       >
-        Mandatory in England
+        National requirement
       </label>
     </div>
   );
