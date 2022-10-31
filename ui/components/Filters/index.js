@@ -19,6 +19,7 @@ export function Filter({
   fullHeight,
   clearAll,
   onClearAllClick,
+  clearAllAlign,
   noBorderTop,
 }) {
   const { query, updateQuery } = useQueryContext();
@@ -65,7 +66,7 @@ export function Filter({
         />
       </OptionSelect>
       {clearAll && (
-        <a href="#" className={styles.clearAll} onClick={onClearAllClick}>
+        <a href="#" className={classnames(styles.clearAll, styles[clearAllAlign])} onClick={onClearAllClick}>
           Clear all
         </a>
       )}
@@ -86,7 +87,8 @@ export function Filters({
   before,
   expanded,
   className,
-  clearAll,
+  clearAll = true,
+  clearAllAlign = 'left',
   fullHeight,
   noBorderTop,
 }) {
@@ -156,6 +158,7 @@ export function Filters({
               fullHeight={fullHeight}
               onClearAllClick={onClearAllClick}
               clearAll={clearAll}
+              clearAllAlign={clearAllAlign}
               noBorderTop={noBorderTop}
             />
           );
