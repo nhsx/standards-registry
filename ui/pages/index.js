@@ -65,7 +65,7 @@ const HomeElement = ({ link, linkText, description }) => (
 export default function Home({ pages, host, ...props }) {
   const { contentMerge } = useContentContext();
   const pageContent = contentMerge(staticPageContent);
-  const standardsPage = 'current-standards';
+  const standardsPage = 'published-standards';
   return (
     <Page description={pageContent.description} host={host} {...props}>
       <HomeSection
@@ -160,7 +160,7 @@ export default function Home({ pages, host, ...props }) {
 }
 
 export function HomepageHero({ recent }) {
-  const standardsPage = 'current-standards';
+  const standardsPage = 'published-standards';
   return (
     <Hero>
       <div className="nhsuk-grid-row">

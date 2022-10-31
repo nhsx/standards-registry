@@ -7,7 +7,7 @@ import styles from './style.module.scss';
 export default function Search({
   placeholder,
   label = true,
-  labelText = 'Search current standards',
+  labelText = 'Search published standards',
   location = null,
   navigate = null,
   homepage,

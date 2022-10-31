@@ -11,8 +11,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -31,63 +31,63 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/devices-patient-level-contract-monitoring</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/devices-patient-level-contract-monitoring</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-number-for-general-practice</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-number-for-general-practice</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/medicine-and-allergyintolerance-data-transfer</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/medicine-and-allergyintolerance-data-transfer</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Social+care</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Social+care</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Appointment+%2F+scheduling</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Appointment+%2F+scheduling</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Access+to+records</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Access+to+records</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Vaccination</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Vaccination</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Record+standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Record+standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -111,888 +111,888 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/systemic-anti-cancer-therapy-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/systemic-anti-cancer-therapy-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/surveillance-of-healthcare-associated-infections</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/surveillance-of-healthcare-associated-infections</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/sexual-and-reproductive-health-activity-dataset</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/sexual-and-reproductive-health-activity-dataset</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/paediatric-critical-care-minimum-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/paediatric-critical-care-minimum-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/neonatal-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/neonatal-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/neonatal-critical-care-minimum-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/neonatal-critical-care-minimum-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-joint-registry-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-joint-registry-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/hiv-and-aids-reporting-system</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/hiv-and-aids-reporting-system</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/female-genital-mutilation-enhanced-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/female-genital-mutilation-enhanced-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/diagnostic-imaging-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/diagnostic-imaging-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=4</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=4</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=5</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=5</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Information+code+of+practice+and+governance+standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Information+code+of+practice+and+governance+standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/chlamydia-testing-activity-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/chlamydia-testing-activity-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-cancer-waiting-times-monitoring-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-cancer-waiting-times-monitoring-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=4</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=4</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=5</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=5</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gumcad-sti-surveillance-system</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gumcad-sti-surveillance-system</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/cover-of-vaccination-evaluated-rapidly-cover</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/cover-of-vaccination-evaluated-rapidly-cover</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/data-security-and-protection-toolkit</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/data-security-and-protection-toolkit</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-drug-and-alcohol-treatment-monitoring-system-ndtms-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-drug-and-alcohol-treatment-monitoring-system-ndtms-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/personal-demographics-service-smsp-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/personal-demographics-service-smsp-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/female-genital-mutilation-information-sharing-smsp-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/female-genital-mutilation-information-sharing-smsp-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/eyecare-electronic-referral-service-api-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/eyecare-electronic-referral-service-api-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=4</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=4</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=5</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=5</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/drugs-patient-level-contract-monitoring-drplcm</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/drugs-patient-level-contract-monitoring-drplcm</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/patient-level-contract-monitoring</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/patient-level-contract-monitoring</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/aggregate-contract-monitoring</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/aggregate-contract-monitoring</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/uk-core-fhir-release-4-r4-governance</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/uk-core-fhir-release-4-r4-governance</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhsd-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhsd-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/fgm-information-sharing-fgm-is-local-system-integration</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/fgm-information-sharing-fgm-is-local-system-integration</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/message-exchange-for-social-care-and-health-mesh-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/message-exchange-for-social-care-and-health-mesh-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/hl7-fhir-uk-core</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/hl7-fhir-uk-core</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/end-of-life-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/end-of-life-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Social+care&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Social+care&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Social+care&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Social+care&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Social+care&amp;page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Social+care&amp;page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-booking-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-booking-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp-connect-appointment-management-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp-connect-appointment-management-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/vaccination-apis</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/vaccination-apis</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-number-for-secondary-care</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-number-for-secondary-care</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/treatment-function-and-main-specialty-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/treatment-function-and-main-specialty-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/health-and-social-care-organisation-reference-data</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/health-and-social-care-organisation-reference-data</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/core-information-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/core-information-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-number</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-number</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Appointment+%2F+scheduling&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Appointment+%2F+scheduling&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Appointment+%2F+scheduling&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Appointment+%2F+scheduling&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/commissioning-data-sets-emergency-care-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/commissioning-data-sets-emergency-care-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/commissioning-data-sets</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/commissioning-data-sets</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/summary-care-record-smsp-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/summary-care-record-smsp-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-record-locator-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-record-locator-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-early-warning-score-2-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-early-warning-score-2-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp-connect-access-record-structured-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp-connect-access-record-structured-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp-connect-access-record-html-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp-connect-access-record-html-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp-connect-access-document-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp-connect-access-document-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Access+to+records&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Access+to+records&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Access+to+records&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Access+to+records&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/vaccination-events-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/vaccination-events-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/vaccination-adverse-reactions-covid-19-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/vaccination-adverse-reactions-covid-19-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/digital-medicine-fhir</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/digital-medicine-fhir</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/snomed-ct</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/snomed-ct</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/accessible-information</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/accessible-information</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?topic=Vaccination&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?topic=Vaccination&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/child-protection-information-sharing-smsp-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/child-protection-information-sharing-smsp-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/transfer-of-care-acute-inpatient-discharge-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/transfer-of-care-acute-inpatient-discharge-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/transfer-of-care-outpatient-clinic-letter-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/transfer-of-care-outpatient-clinic-letter-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/transfer-of-care-mental-health-discharge-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/transfer-of-care-mental-health-discharge-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/transfer-of-care-inpatient-discharge-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/transfer-of-care-inpatient-discharge-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications&amp;page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications&amp;page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications&amp;page=4</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications&amp;page=4</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Technical+standards+and+specifications&amp;page=5</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Technical+standards+and+specifications&amp;page=5</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/emergency-care-discharge</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/emergency-care-discharge</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/digital-maternity-record-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/digital-maternity-record-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/urgent-referral-from-care-home-to-hospital</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/urgent-referral-from-care-home-to-hospital</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/outpatient-letter</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/outpatient-letter</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/hospital-referral-for-assessment-for-community-care-and-support</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/hospital-referral-for-assessment-for-community-care-and-support</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/healthy-child-record</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/healthy-child-record</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/information-provided-by-local-authorities-in-shared-care-records</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/information-provided-by-local-authorities-in-shared-care-records</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/edischarge-summary</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/edischarge-summary</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/personalised-care-and-support-plan</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/personalised-care-and-support-plan</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Record+standard&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Record+standard&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Record+standard&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Record+standard&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies&amp;page=3</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies&amp;page=3</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies&amp;page=4</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies&amp;page=4</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Data+definitions+and+terminologies&amp;page=5</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Data+definitions+and+terminologies&amp;page=5</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-continuing-healthcare-chc-patient-level-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-continuing-healthcare-chc-patient-level-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/consultant-led-referral-to-treatment-rtt-waiting-times</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/consultant-led-referral-to-treatment-rtt-waiting-times</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/assuring-transformation</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/assuring-transformation</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/maternity-services-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/maternity-services-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/radiotherapy-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/radiotherapy-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/patient-level-information-and-costing-systems-integrated-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/patient-level-information-and-costing-systems-integrated-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/patient-level-information-and-costing-systems-ambulance-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/patient-level-information-and-costing-systems-ambulance-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/improving-access-to-psychological-therapies-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/improving-access-to-psychological-therapies-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/mental-health-services-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/mental-health-services-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/cancer-outcomes-and-services-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/cancer-outcomes-and-services-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/community-services-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/community-services-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/surgical-devices-and-implants-core-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/surgical-devices-and-implants-core-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=6</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=6</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/transfer-of-care-emergency-care-discharge-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/transfer-of-care-emergency-care-discharge-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/personal-demographics-service-notifications-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/personal-demographics-service-notifications-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/pathology-messaging-hl7-v3-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/pathology-messaging-hl7-v3-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=7</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=7</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/overseas-visitor-charging-category</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/overseas-visitor-charging-category</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/clinical-risk-management-its-application-in-the-deployment-and-use-of-health-it-systems</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/information-governance-standards-framework</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/information-governance-standards-framework</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/compliance-with-national-data-opt-outs</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/compliance-with-national-data-opt-outs</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/anonymisation-standard-for-publishing-health-and-social-care-data</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/anonymisation-standard-for-publishing-health-and-social-care-data</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Information+code+of+practice+and+governance+standard&amp;page=1</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Information+code+of+practice+and+governance+standard&amp;page=1</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?standard_category=Information+code+of+practice+and+governance+standard&amp;page=2</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?standard_category=Information+code+of+practice+and+governance+standard&amp;page=2</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/pathology-messaging-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/pathology-messaging-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/pathology-messaging-edifact-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/pathology-messaging-edifact-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=6</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=6</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-111-api-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-111-api-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp-connect-send-document-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp-connect-send-document-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/digital-child-health-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/digital-child-health-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/bowel-cancer-screening-edifact-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/bowel-cancer-screening-edifact-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/assessment-discharge-and-withdrawal-fhir-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/assessment-discharge-and-withdrawal-fhir-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=7</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=7</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-health-application-and-infrastructure-services-nhais-gp-links-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-health-application-and-infrastructure-services-nhais-gp-links-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/gp2gp-hl7-v3-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/gp2gp-hl7-v3-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/palliative-care-co-ordination-core-content</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/palliative-care-co-ordination-core-content</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/digital-imaging-and-communications-in-medicine-dicom</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/digital-imaging-and-communications-in-medicine-dicom</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=6</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=6</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/electronic-yellow-card-reporting-version-30</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/electronic-yellow-card-reporting-version-30</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/nhs-app-api</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/nhs-app-api</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/dose-syntax-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/dose-syntax-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/electronic-prescribing-and-medicines-administration-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/electronic-prescribing-and-medicines-administration-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/digital-maternity-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/digital-maternity-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/clinical-decision-support-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/clinical-decision-support-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=7</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=7</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/pathology-test-and-results-standard</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/pathology-test-and-results-standard</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/child-protection-information-sharing</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/child-protection-information-sharing</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/about-me</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/about-me</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/secure-email</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/secure-email</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/assessment-discharge-and-withdrawal-notices-between-hospitals-and-social-services</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/assessment-discharge-and-withdrawal-notices-between-hospitals-and-social-services</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/automatic-identification-and-data-capture-for-patient-identification</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/automatic-identification-and-data-capture-for-patient-identification</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/mental-health-inpatient-discharge</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/mental-health-inpatient-discharge</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/identity-verification-and-authentication-standard-for-digital-health-and-care-services</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/identity-verification-and-authentication-standard-for-digital-health-and-care-services</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/interoperability-toolkit-messaging-hl7-v2-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/interoperability-toolkit-messaging-hl7-v2-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/interoperability-toolkit-3-messaging-distribution-fhir-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/interoperability-toolkit-3-messaging-distribution-fhir-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/care-connect-fhir-api-standards</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/care-connect-fhir-api-standards</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/aidc-automatic-identification-and-data-capture</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/aidc-automatic-identification-and-data-capture</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/patient-identifiers-for-identity-bands</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/patient-identifiers-for-identity-bands</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/ambulance-handover-to-emergency-care</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/ambulance-handover-to-emergency-care</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/international-statistical-classification-of-diseases-and-related-health-problems-icd-10</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/international-statistical-classification-of-diseases-and-related-health-problems-icd-10</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/healthcare-resource-groups</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/healthcare-resource-groups</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/dictionary-of-medicines-and-devices</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/dictionary-of-medicines-and-devices</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/information-sharing-to-tackle-violence</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/information-sharing-to-tackle-violence</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/interim-clinical-imaging-procedure-codes</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/interim-clinical-imaging-procedure-codes</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/national-workforce-data-set</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/national-workforce-data-set</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/opcs-classification-of-interventions-and-procedures</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/opcs-classification-of-interventions-and-procedures</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/sexual-orientation-monitoring</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/sexual-orientation-monitoring</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=8</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=8</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=9</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=9</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards/birth-notifications</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards/birth-notifications</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=8</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=8</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=9</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=9</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=GP+%2F+Primary+care&amp;page=8</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=GP+%2F+Primary+care&amp;page=8</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=10</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=10</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=11</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=11</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?care_setting=Hospital&amp;page=10</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?care_setting=Hospital&amp;page=10</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=12</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=12</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://data.standards.nhs.uk/current-standards?page=13</loc>
-    <lastmod>2022-10-31</lastmod>
+    <loc>https://data.standards.nhs.uk/published-standards?page=13</loc>
+    <lastmod>2022-10-24</lastmod>
     <priority>0.2</priority>
   </url>
 </urlset>
