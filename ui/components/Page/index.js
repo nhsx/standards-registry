@@ -10,7 +10,7 @@ export default function Page({ children, host, description, title }) {
       <WebPageSchema title={title} description={description} host={host} />
       <Head>
         <title>{pageTitle}</title>
-        {description && <meta name="description" value={description} />}
+        {description && <meta name="description" content={description} />}
       </Head>
       {children}
     </>
