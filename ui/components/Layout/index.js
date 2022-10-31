@@ -15,6 +15,8 @@ import styles from './style.module.scss';
 import classnames from 'classnames';
 import { usePages } from '../../context';
 
+const isDevelopment = process.env.NEXT_PUBLIC_ENV !== 'prod';
+
 export default function Home({ children, ...props }) {
   const pages = usePages();
   useRouter();
@@ -30,7 +32,7 @@ export default function Home({ children, ...props }) {
     const page = pages.find((p) => p.name === name);
     return {
       url: `/${page.name}`,
-      label: page.short_title,
+      label: page.short_title || page.title,
     };
   });
 
@@ -51,6 +53,12 @@ export default function Home({ children, ...props }) {
         <title>{title}</title>
         <link rel="icon" href="/favicon.png" />
         <meta name="google-site-verification" content={siteCode} />
+
+        {isDevelopment && <meta name="robots" content="noindex" />}
+
+        {props.metaDescription && (
+          <meta name="description" content={props.metaDescription} />
+        )}
       </Head>
       <Analytics />
       <a className="nhsuk-skip-link" href="#maincontent">
@@ -68,7 +76,7 @@ export default function Home({ children, ...props }) {
                   'nhsuk-header__link nhsuk-header__link--service',
                   styles.logo
                 )}
-                aria-label="NHS Standards Directory homepage"
+                aria-label="NHS Data Standards Directory homepage"
               >
                 <svg
                   className="nhsuk-logo"
@@ -95,7 +103,7 @@ export default function Home({ children, ...props }) {
                     styles.serviceName
                   )}
                 >
-                  Standards Directory
+                  Data Standards Directory
                 </span>
               </a>
             </Link>
@@ -113,7 +121,7 @@ export default function Home({ children, ...props }) {
               </button>
             </div>
             {!props.hideBannerSearch && (
-              <Search label={false} placeholder="Search" location="nav" />
+              <Search placeholder="Search" location="nav" />
             )}
           </div>
         </div>

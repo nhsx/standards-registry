@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import merge from 'lodash/merge';
 
 const CONTENT = {
-  title: 'NHS Standards Directory',
+  title: 'NHS Data Standards Directory',
   pagination: {
     summary: 'Showing {{from}} - {{to}} of {{total}} results',
   },
@@ -12,13 +12,15 @@ const ContentContext = createContext();
 
 export function ContentContextWrapper({ children, value }) {
   const content = merge({}, CONTENT, value);
-
   const delimiter = ' - ';
+  const contentMerge = (content) => {
+    return { ...CONTENT, ...content };
+  };
 
   const setPageTitle = (pageTitle) =>
-    [pageTitle, content.title].join(delimiter);
+    pageTitle ? [pageTitle, content.title].join(delimiter) : content.title;
 
-  const functions = { content, setPageTitle };
+  const functions = { content, setPageTitle, contentMerge };
   return (
     <ContentContext.Provider value={functions}>
       {children}

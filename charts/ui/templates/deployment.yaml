@@ -34,3 +34,5 @@ spec:
               value: {{ .Values.ui.config.tracking_id }}
             - name: NEXT_PUBLIC_SITE_CODE
               value: {{ .Values.ui.config.google_site_code }}
+            - name: NEXT_PUBLIC_ENV
+              value: {{ .Values.ui.config.environment }}

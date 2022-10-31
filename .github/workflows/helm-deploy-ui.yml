@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: configure credentials (using us-east-1)
         uses: aws-actions/configure-aws-credentials@v1
@@ -57,7 +57,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Login to Public ECR
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: public.ecr.aws
           username: ${{ secrets.aws_access_key_id }}
@@ -70,6 +70,7 @@ jobs:
         run: |
           # Build a docker container and push it to ECR
           docker build \
+          --build-arg NEXT_PUBLIC_ENV=${{ inputs.environment }} \
           --build-arg NEXT_PUBLIC_TAG_ID=${{ secrets.google_tag_id }} \
           --build-arg NEXT_PUBLIC_TRACKING_ID=${{ secrets.tracking_id }} \
           --build-arg NEXT_PUBLIC_SITE_CODE=${{ secrets.google_site_code }} \
@@ -78,7 +79,7 @@ jobs:
           docker push ${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
 
       - name: update helm
-        uses: koslib/helm-eks-action@master
+        uses: koslib/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.kubeconfig_file }}
         with:
@@ -89,4 +90,5 @@ jobs:
             --set ui.config.google_tag_id='${{ secrets.google_tag_id }}'
             --set ui.container.image=${{ secrets.ecr_registry }}/${{ inputs.ecr_repository }}:$IMAGE_TAG
             --set ui.config.pagesckanurl=${{ inputs.pages_ckan_url }}
+            --set ui.config.environment=${{ inputs.environment }}
             --set ui.config.google_site_code=${{ inputs.google_site_code }}

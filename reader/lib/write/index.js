@@ -32,7 +32,8 @@ export const isPublished = (status) =>
 const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
   await sleep(150); //sleep .15s between hits to the api
 
-  const { title, reference_code, status, is_published_standard } = record;
+  const { title, reference_code, status, is_published_standard, organization } =
+    record;
   // Slugify titles in a similar fashion to CKAN auto-slug
   const name = slugify(title, { lower: true, strict: true });
   console.log('\n * Processing record:\n  ', title);
@@ -42,6 +43,7 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
       name,
       mandated: !!reference_code,
       is_published_standard: is_published_standard || isPublished(status),
+      owner_org: organization.name,
     },
   };
   let recordToWrite = params;
@@ -49,6 +51,7 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
   if (dryRun) {
     console.log('DRY RUN:');
     console.log('DRY RUN: RECORD ENTRY', record);
+    console.log('DRY RUN HEADERS', headers);
     return;
   }
 
@@ -84,6 +87,8 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
     });
 
     const writeData = await write.json();
+
+    console.log('the writeData was>', writeData);
     const { success } = writeData;
 
     const statusStr = success ? 'successful' : 'unsuccessful';

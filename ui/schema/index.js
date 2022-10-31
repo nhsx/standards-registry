@@ -34,6 +34,39 @@ function TruncateLink({ link, email }) {
   return <a href={email ? `mailto:${link}` : link}>{truncate(link, 50)}</a>;
 }
 
+const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
+
+const CategoryDetails = function () {
+  return (
+    <Details
+      className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
+      summary="What this type means"
+    >
+      <div className="nhsuk-details__text">
+        <Paragraph>
+          <strong>Record standards</strong> define what information to collect
+          and how to format it, for example when registering a new patient.
+        </Paragraph>
+        <Paragraph>
+          <strong>Data definitions and terminologies</strong> define the format
+          of individual data items so they can be consistently represented, for
+          example dates or medication names. Reference sets and controlled lists
+          are also included.
+        </Paragraph>
+        <Paragraph>
+          <strong>Technical standards and specifications</strong> specify how to
+          make information available technically including how the data is
+          structured and transported.
+        </Paragraph>
+        <Paragraph>
+          <strong>Information codes of practice</strong> are legal or best
+          practice guidelines on how information should be handled.
+        </Paragraph>
+      </div>
+    </Details>
+  );
+};
+
 const schema = [
   {
     section_title: 'About this standard',
@@ -45,7 +78,7 @@ const schema = [
       label: 'Status',
       format: (val) => (
         <>
-          <Tag type={val}>{upperFirst(val)}</Tag>
+          <Tag type={val}>{val}</Tag>
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
@@ -76,40 +109,7 @@ const schema = [
     },
     standard_category: {
       label: 'Type',
-      format: (val) => (
-        <>
-          {val}
-          {
-            <Details
-              className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
-              summary="What this type means"
-            >
-              <div className="nhsuk-details__text">
-                <Paragraph>
-                  <strong>Record standards</strong> define what information to
-                  collect and how to format it, for example when registering a
-                  new patient.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Data definitions and terminologies</strong> define the
-                  format of individual data items so they can be consistently
-                  represented, for example dates or medication names. Reference
-                  sets and controlled lists are also included.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Technical standards and specifications</strong>{' '}
-                  specify how to make information available technically
-                  including how the data is structured and transported.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Information codes of practice</strong> are legal or
-                  best practice guidelines on how information should be handled.
-                </Paragraph>
-              </div>
-            </Details>
-          }
-        </>
-      ),
+      more: <CategoryDetails />,
     },
     documentation_help_text: {
       label: 'Documentation',
@@ -118,11 +118,12 @@ const schema = [
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
             <>
-              <Link
-                href={data.documentation_link}
-                text="View documentation for this standard"
-                newWindow={true}
-              />
+              <Link href={data.documentation_link} newWindow={true}>
+                View documentation for this standard
+                <span className="nhsuk-u-visually-hidden">
+                  opens in a new window
+                </span>
+              </Link>
               <br />
               (opens in new window)
             </>
@@ -220,7 +221,7 @@ export const upcomingStandard = [
     id: 'status',
     title: 'Stage',
     sortable: true,
-    formatter: (val) => <strong>{upperFirst(val)}</strong>,
+    formatter: (val) => <strong>{sentenceCase(val)}</strong>,
   },
   {
     id: 'dates',

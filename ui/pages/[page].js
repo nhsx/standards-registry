@@ -2,16 +2,26 @@ import { parse } from 'marked';
 import DOMPurify from 'isomorphic-dompurify';
 import { fromMarkdown } from 'mdast-util-from-markdown';
 import { getPages } from '../helpers/api';
-import { Page, TableOfContents } from '../components';
+import { Page, TableOfContents, CookiesTable } from '../components';
+import { getHost } from '../helpers/getHost';
 
-const StaticPage = ({ content, showToc, title, parsed }) => {
+const StaticPage = ({
+  content,
+  showToc,
+  title,
+  parsed,
+  description,
+  page,
+  host,
+}) => {
   return (
-    <Page title={title}>
+    <Page title={title} description={description} host={host}>
       <div className="nhsuk-grid-row">
         {showToc && <TableOfContents content={parsed} />}
         <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
           <div dangerouslySetInnerHTML={{ __html: content }} />
+          {page === 'cookie-policy' && <CookiesTable />}
         </div>
       </div>
     </Page>
@@ -19,6 +29,7 @@ const StaticPage = ({ content, showToc, title, parsed }) => {
 };
 
 export async function getServerSideProps(context) {
+  const { req } = context;
   const { page } = context.params;
   const pages = await getPages();
   const pageData = pages.filter((i) => i.name === page).pop();
@@ -32,6 +43,7 @@ export async function getServerSideProps(context) {
     title,
     content: unsanitised,
     show_table_of_contents: showToc,
+    meta_description: description,
   } = pageData;
 
   const content = DOMPurify.sanitize(parse(unsanitised));
@@ -39,11 +51,14 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      host: await getHost(req),
       pages,
       showToc,
+      description,
       content,
       title,
       parsed,
+      page,
     },
   };
 }

@@ -20,6 +20,7 @@ const Rows = (props) => {
       ) : (
         format(props)
       )}
+      {options.more}
     </dd>
   );
 };

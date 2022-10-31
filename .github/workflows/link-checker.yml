@@ -1,0 +1,42 @@
+on:
+  workflow_call:
+    inputs:
+      base_url:
+        description: 'The ui url, e.g. https://dev.standards.nhs.uk'
+        required: true
+        type: string
+      blc_args:
+        description: The broken link checker argumernts to pass
+        required: false
+        type: string
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    name: Check for broken links
+    steps:
+      - name: Link Checker with issue creation
+        id: link-report
+        uses: roc/link-checker@master
+        with:
+          url: ${{inputs.base_url}}
+          blc_args: ${{inputs.blc_args}}
+          allow_failures: true
+          output_file: dev/blc/out.md
+
+      - name: Remove verbose output from link checker report
+        run: |
+          sort ${{ steps.link-report.outputs.report }} | uniq -u | sed '/───OK───/d' | sed '/Getting/d' | sed '/Finished/d' | sort -r > quick.txt
+          cat ${{ steps.link-report.outputs.report }} | sed '/───OK───/d' | sed '/Finished/d' | awk '!x[$0]++' > long.txt
+          echo '### Quick report' > ${{ steps.link-report.outputs.report }}
+          cat quick.txt >> ${{ steps.link-report.outputs.report }}
+          echo '### Full report' >> ${{ steps.link-report.outputs.report }}
+          cat long.txt >> ${{ steps.link-report.outputs.report }}
+
+      - name: Create Issue From File
+        uses: peter-evans/create-issue-from-file@v4
+        if: ${{ steps.link-report.outputs.exit_code != 0 }}
+        with:
+          title: 'Link Checker Report for ${{inputs.base_url}}'
+          content-filepath: ${{steps.link-report.outputs.report}}
+          labels: report, automated issue

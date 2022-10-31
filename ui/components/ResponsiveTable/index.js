@@ -115,13 +115,24 @@ export function ResponsiveTable({ schema, results }) {
         <Tbody>
           {results.map((result, index) => (
             <Tr key={index}>
-              {schema.map((s) => (
-                <Td key={s.id} title={s.title}>
-                  {s.formatter
-                    ? s.formatter(result[s.id], result)
-                    : result[s.id]}
-                </Td>
-              ))}
+              {schema.map((s) => {
+                const value = result[s.id];
+                return (
+                  <Td key={s.id} title={s.title}>
+                    {Array.isArray(value) && value.length > 0 ? (
+                      <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
+                        {value.map((val, index) => (
+                          <li key={index}>
+                            {s.formatter ? s.formatter(val, result) : val}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      (s.formatter && s.formatter(value, result)) || value
+                    )}
+                  </Td>
+                );
+              })}
             </Tr>
           ))}
         </Tbody>

@@ -34,9 +34,9 @@ program
   )
   .addOption(
     new Option(
-      '-w, --write-location <dev|test|prod>',
+      '-w, --write-location <local|dev|test|prod>',
       'environment to write to'
-    ).choices(['dev', 'test', 'prod'])
+    ).choices(['local', 'dev', 'test', 'prod'])
   )
   .option('--dry-run <bool>', 'set dry-run', false);
 
@@ -52,10 +52,12 @@ ${location}`);
 
 // map dev,test,prod to nhs domains
 const mapEnv = (to) =>
-  `https://manage.${to.replace(
-    'prod',
-    ''
-  )}.standards.nhs.uk/api/action`.replace('..', '.');
+  to === 'local'
+    ? 'http://localhost:5005/api/action'
+    : `https://manage.${to.replace(
+        'prod',
+        ''
+      )}.standards.nhs.uk/api/action`.replace('..', '.');
 
 const res = await fetch(location);
 const data = await res.json();

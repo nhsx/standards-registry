@@ -11,18 +11,19 @@ import {
   FeedbackFooter,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
-import { useContentContext } from '../../context/content';
-import { useQueryContext } from '../../context/query';
-export default function Standards({ data, schemaData }) {
-  const { query } = useQueryContext();
-  const { setPageTitle } = useContentContext();
-  const pageTitle = query.q
-    ? `${query.q} - Search Results`
-    : 'Current standards';
+
+const staticPageProps = {
+  title: 'Current standards',
+  description:
+    'Find published data standards for health and social care including standards required for use in England.',
+};
+
+export default function Standards({ data, schemaData, host }) {
+  const pageProps = { ...staticPageProps, host };
   return (
-    <Page title={setPageTitle(pageTitle)}>
+    <Page {...pageProps}>
       <h1>
-        {pageTitle}
+        {pageProps.title}
         <span className="nhsuk-u-visually-hidden">
           Search or browse published standards
         </span>
@@ -30,8 +31,8 @@ export default function Standards({ data, schemaData }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Use this directory to find nationally recognised standards for use in
-          health and adult social care.
+          Use this directory to find nationally recognised data standards for
+          use in health and adult social care.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">

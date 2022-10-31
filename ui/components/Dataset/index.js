@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Tag, Flex, Pagination, FilterSummary, Select } from '../';
-import upperFirst from 'lodash/upperFirst';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import classnames from 'classnames';
@@ -29,14 +28,7 @@ function Embolden({ children }) {
 }
 
 function Model({ model }) {
-  const {
-    name,
-    status,
-    title,
-    metadata_created,
-    standard_category,
-    description,
-  } = model;
+  const { name, status, title, metadata_created, description } = model;
   const target = `/current-standards/${name}`;
 
   return (
@@ -51,17 +43,12 @@ function Model({ model }) {
       </p>
       <Flex className="nhsuk-body-s">
         <p className={classnames('nhsuk-body-s', styles.noBottom)}>
-          Type: {standard_category}
-        </p>
-        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Status:{' '}
           <Tag type={status} classes="nhsuk-body-s">
-            {upperFirst(status)}
+            {status}
           </Tag>
         </p>
-        <p
-          className={classnames('nhsuk-body-s', styles.right, styles.noBottom)}
-        >
+        <p className={classnames('nhsuk-body-s', styles.noBottom)}>
           Date added: {formatDate(metadata_created)}
         </p>
       </Flex>
@@ -126,7 +113,12 @@ const CheckBox = () => {
   };
 
   return (
-    <div className={classnames('nhsuk-checkboxes__item', styles.checkboxItem)}>
+    <div
+      className={classnames(
+        'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+        styles.checkboxItem
+      )}
+    >
       <input
         className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
         id="mandated"

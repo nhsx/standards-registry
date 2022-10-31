@@ -6,16 +6,19 @@ import {
   Search,
   Link,
   FeedbackFooter,
+  Page,
 } from '../components';
 import styles from '../styles/Home.module.scss';
 import { getPages } from '../helpers/api';
 import { list } from '../helpers/api';
+import { useContentContext } from '../context';
 
-const content = {
-  title: 'NHS Standards Directory',
+const staticPageContent = {
   header: 'Find standards to record, handle and exchange data in England',
+  description:
+    'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
   intro:
-    'Use this directory to find nationally recognised standards for use in health and adult social care.',
+    'Use this directory to find nationally recognised data standards for use in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -59,10 +62,12 @@ const HomeElement = ({ link, linkText, description }) => (
   </div>
 );
 
-export default function Home({ pages }) {
+export default function Home({ pages, host, ...props }) {
+  const { contentMerge } = useContentContext();
+  const pageContent = contentMerge(staticPageContent);
   const standardsPage = 'current-standards';
   return (
-    <>
+    <Page description={pageContent.description} host={host} {...props}>
       <HomeSection
         title="Browse by care setting"
         link={`/${standardsPage}`}
@@ -133,21 +138,24 @@ export default function Home({ pages }) {
         {['future-standards', 'about-standards', 'help-and-resources'].map(
           (key) => {
             const page = pages.find((p) => p.name === key);
-            const { short_title, name, homepage_snippet } = page;
-            return (
-              <SoloSection
-                key={key}
-                heading={short_title}
-                description={homepage_snippet}
-                link={`/${name}`}
-                linkText={`View ${short_title.toLowerCase()}`}
-              />
-            );
+            if (page) {
+              const { title, short_title, name, homepage_snippet } = page;
+              const displayTitle = short_title || title;
+              return (
+                <SoloSection
+                  key={key}
+                  heading={displayTitle}
+                  description={homepage_snippet}
+                  link={`/${name}`}
+                  linkText={`View ${displayTitle.toLowerCase()}`}
+                />
+              );
+            }
           }
         )}
       </div>
       <FeedbackFooter />
-    </>
+    </Page>
   );
 }
 
@@ -204,7 +212,7 @@ export async function getServerSideProps() {
     props: {
       recent: recent.results.slice(0, 3),
       pages,
-      content,
+      content: staticPageContent,
     },
   };
 }

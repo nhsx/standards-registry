@@ -33,7 +33,7 @@ jobs:
       AWS_REGION: eu-west-2
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: configure credentials (using us-east-1)
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -41,7 +41,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Login to Public ECR
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: public.ecr.aws
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -60,7 +60,7 @@ jobs:
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: ckan deploy
-        uses: koslib/helm-eks-action@master
+        uses: koslib/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
@@ -109,3 +109,12 @@ jobs:
           SLACK_TITLE: 'test deployment: succeeded'
           SLACK_MESSAGE: ':+1::rocket:'
           MSG_MINIMAL: 'true'
+
+  site-quality-test:
+    needs:
+      - integrationtest
+    uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
+    with:
+      test_url: https://test.standards.nhs.uk
+    secrets:
+      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}

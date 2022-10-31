@@ -1,7 +1,7 @@
 ###################
 ### Extensions ####
 ###################
-FROM ghcr.io/keitaroinc/ckan:2.9.5
+FROM ghcr.io/keitaroinc/ckan:2.9.6
 
 # Switch to the root user
 USER root
@@ -15,20 +15,22 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/v3.13/m
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-pages.git#egg=ckanext-pages"
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-download-csv-button#egg=ckanext-download-csv-button"
+RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-nhs-theme#egg=ckanext-nhs-theme"
 
 # Add the custom extensions to the plugins list
-ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages download_csv_button
+ENV CKAN__PLUGINS envvars image_view text_view recline_view datastore datapusher scheming_datasets scheming_organizations pages download_csv_button nhs_theme
 
 # Configure ckan
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.plugins = ${CKAN__PLUGINS}"
-RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:ckan_dataset.yaml"
-RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:org_with_email.json"
+RUN ckan config-tool ${APP_DIR}/production.ini "scheming.dataset_schemas = ckanext.scheming:nhs_dataset.yaml"
+RUN ckan config-tool ${APP_DIR}/production.ini "scheming.organization_schemas = ckanext.scheming:nhs_org.json"
 RUN ckan config-tool ${APP_DIR}/production.ini "ckanext.pages.allow_html = true"
 # https://docs.ckan.org/en/2.9/maintaining/tracking.html
 RUN ckan config-tool ${APP_DIR}/production.ini "ckan.tracking_enabled = true"
 
 RUN cd /srv/app/src/ckanext-scheming && python setup.py develop
 RUN cd /srv/app/src/ckanext-pages && python setup.py develop
+RUN cd /srv/app/src/ckanext-nhs-theme && python setup.py develop
 
 RUN chown -R ckan:ckan /srv/app
 RUN mkdir /var/lib/ckan

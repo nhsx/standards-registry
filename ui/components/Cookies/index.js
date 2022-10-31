@@ -23,7 +23,7 @@ export const Cookies = ({ choice }) => {
         >
           <div className="nhsuk-width-container">
             <h2 className="nhsuk-heading-s">
-              Cookies on the NHS Standards Directory
+              Cookies on the NHS Data Standards Directory
             </h2>
             <p>
               We use essential cookies to make this service work. We&lsquo;d
@@ -32,7 +32,7 @@ export const Cookies = ({ choice }) => {
             </p>
             <p>
               You can{' '}
-              <a id="nhsuk-cookie-banner__link" href="/cookie-policy/">
+              <a id="nhsuk-cookie-banner__link" href="/cookie-policy">
                 read more about our cookies
               </a>{' '}
               before you choose.
