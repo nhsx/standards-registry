@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { stringify } from 'qs';
 import { findKey } from 'lodash';
+import filters from '../schema/filters';
 const { CKAN_URL, PAGES_CKAN_URL } = process.env;
 
 const DEFAULT_SORT = {
@@ -38,7 +39,8 @@ export function queriseSelections(selections) {
     // sanitise "Appointment / thing" => "Appointment"
     selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
-      query[prop] = `(*${selectionsRef[prop].join('* AND *')}*)`;
+      const join = `* ${(filters[prop] && filters[prop].type) || 'AND'} *`;
+      query[prop] = `(*${selectionsRef[prop].join(join)}*)`;
     } else {
       delete query[prop];
     }
