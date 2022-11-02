@@ -260,7 +260,7 @@ redis:
       # redis.master.persistence.size -- Size of the volume claim
       size: 1Gi
   # redis.usePassword -- Use password for accessing redis
-  # usePassword: true
+  usePassword: true
   auth:
     enabled: true
     password: *RedisPassword
