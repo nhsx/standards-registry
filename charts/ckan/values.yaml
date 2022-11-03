@@ -116,8 +116,8 @@ ckan:
   # ckan.solr -- Location of SOLR collection used by the instance
   solr: "http://solr-headless:8983/solr/ckancollection"
   # ckan.redis -- Location of the Redis service to be used by the CKAN instance
-  # redis: "redis://redis-headless:6379/0"
-  redis: "redis://[[default]:[*RedisPassword]]redis-headless:6379/0"
+  # redis: "redis://[[default]:[*RedisPassword]]redis-headless:6379/0"
+  redis: "redis://redis-headless:6379/0"
   spatialBackend: "solr"
   locale:
     offered: "en"
