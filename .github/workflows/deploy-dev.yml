@@ -102,6 +102,7 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
+            --set RedisPassword='${{ secrets.REDIS_PASSWORD }}'
             --set ckan.debug=true
 
   integrationtest:
