@@ -102,7 +102,7 @@ jobs:
             --set ckan.psql.initialize=false
             --set solr.initialize.enabled=false
             --set redis.auth.password='${{ secrets.REDIS_PASSWORD }}'
-            --set ckan.redis='redis://[[default]:[${{ secrets.REDIS_PASSWORD }}]]redis-headless:6379/0'
+            --set ckan.redis='redis://[[default]:[${{ secrets.REDIS_PASSWORD }}]]@redis-headless:6379/0'
             --set ckan.debug=true
 
   integrationtest:
