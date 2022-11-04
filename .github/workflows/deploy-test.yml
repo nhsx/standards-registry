@@ -78,6 +78,7 @@ jobs:
             --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
             --set redis.auth.password='${{ secrets.REDIS_PASSWORD }}'
+            --set ckan.redis='redis://default:${{ secrets.REDIS_PASSWORD }}@redis-headless:6379/0'
             --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
