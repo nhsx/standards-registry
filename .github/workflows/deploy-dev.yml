@@ -1,15 +1,18 @@
 name: deploy-dev
 
 on:
-  workflow_run:
+  push:
     branches:
       - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+  # workflow_run:
+  #   branches:
+  #     - master
+  #   workflows:
+  #     - build-and-test
+  #   types:
+  #     - completed
+  #   conclusion:
+  #     - success
 
 jobs:
   deploy-csv-exporter:
@@ -101,7 +104,7 @@ jobs:
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set redis.auth.password='${{ secrets.REDIS_PASSWORD }}'
-            --set ckan.redis='redis://[[]:[${{ secrets.REDIS_PASSWORD }}]]@redis-headless:6379/0'
+            --set ckan.redis='redis://default:${{ secrets.REDIS_PASSWORD }}@redis-headless:6379/0'
             --set ckan.debug=true
             --set solr.initialize.enabled=false
 
