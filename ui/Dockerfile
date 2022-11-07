@@ -4,13 +4,11 @@ WORKDIR /app
 
 RUN apk upgrade --no-cache
 
-RUN mkdir node_modules && chown node:node node_modules
+
 RUN touch .env.production && chown node:node .env.production
 
-COPY --chown=node:node package.json /app/package.json
-COPY --chown=node:node package-lock.json /app/package-lock.json
-
-USER node
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 
 RUN npm ci --production --include-optional --ignore-scripts
 
@@ -27,5 +25,7 @@ RUN echo "NEXT_PUBLIC_TRACKING_ID=${NEXT_PUBLIC_TRACKING_ID}" >> .env.production
 RUN echo "NEXT_PUBLIC_SITE_CODE=${NEXT_PUBLIC_SITE_CODE}" >> .env.production
 
 RUN npm run build --production  --if-present
+
+USER node
 
 CMD npm start
