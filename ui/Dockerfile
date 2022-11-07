@@ -4,14 +4,17 @@ WORKDIR /app
 
 RUN apk upgrade --no-cache
 
-COPY --chown=node:node . /app
+RUN mkdir node_modules && chown node:node node_modules
+RUN touch .env.production && chown node:node .env.production
 
-RUN touch .env.production
-RUN chown node:node .env.production
+COPY --chown=node:node package.json /app/package.json
+COPY --chown=node:node package-lock.json /app/package-lock.json
 
 USER node
 
 RUN npm ci --production --include-optional --ignore-scripts
+
+COPY --chown=node:node . /app
 
 ARG NEXT_PUBLIC_TAG_ID
 ARG NEXT_PUBLIC_TRACKING_ID
