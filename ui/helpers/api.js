@@ -16,8 +16,8 @@ async function callApi(url) {
 
     return result;
   } catch (err) {
-    const message = err.response.data;
-    console.error(message);
+    console.warn('error trying to call', url);
+    console.error(err);
   }
 }
 

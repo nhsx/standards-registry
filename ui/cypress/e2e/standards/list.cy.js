@@ -12,6 +12,14 @@ describe('Standards Listing Index', () => {
     cy.get('#browse-results li').should('have.length', 10);
   });
 
+  it('Should pass basic a11y check', () => {
+    cy.visit(`/published-standards`);
+    // make sure main content area is loaded before injecting a11y checker
+    cy.get('[role="main"]');
+    cy.injectAxe();
+    cy.checkA11y(null, null, a11yLog);
+  });
+
   describe.only('filters and pagination', () => {
     it('Can change page', () => {
       cy.visit('/published-standards');
