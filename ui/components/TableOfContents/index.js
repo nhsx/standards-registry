@@ -29,8 +29,8 @@ export const TableOfContents = ({ content }) => {
   const minDepth = Math.min(...depths);
 
   return (
-    <div className="nhsuk-grid-column-one-third">
-      <h3 className="nhsuk-heading-s">Contents</h3>
+    <>
+      <h2 className="nhsuk-heading-s">Contents</h2>
       <ul className="nhsuk-list-bullet">
         {headings.map((heading, i) => {
           const { depth, children } = heading;
@@ -42,6 +42,6 @@ export const TableOfContents = ({ content }) => {
           );
         })}
       </ul>
-    </div>
+    </>
   );
 };

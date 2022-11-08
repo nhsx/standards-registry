@@ -17,9 +17,18 @@ const StaticPage = ({
   return (
     <Page title={title} description={description} host={host}>
       <div className="nhsuk-grid-row">
-        {showToc && <TableOfContents content={parsed} />}
+        <div className="nhsuk-grid-column-one-third">
+          <br />
+        </div>
         <div className="nhsuk-grid-column-two-thirds">
           <h1>{title}</h1>
+        </div>
+        {showToc && (
+          <div className="nhsuk-grid-column-one-third">
+            <TableOfContents content={parsed} />
+          </div>
+        )}
+        <div className="nhsuk-grid-column-two-thirds">
           <div dangerouslySetInnerHTML={{ __html: content }} />
           {page === 'cookie-policy' && <CookiesTable />}
         </div>

@@ -53,12 +53,15 @@ export function Th({ children, sortable, col, defaultSort }) {
     }
   }
 
+  const ariaSortLabel = { asc: 'ascending', desc: 'descending' };
+
   return (
     <th
       className={classnames(styles.th)}
       role="columnheader"
+      aria-label={`${children} heading`}
       scope="col"
-      aria-sort={orderBy === col ? order : 'none'}
+      aria-sort={orderBy === col ? ariaSortLabel[order] : 'none'}
     >
       {sortable ? (
         <a href="#" onClick={onClick}>
