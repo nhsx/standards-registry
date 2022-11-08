@@ -73,6 +73,7 @@ export default function Pagination({ limit = 10, count }) {
               })}
             >
               <a
+                aria-current={page === num + 1 ? 'page' : null}
                 aria-label={`Goto Page ${num + 1}`}
                 className={classnames(styles.link, {
                   [styles.current]: page === num + 1,
