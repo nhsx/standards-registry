@@ -36,6 +36,17 @@ describe('Standards Listing Index', () => {
       cy.url().should('contain', 'page=1');
     });
 
+    it.only('a11y when clicking into filters', () => {
+      cy.visit('/published-standards');
+      cy.get('details[title="Care setting"]').click();
+      cy.get('details[title="Topic"]').click();
+      cy.injectAxe();
+      cy.checkA11y(null, null, a11yLog);
+      cy.get('details[title="Care setting"] summary').click();
+      cy.get('details[title="Topic"] summary').click();
+      cy.checkA11y(null, null, a11yLog);
+    });
+
     it('Can filter by mandated, and remove filter (regression)', () => {
       cy.visit('/published-standards');
       let results;
