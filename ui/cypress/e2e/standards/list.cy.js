@@ -12,7 +12,7 @@ describe('Standards Listing Index', () => {
     cy.get('#browse-results li').should('have.length', 10);
   });
 
-  it.only('Should pass basic a11y check', () => {
+  it('Should pass basic a11y check', () => {
     cy.visit(`/published-standards`);
     // make sure main content area is loaded before injecting a11y checker
     cy.get('[role="main"]');
