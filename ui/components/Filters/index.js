@@ -55,12 +55,14 @@ export function Filter({
       className={classnames('nhsuk-filter', styles.filter)}
       open={open}
       noBorderTop={noBorderTop}
+      title={label}
     >
       <OptionSelect fullHeight={fullHeight}>
         <CheckboxGroup
           onChange={onChange}
           options={choices}
           parent={fieldName}
+          legend={label}
           small
         />
       </OptionSelect>

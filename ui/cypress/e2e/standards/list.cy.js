@@ -20,7 +20,7 @@ describe('Standards Listing Index', () => {
     cy.checkA11y(null, null, a11yLog);
   });
 
-  describe.only('filters and pagination', () => {
+  describe('filters and pagination', () => {
     it('Can change page', () => {
       cy.visit('/published-standards');
       cy.get('.nhsuk-pagination').contains('a', 'Next').click();
@@ -34,6 +34,17 @@ describe('Standards Listing Index', () => {
 
       cy.get('.nhsuk-pagination').contains('a', 'Prev').click();
       cy.url().should('contain', 'page=1');
+    });
+
+    it('a11y when clicking into filters', () => {
+      cy.visit('/published-standards');
+      cy.get('details[title="Care setting"]').click();
+      cy.get('details[title="Topic"]').click();
+      cy.injectAxe();
+      cy.checkA11y(null, null, a11yLog);
+      cy.get('details[title="Care setting"] summary').click();
+      cy.get('details[title="Topic"] summary').click();
+      cy.checkA11y(null, null, a11yLog);
     });
 
     it('Can filter by mandated, and remove filter (regression)', () => {
