@@ -44,7 +44,9 @@ export default function CheckboxGroup({
       )}
     >
       <fieldset id={id || name} className="nhsuk-fieldset">
-        {legend && <legend className="nhsuk-fieldset__legend">{legend}</legend>}
+        {legend && (
+          <legend className="nhsuk-u-visually-hidden">{legend}</legend>
+        )}
         {hint && <div className="nhsuk-hint">{hint}</div>}
         <div
           className={classnames('nhsuk-checkboxes', styles.checkboxes, {

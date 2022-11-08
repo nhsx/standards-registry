@@ -61,6 +61,7 @@ export function Filter({
           onChange={onChange}
           options={choices}
           parent={fieldName}
+          legend={label}
           small
         />
       </OptionSelect>
