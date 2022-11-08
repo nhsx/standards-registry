@@ -1,4 +1,4 @@
-import { a11yLog, failLevel } from '../support/custom';
+import { a11yLog } from '../support/custom';
 
 describe('Page a11y', () => {
   describe('Homepage', () => {
@@ -7,6 +7,7 @@ describe('Page a11y', () => {
       cy.get('[role="main"]');
       cy.get('h1');
       cy.injectAxe();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(100);
       cy.checkA11y(null, null, a11yLog);
     });
@@ -18,6 +19,7 @@ describe('Page a11y', () => {
       cy.get('[role="main"]');
       cy.get('h1');
       cy.injectAxe();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(100);
       cy.checkA11y(null, null, a11yLog);
 
@@ -30,6 +32,24 @@ describe('Page a11y', () => {
     });
   });
 
-  describe('Static Pages', () => {});
-  describe('Published Standards', () => {});
+  describe('Static Pages', () => {
+    [
+      '/about-standards',
+      '/help-and-resources',
+      '/accessibility-statement',
+      '/cookie-policy',
+      '/about-this-service',
+      '/privacy-policy',
+    ].forEach((page) => {
+      it(`${page.replace('-', ' ').replace('/', '')} passes a11y check`, () => {
+        cy.visit(page);
+        cy.get('[role="main"]');
+        cy.get('h1');
+        cy.injectAxe();
+        // eslint-disable-next-line cypress/no-unnecessary-waiting
+        cy.wait(100);
+        cy.checkA11y(null, null, a11yLog);
+      });
+    });
+  });
 });
