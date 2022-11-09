@@ -10,6 +10,7 @@ import {
   PhaseBanner,
   Search,
 } from '../';
+import get from 'lodash/get';
 import { useContentContext } from '../../context/content';
 import styles from './style.module.scss';
 import classnames from 'classnames';
