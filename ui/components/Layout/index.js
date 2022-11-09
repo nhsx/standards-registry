@@ -38,7 +38,7 @@ export default function Home({ children, ...props }) {
 
   const { content } = useContentContext();
   const { title } = content;
-  const { title: datasetTitle } = props.data || false;
+  const datasetTitle = get(props, 'data.title');
 
   function toggleNav() {
     const el = document.querySelector('#header-navigation');
