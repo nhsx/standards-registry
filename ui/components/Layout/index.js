@@ -38,6 +38,7 @@ export default function Home({ children, ...props }) {
 
   const { content } = useContentContext();
   const { title } = content;
+  const datasetTitle = get(props, 'data.title');
 
   function toggleNav() {
     const el = document.querySelector('#header-navigation');
@@ -139,6 +140,7 @@ export default function Home({ children, ...props }) {
             technical: 'Browse technical standards',
             services: 'Browse services',
           }}
+          title={datasetTitle}
         />
         <div className="nhsuk-width-container">{children}</div>
       </main>
