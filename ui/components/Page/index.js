@@ -9,7 +9,7 @@ const getQueryForTitle = (query) => {
   if (vals.length === 0) {
     return '';
   }
-  const queryShift = typeof vals.length > 1 ? vals.shift()[0] : vals.shift();
+  const queryShift = vals.length > 1 ? vals.shift()[0] : vals.shift();
   const queryTitle = Array.isArray(queryShift) ? queryShift[0] : queryShift;
   return [joiner, queryTitle].join('');
 };
