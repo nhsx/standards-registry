@@ -11,7 +11,7 @@ function uppercaseFirst(str) {
   return `${str.charAt(0).toUpperCase()}${str.substring(1)}`;
 }
 
-export default function Breadcrumbs({ labels }) {
+export default function Breadcrumbs({ labels, title = false }) {
   const context = useModelContext();
   const router = useRouter();
   const [breadcrumbs, setBreadcrumbs] = useState(null);
@@ -69,6 +69,8 @@ export default function Breadcrumbs({ labels }) {
                 <Link href={breadcrumb.href} className="nhsuk-breadcrumb__link">
                   <a>{getLabel(breadcrumb.value)}</a>
                 </Link>
+              ) : title ? (
+                title
               ) : (
                 getLabel(breadcrumb.value)
               )}
