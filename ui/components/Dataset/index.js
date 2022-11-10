@@ -189,6 +189,8 @@ export default function Dataset({
     if (pageLoaded) {
       getData();
     }
+    // we don't want pageLoaded in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => setPageLoaded(true), []);

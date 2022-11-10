@@ -1,4 +1,4 @@
-import { a11yLog, failLevel } from '../support/custom';
+import { a11yLog } from '../support/custom';
 
 describe('Homepage', () => {
   it('should show home page and call to action', () => {
