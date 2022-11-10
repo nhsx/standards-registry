@@ -49,16 +49,15 @@ export function ResponsiveTable({ schema, results }) {
     });
   }
 
-  let timeout;
-
-  function detectFinish() {
-    clearTimeout(timeout);
-    timeout = setTimeout(setFixedWidths, 100);
-  }
-
   useEffect(() => {
     window.addEventListener('resize', handleWindowResize);
     window.addEventListener('resize', detectFinish);
+
+    let timeout;
+    function detectFinish() {
+      clearTimeout(timeout);
+      timeout = setTimeout(setFixedWidths, 100);
+    }
 
     setFixedWidths();
 

@@ -189,7 +189,7 @@ export default function Dataset({
     if (pageLoaded) {
       getData();
     }
-  }, [query]);
+  }, [query, pageLoaded]);
 
   useEffect(() => setPageLoaded(true), []);
 
