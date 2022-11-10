@@ -50,7 +50,7 @@ export default function Roadmap({ data, schemaData, page }) {
       getData();
       setCurrentQuery(query);
     }
-  }, [query]);
+  }, [query, currentQuery, loading]);
 
   const activeFilters = omit(query, 'q', 'page', 'orderBy', 'order');
   const numSelected = activeFilters.care_setting
