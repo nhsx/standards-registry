@@ -50,7 +50,9 @@ export default function Roadmap({ data, schemaData, page }) {
       getData();
       setCurrentQuery(query);
     }
-  }, [query, currentQuery, loading]);
+    // we don't want to include loading in the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, currentQuery]);
 
   const activeFilters = omit(query, 'q', 'page', 'orderBy', 'order');
   const numSelected = activeFilters.care_setting
