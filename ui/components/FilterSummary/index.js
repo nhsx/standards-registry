@@ -2,6 +2,7 @@ import { useQueryContext } from '../../context/query';
 import omit from 'lodash/omit';
 import without from 'lodash/without';
 import size from 'lodash/size';
+import { default as filtersSchema } from '../../schema/filters';
 
 import styles from './FilterSummary.module.scss';
 
@@ -47,7 +48,7 @@ export function FilterSummary({ schema }) {
     ? { ...chosenFilters, standard_category }
     : chosenFilters;
 
-  let showAnd = false;
+  let showConnector = false;
 
   return (
     <div className={styles.filterSummary}>
@@ -76,14 +77,21 @@ export function FilterSummary({ schema }) {
                   </h4>
                 ) : null}
                 {filters.map((filter, i) => {
+                  const connector = (
+                    (filtersSchema[key] && filtersSchema[key].type) ||
+                    'and'
+                  ).toLowerCase();
+                  const label = settings.choices.find(
+                    (c) => c.value === filter
+                  ).label;
                   return (
                     <li key={i}>
-                      {showAnd && !isType && (
-                        <span className={styles.and}>and</span>
+                      {showConnector && !isType && (
+                        <span className={styles.connector}>{connector}</span>
                       )}
-                      {(showAnd = true)}
+                      {(showConnector = true)}
                       <Widget onClick={() => removeFilter(key, filter)}>
-                        {filter}
+                        {label}
                       </Widget>
                     </li>
                   );
