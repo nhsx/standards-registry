@@ -1,10 +1,228 @@
 {
-  "local": [
+  "dev": [
     {
       "migration": "1665410686156-update-status.js",
       "success": true,
-      "changes": []
+      "changes": [
+        {
+          "name": "pathology-messaging-fhir-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "clinical-decision-support-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "digital-child-health-fhir-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "dose-syntax-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "gp-connect-appointment-management-fhir-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "end-of-life-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "interoperability-toolkit-messaging-hl7-v2-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "female-genital-mutilation-information-sharing-smsp-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "nhs-app-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "care-connect-fhir-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "digital-maternity-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "gp-connect-access-document-fhir-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "national-record-locator-fhir-api",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "national-early-warning-score-2-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "digital-medicine-fhir",
+          "diff": {
+            "status": "In Development"
+          }
+        },
+        {
+          "name": "electronic-prescribing-and-medicines-administration-api-standards",
+          "diff": {
+            "status": "In Development"
+          }
+        }
+      ]
     }
   ],
-  "dev": []
+  "test": [
+    {
+      "migration": "1665410686156-update-status.js",
+      "success": true,
+      "changes": [
+        {
+          "name": "electronic-prescribing-and-medicines-administration-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "digital-medicine-fhir",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "national-early-warning-score-2-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "national-record-locator-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "gp-connect-access-document-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "digital-maternity-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "care-connect-fhir-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "assessment-discharge-and-withdrawal-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "nhs-app-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "pathology-messaging-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "pathology-messaging-hl7-v3-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "gp-connect-appointment-management-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "dose-syntax-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "digital-child-health-fhir-api",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "clinical-decision-support-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "end-of-life-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "eyecare-electronic-referral-service-api-standard",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "female-genital-mutilation-information-sharing-smsp-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        },
+        {
+          "name": "interoperability-toolkit-messaging-hl7-v2-api-standards",
+          "diff": {
+            "status": "draft"
+          }
+        }
+      ]
+    }
+  ]
 }

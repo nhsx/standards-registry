@@ -2,7 +2,6 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import { uniq, get, isEqual, difference } from 'lodash';
-import minimist from 'minimist';
 import cache from './cache.json';
 import config from './config';
 import axios from 'axios';
@@ -95,7 +94,7 @@ export async function up({ env = 'local', force = false, dryRun = false }) {
   );
 
   if (!toRun.length) {
-    console.log('No migration found to roll back');
+    console.log('Migrations up to date');
     return;
   }
 
