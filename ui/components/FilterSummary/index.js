@@ -78,7 +78,7 @@ export function FilterSummary({ schema }) {
                 ) : null}
                 {filters.map((filter, i) => {
                   const connector = (
-                    (filtersSchema[key] && filtersSchema[key].type) ||
+                    (i > 0 && filtersSchema[key] && filtersSchema[key].type) ||
                     'and'
                   ).toLowerCase();
                   const label = settings.choices.find(
