@@ -38,12 +38,15 @@ const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
 
 const DocumentationLink = ({ link, title }) => (
   <>
-    <Link href={link} newWindow={true}>
-      <a title={`Documentation for ${title}`}>
-        View documentation for this standard
-      </a>
-      <span className="nhsuk-u-visually-hidden">opens in a new tab</span>
-    </Link>
+    <a
+      href={link}
+      rel="noreferrer"
+      target="_blank"
+      title={`Documentation for ${title}`}
+    >
+      View documentation for this standard
+    </a>
+    <span className="nhsuk-u-visually-hidden">opens in a new tab</span>
     <br />
     (opens in new tab)
   </>
