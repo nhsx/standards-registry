@@ -146,21 +146,21 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'NHS Digital');
+        cy.contains('dd', 'NHS');
 
         cy.visit('/published-standards');
 
         cy.doSearch('nhsx');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'NHS Digital');
+        cy.contains('dd', 'NHS');
 
         cy.visit('/published-standards');
 
         cy.doSearch('nhs digital');
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'NHS Digital');
+        cy.contains('dd', 'NHS');
       });
     });
   });
