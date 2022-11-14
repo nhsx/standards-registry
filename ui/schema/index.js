@@ -36,6 +36,19 @@ function TruncateLink({ link, email }) {
 
 const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
 
+const DocumentationLink = ({ link, title }) => (
+  <>
+    <Link href={link} newWindow={true}>
+      <a title={`Documentation for ${title}`}>
+        View documentation for this standard
+      </a>
+      <span className="nhsuk-u-visually-hidden">opens in a new tab</span>
+    </Link>
+    <br />
+    (opens in new tab)
+  </>
+);
+
 const CategoryDetails = function () {
   return (
     <Details
@@ -117,16 +130,10 @@ const schema = [
         <>
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
-            <>
-              <Link href={data.documentation_link} newWindow={true}>
-                View documentation for this standard
-                <span className="nhsuk-u-visually-hidden">
-                  opens in a new window
-                </span>
-              </Link>
-              <br />
-              (opens in new window)
-            </>
+            <DocumentationLink
+              link={data.documentation_link}
+              title={data.title}
+            />
           )}
         </>
       ),
@@ -254,7 +261,7 @@ export const upcomingStandard = [
 
         <Dt>Documentation</Dt>
         <Dd>
-          <TruncateLink link={row.documentation_link} />
+          <DocumentationLink link={row.documentation_link} title={row.title} />
         </Dd>
       </Dl>
     ),
