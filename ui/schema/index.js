@@ -59,7 +59,7 @@ const CategoryDetails = function () {
   return (
     <Details
       className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
-      summary="What this type means"
+      summary="Show definitions of standard types"
     >
       <div className="nhsuk-details__text">
         <Paragraph>
@@ -101,7 +101,7 @@ const schema = [
           {
             <Details
               className="nhsuk-u-font-size-16 nhsuk-u-margin-top-4"
-              summary="What this status means"
+              summary="Show definitions of statuses"
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
@@ -109,8 +109,9 @@ const schema = [
                   have been assured or endorsed for use by qualified bodies.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Draft standards</strong> are still being developed or
-                  are waiting for assurance or endorsement by qualified bodies.
+                  Standards <strong>in development</strong> are APIs or API
+                  standards in alpha or beta, meaning they are available for use
+                  but are still in progress and may change.
                 </Paragraph>
                 <Paragraph>
                   <strong>Deprecated standards</strong> are older versions of a
@@ -127,7 +128,7 @@ const schema = [
       ),
     },
     standard_category: {
-      label: 'Type',
+      label: 'Standard type',
       more: <CategoryDetails />,
     },
     documentation_help_text: {
@@ -161,6 +162,21 @@ const schema = [
     },
   },
   {
+    section_title: 'Link to standard',
+    documentation_link: {
+      label: 'Documentation',
+      format: (val) => {
+        return (
+          <Link
+            href={val}
+            text="View documentation for this standard on the owner's website (opens in a new window)"
+            newWindow={true}
+          />
+        );
+      },
+    },
+  },
+  {
     section_title: 'Topics and care settings',
     topic: {
       label: 'Topic',
@@ -189,7 +205,7 @@ const schema = [
   {
     section_title: 'Assurance and endorsements',
     reference_code: {
-      label: 'Reference code for legally mandated standards',
+      label: 'Reference code for standards issued as requirements in England',
       format: (val) => val || 'None - not legally mandated',
     },
     assurance: {
