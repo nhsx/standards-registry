@@ -4,8 +4,8 @@ const PagesContext = createContext();
 
 const DEFAULT_PAGES = [
   {
-    name: 'current-standards',
-    short_title: 'Current standards',
+    name: 'published-standards',
+    short_title: 'Published standards',
   },
   {
     name: 'future-standards',

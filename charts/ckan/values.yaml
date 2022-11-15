@@ -40,6 +40,9 @@ CkanDBName: &CkanDBName ckan_default
 CkanDBUser: &CkanDBUser ckan_default
 # CkanDBPass -- Variable for password for the CKAN database owner
 CkanDBPass: &CkanDBPass pass
+
+# RedisPassword variable
+RedisPassword: &RedisPassword pass
 # DatastoreDBName -- Variable for name of the database used by Datastore
 DatastoreDBName: &DatastoreDBName datastore_default
 # DatastoreRWDBUser -- Variable for username for the user with write access to the datastore database
@@ -113,6 +116,7 @@ ckan:
   # ckan.solr -- Location of SOLR collection used by the instance
   solr: "http://solr-headless:8983/solr/ckancollection"
   # ckan.redis -- Location of the Redis service to be used by the CKAN instance
+  # redis: "redis://[[default]:[*RedisPassword]]redis-headless:6379/0"
   redis: "redis://redis-headless:6379/0"
   spatialBackend: "solr"
   locale:
@@ -256,8 +260,12 @@ redis:
       enabled: false
       # redis.master.persistence.size -- Size of the volume claim
       size: 1Gi
-  # redis.usePassword -- Use password for accessing redis
-  usePassword: false
+  # # redis.usePassword -- Use password for accessing redis
+  # usePassword: true
+  auth:
+    enabled: true
+    password: *RedisPassword
+
 
 solr:  
   # Please see all available overrides at https://github.com/helm/charts/tree/master/incubator/solr

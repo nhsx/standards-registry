@@ -65,7 +65,7 @@ const HomeElement = ({ link, linkText, description }) => (
 export default function Home({ pages, host, ...props }) {
   const { contentMerge } = useContentContext();
   const pageContent = contentMerge(staticPageContent);
-  const standardsPage = 'current-standards';
+  const standardsPage = 'published-standards';
   return (
     <Page description={pageContent.description} host={host} {...props}>
       <HomeSection
@@ -160,7 +160,7 @@ export default function Home({ pages, host, ...props }) {
 }
 
 export function HomepageHero({ recent }) {
-  const standardsPage = 'current-standards';
+  const standardsPage = 'published-standards';
   return (
     <Hero>
       <div className="nhsuk-grid-row">
@@ -169,11 +169,7 @@ export function HomepageHero({ recent }) {
             <Snippet inline>header</Snippet>
           </h1>
           <Snippet large>intro</Snippet>
-          <Search
-            placeholder="For example, FHIR, allergies, GP"
-            navigate
-            homepage
-          />
+          <Search placeholder="Search published standards" navigate homepage />
         </div>
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>

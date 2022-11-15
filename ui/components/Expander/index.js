@@ -7,6 +7,7 @@ export default function Expander({
   children,
   className,
   small,
+  title,
   open = false,
   noBorderTop,
 }) {
@@ -17,6 +18,7 @@ export default function Expander({
 
   return (
     <details
+      title={title}
       className={classnames('nhsuk-details', className, styles.details, {
         [styles['no-border-top']]: noBorderTop,
       })}

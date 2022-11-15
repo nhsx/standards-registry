@@ -25,16 +25,14 @@ jobs:
       - name: Generate sitemap
         id: sitemap
         # Full options description at https://www.npmjs.com/package/sitemap-generator-cli
-        # TODO: update set-output
-        # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
         run: |
           npx sitemap-generator-cli -lqgv -p "1.0,0.8,0.6,0.4,0.2" https://data.standards.nhs.uk
           pwd
           cat sitemap.xml
           # add a newline to the sitemap at the end of the file
           echo >> sitemap.xml
-          echo "::set-output name=date::`date`"
-          echo "::set-output name=workflowurl::https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID?check_suite_focus=true"
+          echo "date=`date`" >> $GITHUB_OUTPUT
+          echo "workflowurl=https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID?check_suite_focus=true" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
         env:

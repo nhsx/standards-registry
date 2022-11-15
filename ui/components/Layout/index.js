@@ -10,6 +10,7 @@ import {
   PhaseBanner,
   Search,
 } from '../';
+import get from 'lodash/get';
 import { useContentContext } from '../../context/content';
 import styles from './style.module.scss';
 import classnames from 'classnames';
@@ -24,7 +25,7 @@ export default function Home({ children, ...props }) {
   const siteCode = process.env.NEXT_PUBLIC_SITE_CODE;
 
   const links = [
-    'current-standards',
+    'published-standards',
     'future-standards',
     'about-standards',
     'help-and-resources',
@@ -38,6 +39,7 @@ export default function Home({ children, ...props }) {
 
   const { content } = useContentContext();
   const { title } = content;
+  const datasetTitle = get(props, 'data.title');
 
   function toggleNav() {
     const el = document.querySelector('#header-navigation');
@@ -134,11 +136,12 @@ export default function Home({ children, ...props }) {
         {props.Hero && <props.Hero {...props} />}
         <Breadcrumbs
           labels={{
-            standards: 'Current standards',
+            standards: 'Published standards',
             content: 'Browse content standards',
             technical: 'Browse technical standards',
             services: 'Browse services',
           }}
+          title={datasetTitle}
         />
         <div className="nhsuk-width-container">{children}</div>
       </main>

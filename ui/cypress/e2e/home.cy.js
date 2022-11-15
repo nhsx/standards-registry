@@ -1,4 +1,4 @@
-import { a11yLog, failLevel } from '../support/custom';
+import { a11yLog } from '../support/custom';
 
 describe('Homepage', () => {
   it('should show home page and call to action', () => {
@@ -33,11 +33,14 @@ describe('Homepage', () => {
   describe('a11y', () => {
     it('has sufficient contrast on focussed links', () => {
       cy.visit('/');
+      cy.get('main');
       cy.injectAxe();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(100);
       cy.get('.nhsuk-phase-banner__text a').focus();
-      cy.checkA11y(null, null, a11yLog, failLevel);
+      cy.checkA11y(null, null, a11yLog);
       cy.get('#recent-standards a').first().focus();
-      cy.checkA11y(null, null, a11yLog, failLevel);
+      cy.checkA11y(null, null, a11yLog);
     });
   });
 

@@ -16,7 +16,12 @@ export const Cookies = ({ choice }) => {
 
   return (
     (!consentChoice && (
-      <div id="nhsuk-cookie-banner" data-nosnippet="true">
+      <div
+        id="nhsuk-cookie-banner"
+        role="alertdialog"
+        aria-label="Cookie consent banner"
+        data-nosnippet="true"
+      >
         <div
           className={classnames('nhsuk-cookie-banner', styles.banner)}
           id="cookiebanner"

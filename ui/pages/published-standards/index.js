@@ -8,12 +8,11 @@ import {
   Col,
   Filters,
   Dataset,
-  FeedbackFooter,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
 
 const staticPageProps = {
-  title: 'Current standards',
+  title: 'Published standards',
   description:
     'Find published data standards for health and social care including standards required for use in England.',
 };
@@ -39,7 +38,7 @@ export default function Standards({ data, schemaData, host }) {
         <div className="nhsuk-grid-column-three-quarters">
           <Search
             labelText="Search"
-            placeholder="For example, FHIR, allergies, GP"
+            placeholder="Search published standards"
             location="browse"
           />
         </div>
@@ -52,7 +51,6 @@ export default function Standards({ data, schemaData, host }) {
           <Dataset data={data} pagination={true} schema={schemaData} />
         </Col>
       </Row>
-      <FeedbackFooter />
     </Page>
   );
 }
