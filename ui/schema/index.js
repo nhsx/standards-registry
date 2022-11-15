@@ -131,20 +131,6 @@ const schema = [
       label: 'Standard type',
       more: <CategoryDetails />,
     },
-    documentation_help_text: {
-      label: 'Documentation',
-      format: (val, data) => (
-        <>
-          {val && <MarkdownBlock md={val} />}
-          {data.documentation_link && (
-            <DocumentationLink
-              link={data.documentation_link}
-              title={data.title}
-            />
-          )}
-        </>
-      ),
-    },
     contact_details: {
       label: 'Contact details',
       format: (val, data) => {
@@ -163,17 +149,19 @@ const schema = [
   },
   {
     section_title: 'Link to standard',
-    documentation_link: {
+    documentation_help_text: {
       label: 'Documentation',
-      format: (val) => {
-        return (
-          <Link
-            href={val}
-            text="View documentation for this standard on the owner's website (opens in a new window)"
-            newWindow={true}
-          />
-        );
-      },
+      format: (val, data) => (
+        <>
+          {val && <MarkdownBlock md={val} />}
+          {data.documentation_link && (
+            <DocumentationLink
+              link={data.documentation_link}
+              title={data.title}
+            />
+          )}
+        </>
+      ),
     },
   },
   {
