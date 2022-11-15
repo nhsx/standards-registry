@@ -36,21 +36,24 @@ function TruncateLink({ link, email }) {
 
 const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
 
-const DocumentationLink = ({ link, title }) => (
-  <>
-    <a
-      href={link}
-      rel="noreferrer"
-      target="_blank"
-      title={`Documentation for ${title}`}
-    >
-      View documentation for this standard
-    </a>
-    <span className="nhsuk-u-visually-hidden">opens in a new tab</span>
-    <br />
-    (opens in new tab)
-  </>
-);
+const DocumentationLink = ({ link = false, title }) =>
+  !link ? (
+    'Not available'
+  ) : (
+    <>
+      <a
+        href={link}
+        rel="noreferrer"
+        target="_blank"
+        title={`Documentation for ${title}`}
+      >
+        View documentation for this standard
+      </a>
+      <span className="nhsuk-u-visually-hidden">opens in a new tab</span>
+      <br />
+      (opens in new tab)
+    </>
+  );
 
 const CategoryDetails = function () {
   return (
