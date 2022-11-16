@@ -123,7 +123,7 @@ export default function Home({ pages, host, ...props }) {
           description="Including FHIR and HL7 standards for interoperability and APIs."
         />
         <HomeElement
-          link={`/${standardsPage}?standard_category=Record+standard`}
+          link={`/${standardsPage}?standard_category=Record+standards`}
           linkText="Record standards"
           description="Including formatting standards for clinical and care records."
         />
