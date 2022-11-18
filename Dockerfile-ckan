@@ -32,6 +32,8 @@ RUN cd /srv/app/src/ckanext-scheming && python setup.py develop
 RUN cd /srv/app/src/ckanext-pages && python setup.py develop
 RUN cd /srv/app/src/ckanext-nhs-theme && python setup.py develop
 
+RUN useradd ckan -u 999 --create-home --user-group
+
 RUN chown -R ckan:ckan /srv/app
 RUN mkdir /var/lib/ckan
 RUN chown -R ckan:ckan /var/lib/ckan
