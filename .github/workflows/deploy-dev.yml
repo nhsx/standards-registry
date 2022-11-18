@@ -1,15 +1,18 @@
 name: deploy-dev
 
 on:
-  workflow_run:
-    branches:
-      - master
-    # workflows:
-    #   - build-and-test
-    # types:
-    #   - completed
-    # conclusion:
-    #   - success
+  - push
+
+# on:
+#   workflow_run:
+#     branches:
+#       - master
+#     workflows:
+#       - build-and-test
+#     types:
+#       - completed
+#     conclusion:
+#       - success
 
 jobs:
   deploy-csv-exporter:
