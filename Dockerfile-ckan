@@ -9,7 +9,7 @@ USER root
 # Install any system packages necessary to build extensions
 # Make sure we install python 3.8, cause CKAN is not compatible with 3.9
 RUN apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.8/main/
-# python3-dev=3.8.13
+RUN echo http://dl-2.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
 
 # Fetch and build the custom CKAN extensions
 RUN pip install -e "git+https://github.com/Marvell-Consulting/ckanext-scheming.git#egg=ckanext-scheming"
@@ -32,7 +32,7 @@ RUN cd /srv/app/src/ckanext-scheming && python setup.py develop
 RUN cd /srv/app/src/ckanext-pages && python setup.py develop
 RUN cd /srv/app/src/ckanext-nhs-theme && python setup.py develop
 
-RUN useradd ckan -u 999 --create-home --user-group
+RUN apk --no-cache add shadow && usermod -u 999 ckan
 
 RUN chown -R ckan:ckan /srv/app
 RUN mkdir /var/lib/ckan
