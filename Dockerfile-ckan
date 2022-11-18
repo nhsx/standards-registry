@@ -35,6 +35,9 @@ RUN cd /srv/app/src/ckanext-nhs-theme && python setup.py develop
 RUN apk --no-cache add shadow && usermod -u 999 ckan
 
 RUN chown -R ckan:ckan /srv/app
+
+RUN chmod -R u+rw '/srv/app/src/ckan/ckan/public/base'
+
 RUN mkdir /var/lib/ckan
 RUN chown -R ckan:ckan /var/lib/ckan
 

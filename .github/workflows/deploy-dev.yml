@@ -4,12 +4,12 @@ on:
   workflow_run:
     branches:
       - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+    # workflows:
+    #   - build-and-test
+    # types:
+    #   - completed
+    # conclusion:
+    #   - success
 
 jobs:
   deploy-csv-exporter:
