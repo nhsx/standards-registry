@@ -16,6 +16,8 @@ spec:
         app: {{ .Values.ui.name }}
         group: {{ .Values.ui.group }}
     spec:
+      securityContext:
+        runAsUser: 1000
       containers:
         - name: {{ .Values.ui.name }}
           image: {{ .Values.ui.container.image }}
