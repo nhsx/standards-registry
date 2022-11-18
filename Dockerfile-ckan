@@ -37,10 +37,8 @@ RUN apk --no-cache add shadow && usermod -u 999 ckan
 RUN chown -R ckan:ckan /srv/app
 
 RUN adduser -S www-data -G ckan
-RUN chown -R www-data '/srv/app/src/ckan/ckan/public/'
-RUN chmod -R u+rwx '/srv/app/src/ckan/ckan/public/'
-
-# RUN chmod -R u+rw '/srv/app/src/ckan/ckan/public/base'
+RUN chown -R www-data /srv/app/src/ckan/ckan/public/
+RUN chmod -R 777 /srv/app/src/ckan/ckan/public/
 
 RUN mkdir /var/lib/ckan
 RUN chown -R ckan:ckan /var/lib/ckan
