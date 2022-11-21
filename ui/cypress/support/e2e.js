@@ -22,3 +22,6 @@ import './commands';
 // Accessibility testing
 // https://github.com/component-driven/cypress-axe
 import '@-ralph/cypress-axe';
+
+// https://npm.io/package/cypress-html-validate
+import 'cypress-html-validate/commands';
