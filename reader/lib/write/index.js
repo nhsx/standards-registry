@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import slugify from 'slugify';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { setValueToBoolean } from '../migrations/21-nov-2022-string-to-boolean/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +47,7 @@ const writeRecord = async ({ record, headers, ckanUrl, dryRun } = {}) => {
       owner_org: organization.name,
     },
   };
-  let recordToWrite = params;
+  let recordToWrite = setValueToBoolean(params);
 
   if (dryRun) {
     console.log('DRY RUN:');
