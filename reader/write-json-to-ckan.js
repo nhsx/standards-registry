@@ -24,7 +24,7 @@ program
     
     e.g. to pull records down from the test env and write to prod:
     
-    $ node write-json-to-ckan.js --from 'https://2gv8f9zmci.execute-api.eu-west-2.amazonaws.com/dev/get?key={apiKey}&env=https://manage.test.standards.nhs.uk/api/action' --wrtite-location dev
+    $ node write-json-to-ckan.js --from 'https://2gv8f9zmci.execute-api.eu-west-2.amazonaws.com/dev/get?key={apiKey}&env=https://manage.test.standards.nhs.uk/api/action' --write-location dev
     `
   )
   .version('0.0.0')
@@ -38,6 +38,12 @@ program
       'environment to write to'
     ).choices(['local', 'dev', 'test', 'prod'])
   )
+  .addOption(
+    new Option(
+      '-k, --key <ckan-api-key>',
+      'ckan api key to use if not using a locally configured key'
+    )
+  )
   .option('--dry-run <bool>', 'set dry-run', false);
 
 program.addHelpText('beforeAll', logo);
@@ -45,8 +51,9 @@ program.addHelpText('beforeAll', logo);
 program.parse();
 const opts = program.opts();
 
-const { from: location } = opts;
+const { from: location, key: ckanApiKey } = opts;
 console.log(logo);
+console.log('api key:', ckanApiKey);
 console.log(`fetching records from
 ${location}`);
 
@@ -61,8 +68,10 @@ const mapEnv = (to) =>
 
 const res = await fetch(location);
 const data = await res.json();
+
 await writeToCKAN({
   data, // write directly with json data
   ckanUrl: mapEnv(opts.writeLocation),
+  ckanApiKey,
   dryRun: opts.dryRun,
 });
