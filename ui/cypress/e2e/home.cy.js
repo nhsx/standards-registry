@@ -41,6 +41,8 @@ describe('Homepage', () => {
       cy.checkA11y(null, null, a11yLog);
       cy.get('#recent-standards a').first().focus();
       cy.checkA11y(null, null, a11yLog);
+
+      cy.htmlvalidate();
     });
   });
 
