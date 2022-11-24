@@ -43,7 +43,7 @@ describe('Homepage', () => {
       cy.checkA11y(null, null, a11yLog);
     });
 
-    it.only('passes strict html validation', () => {
+    it('passes strict html validation', () => {
       cy.visit('/');
       cy.get('main');
       cy.htmlvalidate('html');

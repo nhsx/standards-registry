@@ -12,7 +12,11 @@ export default function Navigation({ links }) {
       <div className="nhsuk-width-container">
         <p className="nhsuk-header__navigation-title">
           <span id="label-navigation">Menu</span>
-          <button className="nhsuk-header__navigation-close" id="close-menu">
+          <button
+            className="nhsuk-header__navigation-close"
+            id="close-menu"
+            type="button"
+          >
             <span className="nhsuk-u-visually-hidden">Close menu</span>
           </button>
         </p>

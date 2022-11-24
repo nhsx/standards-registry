@@ -114,6 +114,7 @@ export default function Home({ children, ...props }) {
             <div className="nhsuk-header__menu">
               <button
                 className="nhsuk-header__menu-toggle"
+                type="button"
                 id="toggle-menu"
                 aria-controls="header-navigation"
                 aria-expanded="false"
