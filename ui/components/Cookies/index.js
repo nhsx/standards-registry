@@ -27,9 +27,9 @@ export const Cookies = ({ choice }) => {
           id="cookiebanner"
         >
           <div className="nhsuk-width-container">
-            <h2 className="nhsuk-heading-s">
+            <span className="nhsuk-heading-s">
               Cookies on the NHS Data Standards Directory
-            </h2>
+            </span>
             <p>
               We use essential cookies to make this service work. We&lsquo;d
               also like to use other cookies to see how you use the service and
@@ -47,6 +47,7 @@ export const Cookies = ({ choice }) => {
                 <button
                   onClick={() => handleCookies(true)}
                   className="nhsuk-button"
+                  type="button"
                   id="nhsuk-cookie-banner__link_accept_analytics"
                   href="#"
                 >
@@ -57,6 +58,7 @@ export const Cookies = ({ choice }) => {
                 <button
                   onClick={() => handleCookies(false)}
                   className="nhsuk-button"
+                  type="button"
                   id="nhsuk-cookie-banner__link_reject"
                   href="#"
                 >

@@ -5,7 +5,7 @@ export default function Navigation({ links }) {
     <nav
       className="nhsuk-header__navigation"
       id="header-navigation"
-      role="navigation"
+      // role="navigation"
       aria-label="Primary navigation"
       aria-labelledby="label-navigation"
     >

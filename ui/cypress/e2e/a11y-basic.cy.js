@@ -4,7 +4,7 @@ describe('Page a11y', () => {
   describe('Homepage', () => {
     it('passes a11y', () => {
       cy.visit('/');
-      cy.get('[role="main"]');
+      cy.get('main');
       cy.get('h1');
       cy.injectAxe();
       // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -16,7 +16,7 @@ describe('Page a11y', () => {
   describe('Future Standards', () => {
     it('passes a11y', () => {
       cy.visit('/future-standards');
-      cy.get('[role="main"]');
+      cy.get('main');
       cy.get('h1');
       cy.injectAxe();
       // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -43,7 +43,7 @@ describe('Page a11y', () => {
     ].forEach((page) => {
       it(`${page.replace('-', ' ').replace('/', '')} passes a11y check`, () => {
         cy.visit(page);
-        cy.get('[role="main"]');
+        cy.get('main');
         cy.get('h1');
         cy.injectAxe();
         // eslint-disable-next-line cypress/no-unnecessary-waiting

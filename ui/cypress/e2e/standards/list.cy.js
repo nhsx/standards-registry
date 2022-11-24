@@ -15,7 +15,7 @@ describe('Standards Listing Index', () => {
   it('Should pass basic a11y check', () => {
     cy.visit(`/published-standards`);
     // make sure main content area is loaded before injecting a11y checker
-    cy.get('[role="main"]');
+    cy.get('main');
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(100);
     cy.injectAxe();

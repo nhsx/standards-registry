@@ -107,7 +107,11 @@ export default function Search({
             </svg>
             <span className="nhsuk-u-visually-hidden">Search</span>
           </button>
-          <button className="nhsuk-search__close" id="close-search">
+          <button
+            className="nhsuk-search__close"
+            id="close-search"
+            type="submit"
+          >
             <svg
               className="nhsuk-icon nhsuk-icon__close"
               xmlns="http://www.w3.org/2000/svg"
