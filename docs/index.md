@@ -1,5 +1,7 @@
 # Weekly Reports
 
+* [24th November 2022](./reports/2022-11-24.md)
+
 * [17th November 2022](./reports/2022-11-17.md)
 
 * [10th November 2022](./reports/2022-11-10.md)
