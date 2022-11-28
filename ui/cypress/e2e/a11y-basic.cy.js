@@ -37,7 +37,7 @@ describe('Page a11y', () => {
       cy.htmlvalidate(
         {
           rules: {
-            'valid-id': 'warn',
+            'valid-id': 'off',
             'require-sri': 'off',
           },
         },
