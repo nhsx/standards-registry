@@ -25,13 +25,7 @@ export default function Expander({
       open={isOpen}
     >
       <summary className={classnames('nhsuk-details__summary', styles.summary)}>
-        <span
-          className={classnames('nhsuk-details__summary-text', {
-            'nhsuk-body-s': small,
-          })}
-        >
-          {summary}
-        </span>
+        {summary}
       </summary>
       <div className={classnames('nhsuk-details__text', styles.detailsText)}>
         {children}
