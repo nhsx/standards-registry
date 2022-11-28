@@ -6,7 +6,6 @@ export default function Expander({
   summary,
   children,
   className,
-  small,
   title,
   open = false,
   noBorderTop,
