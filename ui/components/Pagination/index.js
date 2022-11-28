@@ -32,7 +32,6 @@ export default function Pagination({ limit = 10, count }) {
 
   return (
     <nav
-      role="navigation"
       aria-label="Pagination Navigation"
       className={classnames('nhsuk-pagination', styles.pagination)}
     >
