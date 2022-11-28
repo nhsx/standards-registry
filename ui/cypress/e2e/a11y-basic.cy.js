@@ -30,6 +30,22 @@ describe('Page a11y', () => {
       cy.get('th a').click({ multiple: true });
       cy.checkA11y(null, null, a11yLog);
     });
+
+    it('passes html validation', () => {
+      cy.visit('/future-standards');
+      cy.get('main');
+      cy.htmlvalidate(
+        {
+          rules: {
+            'valid-id': 'warn',
+            'require-sri': 'off',
+          },
+        },
+        {
+          include: ['body'],
+        }
+      );
+    });
   });
 
   describe('Static Pages', () => {

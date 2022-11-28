@@ -22,6 +22,21 @@ describe('Standards Listing Index', () => {
     cy.checkA11y(null, null, a11yLog);
   });
 
+  it('passes html validation', () => {
+    cy.visit(`/published-standards`);
+    cy.get('main');
+    cy.htmlvalidate(
+      {
+        rules: {
+          'valid-id': 'off',
+          'require-sri': 'off',
+        },
+      },
+      {
+        include: ['body'],
+      }
+    );
+  });
   describe('filters and pagination', () => {
     it('Can change page', () => {
       cy.visit('/published-standards');
