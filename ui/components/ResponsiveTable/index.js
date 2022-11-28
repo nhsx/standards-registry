@@ -71,28 +71,30 @@ export function ResponsiveTable({ schema, results }) {
     <div className={styles.responsiveTable}>
       {isSortable && (
         <div className={styles.mobileSort}>
-          <label>Order by</label>
-          <Select
-            onChange={setSort}
-            className={styles.select}
-            value={orderBy && order && `${orderBy} ${order}`}
-            options={flatten([
-              ...schema
-                .filter((s) => s.sortable)
-                .map((s) => {
-                  return [
-                    {
-                      label: `${s.title} (A to Z)`,
-                      value: `${s.id} asc`,
-                    },
-                    {
-                      label: `${s.title} (Z to A)`,
-                      value: `${s.id} desc`,
-                    },
-                  ];
-                }),
-            ])}
-          />
+          <label>
+            Order by
+            <Select
+              onChange={setSort}
+              className={styles.select}
+              value={orderBy && order && `${orderBy} ${order}`}
+              options={flatten([
+                ...schema
+                  .filter((s) => s.sortable)
+                  .map((s) => {
+                    return [
+                      {
+                        label: `${s.title} (A to Z)`,
+                        value: `${s.id} asc`,
+                      },
+                      {
+                        label: `${s.title} (Z to A)`,
+                        value: `${s.id} desc`,
+                      },
+                    ];
+                  }),
+              ])}
+            />
+          </label>
         </div>
       )}
 
