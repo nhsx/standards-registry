@@ -1,5 +1,4 @@
 import path from 'path';
-import { SubresourceIntegrityPlugin } from 'webpack-subresource-integrity';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -8,8 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 // * find out how to push SubresourceIntegrityPlugin props to app
 // * can we wrap script resources at the webpack level?
 
-const nextConfig = (phase, { defaultConfig }) => {
-  // console.log(phase, defaultConfig);
+const nextConfig = () => {
   return {
     reactStrictMode: true,
     sassOptions: {
@@ -27,17 +25,6 @@ const nextConfig = (phase, { defaultConfig }) => {
           permanent: true,
         },
       ];
-    },
-    webpack(config) {
-      config.output.crossOriginLoading = 'anonymous';
-      config.plugins.push(
-        new SubresourceIntegrityPlugin({
-          hashFuncNames: ['sha384', 'sha512'],
-          enabled: true,
-        })
-      );
-      console.log('iam now the config', config);
-      return config;
     },
   };
 };
