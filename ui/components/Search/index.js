@@ -45,6 +45,7 @@ export default function Search({
       {location === 'nav' && (
         <button
           className="nhsuk-header__search-toggle"
+          type="button"
           id="toggle-search"
           aria-controls="search"
           aria-label="Open search"
