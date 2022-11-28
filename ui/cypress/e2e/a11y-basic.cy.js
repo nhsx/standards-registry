@@ -50,6 +50,22 @@ describe('Page a11y', () => {
         cy.wait(100);
         cy.checkA11y(null, null, a11yLog);
       });
+
+      it('passes html validation', () => {
+        cy.visit(page);
+        cy.get('main');
+        cy.htmlvalidate(
+          {
+            rules: {
+              'valid-id': 'warn',
+              'require-sri': 'off',
+            },
+          },
+          {
+            include: ['body'],
+          }
+        );
+      });
     });
   });
 });
