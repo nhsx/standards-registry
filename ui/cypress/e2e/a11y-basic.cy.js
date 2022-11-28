@@ -41,7 +41,9 @@ describe('Page a11y', () => {
       '/about-this-service',
       '/privacy-policy',
     ].forEach((page) => {
-      it(`${page.replace('-', ' ').replace('/', '')} passes a11y check`, () => {
+      const pageTitle = page.replace('-', ' ').replace('/', '');
+
+      it(`${pageTitle} passes a11y check`, () => {
         cy.visit(page);
         cy.get('main');
         cy.get('h1');
@@ -51,13 +53,13 @@ describe('Page a11y', () => {
         cy.checkA11y(null, null, a11yLog);
       });
 
-      it('passes html validation', () => {
+      it(`${pageTitle} passes html validation`, () => {
         cy.visit(page);
         cy.get('main');
         cy.htmlvalidate(
           {
             rules: {
-              'valid-id': 'warn',
+              'valid-id': 'off',
               'require-sri': 'off',
             },
           },
