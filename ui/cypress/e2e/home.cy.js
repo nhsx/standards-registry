@@ -63,8 +63,8 @@ describe('Homepage', () => {
     cy.htmlvalidate(
       {
         rules: {
-          'valid-id': 'warn',
-          'require-sri': 'warn',
+          'valid-id': 'off',
+          'require-sri': 'off',
         },
       },
       {
