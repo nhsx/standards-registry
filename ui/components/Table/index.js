@@ -77,7 +77,6 @@ export function Th({ children, sortable, col, defaultSort }) {
 export function Td({ children, classes, title, ...props }) {
   return (
     <td
-      role="cell"
       title={title}
       className={classnames(
         'nhsuk-table__cell',
@@ -94,11 +93,7 @@ export function Td({ children, classes, title, ...props }) {
 
 export const Table = forwardRef(({ children }, ref) => {
   return (
-    <table
-      className={classnames('nhsuk-table', styles.table)}
-      role="table"
-      ref={ref}
-    >
+    <table className={classnames('nhsuk-table', styles.table)} ref={ref}>
       {children}
     </table>
   );

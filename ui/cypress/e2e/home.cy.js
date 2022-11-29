@@ -42,6 +42,35 @@ describe('Homepage', () => {
       cy.get('#recent-standards a').first().focus();
       cy.checkA11y(null, null, a11yLog);
     });
+
+    it('use a11y checker with wcag2aa', () => {
+      cy.visit('/');
+      cy.injectAxe();
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
+      cy.wait(100);
+      cy.checkA11y(null, {
+        runOnly: {
+          type: 'tag',
+          values: ['wcag2aa', 'wcag21aa'],
+        },
+      });
+    });
+  });
+
+  it('passes html validation', () => {
+    cy.visit('/');
+    cy.get('main');
+    cy.htmlvalidate(
+      {
+        rules: {
+          'valid-id': 'off',
+          'require-sri': 'off',
+        },
+      },
+      {
+        include: ['body'],
+      }
+    );
   });
 
   describe('cookies', () => {

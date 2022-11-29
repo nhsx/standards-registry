@@ -27,11 +27,11 @@ export function Filter({
     label = `Filter by ${label.toLowerCase()}`;
   }
   const summary = useSelect ? null : (
-    <p className={styles.filterHeader}>
+    <span className={styles.filterHeader}>
       {label}
 
       {<span>{numActive} selected</span>}
-    </p>
+    </span>
   );
 
   function onSelectChange(val) {
@@ -43,7 +43,6 @@ export function Filter({
       {label}
       {summary}
       <Select
-        className="nhsuk-u-padding-top-4"
         options={choices}
         onChange={onSelectChange}
         showAll={true}

@@ -5,14 +5,18 @@ export default function Navigation({ links }) {
     <nav
       className="nhsuk-header__navigation"
       id="header-navigation"
-      role="navigation"
+      // role="navigation"
       aria-label="Primary navigation"
       aria-labelledby="label-navigation"
     >
       <div className="nhsuk-width-container">
         <p className="nhsuk-header__navigation-title">
           <span id="label-navigation">Menu</span>
-          <button className="nhsuk-header__navigation-close" id="close-menu">
+          <button
+            className="nhsuk-header__navigation-close"
+            id="close-menu"
+            type="button"
+          >
             <span className="nhsuk-u-visually-hidden">Close menu</span>
           </button>
         </p>

@@ -4,7 +4,7 @@ describe('Page a11y', () => {
   describe('Homepage', () => {
     it('passes a11y', () => {
       cy.visit('/');
-      cy.get('[role="main"]');
+      cy.get('main');
       cy.get('h1');
       cy.injectAxe();
       // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -16,7 +16,7 @@ describe('Page a11y', () => {
   describe('Future Standards', () => {
     it('passes a11y', () => {
       cy.visit('/future-standards');
-      cy.get('[role="main"]');
+      cy.get('main');
       cy.get('h1');
       cy.injectAxe();
       // eslint-disable-next-line cypress/no-unnecessary-waiting
@@ -30,6 +30,22 @@ describe('Page a11y', () => {
       cy.get('th a').click({ multiple: true });
       cy.checkA11y(null, null, a11yLog);
     });
+
+    it('passes html validation', () => {
+      cy.visit('/future-standards');
+      cy.get('main');
+      cy.htmlvalidate(
+        {
+          rules: {
+            'valid-id': 'off',
+            'require-sri': 'off',
+          },
+        },
+        {
+          include: ['body'],
+        }
+      );
+    });
   });
 
   describe('Static Pages', () => {
@@ -41,14 +57,32 @@ describe('Page a11y', () => {
       '/about-this-service',
       '/privacy-policy',
     ].forEach((page) => {
-      it(`${page.replace('-', ' ').replace('/', '')} passes a11y check`, () => {
+      const pageTitle = page.replace('-', ' ').replace('/', '');
+
+      it(`${pageTitle} passes a11y check`, () => {
         cy.visit(page);
-        cy.get('[role="main"]');
+        cy.get('main');
         cy.get('h1');
         cy.injectAxe();
         // eslint-disable-next-line cypress/no-unnecessary-waiting
         cy.wait(100);
         cy.checkA11y(null, null, a11yLog);
+      });
+
+      it(`${pageTitle} passes html validation`, () => {
+        cy.visit(page);
+        cy.get('main');
+        cy.htmlvalidate(
+          {
+            rules: {
+              'valid-id': 'off',
+              'require-sri': 'off',
+            },
+          },
+          {
+            include: ['body'],
+          }
+        );
       });
     });
   });

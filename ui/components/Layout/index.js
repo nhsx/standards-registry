@@ -69,7 +69,7 @@ export default function Home({ children, ...props }) {
 
       <Cookies />
 
-      <header className="nhsuk-header" role="banner">
+      <header className="nhsuk-header">
         <div className="nhsuk-width-container nhsuk-header__container">
           <div className="nhsuk-header__logo">
             <Link href="/">
@@ -114,6 +114,7 @@ export default function Home({ children, ...props }) {
             <div className="nhsuk-header__menu">
               <button
                 className="nhsuk-header__menu-toggle"
+                type="button"
                 id="toggle-menu"
                 aria-controls="header-navigation"
                 aria-expanded="false"
@@ -131,7 +132,7 @@ export default function Home({ children, ...props }) {
         <Navigation links={links} />
       </header>
 
-      <main className={styles.main} id="maincontent" role="main">
+      <main className={styles.main} id="maincontent">
         <PhaseBanner homepage={props.homepage} />
         {props.Hero && <props.Hero {...props} />}
         <Breadcrumbs
@@ -146,7 +147,7 @@ export default function Home({ children, ...props }) {
         <div className="nhsuk-width-container">{children}</div>
       </main>
 
-      <footer role="contentinfo">
+      <footer>
         <div className="nhsuk-footer" id="nhsuk-footer">
           <div className="nhsuk-width-container">
             <h2 className="nhsuk-u-visually-hidden">Support links</h2>
