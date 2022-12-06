@@ -16,8 +16,6 @@ pvc:
   enabled: false
   size: "1Gi"
 
-CkanImageLocation: &CkanImageLocation image.repository
-
 # RedisName -- Variable for name override for redis deployment
 RedisName: &RedisName redis
 
@@ -312,9 +310,7 @@ postgresql:
 cronjobs:
   - name: ckan-tracking
     # image: viderum/ckan-cloud-docker:ckan-v0.0.9
-    image: *CkanImageLocation
-    securityContext:
-      runAsUser: 999
+    image: keitaro/ckan:2.9.2
     # hourly
     schedule: '0 * * * *'
     args:
@@ -324,9 +320,7 @@ cronjobs:
       - tracking
       - update
   - name: ckan-search-rebuilder
-    image: *CkanImageLocation
-    securityContext:
-      runAsUser: 999
+    image: keitaro/ckan:2.9.2
     # nightly at midnight
     schedule: '0 0 * * *' 
     args:

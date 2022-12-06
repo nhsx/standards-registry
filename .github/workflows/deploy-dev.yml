@@ -97,13 +97,13 @@ jobs:
             --set ckan.db.ckanDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RwDbUrl='${{ secrets.DB_HOST }}'
             --set ckan.datastore.RoDbUrl='${{ secrets.DB_HOST }}'
+            --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
             --set image.tag=$IMAGE_TAG
             --set ckan.psql.initialize=false
             --set redis.auth.password='${{ secrets.REDIS_PASSWORD }}'
             --set ckan.redis='redis://default:${{ secrets.REDIS_PASSWORD }}@redis-headless:6379/0'
             --set ckan.debug=true
             --set solr.initialize.enabled=false
-            --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY
 
   integrationtest:
     if: ${{ success() }}
