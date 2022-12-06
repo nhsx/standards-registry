@@ -1,47 +1,48 @@
 name: deploy-dev
 
 on:
-  workflow_run:
-    branches:
-      - master
-    workflows:
-      - build-and-test
-    types:
-      - completed
-    conclusion:
-      - success
+  push
+  # workflow_run:
+  #   branches:
+  #     - master
+  #   workflows:
+  #     - build-and-test
+  #   types:
+  #     - completed
+  #   conclusion:
+  #     - success
 
 jobs:
-  deploy-csv-exporter:
-    runs-on: ubuntu-latest
-    environment: dev
-    defaults:
-      run:
-        working-directory: csv-exporter
-    env:
-      SLS_DEBUG: 1
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
-      - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
+  # deploy-csv-exporter:
+  #   runs-on: ubuntu-latest
+  #   environment: dev
+  #   defaults:
+  #     run:
+  #       working-directory: csv-exporter
+  #   env:
+  #     SLS_DEBUG: 1
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #     - run: npm ci
+  #     - run: npx serverless config credentials --provider aws --key ${{ secrets.SERVERLESS_AWS_ACCESS_KEY_ID }} --secret ${{ secrets.SERVERLESS_AWS_SECRET_ACCESS_KEY }} --profile k8sDev
+  #     - run: npx serverless deploy --aws-profile=k8sDev --verbose --debug=*
 
-  deploy-ui:
-    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@master
-    with:
-      environment: dev
-    secrets:
-      ckan_url: ${{ secrets.CKAN_URL }}
-      tracking_id: ${{ secrets.TRACKING_ID }}
-      google_tag_id: ${{ secrets.GOOGLE_TAG_ID }}
-      ecr_registry: ${{ secrets.ECR_REGISTRY }}
-      kubeconfig_file: ${{ secrets.KUBECONFIG_FILE }}
-      aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      google_site_code: ${{ secrets.GOOGLE_SITE_CODE }}
+  # deploy-ui:
+  #   uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@master
+  #   with:
+  #     environment: dev
+  #   secrets:
+  #     ckan_url: ${{ secrets.CKAN_URL }}
+  #     tracking_id: ${{ secrets.TRACKING_ID }}
+  #     google_tag_id: ${{ secrets.GOOGLE_TAG_ID }}
+  #     ecr_registry: ${{ secrets.ECR_REGISTRY }}
+  #     kubeconfig_file: ${{ secrets.KUBECONFIG_FILE }}
+  #     aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     google_site_code: ${{ secrets.GOOGLE_SITE_CODE }}
 
   ckan:
     runs-on: ubuntu-latest
@@ -77,7 +78,7 @@ jobs:
           docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: ckan deploy
-        uses: koslib/helm-eks-action@v1.25.2
+        uses: roc/helm-eks-action@v1.25.2
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG_FILE }}
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
