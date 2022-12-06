@@ -106,40 +106,40 @@ jobs:
             --set ckan.debug=true
             --set solr.initialize.enabled=false
 
-  integrationtest:
-    if: ${{ success() }}
-    needs:
-      - deploy-csv-exporter
-      - deploy-ui
-      - ckan
-    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
-    with:
-      base_url: https://dev.standards.nhs.uk
-      ckan_url: https://manage.dev.standards.nhs.uk/api/action
-      pages_ckan_url: https://manage.standards.nhs.uk/api/action
+  # integrationtest:
+  #   if: ${{ success() }}
+  #   needs:
+  #     - deploy-csv-exporter
+  #     - deploy-ui
+  #     - ckan
+  #   uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
+  #   with:
+  #     base_url: https://dev.standards.nhs.uk
+  #     ckan_url: https://manage.dev.standards.nhs.uk/api/action
+  #     pages_ckan_url: https://manage.standards.nhs.uk/api/action
 
-  notifypass:
-    runs-on: ubuntu-latest
-    if: ${{ success() }}
-    needs:
-      - integrationtest
-    steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_USERNAME: github-bot
-          SLACK_CHANNEL: developers
-          SLACK_COLOR: good
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_TITLE: 'dev deployment: succeeded'
-          SLACK_MESSAGE: ':+1::rocket:'
-          MSG_MINIMAL: 'true'
+  # notifypass:
+  #   runs-on: ubuntu-latest
+  #   if: ${{ success() }}
+  #   needs:
+  #     - integrationtest
+  #   steps:
+  #     - name: Slack Notification
+  #       uses: rtCamp/action-slack-notify@v2
+  #       env:
+  #         SLACK_USERNAME: github-bot
+  #         SLACK_CHANNEL: developers
+  #         SLACK_COLOR: good
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  #         SLACK_TITLE: 'dev deployment: succeeded'
+  #         SLACK_MESSAGE: ':+1::rocket:'
+  #         MSG_MINIMAL: 'true'
 
-  site-quality-test:
-    needs:
-      - integrationtest
-    uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
-    with:
-      test_url: https://dev.standards.nhs.uk
-    secrets:
-      slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+  # site-quality-test:
+  #   needs:
+  #     - integrationtest
+  #   uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
+  #   with:
+  #     test_url: https://dev.standards.nhs.uk
+  #   secrets:
+  #     slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
