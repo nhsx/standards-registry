@@ -24,7 +24,7 @@ done_query_fragment1 = 'https://standardsportal.atlassian.net/issues/?jql=projec
 done_query_fragment2 = '%22';
 full_query=done_query_fragment1+week_ago_formatted+done_query_fragment2
 
-browser = webdriver.Firefox()
+browser = webdriver.Chrome()
 browser.get('https://standardsportal.atlassian.net/jira/your-work')
 
 login_user = browser.find_element(By.XPATH, "//input[@id=\'username\']")
