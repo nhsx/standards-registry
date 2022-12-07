@@ -34,17 +34,7 @@ describe('Page a11y', () => {
     it('passes html validation', () => {
       cy.visit('/future-standards');
       cy.get('main');
-      cy.htmlvalidate(
-        {
-          rules: {
-            'valid-id': 'off',
-            'require-sri': 'off',
-          },
-        },
-        {
-          include: ['body'],
-        }
-      );
+      cy.htmlvalidate();
     });
   });
 
@@ -72,17 +62,7 @@ describe('Page a11y', () => {
       it(`${pageTitle} passes html validation`, () => {
         cy.visit(page);
         cy.get('main');
-        cy.htmlvalidate(
-          {
-            rules: {
-              'valid-id': 'off',
-              'require-sri': 'off',
-            },
-          },
-          {
-            include: ['body'],
-          }
-        );
+        cy.htmlvalidate();
       });
     });
   });
