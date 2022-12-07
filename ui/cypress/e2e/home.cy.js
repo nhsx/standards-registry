@@ -60,17 +60,7 @@ describe('Homepage', () => {
   it('passes html validation', () => {
     cy.visit('/');
     cy.get('main');
-    cy.htmlvalidate(
-      {
-        rules: {
-          'valid-id': 'off',
-          'require-sri': 'off',
-        },
-      },
-      {
-        include: ['body'],
-      }
-    );
+    cy.htmlvalidate();
   });
 
   describe('cookies', () => {
