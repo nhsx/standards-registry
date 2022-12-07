@@ -8,6 +8,8 @@ const htmlValidationConfig = {
     'attribute-allowed-values': 'off',
     'valid-id': 'off',
     'require-sri': 'off',
+    // Prevents issues relating to 'script type="application/json"' for nextjs data
+    'script-type': 'off',
   },
 };
 
