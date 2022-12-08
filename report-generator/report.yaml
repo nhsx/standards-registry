@@ -1,0 +1,9 @@
+%YAML 1.1   # Reference card
+---
+Values:
+        ATLASSIAN: <JIRA password>
+        ATLASSIAN_USER: <JIRA username>
+        INDEX_FILE: index.md
+        NHS_REPORT_TEMPLATE: template_yyyy_mm_dd.md
+        NHS_REPORT_TARGET_DIR: <insert your path>standards-registry\docs\reports\
+        NHS_REPORT_INDEX: <insert your path>standards-registry\docs\index.md 
