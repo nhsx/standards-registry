@@ -24,7 +24,7 @@ jobs:
       - run: npm test
 
   integrationtest:
-    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
+    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@main
     with:
       base_url: http://localhost:3000
       ckan_url: https://manage.test.standards.nhs.uk/api/action

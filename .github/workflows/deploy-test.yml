@@ -3,7 +3,7 @@ name: deploy-test
 on:
   workflow_run:
     branches:
-      - master
+      - main
     workflows:
       - deploy-dev
     types:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   deploy-ui:
-    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@master
+    uses: nhsx/standards-registry/.github/workflows/helm-deploy-ui.yml@main
     with:
       environment: test
     secrets:
@@ -89,7 +89,7 @@ jobs:
     needs:
       - deploy-ui
       - ckan
-    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@master
+    uses: nhsx/standards-registry/.github/workflows/integration-test.yml@main
     with:
       base_url: https://test.standards.nhs.uk
       ckan_url: https://manage.test.standards.nhs.uk/api/action
@@ -115,7 +115,7 @@ jobs:
   site-quality-test:
     needs:
       - integrationtest
-    uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@master
+    uses: nhsx/standards-registry/.github/workflows/lighthouse-test.yml@main
     with:
       test_url: https://test.standards.nhs.uk
     secrets:

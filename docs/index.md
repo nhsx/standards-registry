@@ -2,6 +2,8 @@
 
 * [15th December 2022](./reports/2022-12-15.md)
 
+* [08th December 2022](./reports/2022-12-08.md)
+
 * [1st December 2022](./reports/2022-12-01.md)
 
 * [24th November 2022](./reports/2022-11-24.md)
