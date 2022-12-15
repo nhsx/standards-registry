@@ -1,4 +1,4 @@
-import { fromCkan, fromParsed } from './fixture';
+import { fromCkan, fromParsed } from './__fixtures__';
 import { mergeRecord } from '../index';
 
 describe('mergeRecord', () => {
