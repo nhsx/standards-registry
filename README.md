@@ -27,7 +27,7 @@ Create a `.env` file containing the following content:
 
 ```
 touch .env.local
-echo "CKAN_URL=https://manage.test.standards.nhs.uk/api/action\nPAGES_CKAN_URL=https://manage.test.standards.nhs.uk/api/action" >> .env.local
+echo "CKAN_URL=https://manage.test.standards.nhs.uk/api/action\nPAGES_CKAN_URL=https://manage.standards.nhs.uk/api/action" >> .env.local
 ```
 
 ### Running the server
