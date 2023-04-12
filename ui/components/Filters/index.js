@@ -30,7 +30,7 @@ export function Filter({
     <span className={styles.filterHeader}>
       {label}
 
-      {<span>{numActive} selected</span>}
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
     </span>
   );
 
