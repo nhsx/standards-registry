@@ -199,7 +199,7 @@ export default function Dataset({
   useEffect(() => {
     const orderBy = 'name';
     const order = 'asc';
-    updateQuery({ orderBy, order });
+    updateQuery({ ...query, orderBy, order });
     setPageLoaded(true);
   }, []);
 
