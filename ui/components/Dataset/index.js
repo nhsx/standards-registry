@@ -27,6 +27,22 @@ function Embolden({ children }) {
   );
 }
 
+function StandardTypeBadge({ isPublishedStandard }) {
+  return (
+    <div>
+      {isPublishedStandard ? (
+        <Tag type="active" classes="nhsuk-body-s">
+          Published standard
+        </Tag>
+      ) : (
+        <Tag type="future" classes="nhsuk-body-s">
+          Future standard
+        </Tag>
+      )}
+    </div>
+  );
+}
+
 function Model({ model }) {
   const {
     name,
@@ -44,17 +60,7 @@ function Model({ model }) {
 
   return (
     <>
-      <div>
-        {is_published_standard ? (
-          <Tag type="active" classes="nhsuk-body-s">
-            Published standard
-          </Tag>
-        ) : (
-          <Tag type="future" classes="nhsuk-body-s">
-            Future standard
-          </Tag>
-        )}
-      </div>
+      <StandardTypeBadge isPublishedStandard={is_published_standard} />
       <Link href={target}>
         <a>
           <Embolden>{title}</Embolden>
