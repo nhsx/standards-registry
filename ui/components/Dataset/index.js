@@ -28,11 +28,33 @@ function Embolden({ children }) {
 }
 
 function Model({ model }) {
-  const { name, status, title, metadata_created, description } = model;
+  const {
+    name,
+    status,
+    title,
+    metadata_created,
+    description,
+    is_published_standard,
+  } = model;
   const target = `/published-standards/${name}`;
+
+  <Tag type={status} classes="nhsuk-body-s">
+    {status}
+  </Tag>;
 
   return (
     <>
+      <div>
+        {is_published_standard ? (
+          <Tag type="active" classes="nhsuk-body-s">
+            Published standard
+          </Tag>
+        ) : (
+          <Tag type="future" classes="nhsuk-body-s">
+            Future standard
+          </Tag>
+        )}
+      </div>
       <Link href={target}>
         <a>
           <Embolden>{title}</Embolden>
