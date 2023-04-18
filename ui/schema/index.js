@@ -10,6 +10,7 @@ import {
   Dt,
 } from '../components';
 import format from 'date-fns/format';
+import ActionLink from '../components/ActionLink';
 
 // `!!val?.length` => check whether empty array or unset val
 
@@ -155,7 +156,8 @@ const schema = [
         <>
           {val && <MarkdownBlock md={val} />}
           {data.documentation_link && (
-            <DocumentationLink
+            <ActionLink
+              id="documentation-link"
               link={data.documentation_link}
               title={data.title}
             />
