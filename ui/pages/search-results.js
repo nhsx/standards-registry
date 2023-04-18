@@ -65,5 +65,5 @@ SearchResults.Layout = function SearchResults({ children }) {
 };
 
 export async function getServerSideProps(context) {
-  return await getPageProps(context, { content });
+  return await getPageProps(context, { content }, true);
 }
