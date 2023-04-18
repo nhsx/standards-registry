@@ -15,6 +15,7 @@ const colorMap = {
   'in-development': 'nhsuk-tag--grey',
   deprecated: 'nhsuk-tag--orange',
   retired: 'nhsuk-tag--red',
+  future: 'nhsuk-tag--blue',
 };
 
 export default function TypeTag({ children, classes, type }) {
