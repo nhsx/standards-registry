@@ -229,7 +229,7 @@ export default function Dataset({
     const order = 'asc';
     updateQuery({ ...query, orderBy, order });
     setPageLoaded(true);
-  }, [updateQuery, query]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
