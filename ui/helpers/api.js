@@ -98,15 +98,10 @@ export async function getPages() {
   return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
-export async function list({
-  page = 1,
-  q,
-  sort,
-  inactive,
-  orderBy,
-  order,
-  ...filters
-}) {
+export async function list(
+  { page = 1, q, sort, inactive, orderBy, order, ...filters },
+  futureAndPublished = false
+) {
   if (!sort) {
     if (orderBy) {
       sort = {
@@ -131,7 +126,9 @@ export async function list({
       .join(', ');
   }
 
-  filters.is_published_standard = !inactive;
+  if (!futureAndPublished) {
+    filters.is_published_standard = !inactive;
+  }
 
   fq = serialise(queriseSelections(filters));
 
