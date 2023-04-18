@@ -134,8 +134,6 @@ export async function list(
 
   const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
-  console.log('Filters', filters);
-  console.log('ckanQuery', ckanQuery);
   return callApi(`${CKAN_URL}/package_search?${ckanQuery}`);
 }
 
