@@ -173,37 +173,6 @@ export function Filters({
     });
   };
 
-  const setSingleItem = (name) => (event) => {
-    const { checked, value } = event.target;
-    console.log(checked, value);
-
-    if (value === 'all') {
-      console.log('Selected All');
-      return;
-    }
-
-    let filter = query[name];
-
-    if (filter && !Array.isArray(filter)) {
-      filter = [filter];
-    }
-
-    if (checked) {
-      return updateQuery({
-        [name]: filter ? [...filter, value] : [value],
-      });
-    }
-
-    if (!filter || !filter.includes(value)) {
-      return;
-    }
-
-    const newVal = filter.filter((val) => val !== value);
-    return updateQuery({
-      [name]: newVal.length ? newVal : null,
-    });
-  };
-
   const filters = select(categories, fields).map((item) => {
     switch (item.field_name) {
       case 'status':
