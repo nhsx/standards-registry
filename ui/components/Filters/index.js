@@ -6,6 +6,7 @@ import pick from 'lodash/pick';
 import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
+import { Radio } from '../Radio';
 
 export function Filter({
   label,
@@ -14,6 +15,7 @@ export function Filter({
   field_name: fieldName,
   open,
   useSelect,
+  useRadio,
   numActive = 0,
   onlyChild,
   fullHeight,
@@ -38,18 +40,68 @@ export function Filter({
     updateQuery({ ...query, [fieldName]: val || [] });
   }
 
-  return useSelect ? (
-    <label className="nhsuk-heading-m nhsuk-u-padding-top-3">
-      {label}
-      {summary}
-      <Select
-        options={choices}
-        onChange={onSelectChange}
-        showAll={true}
-        value={query[fieldName] || ''}
-      />
-    </label>
-  ) : (
+  if (useSelect) {
+    return (
+      <Expander
+        summary={summary}
+        className={classnames('nhsuk-filter', styles.filter)}
+        open={open}
+        noBorderTop={noBorderTop}
+        title={label}
+      >
+        <label className="nhsuk-heading-m nhsuk-u-padding-top-3">
+          {label}
+          {summary}
+          <Select
+            options={choices}
+            onChange={onSelectChange}
+            showAll={true}
+            value={query[fieldName] || ''}
+          />
+        </label>
+        {clearAll && (
+          <a
+            href="#"
+            className={classnames(styles.clearAll, styles[clearAllAlign])}
+            onClick={onClearAllClick}
+          >
+            Clear all
+          </a>
+        )}
+      </Expander>
+    );
+  }
+
+  if (useRadio) {
+    return (
+      <Expander
+        summary={summary}
+        className={classnames('nhsuk-filter', styles.filter)}
+        open={open}
+        noBorderTop={noBorderTop}
+        title={label}
+      >
+        <Radio
+          options={choices}
+          onChange={onSelectChange}
+          showAll={true}
+          value={query[fieldName] || ''}
+          name={fieldName}
+        />
+        {clearAll && (
+          <a
+            href="#"
+            className={classnames(styles.clearAll, styles[clearAllAlign])}
+            onClick={onClearAllClick}
+          >
+            Clear all
+          </a>
+        )}
+      </Expander>
+    );
+  }
+
+  return (
     <Expander
       summary={summary}
       className={classnames('nhsuk-filter', styles.filter)}
@@ -100,29 +152,6 @@ export function Filters({
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
   const [openFilters, setOpenFilters] = useState([]);
-  const filters = select(categories, fields).map((item) =>
-    item.field_name === 'status' ? mapStatus(item) : item
-  );
-
-  function mapStatus(item) {
-    return {
-      ...item,
-      label: 'Status',
-      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
-        (value) => {
-          const choice = item.choices.find((c) => c.value === value);
-          if (value === 'in-development') {
-            return {
-              ...choice,
-              value,
-              label: 'In development (APIs only)',
-            };
-          }
-          return choice;
-        }
-      ),
-    };
-  }
 
   const setItem = (name) => (event) => {
     const { checked, value } = event.target;
@@ -143,6 +172,66 @@ export function Filters({
       [name]: newVal.length ? newVal : null,
     });
   };
+
+  const setSingleItem = (name) => (event) => {
+    const { checked, value } = event.target;
+    console.log(checked, value);
+
+    if (value === 'all') {
+      console.log('Selected All');
+      return;
+    }
+
+    let filter = query[name];
+
+    if (filter && !Array.isArray(filter)) {
+      filter = [filter];
+    }
+
+    if (checked) {
+      return updateQuery({
+        [name]: filter ? [...filter, value] : [value],
+      });
+    }
+
+    if (!filter || !filter.includes(value)) {
+      return;
+    }
+
+    const newVal = filter.filter((val) => val !== value);
+    return updateQuery({
+      [name]: newVal.length ? newVal : null,
+    });
+  };
+
+  const filters = select(categories, fields).map((item) => {
+    switch (item.field_name) {
+      case 'status':
+        return mapStatus(item);
+      default:
+        return item;
+    }
+  });
+
+  function mapStatus(item) {
+    return {
+      ...item,
+      label: 'Status',
+      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
+        (value) => {
+          const choice = item.choices.find((c) => c.value === value);
+          if (value === 'in-development') {
+            return {
+              ...choice,
+              value,
+              label: 'In development (APIs only)',
+            };
+          }
+          return choice;
+        }
+      ),
+    };
+  }
 
   function onClearAllClick(e) {
     e.preventDefault();
@@ -177,10 +266,13 @@ export function Filters({
               key={filter.field_name}
               {...filter}
               open={expanded || openFilters.includes(filter.field_name)}
-              onChange={setItem(filter.field_name)}
+              onChange={
+                filter.onChange ? filter.onChange : setItem(filter.field_name)
+              }
               numActive={numActive}
               // TODO: this should be configured in schema
-              useSelect={filter.field_name === 'standard_category'}
+              //useSelect={filter.field_name === 'standard_category'}
+              useRadio={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
               onClearAllClick={onClearAllClick}
