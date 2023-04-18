@@ -70,20 +70,21 @@ function SortMenu({ searchTerm }) {
       value: 'score desc',
     },
     {
+      label: 'Name (A to Z)',
+      value: 'name asc',
+      selected: 'selected',
+    },
+    {
+      label: 'Name (Z to A)',
+      value: 'name desc',
+    },
+    {
       label: 'Added (newest)',
       value: 'metadata_created desc',
     },
     {
       label: 'Added (oldest)',
       value: 'metadata_created asc',
-    },
-    {
-      label: 'Name (A to Z)',
-      value: 'name asc',
-    },
-    {
-      label: 'Name (Z to A)',
-      value: 'name desc',
     },
   ];
 
@@ -165,7 +166,7 @@ export default function Dataset({
   includeType,
   schema,
 }) {
-  const { query } = useQueryContext();
+  const { query, updateQuery } = useQueryContext();
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
@@ -185,15 +186,22 @@ export default function Dataset({
         setLoading(false);
       }
     }
+
     // we dont want to fetch data on initial load.
     if (pageLoaded) {
       getData();
     }
+
     // we don't want pageLoaded in the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  useEffect(() => setPageLoaded(true), []);
+  useEffect(() => {
+    const orderBy = 'name';
+    const order = 'asc';
+    updateQuery({ ...query, orderBy, order });
+    setPageLoaded(true);
+  }, []);
 
   return (
     <>
