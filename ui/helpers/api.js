@@ -99,7 +99,7 @@ export async function getPages() {
 }
 
 export async function list(
-  { page = 1, q, sort, inactive, orderBy, order, ...filters },
+  { page = 1, q, sort, inactive = false, orderBy, order, ...filters },
   futureAndPublished = false
 ) {
   if (!sort) {

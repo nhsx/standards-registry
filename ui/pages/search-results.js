@@ -52,7 +52,12 @@ export default function SearchResults({ data, schemaData, host }) {
           <Filters schema={schemaData} />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} schema={schemaData} includeType={true} />
+          <Dataset
+            data={data}
+            schema={schemaData}
+            includeType={true}
+            futureAndPublished={true}
+          />
         </Col>
       </Row>
       <FeedbackFooter />
