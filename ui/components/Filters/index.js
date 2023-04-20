@@ -42,15 +42,6 @@ const CheckBox = () => {
           styles.checkboxItem
         )}
       >
-        {/* <OptionSelect fullHeight={fullHeight}>
-              <CheckboxGroup
-                onChange={onChange}
-                options={choices}
-                parent={fieldName}
-                legend={label}
-                small
-              />
-      </OptionSelect> */}
         <input
           className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
           id="mandated"
