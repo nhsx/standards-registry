@@ -193,6 +193,7 @@ export default function Dataset({
   data: initialData = {},
   includeType,
   schema,
+  futureAndPublished = false,
 }) {
   const { query, updateQuery } = useQueryContext();
   const searchTerm = query.q;
@@ -206,7 +207,10 @@ export default function Dataset({
     async function getData() {
       try {
         setLoading(true);
-        const res = await axios.post('/api/refresh-list', query);
+        const res = await axios.post('/api/refresh-list', {
+          ...query,
+          futureAndPublished,
+        });
         setData(res.data);
       } catch (err) {
         console.error(err);
