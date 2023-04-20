@@ -60,12 +60,18 @@ function Model({ model }) {
 
   return (
     <>
-      <StandardTypeBadge isPublishedStandard={is_published_standard} />
-      <Link href={target}>
-        <a>
-          <Embolden>{title}</Embolden>
-        </a>
-      </Link>
+      <div className={classnames(styles.standardHeader)}>
+        <div className={classnames(styles.standardTitle)}>
+          <Link href={target}>
+            <a>
+              <Embolden>{title}</Embolden>
+            </a>
+          </Link>
+        </div>
+        <div className={classnames(styles.standardFlag)}>
+          <StandardTypeBadge isPublishedStandard={is_published_standard} />
+        </div>
+      </div>
       <p>
         <Embolden>{description}</Embolden>
       </p>

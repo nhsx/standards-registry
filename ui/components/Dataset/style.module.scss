@@ -25,3 +25,16 @@
 .right {
   text-align: right;
 }
+
+.standardHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.standardTitle {
+  flex: 6;
+}
+
+.standardFlag {
+  flex: 2;
+}
