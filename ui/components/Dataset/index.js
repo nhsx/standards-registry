@@ -135,43 +135,6 @@ function SortMenu({ searchTerm }) {
   );
 }
 
-const CheckBox = () => {
-  const { getSelections, updateQuery } = useQueryContext();
-  const toggleMandated = (event) => {
-    const selections = getSelections();
-    const { name, checked } = event.target;
-    delete selections[name];
-    if (checked) {
-      selections[name] = checked;
-    }
-    updateQuery(selections, { replace: true });
-  };
-
-  return (
-    <div
-      className={classnames(
-        'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
-        styles.checkboxItem
-      )}
-    >
-      <input
-        className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
-        id="mandated"
-        name="mandated"
-        type="checkbox"
-        value="nationally mandated"
-        onChange={toggleMandated}
-      />
-      <label
-        className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
-        htmlFor="mandated"
-      >
-        National requirement
-      </label>
-    </div>
-  );
-};
-
 const NoResultsSummary = ({ searchTerm }) => (
   <>
     <h3>
@@ -237,7 +200,8 @@ export default function Dataset({
   useEffect(() => {
     const orderBy = 'name';
     const order = 'asc';
-    updateQuery({ ...query, orderBy, order });
+    const mandated = 'true';
+    updateQuery({ ...query, orderBy, order, mandated });
     setPageLoaded(true);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -254,9 +218,6 @@ export default function Dataset({
       <div className="nhsuk-grid-row">
         <div className="nhsuk-grid-column-one-half">
           <SortMenu searchTerm={searchTerm} />
-        </div>
-        <div className="nhsuk-grid-column-one-half">
-          <CheckBox />
         </div>
       </div>
       {count > 0 ? (
