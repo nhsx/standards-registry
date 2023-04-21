@@ -52,7 +52,12 @@ const CheckBox = () => {
           onChange={toggleMandated}
         />
         <label
-          className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
           htmlFor="mandated"
         >
           National requirement
