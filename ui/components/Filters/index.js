@@ -8,7 +8,7 @@ import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 import styles from './Filters.module.scss';
 import { Radio } from '../Radio';
 
-const CheckBox = () => {
+const RequirementCheckBox = () => {
   const { getSelections, updateQuery } = useQueryContext();
 
   const selections = getSelections();
@@ -56,6 +56,146 @@ const CheckBox = () => {
           National requirement
         </label>
       </div>
+    </Expander>
+  );
+};
+
+const PublishedCheckBox = () => {
+  const { getSelections, updateQuery } = useQueryContext();
+  const [isPublished, setIsPublished] = useState(false);
+  const [isFuture, setIsFuture] = useState(false);
+
+  const selections = getSelections();
+
+  useEffect(() => {
+    const selections = getSelections();
+    if (!selections.is_published_standard === undefined) {
+      setIsPublished(false);
+      setIsFuture(false);
+      return;
+    }
+
+    if (selections.is_published_standard) {
+      setIsPublished(true);
+      setIsFuture(false);
+      return;
+    }
+
+    if (!selections.is_published_standard) {
+      setIsPublished(false);
+      setIsFuture(true);
+      return;
+    }
+
+    return;
+  }, []);
+
+  const clearChoices = (event) => {
+    setIsPublished(false);
+    setIsFuture(false);
+    const { name } = event.target;
+    delete selections[name];
+    updateQuery(selections, { replace: true });
+  };
+
+  const onClearAllClicked = (e) => {
+    e.preventDefault();
+    clearChoices(e);
+  };
+
+  const updatePublished = (event) => {
+    const { checked, name, value } = event.target;
+    let queryValue = undefined;
+    switch (value) {
+      case 'published':
+        setIsPublished(checked);
+        setIsFuture(!checked);
+        queryValue = 'true';
+        break;
+      case 'future':
+        setIsFuture(checked);
+        setIsPublished(!checked);
+        queryValue = 'false';
+        break;
+    }
+
+    delete selections[name];
+    if (queryValue !== undefined) {
+      selections[name] = queryValue;
+    }
+
+    updateQuery(selections, { replace: true });
+  };
+
+  return (
+    <Expander
+      summary={'Published/Future Standard'}
+      className={classnames('nhsuk-filter', styles.filter)}
+      noBorderTop={false}
+      title="Published/Future Standard"
+    >
+      <div
+        className={classnames(
+          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+          styles.checkboxItem
+        )}
+      >
+        <input
+          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+          id="is_published_standard"
+          name="is_published_standard"
+          type="checkbox"
+          value="published"
+          checked={isPublished}
+          onChange={updatePublished}
+        />
+        <label
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
+          htmlFor="mandated"
+        >
+          Published
+        </label>
+      </div>
+
+      <div
+        className={classnames(
+          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+          styles.checkboxItem
+        )}
+      >
+        <input
+          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+          id="is_future_standard"
+          name="is_published_standard"
+          type="checkbox"
+          value="future"
+          checked={isFuture}
+          onChange={updatePublished}
+        />
+        <label
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
+          htmlFor="mandated"
+        >
+          Future
+        </label>
+      </div>
+      <a
+        href="#"
+        className={classnames(styles.clearAll)}
+        onClick={onClearAllClicked}
+      >
+        Clear all
+      </a>
     </Expander>
   );
 };
@@ -302,7 +442,8 @@ export function Filters({
             />
           );
         })}
-        <CheckBox />
+        <RequirementCheckBox />
+        <PublishedCheckBox />
       </div>
     </div>
   );
