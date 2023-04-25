@@ -36,7 +36,8 @@ export function FilterSummary({ schema }) {
     'page',
     'orderBy',
     'order',
-    'mandated'
+    'mandated',
+    'is_published_standard'
   );
 
   if (!size(chosenFilters)) {
