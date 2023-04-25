@@ -49,7 +49,11 @@ export default function SearchResults({ data, schemaData, host }) {
       </div>
       <Row>
         <Col>
-          <Filters schema={schemaData} />
+          <Filters
+            schema={schemaData}
+            showRequirementFilter={true}
+            showPublishedFilter={true}
+          />
         </Col>
         <Col colspan={3}>
           <Dataset

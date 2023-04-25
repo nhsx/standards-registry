@@ -45,7 +45,7 @@ export default function Standards({ data, schemaData, host }) {
       </div>
       <Row>
         <Col>
-          <Filters schema={schemaData} />
+          <Filters schema={schemaData} showRequirementFilter={true} />
         </Col>
         <Col colspan={3}>
           <Dataset data={data} pagination={true} schema={schemaData} />

@@ -88,6 +88,7 @@ const PublishedCheckBox = () => {
     }
 
     return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const clearChoices = (event) => {
@@ -99,22 +100,23 @@ const PublishedCheckBox = () => {
   };
 
   const onClearAllClicked = (e) => {
+    e.target.name = 'is_published_standard';
     e.preventDefault();
     clearChoices(e);
   };
 
   const updatePublished = (event) => {
-    const { checked, name, value } = event.target;
+    const { name, value } = event.target;
     let queryValue = undefined;
     switch (value) {
       case 'published':
-        setIsPublished(checked);
-        setIsFuture(!checked);
+        setIsPublished(true);
+        setIsFuture(false);
         queryValue = 'true';
         break;
       case 'future':
-        setIsFuture(checked);
-        setIsPublished(!checked);
+        setIsFuture(true);
+        setIsPublished(false);
         queryValue = 'false';
         break;
     }
@@ -340,6 +342,8 @@ export function Filters({
   clearAllAlign = 'left',
   fullHeight,
   noBorderTop,
+  showRequirementFilter,
+  showPublishedFilter,
 }) {
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
@@ -442,8 +446,8 @@ export function Filters({
             />
           );
         })}
-        <RequirementCheckBox />
-        <PublishedCheckBox />
+        {showRequirementFilter && <RequirementCheckBox />}
+        {showPublishedFilter && <PublishedCheckBox />}
       </div>
     </div>
   );
