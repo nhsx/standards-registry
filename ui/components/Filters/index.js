@@ -8,6 +8,58 @@ import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 import styles from './Filters.module.scss';
 import { Radio } from '../Radio';
 
+const CheckBox = () => {
+  const { getSelections, updateQuery } = useQueryContext();
+
+  const selections = getSelections();
+
+  const toggleMandated = (event) => {
+    const { name, checked } = event.target;
+    delete selections[name];
+    if (checked) {
+      selections[name] = checked;
+    }
+    updateQuery(selections, { replace: true });
+  };
+
+  return (
+    <Expander
+      summary={'Requirement'}
+      className={classnames('nhsuk-filter', styles.filter)}
+      noBorderTop={false}
+      title="Requirement"
+    >
+      <div
+        className={classnames(
+          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+          styles.checkboxItem
+        )}
+      >
+        <input
+          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+          id="mandated"
+          name="mandated"
+          type="checkbox"
+          value="nationally mandated"
+          defaultChecked={true}
+          onChange={toggleMandated}
+        />
+        <label
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
+          htmlFor="mandated"
+        >
+          National requirement
+        </label>
+      </div>
+    </Expander>
+  );
+};
+
 export function Filter({
   label,
   choices,
@@ -240,7 +292,6 @@ export function Filters({
               }
               numActive={numActive}
               // TODO: this should be configured in schema
-              //useSelect={filter.field_name === 'standard_category'}
               useRadio={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
@@ -251,6 +302,7 @@ export function Filters({
             />
           );
         })}
+        <CheckBox />
       </div>
     </div>
   );
