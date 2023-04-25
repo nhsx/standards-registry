@@ -200,8 +200,7 @@ export default function Dataset({
   useEffect(() => {
     const orderBy = 'name';
     const order = 'asc';
-    const mandated = 'true';
-    updateQuery({ ...query, orderBy, order, mandated });
+    updateQuery({ ...query, orderBy, order });
     setPageLoaded(true);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
