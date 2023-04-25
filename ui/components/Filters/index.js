@@ -13,12 +13,12 @@ const CheckBox = () => {
 
   const selections = getSelections();
 
-  useEffect(() => {
-    const name = 'mandated';
-    delete selections[name];
-    selections[name] = true;
-    updateQuery(selections, { replace: true });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   const name = 'mandated';
+  //   delete selections[name];
+  //   selections[name] = true;
+  //   updateQuery(selections, { replace: true });
+  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleMandated = (event) => {
     const { name, checked } = event.target;
