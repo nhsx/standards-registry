@@ -69,19 +69,19 @@ const PublishedCheckBox = () => {
 
   useEffect(() => {
     const selections = getSelections();
-    if (!selections.is_published_standard === undefined) {
+    if (selections.is_published_standard === undefined) {
       setIsPublished(false);
       setIsFuture(false);
       return;
     }
 
-    if (selections.is_published_standard) {
+    if (selections.is_published_standard === 'true') {
       setIsPublished(true);
       setIsFuture(false);
       return;
     }
 
-    if (!selections.is_published_standard) {
+    if (selections.is_published_standard === 'false') {
       setIsPublished(false);
       setIsFuture(true);
       return;
