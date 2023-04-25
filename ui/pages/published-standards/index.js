@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Layout,
   Reading,
@@ -10,6 +11,7 @@ import {
   Dataset,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
+import { useQueryContext } from '../../context/query';
 
 const staticPageProps = {
   title: 'Published standards',
@@ -18,6 +20,15 @@ const staticPageProps = {
 };
 
 export default function Standards({ data, schemaData, host }) {
+  const { getSelections, updateQuery } = useQueryContext();
+
+  useEffect(() => {
+    const mandated = 'true';
+    const selections = { ...getSelections(), mandated };
+    updateQuery(selections, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const pageProps = { ...staticPageProps, host };
   return (
     <Page {...pageProps}>

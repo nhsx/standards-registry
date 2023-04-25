@@ -41,7 +41,7 @@ const RequirementCheckBox = () => {
           name="mandated"
           type="checkbox"
           value="nationally mandated"
-          defaultChecked={true}
+          checked={getSelections().mandated === 'true'}
           onChange={toggleMandated}
         />
         <label
