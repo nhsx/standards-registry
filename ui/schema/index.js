@@ -94,6 +94,10 @@ const schema = [
       label: 'Owner',
       accessor: 'organization.title',
     },
+    reference_code: {
+      label: 'Reference code for standards issued as requirements in England',
+      format: (val) => val || 'None - not legally mandated',
+    },
     status: {
       label: 'Status',
       format: (val) => (
@@ -194,10 +198,6 @@ const schema = [
   },
   {
     section_title: 'Assurance and endorsements',
-    reference_code: {
-      label: 'Reference code for standards issued as requirements in England',
-      format: (val) => val || 'None - not legally mandated',
-    },
     assurance: {
       label: 'Quality assurance',
       format: (val) =>
