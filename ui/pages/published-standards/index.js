@@ -23,8 +23,11 @@ export default function Standards({ data, schemaData, host }) {
   const { getSelections, updateQuery } = useQueryContext();
 
   useEffect(() => {
+    const currentSelections = getSelections();
+    const order = currentSelections.order || 'asc'
+    const orderBy = currentSelections.orderBy || 'name'
     const mandated = 'true';
-    const selections = { ...getSelections(), mandated };
+    const selections = { ...currentSelections, mandated, order, orderBy };
     updateQuery(selections, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
