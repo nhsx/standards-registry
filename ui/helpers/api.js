@@ -91,10 +91,12 @@ export function serialise(obj = {}) {
 }
 
 export async function read({ id }) {
+  console.log('Request URL: ', `${CKAN_URL}/package_show?id=${id}`); // TODO remove before PR
   return callApi(`${CKAN_URL}/package_show?id=${id}`);
 }
 
 export async function getPages() {
+  console.log('Request URL: ', `${PAGES_CKAN_URL}/ckanext_pages_list`); // TODO remove before PR
   return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
@@ -134,14 +136,20 @@ export async function list(
 
   const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
+  console.log('Request URL: ', `${CKAN_URL}/package_search?${ckanQuery}`); // TODO remove before PR
   return callApi(`${CKAN_URL}/package_search?${ckanQuery}`);
 }
 
 export async function schema(dataset = 'dataset') {
+  console.log(
+    'Request URL: ',
+    `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
+  ); // TODO remove before PR
   return callApi(`${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`);
 }
 
 export async function filterSearch(query = '') {
-  // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
+  // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*)) // TODO remove before PR
+  console.log('Request URL: ', `${CKAN_URL}/package_search${query}`); // TODO remove before PR
   return callApi(`${CKAN_URL}/package_search${query}`);
 }
