@@ -405,7 +405,6 @@ export function Filters({
               }
               numActive={numActive}
               // TODO: this should be configured in schema
-              //useRadio={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
               onClearAllClick={onClearAllClick}
