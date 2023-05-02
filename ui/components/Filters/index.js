@@ -6,7 +6,6 @@ import pick from 'lodash/pick';
 import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
-import { Radio } from '../Radio';
 
 const RequirementCheckBox = () => {
   const { getSelections, updateQuery } = useQueryContext();
@@ -209,7 +208,6 @@ export function Filter({
   field_name: fieldName,
   open,
   useSelect,
-  useRadio,
   numActive = 0,
   onlyChild,
   fullHeight,
@@ -253,35 +251,6 @@ export function Filter({
             value={query[fieldName] || ''}
           />
         </label>
-        {clearAll && (
-          <a
-            href="#"
-            className={classnames(styles.clearAll, styles[clearAllAlign])}
-            onClick={onClearAllClick}
-          >
-            Clear all
-          </a>
-        )}
-      </Expander>
-    );
-  }
-
-  if (useRadio) {
-    return (
-      <Expander
-        summary={summary}
-        className={classnames('nhsuk-filter', styles.filter)}
-        open={open}
-        noBorderTop={noBorderTop}
-        title={label}
-      >
-        <Radio
-          options={choices}
-          onChange={onSelectChange}
-          showAll={true}
-          value={query[fieldName] || ''}
-          name={fieldName}
-        />
         {clearAll && (
           <a
             href="#"
@@ -436,7 +405,7 @@ export function Filters({
               }
               numActive={numActive}
               // TODO: this should be configured in schema
-              useRadio={filter.field_name === 'standard_category'}
+              //useRadio={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
               onClearAllClick={onClearAllClick}
