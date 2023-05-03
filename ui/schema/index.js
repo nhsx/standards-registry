@@ -11,6 +11,7 @@ import {
 } from '../components';
 import format from 'date-fns/format';
 import ActionLink from '../components/ActionLink';
+import Logo from '../components/Logo';
 
 // `!!val?.length` => check whether empty array or unset val
 
@@ -87,16 +88,25 @@ const CategoryDetails = function () {
   );
 };
 
+const About = ({ owner, image_url }) => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {owner}
+      {image_url && <Logo owner={owner} image_url={image_url} />}
+    </div>
+  );
+};
+
 const schema = [
   {
     section_title: 'About this standard',
     owner: {
       label: 'Owner',
       accessor: 'organization.title',
-    },
-    logo: {
-      label: 'Logo goes in here to the right of "owner"',
-      format: () => "this is just a placeholder for the logo item"
+      format: (_, data) => {
+        const { title, image_url } = data.organization;
+        return <>{<About owner={title} image_url={image_url} />}</>;
+      },
     },
     reference_code: {
       label: 'Reference code for standards issued as requirements in England',
@@ -179,28 +189,26 @@ const schema = [
     },
     applies_to: {
       label: 'Applies to',
-      format: (val) => 
-      (val &&  <MarkdownBlock md={val} />) || 'data goes in here'
+      format: (val) =>
+        (val && <MarkdownBlock md={val} />) || 'data goes in here',
     },
     impacts_on: {
       label: 'Impacts on',
-      format: (val) => 
-      (val &&  <MarkdownBlock md={val} />) || 'data goes in here'
+      format: (val) =>
+        (val && <MarkdownBlock md={val} />) || 'data goes in here',
     },
     is_part_of: {
       label: 'Is part of',
-      format: (val) => 
-      (val &&  <MarkdownBlock md={val} />) || 'data goes in here'
+      format: (val) =>
+        (val && <MarkdownBlock md={val} />) || 'data goes in here',
     },
     comply_by_date: {
       label: 'Comply by',
-      format: (val) => 
-      (formatDate(val)) 
+      format: (val) => formatDate(val),
     },
     implementation_from_date: {
       label: 'Implementation from date',
-      format: (val) => 
-        (formatDate(val)) 
+      format: (val) => formatDate(val),
     },
   },
 
