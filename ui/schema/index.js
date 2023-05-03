@@ -88,7 +88,7 @@ const CategoryDetails = function () {
   );
 };
 
-const About = ({ owner, image_url }) => {
+const Owner = ({ owner, image_url }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       {owner}
@@ -99,22 +99,29 @@ const About = ({ owner, image_url }) => {
 
 const schema = [
   {
+    section_title: '',
+    alternate_title: {
+      label: 'Also known as',
+      accessor: 'alternate_name',
+    },
+  },
+  {
     section_title: 'About this standard',
     owner: {
       label: 'Owner',
-      accessor: 'organization.title',
+      accessor: 'owner',
       format: (_, data) => {
-        const { title, image_url } = data.organization;
-        return <>{<About owner={title} image_url={image_url} />}</>;
+        const { owner, logo } = data;
+        return <>{<Owner owner={owner} image_url={logo} />}</>;
       },
     },
     reference_code: {
       label: 'Reference code for standards issued as requirements in England',
-      format: (val) => val || 'None - not legally mandated',
+      format: (val) => val,
     },
     release_date: {
       label: 'Release date',
-      format: (val) => val || 'Data not yet available',
+      format: (val) => val,
     },
     status: {
       label: 'Status',
@@ -189,8 +196,9 @@ const schema = [
     },
     applies_to: {
       label: 'Applies to',
-      format: (val) =>
-        (val && <MarkdownBlock md={val} />) || 'data goes in here',
+      format: (val) => {
+        return <>{val && <MarkdownBlock md={val} />}</>;
+      },
     },
     impacts_on: {
       label: 'Impacts on',

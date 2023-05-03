@@ -13,6 +13,7 @@ import schema from '../../schema';
 
 const Id = ({ data }) => {
   const { title, description } = data;
+
   return (
     <>
       <DatasetSchema {...data} />
