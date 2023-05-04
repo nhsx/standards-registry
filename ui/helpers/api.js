@@ -22,7 +22,6 @@ async function callApi(url) {
   }
 }
 
-// TODO: neaten
 export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
   const query = {};
@@ -64,7 +63,7 @@ function getSearchQuery(q) {
   };
 
   const org = findKey(organisationMappings, (mappings) =>
-    mappings.includes(q.toLowerCase())
+    mappings.includes(q.dLowerCase())
   );
 
   if (org) {
@@ -88,7 +87,7 @@ export function serialise(obj = {}) {
 }
 
 export async function read({ id }) {
-  console.log('read() Request URL: ', `${CKAN_URL}/package_show?id=${id}`); // TODO remove before Production
+  console.log('read() Request URL: ', `${CKAN_URL}/package_show?id=${id}`);
   return callApi(`${CKAN_URL}/package_show?id=${id}`);
 }
 
@@ -96,7 +95,7 @@ export async function getPages() {
   console.log(
     'getPages() Request URL: ',
     `${PAGES_CKAN_URL}/ckanext_pages_list`
-  ); // TODO remove before Prodfuction
+  );
   return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
@@ -138,7 +137,7 @@ export async function list(
   console.log(
     'list() Request URL: ',
     `${CKAN_URL}/package_search?${ckanQuery}`
-  ); // TODO remove before Production
+  );
   return callApi(`${CKAN_URL}/package_search?${ckanQuery}`);
 }
 
@@ -146,7 +145,7 @@ export async function schema(dataset = 'dataset') {
   console.log(
     'schema() Request URL: ',
     `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
-  ); // TODO remove before Production
+  );
   return callApi(`${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`);
 }
 
@@ -154,6 +153,6 @@ export async function filterSearch(query = '') {
   console.log(
     'filterSearch() Request URL: ',
     `${CKAN_URL}/package_search${query}`
-  ); // TODO remove before Production
+  );
   return callApi(`${CKAN_URL}/package_search${query}`);
 }
