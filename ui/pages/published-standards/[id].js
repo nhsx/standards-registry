@@ -6,6 +6,7 @@ import {
   Model,
   ReviewDates,
   DatasetSchema,
+  MarkdownBlock,
 } from '../../components';
 
 import { read, getPages } from '../../helpers/api';
@@ -13,6 +14,7 @@ import schema from '../../schema';
 
 const Id = ({ data }) => {
   const { title, description } = data;
+
   return (
     <>
       <DatasetSchema {...data} />
@@ -26,6 +28,14 @@ const Id = ({ data }) => {
         <Row>
           <Col className="nhsuk-grid-column-two-thirds">
             <Model schema={schema} data={data} />
+            <div style={{ paddingTop: '30px' }}>
+              <Reading>
+                <h3>More information</h3>
+                {data.more_information && (
+                  <MarkdownBlock md={data.more_information} />
+                )}
+              </Reading>
+            </div>
             <ReviewDates data={data} />
           </Col>
         </Row>
