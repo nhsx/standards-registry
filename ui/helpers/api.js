@@ -63,7 +63,7 @@ function getSearchQuery(q) {
   };
 
   const org = findKey(organisationMappings, (mappings) =>
-    mappings.includes(q.dLowerCase())
+    mappings.includes(q.toLowerCase())
   );
 
   if (org) {
