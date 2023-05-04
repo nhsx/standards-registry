@@ -117,11 +117,11 @@ const schema = [
     },
     reference_code: {
       label: 'Reference code for standards issued as requirements in England',
-      format: (val) => val,
+      accessor: 'reference_code',
     },
     release_date: {
       label: 'Release date',
-      format: (val) => val,
+      format: (val) => formatDate(val),
     },
     status: {
       label: 'Status',
@@ -163,7 +163,7 @@ const schema = [
     },
     contact_details: {
       label: 'Contact details',
-      format: (val, data) => {
+      format: (_, data) => {
         return (
           (data.contact_details && (
             <Link
@@ -196,19 +196,15 @@ const schema = [
     },
     applies_to: {
       label: 'Applies to',
-      format: (val) => {
-        return <>{val && <MarkdownBlock md={val} />}</>;
-      },
+      format: (val) => val,
     },
     impacts_on: {
       label: 'Impacts on',
-      format: (val) =>
-        (val && <MarkdownBlock md={val} />) || 'data goes in here',
+      format: (val) => val,
     },
     is_part_of: {
       label: 'Is part of',
-      format: (val) =>
-        (val && <MarkdownBlock md={val} />) || 'data goes in here',
+      format: (val) => val,
     },
     comply_by_date: {
       label: 'Comply by',
@@ -224,97 +220,76 @@ const schema = [
     section_title: 'Topics and care settings',
     topic: {
       label: 'Topic',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
     care_setting: {
       label: 'Care setting',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
   },
   {
     section_title: 'Dependencies and related standards',
     dependencies: {
       label: 'Dependencies',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     related_standards: {
       label: 'Related standards',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
     section_title: 'Review Information',
     scope: {
       label: 'Scope',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => val,
     },
     sponsor: {
       label: 'Sponsor',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     senior_responsible_officer: {
       label: 'Senior Responsible Officer',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     business_lead: {
       label: 'Business Lead',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     assurance: {
       label: 'Assurance',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     implementation_review_date: {
       label: 'Implementation Review Date',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => formatDate(val),
     },
     registration_status: {
       label: 'Registration Status',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     registration_authority: {
       label: 'Registration Authority',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
     section_title: 'Assurance and endorsements',
     assurance: {
       label: 'Quality assurance',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
-    },
-    endorsements: {
-      label: 'Endorsements',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority: {
       label: 'Legal authority',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority_description: {
       label: 'Legal authority description',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     trusted_by: {
-      label: 'Trusted by',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      label: 'Implemented by',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
 ];
