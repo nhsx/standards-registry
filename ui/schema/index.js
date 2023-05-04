@@ -254,9 +254,17 @@ const schema = [
       label: 'Business Lead',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
+    contributor: {
+      label: 'Contributor',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
     assurance: {
       label: 'Assurance',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    approval_date: {
+      label: 'Approval date',
+      format: (val) => formatDate(val),
     },
     implementation_review_date: {
       label: 'Implementation Review Date',
