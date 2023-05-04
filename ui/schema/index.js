@@ -13,8 +13,6 @@ import format from 'date-fns/format';
 import ActionLink from '../components/ActionLink';
 import Logo from '../components/Logo';
 
-// `!!val?.length` => check whether empty array or unset val
-
 function truncate(str, chars = 50) {
   if (str.length > chars) {
     return `${str.substring(0, chars)}...`;
