@@ -3,6 +3,7 @@ import omit from 'lodash/omit';
 import without from 'lodash/without';
 import size from 'lodash/size';
 import { default as filtersSchema } from '../../schema/filters';
+import arrayShift from '../../helpers/arrayShift';
 
 import styles from './FilterSummary.module.scss';
 
@@ -50,12 +51,18 @@ export function FilterSummary({ schema }) {
     ? { ...chosenFilters, standard_category }
     : chosenFilters;
 
+  const filterOrder = Object.keys(chosenFilters);
+  if (filterOrder.length > 0) {
+    arrayShift(filterOrder, 'standard_category', 'end');
+  }
+  console.log(filterOrder);
+
   let showConnector = false;
 
   return (
     <div className={styles.filterSummary}>
       <ul className={styles.filterSection}>
-        {Object.keys(activeFilters)
+        {filterOrder
           .filter((key) =>
             schema.dataset_fields.find((f) => f.field_name === key)
           )
@@ -70,7 +77,7 @@ export function FilterSummary({ schema }) {
             const isType = settings.label.toLowerCase() === 'standard type';
             return (
               <div key={key}>
-                {isType && index >= 1 ? (
+                {isType && index >= 0 ? (
                   <h4>
                     <span className="nhsuk-u-visually-hidden">
                       The filters selected are inside this type
