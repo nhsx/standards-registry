@@ -28,12 +28,7 @@ const RenderFilters = ({
     const choice = settings.choices.find((c) => c.value === filter);
 
     if (!choice || !choice.label) {
-      switch (settings.field_name) {
-        case 'mandated':
-          return 'National Requirement';
-        default:
-          return settings.label;
-      }
+      return settings.label;
     }
     const label = choice.label;
     return label;
