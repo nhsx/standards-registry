@@ -10,20 +10,6 @@ const RenderFilters = ({
   schema,
   showConnector = false,
 }) => {
-  const mandatedField = schema.dataset_fields.find(
-    (f) => f.field_name === 'mandated'
-  );
-
-  if (mandatedField) {
-    mandatedField.choices = [
-      {
-        value: 'National requirement',
-        label: 'National requirement',
-        checked: true,
-      },
-    ];
-  }
-
   const renderLabel = (settings, filter) => {
     const choice = settings.choices.find((c) => c.value === filter);
 
