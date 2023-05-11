@@ -25,7 +25,6 @@ export function FilterSummary({ schema }) {
     'page',
     'orderBy',
     'order',
-    'mandated',
     'is_published_standard'
   );
 

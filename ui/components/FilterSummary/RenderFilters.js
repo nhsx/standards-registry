@@ -10,6 +10,12 @@ const RenderFilters = ({
   schema,
   showConnector = false,
 }) => {
+  if (schema.dataset_fields.find((f) => f.field_name === 'mandated')) {
+    console.log('ChosenFilters', chosenFilters);
+    console.log(schema.dataset_fields);
+    return <div>Contains MANDATED</div>;
+  }
+
   return filterOrder
     .filter((key) => schema.dataset_fields.find((f) => f.field_name === key))
     .map((key) => {
@@ -19,7 +25,6 @@ const RenderFilters = ({
         filters = [filters];
       }
       const isStandardType = settings.label.toLowerCase() === 'standard type';
-
       return (
         <div key={key}>
           {isStandardType ? <RenderInConnector /> : null}
