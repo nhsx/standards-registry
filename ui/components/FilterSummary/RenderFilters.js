@@ -10,6 +10,21 @@ const RenderFilters = ({
   schema,
   showConnector = false,
 }) => {
+  const renderLabel = (settings, filter) => {
+    const choice = settings.choices.find((c) => c.value === filter);
+
+    if (!choice || !choice.label) {
+      switch (settings.field_name) {
+        case 'mandated':
+          return 'National requirement';
+        default:
+          return settings.label;
+      }
+    }
+    const label = choice.label;
+    return label;
+  };
+
   return filterOrder
     .filter((key) => schema.dataset_fields.find((f) => f.field_name === key))
     .map((key) => {
@@ -19,7 +34,6 @@ const RenderFilters = ({
         filters = [filters];
       }
       const isStandardType = settings.label.toLowerCase() === 'standard type';
-
       return (
         <div key={key}>
           {isStandardType ? <RenderInConnector /> : null}
@@ -28,9 +42,6 @@ const RenderFilters = ({
               (index > 0 && filtersSchema[key] && filtersSchema[key].type) ||
               'and'
             ).toLowerCase();
-            const label = settings.choices.find(
-              (c) => c.value === filter
-            ).label;
             return (
               <li key={index}>
                 {showConnector && !isStandardType && (
@@ -41,7 +52,7 @@ const RenderFilters = ({
                 )}
                 {(showConnector = true)}
                 <FilterWidget onClick={() => removeFilter(key, filter)}>
-                  {label}
+                  {renderLabel(settings, filter)}
                 </FilterWidget>
               </li>
             );
