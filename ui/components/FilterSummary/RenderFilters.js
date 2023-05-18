@@ -17,6 +17,10 @@ const RenderFilters = ({
       switch (settings.field_name) {
         case 'mandated':
           return 'National requirement';
+        case 'is_published_standard':
+          return chosenFilters.is_published_standard === 'true'
+            ? 'Published Standard'
+            : 'Future Standard';
         default:
           return settings.label;
       }

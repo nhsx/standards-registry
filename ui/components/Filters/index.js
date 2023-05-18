@@ -87,6 +87,7 @@ const PublishedCheckBox = () => {
   const { getSelections, updateQuery } = useQueryContext();
   const [isPublished, setIsPublished] = useState(false);
   const [isFuture, setIsFuture] = useState(false);
+  const [numActive, setNumActive] = useState(0);
 
   const selections = getSelections();
 
@@ -95,18 +96,21 @@ const PublishedCheckBox = () => {
     if (selections.is_published_standard === undefined) {
       setIsPublished(false);
       setIsFuture(false);
+      setNumActive(0);
       return;
     }
 
     if (selections.is_published_standard === 'true') {
       setIsPublished(true);
       setIsFuture(false);
+      setNumActive(1);
       return;
     }
 
     if (selections.is_published_standard === 'false') {
       setIsPublished(false);
       setIsFuture(true);
+      setNumActive(1);
       return;
     }
 
@@ -117,6 +121,7 @@ const PublishedCheckBox = () => {
   const clearChoices = (event) => {
     setIsPublished(false);
     setIsFuture(false);
+    setNumActive(0);
     const { name } = event.target;
     delete selections[name];
     updateQuery(selections, { replace: true });
@@ -136,11 +141,13 @@ const PublishedCheckBox = () => {
         setIsPublished(true);
         setIsFuture(false);
         queryValue = 'true';
+        setNumActive(1);
         break;
       case 'future':
         setIsFuture(true);
         setIsPublished(false);
         queryValue = 'false';
+        setNumActive(1);
         break;
     }
 
@@ -152,9 +159,19 @@ const PublishedCheckBox = () => {
     updateQuery(selections, { replace: true });
   };
 
+  const label = 'Published/Future Standard';
+
+  const summary = (
+    <span className={styles.filterHeader}>
+      {label}
+
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
+    </span>
+  );
+
   return (
     <Expander
-      summary={'Published/Future Standard'}
+      summary={summary}
       className={classnames('nhsuk-filter', styles.filter)}
       noBorderTop={false}
       title="Published/Future Standard"
