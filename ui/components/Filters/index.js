@@ -9,7 +9,7 @@ import styles from './Filters.module.scss';
 
 const RequirementCheckBox = () => {
   const { getSelections, updateQuery } = useQueryContext();
-  const [numActive, setNumActive] = useState(0);
+  const [numActive, setNumActive] = useState(getSelections().mandated);
 
   useEffect(() => {
     const selections = getSelections();
@@ -26,9 +26,9 @@ const RequirementCheckBox = () => {
 
     if (checked) {
       selections[name] = checked;
-      setNumActive(1);
+      setNumActive(numActive + 1);
     } else {
-      setNumActive(0);
+      setNumActive(numActive - 1);
     }
     updateQuery(selections, { replace: true });
   };
