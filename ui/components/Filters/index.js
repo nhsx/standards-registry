@@ -9,53 +9,77 @@ import styles from './Filters.module.scss';
 
 const RequirementCheckBox = () => {
   const { getSelections, updateQuery } = useQueryContext();
+  const [numActive, setNumActive] = useState(getSelections().mandated);
+
+  useEffect(() => {
+    const selections = getSelections();
+    if (selections.mandated) {
+      setNumActive(1);
+    }
+  });
 
   const selections = getSelections();
 
   const toggleMandated = (event) => {
     const { name, checked } = event.target;
     delete selections[name];
+
     if (checked) {
       selections[name] = checked;
+      setNumActive(numActive + 1);
+    } else {
+      setNumActive(numActive - 1);
     }
     updateQuery(selections, { replace: true });
   };
 
+  const label = 'Requirement';
+
+  const summary = (
+    <span className={styles.filterHeader}>
+      {label}
+
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
+    </span>
+  );
+
   return (
-    <Expander
-      summary={'Requirement'}
-      className={classnames('nhsuk-filter', styles.filter)}
-      noBorderTop={false}
-      title="Requirement"
-    >
-      <div
-        className={classnames(
-          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
-          styles.checkboxItem
-        )}
+    <>
+      <Expander
+        summary={summary}
+        className={classnames('nhsuk-filter', styles.filter)}
+        noBorderTop={false}
+        title="Requirement"
       >
-        <input
-          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
-          id="mandated"
-          name="mandated"
-          type="checkbox"
-          value="nationally mandated"
-          checked={getSelections().mandated === 'true'}
-          onChange={toggleMandated}
-        />
-        <label
+        <div
           className={classnames(
-            'nhsuk-label',
-            'nhsuk-checkboxes__label',
-            'nhsuk-u-font-size-16',
-            styles.requirementLabel
+            'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+            styles.checkboxItem
           )}
-          htmlFor="mandated"
         >
-          National requirement
-        </label>
-      </div>
-    </Expander>
+          <input
+            className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+            id="mandated"
+            name="mandated"
+            type="checkbox"
+            value="nationally mandated"
+            checked={getSelections().mandated === 'true'}
+            onChange={toggleMandated}
+          />
+          <label
+            className={classnames(
+              'nhsuk-label',
+              'nhsuk-checkboxes__label',
+              'nhsuk-u-font-size-16',
+              styles.requirementLabel
+            )}
+            htmlFor="mandated"
+          >
+            National requirement
+          </label>
+        </div>
+      </Expander>
+    </>
   );
 };
 
