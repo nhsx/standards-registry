@@ -11,8 +11,7 @@ import {
 } from '../components';
 import format from 'date-fns/format';
 import ActionLink from '../components/ActionLink';
-
-// `!!val?.length` => check whether empty array or unset val
+import Logo from '../components/Logo';
 
 function truncate(str, chars = 50) {
   if (str.length > chars) {
@@ -87,12 +86,40 @@ const CategoryDetails = function () {
   );
 };
 
+const Owner = ({ owner, image_url }) => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {owner}
+      {image_url && <Logo owner={owner} image_url={image_url} />}
+    </div>
+  );
+};
+
 const schema = [
+  {
+    section_title: '',
+    alternate_title: {
+      label: 'Also known as',
+      accessor: 'alternate_name',
+    },
+  },
   {
     section_title: 'About this standard',
     owner: {
       label: 'Owner',
-      accessor: 'organization.title',
+      accessor: 'owner',
+      format: (_, data) => {
+        const { owner, logo } = data;
+        return <>{<Owner owner={owner} image_url={logo} />}</>;
+      },
+    },
+    reference_code: {
+      label: 'Reference code for standards issued as requirements in England',
+      accessor: 'reference_code',
+    },
+    release_date: {
+      label: 'Release date',
+      format: (val) => formatDate(val),
     },
     status: {
       label: 'Status',
@@ -134,7 +161,7 @@ const schema = [
     },
     contact_details: {
       label: 'Contact details',
-      format: (val, data) => {
+      format: (_, data) => {
         return (
           (data.contact_details && (
             <Link
@@ -165,48 +192,110 @@ const schema = [
         </>
       ),
     },
+    applies_to: {
+      label: 'Applies to',
+      format: (val) => val,
+    },
+    impacts_on: {
+      label: 'Impacts on',
+      format: (val) => val,
+    },
+    is_part_of: {
+      label: 'Is part of',
+      format: (val) => val,
+    },
+    comply_by_date: {
+      label: 'Comply by',
+      format: (val) => formatDate(val),
+    },
+    implementation_from_date: {
+      label: 'Implementation from date',
+      format: (val) => formatDate(val),
+    },
   },
+
   {
     section_title: 'Topics and care settings',
     topic: {
       label: 'Topic',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
     care_setting: {
       label: 'Care setting',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
   },
   {
     section_title: 'Dependencies and related standards',
     dependencies: {
       label: 'Dependencies',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     related_standards: {
       label: 'Related standards',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+  },
+  {
+    section_title: 'Review Information',
+    scope: {
+      label: 'Scope',
+      format: (val) => val,
+    },
+    sponsor: {
+      label: 'Sponsor',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    senior_responsible_officer: {
+      label: 'Senior Responsible Officer',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    business_lead: {
+      label: 'Business Lead',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    contributor: {
+      label: 'Contributor',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    assurance: {
+      label: 'Assurance',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    approval_date: {
+      label: 'Approval date',
+      format: (val) => formatDate(val),
+    },
+    implementation_review_date: {
+      label: 'Implementation Review Date',
+      format: (val) => formatDate(val),
+    },
+    registration_status: {
+      label: 'Registration Status',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    registration_authority: {
+      label: 'Registration Authority',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
     section_title: 'Assurance and endorsements',
-    reference_code: {
-      label: 'Reference code for standards issued as requirements in England',
-      format: (val) => val || 'None - not legally mandated',
-    },
     assurance: {
       label: 'Quality assurance',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
-    endorsements: {
-      label: 'Endorsements',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+    legal_authority: {
+      label: 'Legal authority',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    legal_authority_description: {
+      label: 'Legal authority description',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    trusted_by: {
+      label: 'Implemented by',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
 ];
