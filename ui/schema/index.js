@@ -116,7 +116,7 @@ const schema = [
     },
     reference_code: {
       hide_when_empty: true,
-      label: 'Reference code for standards issued as requirements in England',
+      label: 'Reference code',
       accessor: 'reference_code',
       format: (val) =>
         !!val?.length && (
