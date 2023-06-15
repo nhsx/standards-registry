@@ -116,6 +116,12 @@ const schema = [
     reference_code: {
       label: 'Reference code for standards issued as requirements in England',
       accessor: 'reference_code',
+      format: (val) =>
+        !!val?.length && (
+          <a href={val} target="_blank">
+            {val}
+          </a>
+        ),
     },
     release_date: {
       label: 'Release date',
@@ -229,11 +235,13 @@ const schema = [
     section_title: 'Dependencies and related standards',
     dependencies: {
       label: 'Dependencies',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) =>
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
     related_standards: {
       label: 'Related standards',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) =>
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
   },
   {
