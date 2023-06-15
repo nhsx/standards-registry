@@ -252,7 +252,7 @@ const schema = [
     },
     sponsor: {
       label: 'Sponsor',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     senior_responsible_officer: {
       label: 'Senior Responsible Officer',
@@ -260,7 +260,7 @@ const schema = [
     },
     business_lead: {
       label: 'Business Lead',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     contributor: {
       label: 'Contributor',
@@ -268,7 +268,7 @@ const schema = [
     },
     assurance: {
       label: 'Assurance',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     approval_date: {
       label: 'Approval date',
