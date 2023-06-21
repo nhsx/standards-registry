@@ -9,7 +9,7 @@ const Rows = (props) => {
   const { options, vals, data } = props;
   return (
     <dd className={styles.breakWord}>
-      {Array.isArray(vals) && vals.length > 0 ? (
+      {Array.isArray(vals) && vals.length > 1 ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
             <li key={index}>
