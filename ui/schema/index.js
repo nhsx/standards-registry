@@ -99,6 +99,7 @@ const schema = [
   {
     section_title: '',
     alternate_title: {
+      hide_when_empty: true,
       label: 'Also known as',
       accessor: 'alternate_name',
     },
@@ -114,7 +115,8 @@ const schema = [
       },
     },
     reference_code: {
-      label: 'Reference code for standards issued as requirements in England',
+      hide_when_empty: true,
+      label: 'Reference code',
       accessor: 'reference_code',
       format: (val) =>
         !!val?.length && (
@@ -201,14 +203,17 @@ const schema = [
       ),
     },
     applies_to: {
+      hide_when_empty: true,
       label: 'Applies to',
       format: (val) => val,
     },
     impacts_on: {
+      hide_when_empty: true,
       label: 'Impacts on',
       format: (val) => val,
     },
     is_part_of: {
+      hide_when_empty: true,
       label: 'Is part of',
       format: (val) => val,
     },
@@ -296,6 +301,7 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority: {
+      hide_when_empty: true,
       label: 'Legal authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
@@ -304,6 +310,7 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     trusted_by: {
+      hide_when_empty: true,
       label: 'Implemented by',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },

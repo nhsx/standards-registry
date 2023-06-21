@@ -29,12 +29,12 @@ const Id = ({ data }) => {
           <Col className="nhsuk-grid-column-two-thirds">
             <Model schema={schema} data={data} />
             <div style={{ paddingTop: '30px' }}>
-              <Reading>
-                <h3>More information</h3>
-                {data.more_information && (
+              {data.more_information && (
+                <Reading>
+                  <h3>More information</h3>
                   <MarkdownBlock md={data.more_information} />
-                )}
-              </Reading>
+                </Reading>
+              )}
             </div>
             <ReviewDates data={data} />
           </Col>
