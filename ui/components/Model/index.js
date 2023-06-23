@@ -9,7 +9,7 @@ const Rows = (props) => {
   const { options, vals, data } = props;
   return (
     <dd className={styles.breakWord}>
-      {Array.isArray(vals) && vals.length > 0 ? (
+      {Array.isArray(vals) && vals.length > 1 ? (
         <ul className="nhsuk-list-bullet nhsuk-u-font-size-16">
           {vals.map((val, index) => (
             <li key={index}>
@@ -25,6 +25,19 @@ const Rows = (props) => {
   );
 };
 
+const itDisplaysLabel = (key, entry, data) => {
+  const options = entry[key];
+  const hasData = options.accessor
+    ? get(data, options.accessor, data[key])
+    : data[key];
+
+  if (hasData && hasData.length > 0) {
+    return true;
+  }
+
+  return !entry[key].hide_when_empty;
+};
+
 const Section = ({ entry, data }) => {
   return (
     <>
@@ -33,6 +46,7 @@ const Section = ({ entry, data }) => {
       </h2>
       {Object.keys(entry)
         .filter((key) => entry[key].label)
+        .filter((key) => itDisplaysLabel(key, entry, data))
         .map((key, index) => {
           const options = entry[key];
           const val = options.accessor

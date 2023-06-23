@@ -99,6 +99,7 @@ const schema = [
   {
     section_title: '',
     alternate_title: {
+      hide_when_empty: true,
       label: 'Also known as',
       accessor: 'alternate_name',
     },
@@ -114,8 +115,15 @@ const schema = [
       },
     },
     reference_code: {
-      label: 'Reference code for standards issued as requirements in England',
+      hide_when_empty: true,
+      label: 'Reference code',
       accessor: 'reference_code',
+      format: (val) =>
+        !!val?.length && (
+          <a href={val} target="_blank">
+            {val}
+          </a>
+        ),
     },
     release_date: {
       label: 'Release date',
@@ -182,25 +190,30 @@ const schema = [
       format: (val, data) => (
         <>
           {val && <MarkdownBlock md={val} />}
-          {data.documentation_link && (
+          {data.documentation_link.length > 0 ? (
             <ActionLink
               id="documentation-link"
               link={data.documentation_link}
               title={data.title}
             />
+          ) : (
+            <span>Not Available</span>
           )}
         </>
       ),
     },
     applies_to: {
+      hide_when_empty: true,
       label: 'Applies to',
       format: (val) => val,
     },
     impacts_on: {
+      hide_when_empty: true,
       label: 'Impacts on',
       format: (val) => val,
     },
     is_part_of: {
+      hide_when_empty: true,
       label: 'Is part of',
       format: (val) => val,
     },
@@ -229,11 +242,13 @@ const schema = [
     section_title: 'Dependencies and related standards',
     dependencies: {
       label: 'Dependencies',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) =>
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
     related_standards: {
       label: 'Related standards',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) =>
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
   },
   {
@@ -244,7 +259,7 @@ const schema = [
     },
     sponsor: {
       label: 'Sponsor',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     senior_responsible_officer: {
       label: 'Senior Responsible Officer',
@@ -252,7 +267,7 @@ const schema = [
     },
     business_lead: {
       label: 'Business Lead',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     contributor: {
       label: 'Contributor',
@@ -260,7 +275,7 @@ const schema = [
     },
     assurance: {
       label: 'Assurance',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     approval_date: {
       label: 'Approval date',
@@ -286,14 +301,17 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority: {
+      hide_when_empty: true,
       label: 'Legal authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority_description: {
+      hide_when_empty: true,
       label: 'Legal authority description',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     trusted_by: {
+      hide_when_empty: true,
       label: 'Implemented by',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
