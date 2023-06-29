@@ -7,6 +7,241 @@ import { CheckboxGroup, OptionSelect, Expander, Select } from '../';
 
 import styles from './Filters.module.scss';
 
+const RequirementCheckBox = () => {
+  const { getSelections, updateQuery } = useQueryContext();
+  const [numActive, setNumActive] = useState(getSelections().mandated);
+
+  useEffect(() => {
+    const selections = getSelections();
+    if (selections.mandated) {
+      setNumActive(1);
+    }
+  });
+
+  const selections = getSelections();
+
+  const toggleMandated = (event) => {
+    const { name, checked } = event.target;
+    delete selections[name];
+
+    if (checked) {
+      selections[name] = checked;
+      setNumActive(numActive + 1);
+    } else {
+      setNumActive(numActive - 1);
+    }
+    updateQuery(selections, { replace: true });
+  };
+
+  const label = 'Requirement';
+
+  const summary = (
+    <span className={styles.filterHeader}>
+      {label}
+
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
+    </span>
+  );
+
+  return (
+    <>
+      <Expander
+        summary={summary}
+        className={classnames('nhsuk-filter', styles.filter)}
+        noBorderTop={false}
+        title="Requirement"
+      >
+        <div
+          className={classnames(
+            'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+            styles.checkboxItem
+          )}
+        >
+          <input
+            className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+            id="mandated"
+            name="mandated"
+            type="checkbox"
+            value="nationally mandated"
+            checked={getSelections().mandated === 'true'}
+            onChange={toggleMandated}
+          />
+          <label
+            className={classnames(
+              'nhsuk-label',
+              'nhsuk-checkboxes__label',
+              'nhsuk-u-font-size-16',
+              styles.requirementLabel
+            )}
+            htmlFor="mandated"
+          >
+            National requirement
+          </label>
+        </div>
+      </Expander>
+    </>
+  );
+};
+
+const PublishedCheckBox = () => {
+  const { getSelections, updateQuery } = useQueryContext();
+  const [isPublished, setIsPublished] = useState(false);
+  const [isFuture, setIsFuture] = useState(false);
+  const [numActive, setNumActive] = useState(0);
+
+  const selections = getSelections();
+
+  useEffect(() => {
+    const selections = getSelections();
+    if (selections.is_published_standard === undefined) {
+      setIsPublished(false);
+      setIsFuture(false);
+      setNumActive(0);
+      return;
+    }
+
+    if (selections.is_published_standard === 'true') {
+      setIsPublished(true);
+      setIsFuture(false);
+      setNumActive(1);
+      return;
+    }
+
+    if (selections.is_published_standard === 'false') {
+      setIsPublished(false);
+      setIsFuture(true);
+      setNumActive(1);
+      return;
+    }
+
+    return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const clearChoices = (event) => {
+    setIsPublished(false);
+    setIsFuture(false);
+    setNumActive(0);
+    const { name } = event.target;
+    delete selections[name];
+    updateQuery(selections, { replace: true });
+  };
+
+  const onClearAllClicked = (e) => {
+    e.target.name = 'is_published_standard';
+    e.preventDefault();
+    clearChoices(e);
+  };
+
+  const updatePublished = (event) => {
+    const { name, value } = event.target;
+    let queryValue = undefined;
+    switch (value) {
+      case 'published':
+        setIsPublished(true);
+        setIsFuture(false);
+        queryValue = 'true';
+        setNumActive(1);
+        break;
+      case 'future':
+        setIsFuture(true);
+        setIsPublished(false);
+        queryValue = 'false';
+        setNumActive(1);
+        break;
+    }
+
+    delete selections[name];
+    if (queryValue !== undefined) {
+      selections[name] = queryValue;
+    }
+
+    updateQuery(selections, { replace: true });
+  };
+
+  const label = 'Published/Future Standard';
+
+  const summary = (
+    <span className={styles.filterHeader}>
+      {label}
+
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
+    </span>
+  );
+
+  return (
+    <Expander
+      summary={summary}
+      className={classnames('nhsuk-filter', styles.filter)}
+      noBorderTop={false}
+      title="Published/Future Standard"
+    >
+      <div
+        className={classnames(
+          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+          styles.checkboxItem
+        )}
+      >
+        <input
+          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+          id="is_published_standard"
+          name="is_published_standard"
+          type="checkbox"
+          value="published"
+          checked={isPublished}
+          onChange={updatePublished}
+        />
+        <label
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
+          htmlFor="mandated"
+        >
+          Published
+        </label>
+      </div>
+
+      <div
+        className={classnames(
+          'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
+          styles.checkboxItem
+        )}
+      >
+        <input
+          className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
+          id="is_future_standard"
+          name="is_published_standard"
+          type="checkbox"
+          value="future"
+          checked={isFuture}
+          onChange={updatePublished}
+        />
+        <label
+          className={classnames(
+            'nhsuk-label',
+            'nhsuk-checkboxes__label',
+            'nhsuk-u-font-size-16',
+            styles.requirementLabel
+          )}
+          htmlFor="mandated"
+        >
+          Future
+        </label>
+      </div>
+      <a
+        href="#"
+        className={classnames(styles.clearAll)}
+        onClick={onClearAllClicked}
+      >
+        Clear all
+      </a>
+    </Expander>
+  );
+};
+
 export function Filter({
   label,
   choices,
@@ -30,7 +265,7 @@ export function Filter({
     <span className={styles.filterHeader}>
       {label}
 
-      {<span>{numActive} selected</span>}
+      {numActive > 0 ? <span>{numActive} selected</span> : null}
     </span>
   );
 
@@ -38,18 +273,39 @@ export function Filter({
     updateQuery({ ...query, [fieldName]: val || [] });
   }
 
-  return useSelect ? (
-    <label className="nhsuk-heading-m nhsuk-u-padding-top-3">
-      {label}
-      {summary}
-      <Select
-        options={choices}
-        onChange={onSelectChange}
-        showAll={true}
-        value={query[fieldName] || ''}
-      />
-    </label>
-  ) : (
+  if (useSelect) {
+    return (
+      <Expander
+        summary={summary}
+        className={classnames('nhsuk-filter', styles.filter)}
+        open={open}
+        noBorderTop={noBorderTop}
+        title={label}
+      >
+        <label className="nhsuk-heading-m nhsuk-u-padding-top-3">
+          {label}
+          {summary}
+          <Select
+            options={choices}
+            onChange={onSelectChange}
+            showAll={true}
+            value={query[fieldName] || ''}
+          />
+        </label>
+        {clearAll && (
+          <a
+            href="#"
+            className={classnames(styles.clearAll, styles[clearAllAlign])}
+            onClick={onClearAllClick}
+          >
+            Clear all
+          </a>
+        )}
+      </Expander>
+    );
+  }
+
+  return (
     <Expander
       summary={summary}
       className={classnames('nhsuk-filter', styles.filter)}
@@ -96,33 +352,12 @@ export function Filters({
   clearAllAlign = 'left',
   fullHeight,
   noBorderTop,
+  showRequirementFilter,
+  showPublishedFilter,
 }) {
   const { dataset_fields: fields } = schema;
   const { query, updateQuery } = useQueryContext();
   const [openFilters, setOpenFilters] = useState([]);
-  const filters = select(categories, fields).map((item) =>
-    item.field_name === 'status' ? mapStatus(item) : item
-  );
-
-  function mapStatus(item) {
-    return {
-      ...item,
-      label: 'Status',
-      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
-        (value) => {
-          const choice = item.choices.find((c) => c.value === value);
-          if (value === 'in-development') {
-            return {
-              ...choice,
-              value,
-              label: 'In development (APIs only)',
-            };
-          }
-          return choice;
-        }
-      ),
-    };
-  }
 
   const setItem = (name) => (event) => {
     const { checked, value } = event.target;
@@ -143,6 +378,35 @@ export function Filters({
       [name]: newVal.length ? newVal : null,
     });
   };
+
+  const filters = select(categories, fields).map((item) => {
+    switch (item.field_name) {
+      case 'status':
+        return mapStatus(item);
+      default:
+        return item;
+    }
+  });
+
+  function mapStatus(item) {
+    return {
+      ...item,
+      label: 'Status',
+      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
+        (value) => {
+          const choice = item.choices.find((c) => c.value === value);
+          if (value === 'in-development') {
+            return {
+              ...choice,
+              value,
+              label: 'In development (APIs only)',
+            };
+          }
+          return choice;
+        }
+      ),
+    };
+  }
 
   function onClearAllClick(e) {
     e.preventDefault();
@@ -177,10 +441,11 @@ export function Filters({
               key={filter.field_name}
               {...filter}
               open={expanded || openFilters.includes(filter.field_name)}
-              onChange={setItem(filter.field_name)}
+              onChange={
+                filter.onChange ? filter.onChange : setItem(filter.field_name)
+              }
               numActive={numActive}
               // TODO: this should be configured in schema
-              useSelect={filter.field_name === 'standard_category'}
               onlyChild={filters.length === 1}
               fullHeight={fullHeight}
               onClearAllClick={onClearAllClick}
@@ -190,6 +455,8 @@ export function Filters({
             />
           );
         })}
+        {showRequirementFilter && <RequirementCheckBox />}
+        {showPublishedFilter && <PublishedCheckBox />}
       </div>
     </div>
   );

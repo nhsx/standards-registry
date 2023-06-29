@@ -10,8 +10,8 @@ import {
   Dt,
 } from '../components';
 import format from 'date-fns/format';
-
-// `!!val?.length` => check whether empty array or unset val
+import ActionLink from '../components/ActionLink';
+import Logo from '../components/Logo';
 
 function truncate(str, chars = 50) {
   if (str.length > chars) {
@@ -86,12 +86,48 @@ const CategoryDetails = function () {
   );
 };
 
+const Owner = ({ owner, image_url }) => {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {owner}
+      {image_url && <Logo owner={owner} image_url={image_url} />}
+    </div>
+  );
+};
+
 const schema = [
+  {
+    section_title: '',
+    alternate_title: {
+      hide_when_empty: true,
+      label: 'Also known as',
+      accessor: 'alternate_name',
+    },
+  },
   {
     section_title: 'About this standard',
     owner: {
       label: 'Owner',
-      accessor: 'organization.title',
+      accessor: 'owner',
+      format: (_, data) => {
+        const { owner, logo } = data;
+        return <>{<Owner owner={owner} image_url={logo} />}</>;
+      },
+    },
+    reference_code: {
+      hide_when_empty: true,
+      label: 'Reference code',
+      accessor: 'reference_code',
+      format: (val) =>
+        !!val?.length && (
+          <a href={val} target="_blank">
+            {val}
+          </a>
+        ),
+    },
+    release_date: {
+      label: 'Release date',
+      format: (val) => formatDate(val),
     },
     status: {
       label: 'Status',
@@ -133,7 +169,7 @@ const schema = [
     },
     contact_details: {
       label: 'Contact details',
-      format: (val, data) => {
+      format: (_, data) => {
         return (
           (data.contact_details && (
             <Link
@@ -154,25 +190,52 @@ const schema = [
       format: (val, data) => (
         <>
           {val && <MarkdownBlock md={val} />}
-          {data.documentation_link && (
-            <DocumentationLink
+          {data.documentation_link.length > 0 ? (
+            <ActionLink
+              id="documentation-link"
               link={data.documentation_link}
               title={data.title}
             />
+          ) : (
+            <span>Not Available</span>
           )}
         </>
       ),
     },
+    applies_to: {
+      hide_when_empty: true,
+      label: 'Applies to',
+      format: (val) => val,
+    },
+    impacts_on: {
+      hide_when_empty: true,
+      label: 'Impacts on',
+      format: (val) => val,
+    },
+    is_part_of: {
+      hide_when_empty: true,
+      label: 'Is part of',
+      format: (val) => val,
+    },
+    comply_by_date: {
+      label: 'Comply by',
+      format: (val) => formatDate(val),
+    },
+    implementation_from_date: {
+      label: 'Implementation from date',
+      format: (val) => formatDate(val),
+    },
   },
+
   {
     section_title: 'Topics and care settings',
     topic: {
       label: 'Topic',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
     care_setting: {
       label: 'Care setting',
-      format: (val) => val || 'As yet unspecified',
+      format: (val) => val,
     },
   },
   {
@@ -180,31 +243,77 @@ const schema = [
     dependencies: {
       label: 'Dependencies',
       format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
     related_standards: {
       label: 'Related standards',
       format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) ||
-        'Information unavailable',
+        !!val?.length && <Link href={val} text={val} newWindow={true} />,
+    },
+  },
+  {
+    section_title: 'Review Information',
+    scope: {
+      label: 'Scope',
+      format: (val) => val,
+    },
+    sponsor: {
+      label: 'Sponsor',
+      format: (val) => val,
+    },
+    senior_responsible_officer: {
+      label: 'Senior Responsible Officer',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    business_lead: {
+      label: 'Business Lead',
+      format: (val) => val,
+    },
+    contributor: {
+      label: 'Contributor',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    assurance: {
+      label: 'Assurance',
+      format: (val) => val,
+    },
+    approval_date: {
+      label: 'Approval date',
+      format: (val) => formatDate(val),
+    },
+    implementation_review_date: {
+      label: 'Implementation Review Date',
+      format: (val) => formatDate(val),
+    },
+    registration_status: {
+      label: 'Registration Status',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    registration_authority: {
+      label: 'Registration Authority',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
     section_title: 'Assurance and endorsements',
-    reference_code: {
-      label: 'Reference code for standards issued as requirements in England',
-      format: (val) => val || 'None - not legally mandated',
-    },
     assurance: {
       label: 'Quality assurance',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
-    endorsements: {
-      label: 'Endorsements',
-      format: (val) =>
-        (!!val?.length && <MarkdownBlock md={val} />) || 'Not applicable',
+    legal_authority: {
+      hide_when_empty: true,
+      label: 'Legal authority',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    legal_authority_description: {
+      hide_when_empty: true,
+      label: 'Legal authority description',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    trusted_by: {
+      hide_when_empty: true,
+      label: 'Implemented by',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
 ];

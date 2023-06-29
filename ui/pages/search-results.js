@@ -42,17 +42,26 @@ export default function SearchResults({ data, schemaData, host }) {
         <div className="nhsuk-grid-column-three-quarters">
           <Search
             labelText="Search"
-            placeholder="Search published standards"
+            placeholder="Search standards"
             location="browse"
           />
         </div>
       </div>
       <Row>
         <Col>
-          <Filters schema={schemaData} />
+          <Filters
+            schema={schemaData}
+            showRequirementFilter={true}
+            showPublishedFilter={true}
+          />
         </Col>
         <Col colspan={3}>
-          <Dataset data={data} schema={schemaData} includeType={true} />
+          <Dataset
+            data={data}
+            schema={schemaData}
+            includeType={true}
+            futureAndPublished={true}
+          />
         </Col>
       </Row>
       <FeedbackFooter />
@@ -65,5 +74,5 @@ SearchResults.Layout = function SearchResults({ children }) {
 };
 
 export async function getServerSideProps(context) {
-  return await getPageProps(context, { content });
+  return await getPageProps(context, { content }, true);
 }

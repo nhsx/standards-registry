@@ -1,6 +1,5 @@
 export function Select({ options, onChange, id, value, label, showAll, name }) {
   return (
-    // <div className={classNames('nhsuk-form-group', className)}>
     <>
       {' '}
       {label && (
