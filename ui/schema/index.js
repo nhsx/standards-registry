@@ -306,6 +306,7 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     legal_authority_description: {
+      hide_when_empty: true,
       label: 'Legal authority description',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },

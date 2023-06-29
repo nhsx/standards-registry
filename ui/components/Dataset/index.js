@@ -16,7 +16,7 @@ function Embolden({ children }) {
   const { getSelections } = useQueryContext();
   const { q } = getSelections();
   const re = new RegExp(`(${q})`, 'ig');
-  const replaced = children.replace(re, '<strong>$1</strong>');
+  const replaced = children ? children.replace(re, '<strong>$1</strong>') : '';
 
   return (
     <span
