@@ -194,7 +194,7 @@ const schema = [
             <ActionLink
               id="documentation-link"
               link={data.documentation_link}
-              title={data.title ? data.title : ''}
+              title={data.title || ''}
             />
           ) : (
             <span>Not Available</span>
