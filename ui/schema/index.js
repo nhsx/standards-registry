@@ -190,11 +190,11 @@ const schema = [
       format: (val, data) => (
         <>
           {val && <MarkdownBlock md={val} />}
-          {data.documentation_link.length > 0 ? (
+          {data.documentation_link && data.documentation_link.length > 0 ? (
             <ActionLink
               id="documentation-link"
               link={data.documentation_link}
-              title={data.title}
+              title={data.title || ''}
             />
           ) : (
             <span>Not Available</span>
