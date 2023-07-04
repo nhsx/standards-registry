@@ -107,6 +107,7 @@ const schema = [
   {
     section_title: 'About this standard',
     owner: {
+      hide_when_empty: true,
       label: 'Owner',
       accessor: 'owner',
       format: (_, data) => {
@@ -130,6 +131,7 @@ const schema = [
       format: (val) => formatDate(val),
     },
     status: {
+      hide_when_empty: true,
       label: 'Status',
       format: (val) => (
         <>
@@ -164,6 +166,7 @@ const schema = [
       ),
     },
     standard_category: {
+      hide_when_empty: true,
       label: 'Standard type',
       more: <CategoryDetails />,
     },
@@ -230,10 +233,12 @@ const schema = [
   {
     section_title: 'Topics and care settings',
     topic: {
+      hide_when_empty: true,
       label: 'Topic',
       format: (val) => val,
     },
     care_setting: {
+      hide_when_empty: true,
       label: 'Care setting',
       format: (val) => val,
     },
@@ -241,11 +246,13 @@ const schema = [
   {
     section_title: 'Dependencies and related standards',
     dependencies: {
+      hide_when_empty: true,
       label: 'Dependencies',
       format: (val) =>
         !!val?.length && <Link href={val} text={val} newWindow={true} />,
     },
     related_standards: {
+      hide_when_empty: true,
       label: 'Related standards',
       format: (val) =>
         !!val?.length && <Link href={val} text={val} newWindow={true} />,
@@ -254,26 +261,32 @@ const schema = [
   {
     section_title: 'Review Information',
     scope: {
+      hide_when_empty: true,
       label: 'Scope',
       format: (val) => val,
     },
     sponsor: {
+      hide_when_empty: true,
       label: 'Sponsor',
       format: (val) => val,
     },
     senior_responsible_officer: {
+      hide_when_empty: true,
       label: 'Senior Responsible Officer',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     business_lead: {
+      hide_when_empty: true,
       label: 'Business Lead',
       format: (val) => val,
     },
     contributor: {
+      hide_when_empty: true,
       label: 'Contributor',
-      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+      format: (val) => val,
     },
     assurance: {
+      hide_when_empty: true,
       label: 'Assurance',
       format: (val) => val,
     },
@@ -282,21 +295,24 @@ const schema = [
       format: (val) => formatDate(val),
     },
     implementation_review_date: {
-      label: 'Implementation Review Date',
+      label: 'Implementation review Date',
       format: (val) => formatDate(val),
     },
     registration_status: {
-      label: 'Registration Status',
+      hide_when_empty: true,
+      label: 'Registration status',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     registration_authority: {
-      label: 'Registration Authority',
+      hide_when_empty: true,
+      label: 'Registration authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
     section_title: 'Assurance and endorsements',
     assurance: {
+      hide_when_empty: true,
       label: 'Quality assurance',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
