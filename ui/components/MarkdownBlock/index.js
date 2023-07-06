@@ -8,9 +8,7 @@ function replacer(matched) {
 }
 
 export default function MarkdownBlock({ md }) {
-  console.log('markdown', md);
-
-  const linkRegex = /(?<=href=\")[^\"]+/g;
+  const linkRegex = /(?<=href=")[^"]+/g;
   const decodedMd = md.replace(linkRegex, replacer);
 
   return (
