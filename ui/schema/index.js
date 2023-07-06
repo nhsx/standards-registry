@@ -34,7 +34,7 @@ function TruncateLink({ link, email }) {
   return <a href={email ? `mailto:${link}` : link}>{truncate(link, 50)}</a>;
 }
 
-const sentenceCase = (str) => upperFirst(str.replaceAll('-', ' '));
+const sentenceCase = (str) => (str ? upperFirst(str.replaceAll('-', ' ')) : '');
 
 const DocumentationLink = ({ link = false, title }) =>
   !link ? (
