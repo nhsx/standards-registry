@@ -124,7 +124,7 @@ export default function Home({ children, ...props }) {
               </button>
             </div>
             {!props.hideBannerSearch && (
-              <Search placeholder="Search" location="nav" />
+              <Search placeholder="Search all standards" location="nav" />
             )}
           </div>
         </div>
