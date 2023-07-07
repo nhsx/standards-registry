@@ -210,6 +210,12 @@ const schema = [
       label: 'Impacts on',
       format: (val) => val,
     },
+    associated_medias: {
+      hide_when_empty: true,
+      label: 'Associated medias',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+
     is_part_of: {
       hide_when_empty: true,
       label: 'Is part of',
@@ -243,14 +249,12 @@ const schema = [
     dependencies: {
       hide_when_empty: true,
       label: 'Dependencies',
-      format: (val) =>
-        !!val?.length && <Link href={val} text={val} newWindow={true} />,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     related_standards: {
       hide_when_empty: true,
       label: 'Related standards',
-      format: (val) =>
-        !!val?.length && <Link href={val} text={val} newWindow={true} />,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
