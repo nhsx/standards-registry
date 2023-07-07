@@ -119,12 +119,7 @@ const schema = [
       hide_when_empty: true,
       label: 'Reference code',
       accessor: 'reference_code',
-      format: (val) =>
-        !!val?.length && (
-          <a href={val} target="_blank">
-            {val}
-          </a>
-        ),
+      format: (val) => !!val.length && val,
     },
     release_date: {
       label: 'Release date',
