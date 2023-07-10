@@ -51,6 +51,11 @@ function getSearchQuery(q) {
     return undefined;
   }
 
+  const searchPrefix = "rs:"; // Prefix to indicate Lucene query syntax
+  if (q.toLowerCase().startsWith(searchPrefix.toLowerCase())) {
+    return q.slice(searchPrefix.length);
+  }
+
   let query = `(title:${q}~ OR ${q})`;
 
   const organisationMappings = {
