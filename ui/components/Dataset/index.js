@@ -12,10 +12,15 @@ import DOMPurify from 'isomorphic-dompurify';
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
   format(parseISO(date), dateFormat);
 
+function escapeRegExp(text) {
+  return text && text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
 function Embolden({ children }) {
   const { getSelections } = useQueryContext();
   const { q } = getSelections();
-  const re = new RegExp(`(${q})`, 'ig');
+  const escapedQuery = escapeRegExp(q);
+  const re = new RegExp(`(${escapedQuery})`, 'ig');
   const replaced = children ? children.replace(re, '<strong>$1</strong>') : '';
 
   return (
