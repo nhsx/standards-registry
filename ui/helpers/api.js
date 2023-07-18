@@ -56,7 +56,7 @@ function getSearchQuery(q) {
     return q.slice(searchPrefix.length);
   }
 
-  const pattern =/^(DAPB|ISB)\s?[0-9]{4}\s?((Amd*|-)?\s?\d{2,4}\/?\d{0,4})?$/i
+  const pattern =/^(DAPB|ISB|DCB|SCCI)\s?[0-9]{4}\s?((Amd*|-)?\s?\d{2,4}\/?\d{0,4})?$/i
   const isMatch = pattern.test(q);
   if (isMatch) {
     return `reference_code:"${q}"`;
