@@ -226,7 +226,7 @@ const schema = [
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
-      label: 'Implementation from date',
+      label: 'Effective from',
       format: (val) => formatDate(val),
     },
   },
