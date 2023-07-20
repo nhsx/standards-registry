@@ -293,8 +293,8 @@ const schema = [
       label: 'Approval date',
       format: (val) => formatDate(val),
     },
-    implementation_review_date: {
-      label: 'Implementation review Date',
+    post_implementation_review_date: {
+      label: 'Post Implementation review Date',
       format: (val) => formatDate(val),
     },
     registration_status: {
