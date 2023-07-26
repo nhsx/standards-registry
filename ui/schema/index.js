@@ -24,7 +24,7 @@ function formatDate(date) {
   if (!date) {
     return 'Date not set';
   }
-  return format(new Date(date), 'dd MMM yyyy');
+  return format(new Date(date), 'dd/MM/yyyy');
 }
 
 function TruncateLink({ link, email }) {
