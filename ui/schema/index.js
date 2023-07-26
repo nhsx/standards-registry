@@ -166,6 +166,7 @@ const schema = [
       more: <CategoryDetails />,
     },
     contact_details: {
+      hide_when_empty: true,
       label: 'Contact details',
       format: (_, data) => {
         return (
