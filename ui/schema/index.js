@@ -166,6 +166,7 @@ const schema = [
       more: <CategoryDetails />,
     },
     contact_details: {
+      hide_when_empty: true,
       label: 'Contact details',
       format: (_, data) => {
         return (
@@ -219,14 +220,14 @@ const schema = [
     is_part_of: {
       hide_when_empty: true,
       label: 'Is part of',
-      format: (val) => val,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
       label: 'Comply by',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
-      label: 'Implementation from date',
+      label: 'Effective from',
       format: (val) => formatDate(val),
     },
   },
