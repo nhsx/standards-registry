@@ -219,7 +219,7 @@ const schema = [
     is_part_of: {
       hide_when_empty: true,
       label: 'Is part of',
-      format: (val) => val,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
       label: 'Comply by',
