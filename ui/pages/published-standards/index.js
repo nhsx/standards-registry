@@ -24,10 +24,9 @@ export default function Standards({ data, schemaData, host }) {
 
   useEffect(() => {
     const currentSelections = getSelections();
-    const order = currentSelections.order || 'asc'
-    const orderBy = currentSelections.orderBy || 'name'
-    const mandated = 'true';
-    const selections = { ...currentSelections, mandated, order, orderBy };
+    const order = currentSelections.order || 'asc';
+    const orderBy = currentSelections.orderBy || 'name';
+    const selections = { ...currentSelections, order, orderBy };
     updateQuery(selections, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
