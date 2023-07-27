@@ -160,7 +160,6 @@ export default function Home({ pages, host, ...props }) {
 }
 
 export function HomepageHero({ recent }) {
-  console.log('Recent released standards', recent);
   const standardsPage = 'published-standards';
   return (
     <Hero>
@@ -207,11 +206,15 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      recent: recent
-        ? recent.results
-            .filter((item) => Date(item.release_date) <= Date().toISOString())
-            .slice(0, 3)
-        : [],
+      recent:
+        recent && recent.results
+          ? recent.results
+              .filter((item) => {
+                const [year, month, day] = item.release_date.split('-');
+                return new Date(year, month, day) <= new Date();
+              })
+              .slice(0, 3)
+          : [],
       pages,
       content: staticPageContent,
     },
