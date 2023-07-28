@@ -24,7 +24,7 @@ function formatDate(date) {
   if (!date) {
     return 'Date not set';
   }
-  return format(new Date(date), 'MMM yyyy');
+  return format(new Date(date), 'dd/MM/yyyy');
 }
 
 function TruncateLink({ link, email }) {
@@ -166,6 +166,7 @@ const schema = [
       more: <CategoryDetails />,
     },
     contact_details: {
+      hide_when_empty: true,
       label: 'Contact details',
       format: (_, data) => {
         return (
@@ -219,14 +220,14 @@ const schema = [
     is_part_of: {
       hide_when_empty: true,
       label: 'Is part of',
-      format: (val) => val,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
       label: 'Comply by',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
-      label: 'Implementation from date',
+      label: 'Effective from',
       format: (val) => formatDate(val),
     },
   },
@@ -293,8 +294,8 @@ const schema = [
       label: 'Approval date',
       format: (val) => formatDate(val),
     },
-    implementation_review_date: {
-      label: 'Implementation review Date',
+    post_implementation_review_date: {
+      label: 'Post Implementation review Date',
       format: (val) => formatDate(val),
     },
     registration_status: {
