@@ -211,7 +211,9 @@ export async function getServerSideProps() {
           ? recent.results
               .filter((item) => {
                 const [year, month, day] = item.release_date.split('-');
-                return new Date(year, month, day) <= new Date();
+                const now = new Date();
+                const itemDate = Date.parse(`${year}-${month}-${day}`);
+                return itemDate <= now.setHours(23, 59, 59);
               })
               .slice(0, 3)
           : [],
