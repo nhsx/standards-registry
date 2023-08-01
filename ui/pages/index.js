@@ -213,7 +213,7 @@ export async function getServerSideProps() {
                 const [year, month, day] = item.release_date.split('-');
                 const now = new Date();
                 const itemDate = Date.parse(`${year}-${month}-${day}`);
-                return itemDate <= now.setHours(23, 59, 59);
+                return itemDate <= now;
               })
               .slice(0, 3)
           : [],
