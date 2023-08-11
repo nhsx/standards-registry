@@ -173,7 +173,7 @@ export function HomepageHero({ recent }) {
         </div>
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>
-            <h2>Latest standards</h2>
+            <h2>Latest released standards</h2>
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
               {recent.map((standard) => (
                 <li key={standard.id}>
@@ -201,12 +201,22 @@ function HomeLayout({ children, ...props }) {
 Home.Layout = HomeLayout;
 
 export async function getServerSideProps() {
-  const recent = await list({ sort: { metadata_modified: 'desc' } });
+  const recent = await list({ sort: { release_date: 'desc' } });
   const pages = await getPages();
 
   return {
     props: {
-      recent: recent.results.slice(0, 3),
+      recent:
+        recent && recent.results
+          ? recent.results
+              .filter((item) => {
+                const [year, month, day] = item.release_date.split('-');
+                const now = new Date();
+                const itemDate = Date.parse(`${year}-${month}-${day}`);
+                return itemDate <= now;
+              })
+              .slice(0, 3)
+          : [],
       pages,
       content: staticPageContent,
     },

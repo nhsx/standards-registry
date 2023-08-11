@@ -13,10 +13,11 @@ const RequirementCheckBox = () => {
 
   useEffect(() => {
     const selections = getSelections();
+    setNumActive(0);
     if (selections.mandated) {
       setNumActive(1);
     }
-  });
+  }, [getSelections]);
 
   const selections = getSelections();
 
