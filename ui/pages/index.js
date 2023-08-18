@@ -210,6 +210,10 @@ export async function getServerSideProps() {
         recent && recent.results
           ? recent.results
               .filter((item) => {
+                return !!item.release_date;
+              })
+              .filter((item) => {
+                console.log('Item', item);
                 const [year, month, day] = item.release_date.split('-');
                 const now = new Date();
                 const itemDate = Date.parse(`${year}-${month}-${day}`);
