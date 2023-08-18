@@ -201,7 +201,10 @@ function HomeLayout({ children, ...props }) {
 Home.Layout = HomeLayout;
 
 export async function getServerSideProps() {
-  const recent = await list({ sort: { release_date: 'desc' } });
+  const recent = await list({
+    sort: { release_date: 'desc' },
+    is_published_standard: true,
+  });
   const pages = await getPages();
 
   return {
@@ -209,7 +212,11 @@ export async function getServerSideProps() {
       recent:
         recent && recent.results
           ? recent.results
+
               .filter((item) => {
+                if (!item.release_date) {
+                  return false;
+                }
                 const [year, month, day] = item.release_date.split('-');
                 const now = new Date();
                 const itemDate = Date.parse(`${year}-${month}-${day}`);
