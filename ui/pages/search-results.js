@@ -12,6 +12,7 @@ import {
 } from '../components';
 import { getPageProps } from '../helpers/getPageProps';
 import { useQueryContext } from '../context/query';
+import { useEffect } from 'react';
 
 const content = {
   title: 'Search results',
@@ -24,11 +25,21 @@ const content = {
 };
 
 export default function SearchResults({ data, schemaData, host }) {
-  const { query } = useQueryContext();
+  const { query, updateQuery } = useQueryContext();
   const { q: searchTerm } = query;
   const title = searchTerm
     ? [query.q, content.title].join(' - ')
     : content.title;
+
+  useEffect(() => {
+    let orderBy = null;
+    let order = null;
+    if (!query || !searchTerm || searchTerm === '') {
+      orderBy = 'name';
+      order = 'asc';
+    }
+    updateQuery({ ...query, orderBy, order });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Page title={`${title} - NHS Data Standards Directory`} host={host}>
