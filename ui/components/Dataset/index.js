@@ -203,7 +203,6 @@ export default function Dataset({
   }, [query]);
 
   useEffect(() => {
-    console.log('Search Term', searchTerm);
     let orderBy = null;
     let order = null;
     if (!searchTerm || searchTerm === '') {
