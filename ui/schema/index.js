@@ -343,13 +343,11 @@ export const upcomingStandard = [
     sortable: true,
     defaultSort: 'asc',
     formatter: (val, row) => {
-      console.log('ROW', row);
-
       return (
         <>
           <p>
             <strong>
-              <a href={`http://localhost:3000/published-standards/${row.name}`}>
+              <a href={`http://localhost:3000/future-standards/${row.name}`}>
                 {row.title}
               </a>
             </strong>
