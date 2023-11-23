@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { setCookie, hasCookie } from 'cookies-next';
 import classnames from 'classnames';
 import styles from './style.module.scss';
+import { useContentContext } from '../../context/content';
 
 export const Cookies = ({ choice }) => {
   const [consentChoice, consentChoiceSet] = useState(choice);
+  const { content } = useContentContext();
+  const { title } = content;
   useEffect(() => {
     consentChoiceSet(hasCookie('localConsent'));
   }, [choice]);
@@ -28,7 +31,7 @@ export const Cookies = ({ choice }) => {
         >
           <div className="nhsuk-width-container">
             <p className="nhsuk-heading-s">
-              Cookies on the NHS Data Standards Directory
+              {`Cookies on the ${title} website`}
             </p>
             <p>
               We use essential cookies to make this service work. We&lsquo;d
