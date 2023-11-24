@@ -203,8 +203,13 @@ export default function Dataset({
   }, [query]);
 
   useEffect(() => {
-    const orderBy = 'name';
-    const order = 'asc';
+    let orderBy = null;
+    let order = null;
+    if (!searchTerm || searchTerm === '') {
+      orderBy = 'name';
+      order = 'asc';
+    }
+
     updateQuery({ ...query, orderBy, order });
     setPageLoaded(true);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
