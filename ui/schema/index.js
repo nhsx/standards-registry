@@ -346,7 +346,11 @@ export const upcomingStandard = [
       return (
         <>
           <p>
-            <strong>{row.title}</strong>
+            <strong>
+              <a href={`http://localhost:3000/future-standards/${row.name}`}>
+                {row.title}
+              </a>
+            </strong>
             <br />
             {row.description}
           </p>
