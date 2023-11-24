@@ -16,7 +16,7 @@ import { useQueryContext } from '../context/query';
 const content = {
   title: 'Search results',
   intro:
-    'Explore published standards and APIs used to format and exchange healthcare data in England.',
+    'Discover recognized published and future standards that help things work together for service users in health and adult social care within England.',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
     all: '{{num}} result{{#plural}}s{{/plural}}',
@@ -31,7 +31,7 @@ export default function SearchResults({ data, schemaData, host }) {
     : content.title;
 
   return (
-    <Page title={`${title} - NHS Data Standards Directory`} host={host}>
+    <Page title={`${title} =`} host={host}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>
