@@ -1,3 +1,7 @@
-.markdown p {
+.markdown,
+.markdown p,
+.markdown ul,
+.markdown li,
+.markdown ol {
   font-size: 1rem;
 }
