@@ -6,6 +6,6 @@
   font-size: 1rem;
 }
 
-.markdown ul {
-  line-height: 2rem;
+.markdown li > ul {
+  margin-top: 0.5rem;
 }
