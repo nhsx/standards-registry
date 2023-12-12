@@ -168,18 +168,7 @@ const schema = [
     contact_details: {
       hide_when_empty: true,
       label: 'Contact details',
-      format: (_, data) => {
-        return (
-          (data.contact_details && (
-            <Link
-              href={`mailto:${data.contact_details}`}
-              text={data.contact_details}
-              newWindow={true}
-            />
-          )) ||
-          'Contact information not yet provided'
-        );
-      },
+      format: (val) => !!val?.length && <MarkdownBlock md={val}/>,
     },
   },
   {
