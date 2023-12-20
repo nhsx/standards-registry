@@ -24,12 +24,12 @@ export default function PhaseBanner({ homepage }) {
             BETA{' '}
           </strong>
           <span className="nhsuk-phase-banner__text">
-            This is a new service. Your{' '}
+            This is a new service powered by Metdataworks. Your{' '}
             <Link
               className={classnames('nhsuk-phase-banner', styles.bannerLink, {
                 [styles.homepage]: homepage,
               })}
-              href="https://forms.gle/CKKi5nFzUjuxHB9N6"
+              href="https://forms.office.com/e/VQTTC04qxb"
               newWindow={true}
             >
               feedback

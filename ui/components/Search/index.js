@@ -28,9 +28,17 @@ export default function Search({
   function onFormSubmit(e) {
     e.preventDefault();
     delete query.page; // remove page depth from query when submitting a new search
+
     if (navigate || location === 'nav') {
       router.push(`/search-results?q=${value || ''}`);
     } else {
+      query.order = null;
+      query.orderBy = null;
+      updateQuery({ ...query, q: value });
+    }
+    if (!value || value === '') {
+      query.order = 'name';
+      query.orderBy = 'asc';
       updateQuery({ ...query, q: value });
     }
     return false;

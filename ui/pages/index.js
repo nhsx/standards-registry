@@ -14,11 +14,12 @@ import { list } from '../helpers/api';
 import { useContentContext } from '../context';
 
 const staticPageContent = {
-  header: 'Find standards to record, handle and exchange data in England',
+  header:
+    'Discover standards that help things work together for service users in England',
   description:
-    'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
+    'Discover recognized published and future standards that help things work together for service users in health and adult social care within England.',
   intro:
-    'Use this directory to find standards for use in health and adult social care.',
+    'Use this service to find out about recognized published and future standards in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -169,7 +170,7 @@ export function HomepageHero({ recent }) {
             <Snippet inline>header</Snippet>
           </h1>
           <Snippet large>intro</Snippet>
-          <Search placeholder="Search all standards" navigate homepage />
+          <Search placeholder="Search standards" navigate homepage />
         </div>
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>

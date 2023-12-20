@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import merge from 'lodash/merge';
 
 const CONTENT = {
-  title: 'NHS Data Standards Directory',
+  title: 'NHS Standards Together',
   pagination: {
     summary: 'Showing {{from}} - {{to}} of {{total}} results',
   },
