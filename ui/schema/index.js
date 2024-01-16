@@ -361,8 +361,8 @@ export const upcomingStandard = [
     title: 'Estimated dates',
     formatter: (_, row) => (
       <Dl>
-        <Dt>Publication due:</Dt>
-        <Dd>{formatDate(row.publication_due_date)}</Dd>
+        <Dt>Approval due:</Dt>
+        <Dd>{formatDate(row.approval_date)}</Dd>
 
         <Dt>Implement from:</Dt>
         <Dd>{formatDate(row.implementation_from_date)}</Dd>
