@@ -317,7 +317,7 @@ const schema = [
     },
     trusted_by: {
       hide_when_empty: true,
-      label: 'Implemented by',
+      label: 'Collaborating Organisations',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
