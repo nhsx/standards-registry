@@ -9,7 +9,8 @@ function replacer(matched) {
 
 export default function MarkdownBlock({ md }) {
   const linkRegex = /(?<=href=")[^"]+/g;
-  const decodedMd = md.replace(linkRegex, replacer);
+  const mdString = Array.isArray(md) ? md.join("\n") : md;
+  const decodedMd = mdString.replace(linkRegex, replacer);
 
   return (
     <div className={`nhsuk-u-font-size-16 ${style.markdown}`}>
