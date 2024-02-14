@@ -38,7 +38,7 @@ export default function Home({ children, ...props }) {
   });
 
   const { content } = useContentContext();
-  const { title } = content;
+  const { title, headerTitle } = content;
 
   const datasetTitle = get(props, 'data.title');
 
@@ -53,7 +53,7 @@ export default function Home({ children, ...props }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{title}</title>
+        <title>{headerTitle}</title>
         <link rel="icon" href="/favicon.png" />
         <meta name="google-site-verification" content={siteCode} />
 
@@ -106,7 +106,7 @@ export default function Home({ children, ...props }) {
                     styles.serviceName
                   )}
                 >
-                  {title}
+                  {headerTitle}
                 </span>
               </a>
             </Link>

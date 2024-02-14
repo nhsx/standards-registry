@@ -58,12 +58,13 @@ export function DatasetSchema({
 // Schema:description - Description
 // Schema:url - defined url of page
 
-export function WebPageSchema({ title, description, host }) {
+export function WebPageSchema({ title, headerTitle, description, host }) {
   const router = useRouter();
   const data = {
     '@context': 'https://schema.org/',
     '@type': 'WebPage',
     title,
+    headerTitle,
     description,
     url: [host, router.asPath].join(''),
     contactPoint: {
