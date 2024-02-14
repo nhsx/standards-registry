@@ -20,9 +20,9 @@ function truncate(str, chars = 50) {
   return str;
 }
 
-function formatDate(date) {
+function formatDate(date = null) {
   if (!date) {
-    return 'Date not set';
+    return null;
   }
   return format(new Date(date), 'dd/MM/yyyy');
 }
@@ -122,6 +122,7 @@ const schema = [
       format: (val) => !!val.length && val,
     },
     release_date: {
+      hide_when_empty: true,
       label: 'Release date',
       format: (val) => formatDate(val),
     },
@@ -168,7 +169,7 @@ const schema = [
     contact_details: {
       hide_when_empty: true,
       label: 'Contact details',
-      format: (val) => !!val?.length && <MarkdownBlock md={val}/>,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {
@@ -212,10 +213,12 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
+      hide_when_empty: true,
       label: 'Comply by',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
+      hide_when_empty: true,
       label: 'Effective from',
       format: (val) => formatDate(val),
     },
@@ -280,10 +283,12 @@ const schema = [
       format: (val) => val,
     },
     approval_date: {
+      hide_when_empty: true,
       label: 'Approval date',
       format: (val) => formatDate(val),
     },
     post_implementation_review_date: {
+      hide_when_empty: true,
       label: 'Post Implementation review Date',
       format: (val) => formatDate(val),
     },
