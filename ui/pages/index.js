@@ -17,9 +17,9 @@ const staticPageContent = {
   header:
     'Discover standards that help things work together for service users in England',
   description:
-    'Discover recognized published and future standards that help things work together for service users in health and adult social care within England.',
+    'Discover recognised published and future standards that help things work together for service users in health and adult social care within England.',
   intro:
-    'Use this service to find out about recognized published and future standards in health and adult social care.',
+    'Use this service to find out about recognised published and future standards in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -176,8 +176,8 @@ export function HomepageHero({ recent }) {
           <div className={styles.sidebar}>
             <h2>Latest released standards</h2>
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
-              {recent.map((standard) => (
-                <li key={standard.id}>
+              {recent.map((standard, index) => (
+                <li key={standard.id || index}>
                   <Link href={`/${standardsPage}/${standard.name}`}>
                     {standard.title}
                   </Link>
