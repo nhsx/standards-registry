@@ -123,9 +123,15 @@ const schema = [
     },
     release_date: {
       hide_when_empty: true,
-      label: 'Release date',
+      label: 'Publication date',
       format: (val) => formatDate(val),
     },
+    publication_version: {
+      hide_when_empty: true,
+      label: 'Publication version',
+      format: (val) => !!val.length && val,
+    },
+
     status: {
       hide_when_empty: true,
       label: 'Status',
@@ -166,6 +172,16 @@ const schema = [
       label: 'Standard type',
       more: <CategoryDetails />,
     },
+    collection_level: {
+      hide_when_empty: true,
+      label: 'Collection level',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    frequency: {
+      hide_when_empty: true,
+      label: 'Frequency',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
     contact_details: {
       hide_when_empty: true,
       label: 'Contact point',
@@ -200,6 +216,16 @@ const schema = [
       hide_when_empty: true,
       label: 'Impacts on',
       format: (val) => val,
+    },
+    burden_year_1: {
+      hide_when_empty: true,
+      label: 'Burden cost in year 1 (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    burden_annual_rolling: {
+      hide_when_empty: true,
+      label: 'Yearly rolling burden cost (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     associated_medias: {
       hide_when_empty: true,
@@ -302,9 +328,15 @@ const schema = [
       label: 'Registration authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
+    assurance_expiry_date: {
+      hide_when_empty: true,
+      label: 'Assurance expiry date',
+      format: (val) => formatDate(val),
+    },
   },
   {
-    section_title: 'Assurance and endorsements',
+    section_title: 'Legal basis and endorsements',
+
     assurance: {
       hide_when_empty: true,
       label: 'Quality assurance',
