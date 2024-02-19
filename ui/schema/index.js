@@ -122,6 +122,7 @@ const schema = [
       format: (val) => !!val.length && val,
     },
     release_date: {
+      hide_when_empty: true,
       label: 'Publication date',
       format: (val) => formatDate(val),
     },
