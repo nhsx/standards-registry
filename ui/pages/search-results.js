@@ -15,9 +15,10 @@ import { useQueryContext } from '../context/query';
 import { useEffect } from 'react';
 
 const content = {
-  title: 'Search results',
+  headerTitle: 'Standards Together',
+  title: 'Search Results',
   intro:
-    'Discover recognized published and future standards that help things work together for service users in health and adult social care within England.',
+    'Discover recognised published and future standards that help things work together for service users in health and adult social care within England.',
   filters: {
     summary: '{{num}} item{{#plural}}s{{/plural}} related to: "{{searchTerm}}"',
     all: '{{num}} result{{#plural}}s{{/plural}}',
@@ -27,9 +28,8 @@ const content = {
 export default function SearchResults({ data, schemaData, host }) {
   const { query, updateQuery } = useQueryContext();
   const { q: searchTerm } = query;
-  const title = searchTerm
-    ? [query.q, content.title].join(' - ')
-    : content.title;
+  const title = searchTerm ? [query.q, content.title].join(' - ') : '';
+  const headerTitle = content.headerTitle || '';
 
   useEffect(() => {
     let orderBy = null;
@@ -42,7 +42,7 @@ export default function SearchResults({ data, schemaData, host }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Page title={`${title} =`} host={host}>
+    <Page title={`${title}`} headerTitle={headerTitle} host={host}>
       <h1>
         <Snippet inline>title</Snippet>
       </h1>
