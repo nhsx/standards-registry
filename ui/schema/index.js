@@ -20,9 +20,9 @@ function truncate(str, chars = 50) {
   return str;
 }
 
-function formatDate(date) {
+function formatDate(date = null) {
   if (!date) {
-    return 'Date not set';
+    return null;
   }
   return format(new Date(date), 'dd/MM/yyyy');
 }
@@ -125,9 +125,16 @@ const schema = [
       format: (val) => !!val.length && val,
     },
     release_date: {
-      label: 'Release date',
+      hide_when_empty: true,
+      label: 'Publication date',
       format: (val) => formatDate(val),
     },
+    publication_version: {
+      hide_when_empty: true,
+      label: 'Publication version',
+      format: (val) => !!val.length && val,
+    },
+
     status: {
       hide_when_empty: true,
       label: 'Status',
@@ -165,9 +172,19 @@ const schema = [
       label: 'Standard type',
       more: <CategoryDetails />,
     },
+    collection_level: {
+      hide_when_empty: true,
+      label: 'Collection level',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    frequency: {
+      hide_when_empty: true,
+      label: 'Frequency',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
     contact_details: {
       hide_when_empty: true,
-      label: 'Contact details',
+      label: 'Contact point',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
@@ -200,6 +217,16 @@ const schema = [
       label: 'Impacts on',
       format: (val) => val,
     },
+    burden_year_1: {
+      hide_when_empty: true,
+      label: 'Burden cost in year 1 (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    burden_annual_rolling: {
+      hide_when_empty: true,
+      label: 'Yearly rolling burden cost (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
     associated_medias: {
       hide_when_empty: true,
       label: 'Associated medias',
@@ -212,10 +239,12 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
+      hide_when_empty: true,
       label: 'Comply by',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
+      hide_when_empty: true,
       label: 'Effective from',
       format: (val) => formatDate(val),
     },
@@ -280,10 +309,12 @@ const schema = [
       format: (val) => val,
     },
     approval_date: {
+      hide_when_empty: true,
       label: 'Approval date',
       format: (val) => formatDate(val),
     },
     post_implementation_review_date: {
+      hide_when_empty: true,
       label: 'Post Implementation review Date',
       format: (val) => formatDate(val),
     },
@@ -297,9 +328,15 @@ const schema = [
       label: 'Registration authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
+    assurance_expiry_date: {
+      hide_when_empty: true,
+      label: 'Assurance expiry date',
+      format: (val) => formatDate(val),
+    },
   },
   {
-    section_title: 'Assurance and endorsements',
+    section_title: 'Legal basis and endorsements',
+
     assurance: {
       hide_when_empty: true,
       label: 'Quality assurance',
