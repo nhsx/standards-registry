@@ -8,10 +8,10 @@ import {
   Dl,
   Dd,
   Dt,
-} from '../components';
+} from '../../components';
 import format from 'date-fns/format';
-import ActionLink from '../components/ActionLink';
-import Logo from '../components/Logo';
+import ActionLink from '../../components/ActionLink';
+import Logo from '../../components/Logo';
 
 function truncate(str, chars = 50) {
   if (str.length > chars) {
@@ -63,23 +63,26 @@ const CategoryDetails = function () {
     >
       <div className="nhsuk-details__text">
         <Paragraph>
-          <strong>Record standards</strong> define what information to collect
-          and how to format it, for example when registering a new patient.
+          <strong>Collections.</strong> A Collection is a systematic gathering
+          of a specified selection of data or information for a particular
+          stated purpose from existing records held within health and care
+          systems and electronic devices.
         </Paragraph>
         <Paragraph>
-          <strong>Data definitions and terminologies</strong> define the format
-          of individual data items so they can be consistently represented, for
-          example dates or medication names. Reference sets and controlled lists
-          are also included.
+          <strong>Extractions.</strong> An extraction is a type of collection
+          that is pulled from an operational system by the data controller and
+          transmitted to the receiver without additional processing or
+          transcription by the sender.
         </Paragraph>
         <Paragraph>
-          <strong>Technical standards and specifications</strong> specify how to
-          make information available technically including how the data is
-          structured and transported.
+          <strong>Information standards.</strong> Information standards are
+          agreed ways of doing something, written down as a set of precise
+          criteria so they can be used as rules, guidelines, or definitions.
         </Paragraph>
         <Paragraph>
-          <strong>Information codes of practice</strong> are legal or best
-          practice guidelines on how information should be handled.
+          <strong>Technical Standards and specifications.</strong> Technical
+          standards and specifications specify how to make information available
+          technically including how the data is structured and transported.
         </Paragraph>
       </div>
     </Details>
@@ -138,21 +141,18 @@ const schema = [
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
-                  <strong>Active standards</strong> are stable, maintained and
-                  have been assured or endorsed for use by qualified bodies.
+                  <strong>Active.</strong> Active standards are stable,
+                  maintained and have been approved, assured or endorsed for use
+                  by qualified bodies.
                 </Paragraph>
                 <Paragraph>
-                  Standards <strong>in development</strong> are APIs or API
-                  standards in alpha or beta, meaning they are available for use
-                  but are still in progress and may change.
+                  <strong>Deprecated</strong> Deprecated standards are available
+                  for use and are maintained, but are being phased out, so new
+                  functionality will not be added.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Deprecated standards</strong> are older versions of a
-                  standard which are being phased out.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Retired standards</strong> are not being maintained
-                  and should not be used.
+                  <strong>Retired standards</strong> Retired standards are not
+                  being maintained or supported and should not be used.
                 </Paragraph>
               </div>
             </Details>
@@ -168,7 +168,7 @@ const schema = [
     contact_details: {
       hide_when_empty: true,
       label: 'Contact details',
-      format: (val) => !!val?.length && <MarkdownBlock md={val}/>,
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
   {

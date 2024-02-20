@@ -119,19 +119,19 @@ export default function Home({ pages, host, ...props }) {
         lineBreak={false}
       >
         <HomeElement
-          link={`/${standardsPage}?standard_category=Technical+standards+and+specifications`}
+          link={`/search-results?standard_category=collections&order=asc&orderBy=name`}
+          linkText="Collections"
+          description="Includes commissioning, mental health, emergency and public health data sets and contract monitoring reporting."
+        />
+        <HomeElement
+          link={`/search-results?standard_category=information+standards&order=asc&orderBy=name`}
+          linkText="Information standards"
+          description="Includes standards for clinical and care records and dictionaries for medicines, devices and data."
+        />
+        <HomeElement
+          link={`/search-results?standard_category=Technical+standards+and+specifications&order=asc&orderBy=name`}
           linkText="Technical standards and specifications"
-          description="Including FHIR and HL7 standards for interoperability and APIs."
-        />
-        <HomeElement
-          link={`/${standardsPage}?standard_category=Record+standards`}
-          linkText="Record standards"
-          description="Including formatting standards for clinical and care records."
-        />
-        <HomeElement
-          link={`/${standardsPage}?standard_category=Data+definitions+and+terminologies`}
-          linkText="Data definitions and terminologies"
-          description="Including dictionaries for medicines, devices and data."
+          description="Includes standards for interoperability and electronic data sharing."
         />
       </HomeSection>
 
