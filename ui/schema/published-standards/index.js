@@ -167,7 +167,7 @@ const schema = [
     },
     contact_details: {
       hide_when_empty: true,
-      label: 'Contact details',
+      label: 'Contact point',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
   },
