@@ -134,7 +134,6 @@ const schema = [
       label: 'Publication version',
       format: (val) => !!val.length && val,
     },
-
     status: {
       hide_when_empty: true,
       label: 'Status',

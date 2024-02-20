@@ -125,8 +125,14 @@ const schema = [
       format: (val) => !!val.length && val,
     },
     release_date: {
-      label: 'Release date',
+      hide_when_empty: true,
+      label: 'Publication date',
       format: (val) => formatDate(val),
+    },
+    publication_version: {
+      hide_when_empty: true,
+      label: 'Publication version',
+      format: (val) => !!val.length && val,
     },
     status: {
       hide_when_empty: true,
@@ -141,24 +147,18 @@ const schema = [
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
-                  <strong>Future standards.</strong> If the selected standard is
-                  a Future standard, show only statuses for Future standards.
+                  <strong>Active.</strong> Active standards are stable,
+                  maintained and have been approved, assured or endorsed for use
+                  by qualified bodies.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Proposed.</strong> New standards suggested to address
-                  unmet need(s), but further exploratory work is required.
+                  <strong>Deprecated</strong> Deprecated standards are available
+                  for use and are maintained, but are being phased out, so new
+                  functionality will not be added.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Draft in Progress.</strong> Standards that are in the
-                  process of being developed or going through consultation.
-                </Paragraph>
-                <Paragraph>
-                  <strong>On hold.</strong> Standards that have been paused but
-                  may resume in future.
-                </Paragraph>
-                <Paragraph>
-                  <strong>Withdrawn.</strong> Standards that have been withdrawn
-                  from any development and approval process.
+                  <strong>Retired standards</strong> Retired standards are not
+                  being maintained or supported and should not be used.
                 </Paragraph>
               </div>
             </Details>
@@ -170,6 +170,16 @@ const schema = [
       hide_when_empty: true,
       label: 'Standard type',
       more: <CategoryDetails />,
+    },
+    collection_level: {
+      hide_when_empty: true,
+      label: 'Collection level',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    frequency: {
+      hide_when_empty: true,
+      label: 'Frequency',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     contact_details: {
       hide_when_empty: true,
@@ -205,6 +215,16 @@ const schema = [
       hide_when_empty: true,
       label: 'Impacts on',
       format: (val) => val,
+    },
+    burden_year_1: {
+      hide_when_empty: true,
+      label: 'Burden cost in year 1 (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
+    },
+    burden_annual_rolling: {
+      hide_when_empty: true,
+      label: 'Yearly rolling burden cost (£)',
+      format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     associated_medias: {
       hide_when_empty: true,
@@ -303,9 +323,14 @@ const schema = [
       label: 'Registration authority',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
+    assurance_expiry_date: {
+      hide_when_empty: true,
+      label: 'Assurance expiry date',
+      format: (val) => formatDate(val),
+    },
   },
   {
-    section_title: 'Assurance and endorsements',
+    section_title: 'Legal basis and endorsements',
     assurance: {
       hide_when_empty: true,
       label: 'Quality assurance',
