@@ -22,7 +22,7 @@ function truncate(str, chars = 50) {
 
 function formatDate(date) {
   if (!date) {
-    return 'Date not set';
+    return null;
   }
   return format(new Date(date), 'dd/MM/yyyy');
 }
@@ -147,18 +147,20 @@ const schema = [
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
-                  <strong>Active.</strong> Active standards are stable,
-                  maintained and have been approved, assured or endorsed for use
-                  by qualified bodies.
+                  <strong>Proposed.</strong> New standards suggested to address
+                  unmet need(s), but further exploratory work is required.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Deprecated</strong> Deprecated standards are available
-                  for use and are maintained, but are being phased out, so new
-                  functionality will not be added.
+                  <strong>Draft in Progress.</strong> Standards that are in the
+                  process of being developed or going through consultation.
                 </Paragraph>
                 <Paragraph>
-                  <strong>Retired standards</strong> Retired standards are not
-                  being maintained or supported and should not be used.
+                  <strong>On Hold.</strong> Standards that have been paused but
+                  may resume in future.
+                </Paragraph>
+                <Paragraph>
+                  <strong>Withdrawn.</strong> Standards that have been withdrawn
+                  from any development and approval process.
                 </Paragraph>
               </div>
             </Details>
@@ -238,10 +240,12 @@ const schema = [
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
     comply_by_date: {
+      hide_when_empty: true,
       label: 'Comply by',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
+      hide_when_empty: true,
       label: 'Effective from',
       format: (val) => formatDate(val),
     },
@@ -306,10 +310,12 @@ const schema = [
       format: (val) => val,
     },
     approval_date: {
+      hide_when_empty: true,
       label: 'Approval date',
       format: (val) => formatDate(val),
     },
     post_implementation_review_date: {
+      hide_when_empty: true,
       label: 'Post Implementation review Date',
       format: (val) => formatDate(val),
     },
@@ -330,7 +336,7 @@ const schema = [
     },
   },
   {
-    section_title: 'Legal basis and endorsements',
+    section_title: 'Legal basis and endorsementsq',
     assurance: {
       hide_when_empty: true,
       label: 'Quality assurance',
