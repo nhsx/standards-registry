@@ -14,13 +14,24 @@ const getQueryForTitle = (query) => {
   return [joiner, queryTitle].join('');
 };
 
-export default function Page({ children, host, description, title }) {
+export default function Page({
+  children,
+  host,
+  description,
+  title,
+  headerTitle,
+}) {
   const { query } = useQueryContext();
   const { setPageTitle } = useContentContext();
   const pageTitle = `${setPageTitle(title)}${getQueryForTitle(query)}`;
   return (
     <>
-      <WebPageSchema title={title} description={description} host={host} />
+      <WebPageSchema
+        title={title}
+        headerTitle={headerTitle}
+        description={description}
+        host={host}
+      />
       <Head>
         <title>{pageTitle}</title>
         {description && <meta name="description" content={description} />}

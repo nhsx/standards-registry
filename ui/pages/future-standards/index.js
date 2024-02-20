@@ -1,4 +1,4 @@
-import { upcomingStandard as schema } from '../../schema';
+import { upcomingStandard as schema } from '../../schema/future-standards';
 import { getPageProps } from '../../helpers/getPageProps';
 import { useState, useEffect } from 'react';
 import { useQueryContext } from '../../context/query';

@@ -43,7 +43,7 @@ export default function Standards({ data, schemaData, host }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Discover recognized published standards that help things work together
+          Discover recognised published standards that help things work together
           for service users in health and adult social care within England.
         </p>
       </Reading>
