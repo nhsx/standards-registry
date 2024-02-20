@@ -393,19 +393,18 @@ export function Filters({
     return {
       ...item,
       label: 'Status',
-      choices: ['in-development', 'active', 'deprecated', 'retired'].map(
-        (value) => {
-          const choice = item.choices.find((c) => c.value === value);
-          if (value === 'in-development') {
-            return {
-              ...choice,
-              value,
-              label: 'In development (APIs only)',
-            };
-          }
-          return choice;
-        }
-      ),
+      choices: [
+        'active',
+        'deprecated',
+        'retired',
+        'proposed',
+        'draft-in-progress',
+        'on-hold',
+        'cancelled',
+      ].map((value) => {
+        const choice = item.choices.find((c) => c.value === value);
+        return choice;
+      }),
     };
   }
 

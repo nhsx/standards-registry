@@ -10,7 +10,7 @@ import {
 } from '../../components';
 
 import { read, getPages } from '../../helpers/api';
-import schema from '../../schema';
+import schema from '../../schema/future-standards';
 
 const Id = ({ data }) => {
   const { title, description } = data;
