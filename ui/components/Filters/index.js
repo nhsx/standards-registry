@@ -400,7 +400,7 @@ export function Filters({
         'proposed',
         'draft-in-progress',
         'on-hold',
-        'cancelled',
+        'withdrawn',
       ].map((value) => {
         const choice = item.choices.find((c) => c.value === value);
         return choice;

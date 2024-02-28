@@ -147,6 +147,10 @@ const schema = [
             >
               <div className="nhsuk-details__text">
                 <Paragraph>
+                  <strong>Future Standards.</strong> If the selected standard is
+                  a Future standard, show only statuses for Future standards.
+                </Paragraph>
+                <Paragraph>
                   <strong>Proposed.</strong> New standards suggested to address
                   unmet need(s), but further exploratory work is required.
                 </Paragraph>
