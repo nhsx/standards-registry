@@ -125,7 +125,7 @@ export async function list(
     }
   }
 
-  if (!q) {
+  if (!q && !sort) {
     sort = {
       ['name']: 'asc',
     };
