@@ -12,10 +12,15 @@ import DOMPurify from 'isomorphic-dompurify';
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
   format(parseISO(date), dateFormat);
 
+function escapeRegExp(text) {
+  return text && text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
 function Embolden({ children }) {
   const { getSelections } = useQueryContext();
   const { q } = getSelections();
-  const re = new RegExp(`(${q})`, 'ig');
+  const escapedQuery = escapeRegExp(q);
+  const re = new RegExp(`(${escapedQuery})`, 'ig');
   const replaced = children ? children.replace(re, '<strong>$1</strong>') : '';
 
   return (
@@ -198,8 +203,13 @@ export default function Dataset({
   }, [query]);
 
   useEffect(() => {
-    const orderBy = 'name';
-    const order = 'asc';
+    let orderBy = null;
+    let order = null;
+    if (!searchTerm || searchTerm === '') {
+      orderBy = 'name';
+      order = 'asc';
+    }
+
     updateQuery({ ...query, orderBy, order });
     setPageLoaded(true);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -221,8 +231,8 @@ export default function Dataset({
       </div>
       {count > 0 ? (
         <ul className={styles.list} id="browse-results">
-          {results.map((model) => (
-            <li key={model.id} className={styles.listItem}>
+          {results.map((model, index) => (
+            <li key={model.id || index} className={styles.listItem}>
               <Model model={model} includeType={includeType} />
             </li>
           ))}

@@ -24,10 +24,9 @@ export default function Standards({ data, schemaData, host }) {
 
   useEffect(() => {
     const currentSelections = getSelections();
-    const order = currentSelections.order || 'asc'
-    const orderBy = currentSelections.orderBy || 'name'
-    const mandated = 'true';
-    const selections = { ...currentSelections, mandated, order, orderBy };
+    const order = currentSelections.order || 'asc';
+    const orderBy = currentSelections.orderBy || 'name';
+    const selections = { ...currentSelections, order, orderBy };
     updateQuery(selections, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,8 +43,8 @@ export default function Standards({ data, schemaData, host }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Use this directory to find nationally recognised data standards for
-          use in health and adult social care.
+          Discover recognised published standards that help things work together
+          for service users in health and adult social care within England.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">

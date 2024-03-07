@@ -14,11 +14,12 @@ import { list } from '../helpers/api';
 import { useContentContext } from '../context';
 
 const staticPageContent = {
-  header: 'Find standards to record, handle and exchange data in England',
+  header:
+    'Discover standards that help things work together for service users in England',
   description:
-    'Find data standards for health and social care in England, including standards for clinical and care information, APIs and draft standards in development.',
+    'Discover recognised published and future standards that help things work together for service users in health and adult social care within England.',
   intro:
-    'Use this directory to find nationally recognised data standards for use in health and adult social care.',
+    'Use this service to find out about recognised published and future standards in health and adult social care.',
 };
 
 const SoloSection = ({ heading, description, link, linkText }) => (
@@ -118,19 +119,19 @@ export default function Home({ pages, host, ...props }) {
         lineBreak={false}
       >
         <HomeElement
-          link={`/${standardsPage}?standard_category=Technical+standards+and+specifications`}
+          link={`/search-results?standard_category=collections&order=asc&orderBy=name`}
+          linkText="Collections"
+          description="Includes commissioning, mental health, emergency and public health data sets and contract monitoring reporting."
+        />
+        <HomeElement
+          link={`/search-results?standard_category=information+standards&order=asc&orderBy=name`}
+          linkText="Information standards"
+          description="Includes standards for clinical and care records and dictionaries for medicines, devices and data."
+        />
+        <HomeElement
+          link={`/search-results?standard_category=Technical+standards+and+specifications&order=asc&orderBy=name`}
           linkText="Technical standards and specifications"
-          description="Including FHIR and HL7 standards for interoperability and APIs."
-        />
-        <HomeElement
-          link={`/${standardsPage}?standard_category=Record+standards`}
-          linkText="Record standards"
-          description="Including formatting standards for clinical and care records."
-        />
-        <HomeElement
-          link={`/${standardsPage}?standard_category=Data+definitions+and+terminologies`}
-          linkText="Data definitions and terminologies"
-          description="Including dictionaries for medicines, devices and data."
+          description="Includes standards for interoperability and electronic data sharing."
         />
       </HomeSection>
 
@@ -169,14 +170,14 @@ export function HomepageHero({ recent }) {
             <Snippet inline>header</Snippet>
           </h1>
           <Snippet large>intro</Snippet>
-          <Search placeholder="Search published standards" navigate homepage />
+          <Search placeholder="Search standards" navigate homepage />
         </div>
         <div className="nhsuk-grid-column-one-third">
           <div className={styles.sidebar}>
-            <h2>Latest standards</h2>
+            <h2>Latest released standards</h2>
             <ul className="nhsuk-u-font-size-16" id="recent-standards">
-              {recent.map((standard) => (
-                <li key={standard.id}>
+              {recent.map((standard, index) => (
+                <li key={standard.id || index}>
                   <Link href={`/${standardsPage}/${standard.name}`}>
                     {standard.title}
                   </Link>
@@ -201,12 +202,29 @@ function HomeLayout({ children, ...props }) {
 Home.Layout = HomeLayout;
 
 export async function getServerSideProps() {
-  const recent = await list({ sort: { metadata_modified: 'desc' } });
+  const recent = await list({
+    sort: { release_date: 'desc' },
+    is_published_standard: true,
+  });
   const pages = await getPages();
 
   return {
     props: {
-      recent: recent.results.slice(0, 3),
+      recent:
+        recent && recent.results
+          ? recent.results
+
+              .filter((item) => {
+                if (!item.release_date) {
+                  return false;
+                }
+                const [year, month, day] = item.release_date.split('-');
+                const now = new Date();
+                const itemDate = Date.parse(`${year}-${month}-${day}`);
+                return itemDate <= now;
+              })
+              .slice(0, 3)
+          : [],
       pages,
       content: staticPageContent,
     },

@@ -24,20 +24,20 @@ export default function PhaseBanner({ homepage }) {
             BETA{' '}
           </strong>
           <span className="nhsuk-phase-banner__text">
-            This is a new service. Your{' '}
+            A NHS service powered by standards.{' '}
             <Link
               className={classnames('nhsuk-phase-banner', styles.bannerLink, {
                 [styles.homepage]: homepage,
               })}
-              href="https://forms.gle/CKKi5nFzUjuxHB9N6"
+              href="https://forms.office.com/e/VQTTC04qxb"
               newWindow={true}
             >
-              feedback
+              Feedback
               <span className="nhsuk-u-visually-hidden">
                 opens in a new window
               </span>
             </Link>{' '}
-            will help us improve it.
+            will help us improve.
           </span>
         </span>
       </div>

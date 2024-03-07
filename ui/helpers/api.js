@@ -51,6 +51,18 @@ function getSearchQuery(q) {
     return undefined;
   }
 
+  const searchPrefix = 'rs:'; // Prefix to indicate Lucene query syntax
+  if (q.toLowerCase().startsWith(searchPrefix.toLowerCase())) {
+    return q.slice(searchPrefix.length);
+  }
+
+  const pattern =
+    /^(DAPB|ISB|DCB|SCCI)\s?[0-9]{4}\s?((Amd*|-)?\s?\d{2,4}\/?\d{0,4})?$/i;
+  const isMatch = pattern.test(q);
+  if (isMatch) {
+    return `reference_code:"${q}"`;
+  }
+
   let query = `(title:${q}~ OR ${q})`;
 
   const organisationMappings = {
@@ -111,6 +123,12 @@ export async function list(
     } else {
       sort = DEFAULT_SORT;
     }
+  }
+
+  if (!q) {
+    sort = {
+      ['name']: 'asc',
+    };
   }
 
   let sortstring, fq;
