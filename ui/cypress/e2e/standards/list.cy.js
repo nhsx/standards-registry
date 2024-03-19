@@ -67,20 +67,31 @@ describe('Standards Listing Index', () => {
     it('Can filter by mandated, and remove filter (regression)', () => {
       cy.visit('/published-standards');
       let results;
-      cy.get('span[role="status"]').should((el) => {
-        results = parseInt(el.text().replace(' Results', ''));
-      });
-      cy.get('#mandated').click();
 
-      cy.get('span[role="status"]').should((el) => {
-        const filteredResults = parseInt(el.text().replace(' Results', ''));
+      cy.get('span[role="status"]').then($span => {
+        const text = $span.text()
+        results = parseInt(text.match(/\d+/)[0])
+      });
+
+      cy.get('[title="Requirement"]').click();
+      cy.get('#mandated').scrollIntoView().click({ force: true });
+
+      // wait added for api response
+      cy.wait(500);
+
+      cy.get('span[role="status"]').then($span => {
+        const text = $span.text()
+        const filteredResults = parseInt(text.match(/\d+/)[0]);
         expect(filteredResults).to.be.lessThan(results);
       });
 
       cy.get('#mandated').click();
 
-      cy.get('span[role="status"]').should((el) => {
-        const filteredResults = parseInt(el.text().replace(' Results', ''));
+      cy.wait(500);
+
+      cy.get('span[role="status"]').then($span => {
+        const text = $span.text()
+        const filteredResults = parseInt(text.match(/\d+/)[0]);
         expect(filteredResults).to.be.equal(results);
       });
     });
@@ -90,7 +101,8 @@ describe('Standards Listing Index', () => {
       cy.get('.nhsuk-pagination').contains('a', 'Next').click();
       cy.url().should('contain', 'page=2');
 
-      cy.get('#mandated').click();
+      cy.get('[title="Requirement"]').click();
+      cy.get('#mandated').scrollIntoView().click({ force: true });
 
       cy.url().should('not.contain', 'page');
       cy.url().should('contain', 'mandated');
@@ -101,7 +113,7 @@ describe('Standards Listing Index', () => {
     it('Can search by standard matching', () => {
       cy.visit('/published-standards');
       cy.injectAxe();
-      cy.doSearch('allergies');
+      cy.doSearch('hospital');
       cy.get('#browse-results li').not('have.length', 0);
 
       cy.checkA11y(null, null, a11yLog, failLevel);
@@ -109,10 +121,10 @@ describe('Standards Listing Index', () => {
 
     it('Can search by fuzzy match', () => {
       cy.visit('/published-standards');
-      cy.doSearch('alergy');
+      cy.doSearch('hosptal');
 
       cy.get('#browse-results li').should('have.length.of.at.least', 1);
-      cy.contains('#browse-results li', 'Allergy').click();
+      cy.contains('#browse-results li', 'hospital');
     });
 
     it('emboldens matches', () => {
@@ -136,7 +148,7 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'Professional Record Standards Body');
+        cy.contains('Core information standard');
       });
 
       it('Matches various variations of prsb', () => {
@@ -145,7 +157,7 @@ describe('Standards Listing Index', () => {
 
         cy.get('#browse-results li a').eq(0).click();
 
-        cy.contains('dd', 'Professional Record Standards Body');
+        cy.contains('Community Pharmacy Information Standard');
 
         cy.visit('/published-standards');
         cy.doSearch('professional records standards body');

@@ -20,7 +20,7 @@ describe('Homepage', () => {
   describe('Search', () => {
     it('Can search from the homepage', () => {
       cy.visit('/');
-      cy.doSearch('allergies');
+      cy.doSearch('hospital');
       cy.get('#browse-results li').not('have.length', 0);
     });
     it('Blank search returns results', () => {
