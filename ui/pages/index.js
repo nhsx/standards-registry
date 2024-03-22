@@ -119,12 +119,12 @@ export default function Home({ pages, host, ...props }) {
         lineBreak={false}
       >
         <HomeElement
-          link={`/search-results?standard_category=collections&order=asc&orderBy=name`}
+          link={`/search-results?standard_category=Collections&order=asc&orderBy=name`}
           linkText="Collections"
           description="Includes commissioning, mental health, emergency and public health data sets and contract monitoring reporting."
         />
         <HomeElement
-          link={`/search-results?standard_category=information+standards&order=asc&orderBy=name`}
+          link={`/search-results?standard_category=Information+standards&order=asc&orderBy=name`}
           linkText="Information standards"
           description="Includes standards for clinical and care records and dictionaries for medicines, devices and data."
         />
