@@ -111,7 +111,7 @@ const schema = [
     section_title: 'About this standard',
     owner: {
       hide_when_empty: true,
-      label: 'Owner',
+      label: 'Publisher',
       accessor: 'owner',
       format: (_, data) => {
         const { owner, logo } = data;
