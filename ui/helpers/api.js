@@ -35,7 +35,6 @@ export function queriseSelections(selections) {
     if (typeof selections[prop] === 'string') {
       selectionsRef[prop] = [selectionsRef[prop]];
     }
-    selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
       const join = `* ${(filters[prop] && filters[prop].type) || 'AND'} *`;
       query[prop] = `(*${selectionsRef[prop].join(join)}*)`;
