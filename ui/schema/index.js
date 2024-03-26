@@ -239,7 +239,7 @@ const schema = [
     },
     comply_by_date: {
       hide_when_empty: true,
-      label: 'Comply by',
+      label: 'Conformance date',
       format: (val) => formatDate(val),
     },
     implementation_from_date: {
@@ -403,7 +403,7 @@ export const upcomingStandard = [
         <Dt>Implement from:</Dt>
         <Dd>{formatDate(row.implementation_from_date)}</Dd>
 
-        <Dt>Comply by:</Dt>
+        <Dt>Conformance date:</Dt>
         <Dd>{formatDate(row.comply_by_date)}</Dd>
       </Dl>
     ),

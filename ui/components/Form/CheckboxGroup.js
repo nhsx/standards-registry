@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import styles from './CheckboxGroup.module.scss';
 
 function getOptionId(id, option) {
-  const key = option.value
+  const key = (option.value ? option.value : '')
     .toString()
     .split('')
     .reduce((str, char) => str + char.charCodeAt(0), '');
