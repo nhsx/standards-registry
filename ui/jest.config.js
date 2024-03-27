@@ -7,6 +7,15 @@
 const path = require('path');
 
 const esModules = [
+  'rehype-raw',
+  'hast-util-raw',
+  'hast-util-from-parse5',
+  'hastscript',
+  'hast-util-parse-selector',
+  'hast-util-to-parse5',
+  'web-namespaces',
+  'zwitch',
+  'html-void-elements',
   'react-markdown',
   'vfile',
   'unist-.+',

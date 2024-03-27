@@ -9,7 +9,7 @@ function replacer(matched) {
 
 export default function MarkdownBlock({ md }) {
   const linkRegex = /(?<=href=")[^"]+/g;
-  const mdString = Array.isArray(md) ? md.join("\n") : md;
+  const mdString = Array.isArray(md) ? md.join('\n') : md;
   const decodedMd = mdString.replace(linkRegex, replacer);
 
   return (
