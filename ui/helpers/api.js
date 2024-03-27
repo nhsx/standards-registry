@@ -98,15 +98,10 @@ export function serialise(obj = {}) {
 }
 
 export async function read({ id }) {
-  console.log('read() Request URL: ', `${CKAN_URL}/package_show?id=${id}`);
   return callApi(`${CKAN_URL}/package_show?id=${id}`);
 }
 
 export async function getPages() {
-  console.log(
-    'getPages() Request URL: ',
-    `${PAGES_CKAN_URL}/ckanext_pages_list`
-  );
   return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
@@ -151,25 +146,13 @@ export async function list(
 
   const query = getSearchQuery(q);
   const ckanQuery = stringify({ q: query, fq, rows, start, sort: sortstring });
-  console.log(
-    'list() Request URL: ',
-    `${CKAN_URL}/package_search?${ckanQuery}`
-  );
   return callApi(`${CKAN_URL}/package_search?${ckanQuery}`);
 }
 
 export async function schema(dataset = 'dataset') {
-  console.log(
-    'schema() Request URL: ',
-    `${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`
-  );
   return callApi(`${CKAN_URL}/scheming_dataset_schema_show?type=${dataset}`);
 }
 
 export async function filterSearch(query = '') {
-  console.log(
-    'filterSearch() Request URL: ',
-    `${CKAN_URL}/package_search${query}`
-  );
   return callApi(`${CKAN_URL}/package_search${query}`);
 }

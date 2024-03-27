@@ -1,7 +1,7 @@
 import styles from './logo.module.scss';
 
 const onError = (event) => {
-    event.target.style.display = 'none';
+  event.target.style.display = 'none';
 };
 
 const Logo = ({ owner, image_url }) => {
@@ -9,7 +9,7 @@ const Logo = ({ owner, image_url }) => {
     <>
       {image_url && (
         <div className={styles.logo}>
-          <img src={image_url} alt={`${owner} logo`} onError={onError}/>
+          <img src={image_url} alt={`${owner} logo`} onError={onError} />
         </div>
       )}
     </>

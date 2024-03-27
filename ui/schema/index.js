@@ -2,7 +2,6 @@ import upperFirst from 'lodash/upperFirst';
 import {
   Details,
   Tag,
-  Link,
   MarkdownBlock,
   Paragraph,
   Dl,
