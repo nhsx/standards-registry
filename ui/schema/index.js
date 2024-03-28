@@ -350,6 +350,18 @@ const schema = [
       label: 'Legal authority description',
       format: (val) => !!val?.length && <MarkdownBlock md={val} />,
     },
+    legalAuthorities: {
+      hide_when_empty: true,
+      label: 'Legal authority',
+      format: (val) => {
+        let legalAuthorityTitles = val.legalAuthority.join(', <br />');
+        const mdBlock = `${legalAuthorityTitles}<p> ${val.legalAuthorityDescription}</p>`
+        return (
+        val && (
+          <MarkdownBlock md={mdBlock} />
+        ),
+      )}
+    },
     trusted_by: {
       hide_when_empty: true,
       label: 'Collaborating Organisations',
