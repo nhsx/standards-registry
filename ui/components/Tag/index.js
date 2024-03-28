@@ -1,7 +1,8 @@
 import classnames from 'classnames';
 import { upperFirst } from 'lodash';
 
-const formatTagValue = (value) => upperFirst(value.replace(/-/g, ' '));
+const formatTagValue = (value) =>
+  value ? upperFirst(value.replace(/-/g, ' ')) : '';
 
 const colorMap = {
   proposed: 'nhsuk-tag--white',
@@ -15,19 +16,26 @@ const colorMap = {
   'in-development': 'nhsuk-tag--grey',
   deprecated: 'nhsuk-tag--orange',
   retired: 'nhsuk-tag--red',
+  future: 'nhsuk-tag--blue',
 };
 
 export default function TypeTag({ children, classes, type }) {
   return (
-    <span
-      className={classnames(
-        'nhsuk-tag',
-        classes,
-        (type && typeof type === 'string' && colorMap[type.toLowerCase()]) ||
-          null
+    <>
+      {children && (
+        <span
+          className={classnames(
+            'nhsuk-tag',
+            classes,
+            (type &&
+              typeof type === 'string' &&
+              colorMap[type.toLowerCase()]) ||
+              null
+          )}
+        >
+          {formatTagValue(children)}
+        </span>
       )}
-    >
-      {formatTagValue(children)}
-    </span>
+    </>
   );
 }

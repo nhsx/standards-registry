@@ -12,11 +12,16 @@ import DOMPurify from 'isomorphic-dompurify';
 export const formatDate = (date, dateFormat = 'd MMM yyyy') =>
   format(parseISO(date), dateFormat);
 
+function escapeRegExp(text) {
+  return text && text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
+
 function Embolden({ children }) {
   const { getSelections } = useQueryContext();
   const { q } = getSelections();
-  const re = new RegExp(`(${q})`, 'ig');
-  const replaced = children.replace(re, '<strong>$1</strong>');
+  const escapedQuery = escapeRegExp(q);
+  const re = new RegExp(`(${escapedQuery})`, 'ig');
+  const replaced = children ? children.replace(re, '<strong>$1</strong>') : '';
 
   return (
     <span
@@ -27,17 +32,51 @@ function Embolden({ children }) {
   );
 }
 
+function StandardTypeBadge({ isPublishedStandard }) {
+  return (
+    <div>
+      {isPublishedStandard ? (
+        <Tag type="active" classes="nhsuk-body-s">
+          Published standard
+        </Tag>
+      ) : (
+        <Tag type="future" classes="nhsuk-body-s">
+          Future standard
+        </Tag>
+      )}
+    </div>
+  );
+}
+
 function Model({ model }) {
-  const { name, status, title, metadata_created, description } = model;
+  const {
+    name,
+    status,
+    title,
+    metadata_created,
+    description,
+    is_published_standard,
+  } = model;
   const target = `/published-standards/${name}`;
+
+  <Tag type={status} classes="nhsuk-body-s">
+    {status}
+  </Tag>;
 
   return (
     <>
-      <Link href={target}>
-        <a>
-          <Embolden>{title}</Embolden>
-        </a>
-      </Link>
+      <div className={classnames(styles.standardHeader)}>
+        <div className={classnames(styles.standardTitle)}>
+          <Link href={target}>
+            <a>
+              <Embolden>{title}</Embolden>
+            </a>
+          </Link>
+        </div>
+        <div className={classnames(styles.standardFlag)}>
+          <StandardTypeBadge isPublishedStandard={is_published_standard} />
+        </div>
+      </div>
       <p>
         <Embolden>{description}</Embolden>
       </p>
@@ -70,20 +109,21 @@ function SortMenu({ searchTerm }) {
       value: 'score desc',
     },
     {
+      label: 'Name (A to Z)',
+      value: 'name asc',
+      selected: 'selected',
+    },
+    {
+      label: 'Name (Z to A)',
+      value: 'name desc',
+    },
+    {
       label: 'Added (newest)',
       value: 'metadata_created desc',
     },
     {
       label: 'Added (oldest)',
       value: 'metadata_created asc',
-    },
-    {
-      label: 'Name (A to Z)',
-      value: 'name asc',
-    },
-    {
-      label: 'Name (Z to A)',
-      value: 'name desc',
     },
   ];
 
@@ -99,43 +139,6 @@ function SortMenu({ searchTerm }) {
     />
   );
 }
-
-const CheckBox = () => {
-  const { getSelections, updateQuery } = useQueryContext();
-  const toggleMandated = (event) => {
-    const selections = getSelections();
-    const { name, checked } = event.target;
-    delete selections[name];
-    if (checked) {
-      selections[name] = checked;
-    }
-    updateQuery(selections, { replace: true });
-  };
-
-  return (
-    <div
-      className={classnames(
-        'nhsuk-checkboxes__item nhsuk-u-margin-bottom-4',
-        styles.checkboxItem
-      )}
-    >
-      <input
-        className="nhsuk-checkboxes__input nhsuk-u-font-size-16"
-        id="mandated"
-        name="mandated"
-        type="checkbox"
-        value="nationally mandated"
-        onChange={toggleMandated}
-      />
-      <label
-        className="nhsuk-label nhsuk-checkboxes__label nhsuk-u-font-size-16"
-        htmlFor="mandated"
-      >
-        National requirement
-      </label>
-    </div>
-  );
-};
 
 const NoResultsSummary = ({ searchTerm }) => (
   <>
@@ -164,8 +167,9 @@ export default function Dataset({
   data: initialData = {},
   includeType,
   schema,
+  futureAndPublished = false,
 }) {
-  const { query } = useQueryContext();
+  const { query, updateQuery } = useQueryContext();
   const searchTerm = query.q;
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(false);
@@ -177,7 +181,10 @@ export default function Dataset({
     async function getData() {
       try {
         setLoading(true);
-        const res = await axios.post('/api/refresh-list', query);
+        const res = await axios.post('/api/refresh-list', {
+          ...query,
+          futureAndPublished,
+        });
         setData(res.data);
       } catch (err) {
         console.error(err);
@@ -185,15 +192,27 @@ export default function Dataset({
         setLoading(false);
       }
     }
+
     // we dont want to fetch data on initial load.
     if (pageLoaded) {
       getData();
     }
+
     // we don't want pageLoaded in the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
-  useEffect(() => setPageLoaded(true), []);
+  useEffect(() => {
+    let orderBy = null;
+    let order = null;
+    if (!searchTerm || searchTerm === '') {
+      orderBy = 'name';
+      order = 'asc';
+    }
+
+    updateQuery({ ...query, orderBy, order });
+    setPageLoaded(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -209,14 +228,11 @@ export default function Dataset({
         <div className="nhsuk-grid-column-one-half">
           <SortMenu searchTerm={searchTerm} />
         </div>
-        <div className="nhsuk-grid-column-one-half">
-          <CheckBox />
-        </div>
       </div>
       {count > 0 ? (
         <ul className={styles.list} id="browse-results">
-          {results.map((model) => (
-            <li key={model.id} className={styles.listItem}>
+          {results.map((model, index) => (
+            <li key={model.id || index} className={styles.listItem}>
               <Model model={model} includeType={includeType} />
             </li>
           ))}

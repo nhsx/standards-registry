@@ -1,0 +1,11 @@
+.markdown,
+.markdown p,
+.markdown ul,
+.markdown li,
+.markdown ol {
+  font-size: 1rem;
+}
+
+.markdown li > ul {
+  margin-top: 0.5rem;
+}

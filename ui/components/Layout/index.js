@@ -38,7 +38,8 @@ export default function Home({ children, ...props }) {
   });
 
   const { content } = useContentContext();
-  const { title } = content;
+  const { title, headerTitle } = content;
+
   const datasetTitle = get(props, 'data.title');
 
   function toggleNav() {
@@ -52,7 +53,7 @@ export default function Home({ children, ...props }) {
   return (
     <div className={styles.container}>
       <Head>
-        <title>{title}</title>
+        <title>{headerTitle}</title>
         <link rel="icon" href="/favicon.png" />
         <meta name="google-site-verification" content={siteCode} />
 
@@ -78,7 +79,7 @@ export default function Home({ children, ...props }) {
                   'nhsuk-header__link nhsuk-header__link--service',
                   styles.logo
                 )}
-                aria-label="NHS Data Standards Directory homepage"
+                aria-label={`${title} - home page`}
               >
                 <svg
                   className="nhsuk-logo"
@@ -105,7 +106,7 @@ export default function Home({ children, ...props }) {
                     styles.serviceName
                   )}
                 >
-                  Data Standards Directory
+                  {headerTitle}
                 </span>
               </a>
             </Link>
@@ -124,7 +125,7 @@ export default function Home({ children, ...props }) {
               </button>
             </div>
             {!props.hideBannerSearch && (
-              <Search placeholder="Search" location="nav" />
+              <Search placeholder="Search all standards" location="nav" />
             )}
           </div>
         </div>

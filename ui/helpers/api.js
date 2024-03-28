@@ -22,7 +22,6 @@ async function callApi(url) {
   }
 }
 
-// TODO: neaten
 export function queriseSelections(selections) {
   const selectionsRef = { ...selections };
   const query = {};
@@ -36,8 +35,6 @@ export function queriseSelections(selections) {
     if (typeof selections[prop] === 'string') {
       selectionsRef[prop] = [selectionsRef[prop]];
     }
-    // sanitise "Appointment / thing" => "Appointment"
-    selectionsRef[prop] = selectionsRef[prop].map((i) => i.split(' ').shift());
     if (selectionsRef[prop].length) {
       const join = `* ${(filters[prop] && filters[prop].type) || 'AND'} *`;
       query[prop] = `(*${selectionsRef[prop].join(join)}*)`;
@@ -51,6 +48,18 @@ export function queriseSelections(selections) {
 function getSearchQuery(q) {
   if (!q) {
     return undefined;
+  }
+
+  const searchPrefix = 'rs:'; // Prefix to indicate Lucene query syntax
+  if (q.toLowerCase().startsWith(searchPrefix.toLowerCase())) {
+    return q.slice(searchPrefix.length);
+  }
+
+  const pattern =
+    /^(DAPB|ISB|DCB|SCCI)\s?[0-9]{4}\s?((Amd*|-)?\s?\d{2,4}\/?\d{0,4})?$/i;
+  const isMatch = pattern.test(q);
+  if (isMatch) {
+    return `reference_code:"${q}"`;
   }
 
   let query = `(title:${q}~ OR ${q})`;
@@ -75,8 +84,6 @@ function getSearchQuery(q) {
   return query;
 }
 
-// helper function for building SOLR Filter Queries into package_search
-// e.g. // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20OR%20business_use:(*Continuity*))
 export function serialise(obj = {}) {
   if (Object.keys(obj).length === 0) {
     return;
@@ -98,15 +105,10 @@ export async function getPages() {
   return callApi(`${PAGES_CKAN_URL}/ckanext_pages_list`);
 }
 
-export async function list({
-  page = 1,
-  q,
-  sort,
-  inactive,
-  orderBy,
-  order,
-  ...filters
-}) {
+export async function list(
+  { page = 1, q, sort, inactive = false, orderBy, order, ...filters },
+  futureAndPublished = false
+) {
   if (!sort) {
     if (orderBy) {
       sort = {
@@ -117,12 +119,17 @@ export async function list({
     }
   }
 
+  if (!q && !sort) {
+    sort = {
+      ['name']: 'asc',
+    };
+  }
+
   let sortstring, fq;
   const rows = 10;
 
   const start = (page - 1) * rows;
-  // e.g.
-  // sort=score desc, metadata_modified desc
+
   if (typeof sort === 'string') {
     sortstring = sort;
   } else {
@@ -131,7 +138,9 @@ export async function list({
       .join(', ');
   }
 
-  filters.is_published_standard = !inactive;
+  if (!futureAndPublished) {
+    filters.is_published_standard = !inactive;
+  }
 
   fq = serialise(queriseSelections(filters));
 
@@ -145,6 +154,5 @@ export async function schema(dataset = 'dataset') {
 }
 
 export async function filterSearch(query = '') {
-  // /package_search?fq=(care_setting:(*Dentistry*%20OR%20*Community*)%20AND%20business_use:(*Continuity*))
   return callApi(`${CKAN_URL}/package_search${query}`);
 }

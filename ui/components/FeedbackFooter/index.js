@@ -10,7 +10,7 @@ export function FeedbackFooter() {
       </h2>
       <p className="nhsuk-u-font-size-16">
         This is a new service — your{' '}
-        <Link newWindow={true} href="https://forms.gle/CKKi5nFzUjuxHB9N6">
+        <Link newWindow={true} href="https://forms.office.com/e/VQTTC04qxb">
           feedback
           <span className="nhsuk-u-visually-hidden">opens in a new window</span>
         </Link>{' '}

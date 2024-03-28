@@ -25,30 +25,51 @@ const Rows = (props) => {
   );
 };
 
+const itDisplaysLabel = (key, entry, data) => {
+  const options = entry[key];
+  const hasData = options.accessor
+    ? get(data, options.accessor, data[key])
+    : data[key];
+
+  if (hasData && hasData.length > 0) {
+    return true;
+  }
+
+  return !entry[key].hide_when_empty;
+};
+
 const Section = ({ entry, data }) => {
+  const generateContent = (entry, data) => {
+    const returnValue = Object.keys(entry)
+      .filter((key) => entry[key].label)
+      .filter((key) => itDisplaysLabel(key, entry, data))
+      .map((key, index) => {
+        const options = entry[key];
+        const val = options.accessor
+          ? get(data, options.accessor, data[key])
+          : data[key];
+        return (
+          <dl key={index} className={classnames(styles.grid)}>
+            <dt>
+              <span className="nhsuk-u-font-weight-bold">{options.label}</span>
+            </dt>
+            <Rows vals={val} options={options} data={data}></Rows>
+          </dl>
+        );
+      });
+    return returnValue;
+  };
+
+  const content = generateContent(entry, data);
+
   return (
     <>
-      <h2 className={classnames(styles.sectionTitle, 'nhsuk-heading-m')}>
-        {entry.section_title}
-      </h2>
-      {Object.keys(entry)
-        .filter((key) => entry[key].label)
-        .map((key, index) => {
-          const options = entry[key];
-          const val = options.accessor
-            ? get(data, options.accessor, data[key])
-            : data[key];
-          return (
-            <dl key={index} className={classnames(styles.grid)}>
-              <dt>
-                <span className="nhsuk-u-font-weight-bold">
-                  {options.label}
-                </span>
-              </dt>
-              <Rows vals={val} options={options} data={data}></Rows>
-            </dl>
-          );
-        })}
+      {content.length > 0 ? (
+        <h2 className={classnames(styles.sectionTitle, 'nhsuk-heading-m')}>
+          {entry.section_title}
+        </h2>
+      ) : null}
+      {content}
     </>
   );
 };

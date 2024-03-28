@@ -1,7 +1,7 @@
-import { upcomingStandard as schema } from '../schema';
-import { getPageProps } from '../helpers/getPageProps';
+import { upcomingStandard as schema } from '../../schema/future-standards';
+import { getPageProps } from '../../helpers/getPageProps';
 import { useState, useEffect } from 'react';
-import { useQueryContext } from '../context/query';
+import { useQueryContext } from '../../context/query';
 import isEqual from 'lodash/isEqual';
 import classnames from 'classnames';
 import axios from 'axios';
@@ -13,9 +13,9 @@ import {
   Modal,
   ResponsiveTable,
   Pagination,
-} from '../components';
+} from '../../components';
 
-import styles from '../styles/Roadmap.module.scss';
+import styles from '../../styles/Roadmap.module.scss';
 
 export default function Roadmap({ data, schemaData, page }) {
   const [results, setResults] = useState(data.results);

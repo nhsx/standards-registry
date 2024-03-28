@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    '@next/next/no-document-import-in-page': 'off',
     'react/prop-types': [0],
     'react/react-in-jsx-scope': [0], // next puts react in global scope
     'no-console': [2, { allow: ['warn', 'error'] }],

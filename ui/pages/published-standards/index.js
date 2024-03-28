@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Layout,
   Reading,
@@ -10,6 +11,7 @@ import {
   Dataset,
 } from '../../components';
 import { getPageProps } from '../../helpers/getPageProps';
+import { useQueryContext } from '../../context/query';
 
 const staticPageProps = {
   title: 'Published standards',
@@ -18,6 +20,17 @@ const staticPageProps = {
 };
 
 export default function Standards({ data, schemaData, host }) {
+  const { getSelections, updateQuery } = useQueryContext();
+
+  useEffect(() => {
+    const currentSelections = getSelections();
+    const order = currentSelections.order || 'asc';
+    const orderBy = currentSelections.orderBy || 'name';
+    const selections = { ...currentSelections, order, orderBy };
+    updateQuery(selections, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const pageProps = { ...staticPageProps, host };
   return (
     <Page {...pageProps}>
@@ -30,8 +43,8 @@ export default function Standards({ data, schemaData, host }) {
       <Reading>
         <Snippet>intro</Snippet>
         <p>
-          Use this directory to find nationally recognised data standards for
-          use in health and adult social care.
+          Discover recognised published standards that help things work together
+          for service users in health and adult social care within England.
         </p>
       </Reading>
       <div className="nhsuk-grid-row">
@@ -45,7 +58,7 @@ export default function Standards({ data, schemaData, host }) {
       </div>
       <Row>
         <Col>
-          <Filters schema={schemaData} />
+          <Filters schema={schemaData} showRequirementFilter={true} />
         </Col>
         <Col colspan={3}>
           <Dataset data={data} pagination={true} schema={schemaData} />

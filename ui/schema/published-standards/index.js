@@ -19,7 +19,7 @@ function truncate(str, chars = 50) {
   return str;
 }
 
-function formatDate(date = null) {
+function formatDate(date) {
   if (!date) {
     return null;
   }
@@ -110,7 +110,7 @@ const schema = [
     section_title: 'About this standard',
     owner: {
       hide_when_empty: true,
-      label: 'Owner',
+      label: 'Publisher',
       accessor: 'owner',
       format: (_, data) => {
         const { owner, logo } = data;
@@ -334,7 +334,6 @@ const schema = [
   },
   {
     section_title: 'Legal basis and endorsements',
-
     assurance: {
       hide_when_empty: true,
       label: 'Quality assurance',
